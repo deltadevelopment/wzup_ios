@@ -13,7 +13,7 @@
 {
     self = [super init];
     if (self) {
-        _baseUrl = @"http://wzap.herokuapp.com/";
+        _baseUrl = @"http://wzap.herokuapp.com";
     }
     
     return self;

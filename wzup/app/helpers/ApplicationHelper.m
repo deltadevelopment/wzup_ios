@@ -13,6 +13,7 @@
     ConfigHelper *configHelper = [[ConfigHelper alloc] init];
     NSMutableString *url = [[NSMutableString alloc] init];
     [url appendString:[configHelper baseUrl]];
+    [url appendString:@"/"];
     [url appendString:relativePath];
     return url;
     //base + relative;

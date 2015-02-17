@@ -25,4 +25,8 @@
 -(NSMutableURLRequest *) getHttpRequest:(NSString *) url;
 -(NSMutableURLRequest *) postHttpRequest:(NSString *) url
                                     json:(NSString *) data;
+-(NSMutableURLRequest *) deleteHttpRequest:(NSString *) url;
+-(NSMutableURLRequest *) putHttpRequest:(NSString *) url
+                                    json:(NSString *) data;
+
 @end

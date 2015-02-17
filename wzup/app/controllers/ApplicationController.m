@@ -29,23 +29,39 @@
     NSURL * serviceUrl = [NSURL URLWithString:[applicationHelper generateUrl:url]];
     NSMutableURLRequest * serviceRequest = [NSMutableURLRequest requestWithURL:serviceUrl];
     [serviceRequest setValue:@"text" forHTTPHeaderField:@"Content-type"];
-    
+    [serviceRequest addValue:[authHelper getAuthToken] forHTTPHeaderField:@"X-AUTH-TOKEN"];
     [serviceRequest setHTTPMethod:@"GET"];
     return serviceRequest;
 };
 
 -(NSMutableURLRequest *) postHttpRequest:(NSString *) url
                                     json:(NSString *) data{
-    
-    //Look through dic
-    
-    
-    //NSString * xmlString = @"username=simentest&password=simentest";
     NSURL * serviceUrl = [NSURL URLWithString:[applicationHelper generateUrl:url]];
     NSMutableURLRequest * serviceRequest = [NSMutableURLRequest requestWithURL:serviceUrl];
     [serviceRequest setValue:@"application/json" forHTTPHeaderField:@"Content-type"];
+    [serviceRequest addValue:[authHelper getAuthToken] forHTTPHeaderField:@"X-AUTH-TOKEN"];
     [serviceRequest setHTTPMethod:@"POST"];
     [serviceRequest setHTTPBody:[data dataUsingEncoding:NSASCIIStringEncoding]];
     return serviceRequest;
+};
+
+-(NSMutableURLRequest *) deleteHttpRequest:(NSString *) url{
+    NSURL * serviceUrl = [NSURL URLWithString:[applicationHelper generateUrl:url]];
+    NSMutableURLRequest * serviceRequest = [NSMutableURLRequest requestWithURL:serviceUrl];
+    [serviceRequest setValue:@"text" forHTTPHeaderField:@"Content-type"];
+      [serviceRequest addValue:[authHelper getAuthToken] forHTTPHeaderField:@"X-AUTH-TOKEN"];
+    [serviceRequest setHTTPMethod:@"DELETE"];
+    return serviceRequest;
+
+};
+-(NSMutableURLRequest *) putHttpRequest:(NSString *) url
+                                   json:(NSString *) data{
+    NSURL * serviceUrl = [NSURL URLWithString:[applicationHelper generateUrl:url]];
+    NSMutableURLRequest * serviceRequest = [NSMutableURLRequest requestWithURL:serviceUrl];
+    [serviceRequest setValue:@"application/json" forHTTPHeaderField:@"Content-type"];
+    [serviceRequest setHTTPMethod:@"PUT"];
+    [serviceRequest setHTTPBody:[data dataUsingEncoding:NSASCIIStringEncoding]];
+    return serviceRequest;
+
 };
 @end

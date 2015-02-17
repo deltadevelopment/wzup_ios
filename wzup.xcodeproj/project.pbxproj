@@ -15,15 +15,16 @@
 		C506389C1A91E18C00F39D63 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C506389B1A91E18C00F39D63 /* Images.xcassets */; };
 		C506389F1A91E18C00F39D63 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C506389D1A91E18C00F39D63 /* LaunchScreen.xib */; };
 		C50638AB1A91E18C00F39D63 /* wzupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C50638AA1A91E18C00F39D63 /* wzupTests.m */; };
+		C590CFE31A937FFC003432D7 /* ApplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFD01A937FFC003432D7 /* ApplicationController.m */; };
+		C590CFE41A937FFC003432D7 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFD21A937FFC003432D7 /* LoginController.m */; };
+		C590CFE51A937FFC003432D7 /* ApplicationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFD51A937FFC003432D7 /* ApplicationHelper.m */; };
+		C590CFE61A937FFC003432D7 /* AuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFD71A937FFC003432D7 /* AuthHelper.m */; };
+		C590CFE71A937FFC003432D7 /* ConfigHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFD91A937FFC003432D7 /* ConfigHelper.m */; };
+		C590CFE81A937FFC003432D7 /* ParserHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFDB1A937FFC003432D7 /* ParserHelper.m */; };
+		C590CFE91A937FFC003432D7 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFDE1A937FFC003432D7 /* SSKeychain.m */; };
+		C590CFEA1A937FFC003432D7 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFE01A937FFC003432D7 /* SSKeychainQuery.m */; };
+		C590CFF01A93A9E6003432D7 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFEF1A93A9E6003432D7 /* StartViewController.m */; };
 		C5DFD5811A920A1800F37803 /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD5801A920A1800F37803 /* LoginModel.m */; };
-		C5DFD5891A922F5200F37803 /* AuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD5881A922F5200F37803 /* AuthHelper.m */; };
-		C5DFD58F1A92308E00F37803 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD58C1A92308E00F37803 /* SSKeychain.m */; };
-		C5DFD5901A92308E00F37803 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD58E1A92308E00F37803 /* SSKeychainQuery.m */; };
-		C5DFD5931A92392900F37803 /* ParserHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD5921A92392900F37803 /* ParserHelper.m */; };
-		C5DFD5961A923C4800F37803 /* ApplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD5951A923C4800F37803 /* ApplicationController.m */; };
-		C5DFD5991A92402F00F37803 /* ApplicationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD5981A92402F00F37803 /* ApplicationHelper.m */; };
-		C5DFD59C1A92426D00F37803 /* ConfigHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD59B1A92426D00F37803 /* ConfigHelper.m */; };
-		C5DFD59F1A9244EF00F37803 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD59E1A9244EF00F37803 /* LoginController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,24 +53,26 @@
 		C50638A41A91E18C00F39D63 /* wzupTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wzupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C50638A91A91E18C00F39D63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C50638AA1A91E18C00F39D63 /* wzupTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wzupTests.m; sourceTree = "<group>"; };
+		C590CFCF1A937FFC003432D7 /* ApplicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationController.h; sourceTree = "<group>"; };
+		C590CFD01A937FFC003432D7 /* ApplicationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationController.m; sourceTree = "<group>"; };
+		C590CFD11A937FFC003432D7 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
+		C590CFD21A937FFC003432D7 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
+		C590CFD41A937FFC003432D7 /* ApplicationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationHelper.h; sourceTree = "<group>"; };
+		C590CFD51A937FFC003432D7 /* ApplicationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationHelper.m; sourceTree = "<group>"; };
+		C590CFD61A937FFC003432D7 /* AuthHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthHelper.h; sourceTree = "<group>"; };
+		C590CFD71A937FFC003432D7 /* AuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthHelper.m; sourceTree = "<group>"; };
+		C590CFD81A937FFC003432D7 /* ConfigHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigHelper.h; sourceTree = "<group>"; };
+		C590CFD91A937FFC003432D7 /* ConfigHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigHelper.m; sourceTree = "<group>"; };
+		C590CFDA1A937FFC003432D7 /* ParserHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParserHelper.h; sourceTree = "<group>"; };
+		C590CFDB1A937FFC003432D7 /* ParserHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParserHelper.m; sourceTree = "<group>"; };
+		C590CFDD1A937FFC003432D7 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
+		C590CFDE1A937FFC003432D7 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
+		C590CFDF1A937FFC003432D7 /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychainQuery.h; sourceTree = "<group>"; };
+		C590CFE01A937FFC003432D7 /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
+		C590CFEE1A93A9E6003432D7 /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartViewController.h; path = ../StartViewController.h; sourceTree = "<group>"; };
+		C590CFEF1A93A9E6003432D7 /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StartViewController.m; path = ../StartViewController.m; sourceTree = "<group>"; };
 		C5DFD57F1A920A1800F37803 /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModel.h; sourceTree = "<group>"; };
 		C5DFD5801A920A1800F37803 /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModel.m; sourceTree = "<group>"; };
-		C5DFD5871A922F5200F37803 /* AuthHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthHelper.h; sourceTree = "<group>"; };
-		C5DFD5881A922F5200F37803 /* AuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthHelper.m; sourceTree = "<group>"; };
-		C5DFD58B1A92308E00F37803 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSKeychain.h; path = "../../../../../Volumes/Untitled 1/FronterFeeder/FronterFeeder/SSKeychain.h"; sourceTree = "<group>"; };
-		C5DFD58C1A92308E00F37803 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSKeychain.m; path = "../../../../../Volumes/Untitled 1/FronterFeeder/FronterFeeder/SSKeychain.m"; sourceTree = "<group>"; };
-		C5DFD58D1A92308E00F37803 /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSKeychainQuery.h; path = "../../../../../Volumes/Untitled 1/FronterFeeder/FronterFeeder/SSKeychainQuery.h"; sourceTree = "<group>"; };
-		C5DFD58E1A92308E00F37803 /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSKeychainQuery.m; path = "../../../../../Volumes/Untitled 1/FronterFeeder/FronterFeeder/SSKeychainQuery.m"; sourceTree = "<group>"; };
-		C5DFD5911A92392900F37803 /* ParserHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParserHelper.h; sourceTree = "<group>"; };
-		C5DFD5921A92392900F37803 /* ParserHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParserHelper.m; sourceTree = "<group>"; };
-		C5DFD5941A923C4800F37803 /* ApplicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationController.h; sourceTree = "<group>"; };
-		C5DFD5951A923C4800F37803 /* ApplicationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationController.m; sourceTree = "<group>"; };
-		C5DFD5971A92402F00F37803 /* ApplicationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationHelper.h; sourceTree = "<group>"; };
-		C5DFD5981A92402F00F37803 /* ApplicationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationHelper.m; sourceTree = "<group>"; };
-		C5DFD59A1A92426D00F37803 /* ConfigHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigHelper.h; sourceTree = "<group>"; };
-		C5DFD59B1A92426D00F37803 /* ConfigHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigHelper.m; sourceTree = "<group>"; };
-		C5DFD59D1A9244EF00F37803 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
-		C5DFD59E1A9244EF00F37803 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,9 +114,11 @@
 		C506388A1A91E18C00F39D63 /* wzup */ = {
 			isa = PBXGroup;
 			children = (
-				C5DFD5831A922E0500F37803 /* app */,
+				C590CFCD1A937FFC003432D7 /* app */,
 				C506388F1A91E18C00F39D63 /* AppDelegate.h */,
 				C50638901A91E18C00F39D63 /* AppDelegate.m */,
+				C590CFEE1A93A9E6003432D7 /* StartViewController.h */,
+				C590CFEF1A93A9E6003432D7 /* StartViewController.m */,
 				C50638921A91E18C00F39D63 /* FirstViewController.h */,
 				C50638931A91E18C00F39D63 /* FirstViewController.m */,
 				C50638951A91E18C00F39D63 /* SecondViewController.h */,
@@ -154,67 +159,67 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		C5DFD5821A922DEA00F37803 /* views */ = {
+		C590CFCD1A937FFC003432D7 /* app */ = {
 			isa = PBXGroup;
 			children = (
+				C590CFCE1A937FFC003432D7 /* controllers */,
+				C590CFD31A937FFC003432D7 /* helpers */,
+				C590CFDC1A937FFC003432D7 /* lib */,
+				C590CFE11A937FFC003432D7 /* models */,
+				C590CFE21A937FFC003432D7 /* views */,
 			);
-			name = views;
+			path = app;
 			sourceTree = "<group>";
 		};
-		C5DFD5831A922E0500F37803 /* app */ = {
+		C590CFCE1A937FFC003432D7 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C5DFD58A1A92301B00F37803 /* lib */,
-				C5DFD5861A922E3A00F37803 /* helpers */,
-				C5DFD5851A922E2200F37803 /* models */,
-				C5DFD5841A922E0D00F37803 /* controllers */,
-				C5DFD5821A922DEA00F37803 /* views */,
+				C590CFCF1A937FFC003432D7 /* ApplicationController.h */,
+				C590CFD01A937FFC003432D7 /* ApplicationController.m */,
+				C590CFD11A937FFC003432D7 /* LoginController.h */,
+				C590CFD21A937FFC003432D7 /* LoginController.m */,
 			);
-			name = app;
+			path = controllers;
 			sourceTree = "<group>";
 		};
-		C5DFD5841A922E0D00F37803 /* controllers */ = {
+		C590CFD31A937FFC003432D7 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
-				C5DFD5941A923C4800F37803 /* ApplicationController.h */,
-				C5DFD5951A923C4800F37803 /* ApplicationController.m */,
-				C5DFD59D1A9244EF00F37803 /* LoginController.h */,
-				C5DFD59E1A9244EF00F37803 /* LoginController.m */,
+				C590CFD41A937FFC003432D7 /* ApplicationHelper.h */,
+				C590CFD51A937FFC003432D7 /* ApplicationHelper.m */,
+				C590CFD61A937FFC003432D7 /* AuthHelper.h */,
+				C590CFD71A937FFC003432D7 /* AuthHelper.m */,
+				C590CFD81A937FFC003432D7 /* ConfigHelper.h */,
+				C590CFD91A937FFC003432D7 /* ConfigHelper.m */,
+				C590CFDA1A937FFC003432D7 /* ParserHelper.h */,
+				C590CFDB1A937FFC003432D7 /* ParserHelper.m */,
 			);
-			name = controllers;
+			path = helpers;
 			sourceTree = "<group>";
 		};
-		C5DFD5851A922E2200F37803 /* models */ = {
+		C590CFDC1A937FFC003432D7 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				C590CFDD1A937FFC003432D7 /* SSKeychain.h */,
+				C590CFDE1A937FFC003432D7 /* SSKeychain.m */,
+				C590CFDF1A937FFC003432D7 /* SSKeychainQuery.h */,
+				C590CFE01A937FFC003432D7 /* SSKeychainQuery.m */,
 			);
-			name = models;
+			path = lib;
 			sourceTree = "<group>";
 		};
-		C5DFD5861A922E3A00F37803 /* helpers */ = {
+		C590CFE11A937FFC003432D7 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				C5DFD5871A922F5200F37803 /* AuthHelper.h */,
-				C5DFD5881A922F5200F37803 /* AuthHelper.m */,
-				C5DFD5911A92392900F37803 /* ParserHelper.h */,
-				C5DFD5921A92392900F37803 /* ParserHelper.m */,
-				C5DFD5971A92402F00F37803 /* ApplicationHelper.h */,
-				C5DFD5981A92402F00F37803 /* ApplicationHelper.m */,
-				C5DFD59A1A92426D00F37803 /* ConfigHelper.h */,
-				C5DFD59B1A92426D00F37803 /* ConfigHelper.m */,
 			);
-			name = helpers;
+			path = models;
 			sourceTree = "<group>";
 		};
-		C5DFD58A1A92301B00F37803 /* lib */ = {
+		C590CFE21A937FFC003432D7 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				C5DFD58B1A92308E00F37803 /* SSKeychain.h */,
-				C5DFD58C1A92308E00F37803 /* SSKeychain.m */,
-				C5DFD58D1A92308E00F37803 /* SSKeychainQuery.h */,
-				C5DFD58E1A92308E00F37803 /* SSKeychainQuery.m */,
 			);
-			name = lib;
+			path = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,19 +323,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C590CFEA1A937FFC003432D7 /* SSKeychainQuery.m in Sources */,
+				C590CFE41A937FFC003432D7 /* LoginController.m in Sources */,
+				C590CFE31A937FFC003432D7 /* ApplicationController.m in Sources */,
+				C590CFF01A93A9E6003432D7 /* StartViewController.m in Sources */,
+				C590CFE51A937FFC003432D7 /* ApplicationHelper.m in Sources */,
+				C590CFE71A937FFC003432D7 /* ConfigHelper.m in Sources */,
+				C590CFE81A937FFC003432D7 /* ParserHelper.m in Sources */,
+				C590CFE91A937FFC003432D7 /* SSKeychain.m in Sources */,
+				C590CFE61A937FFC003432D7 /* AuthHelper.m in Sources */,
 				C50638971A91E18C00F39D63 /* SecondViewController.m in Sources */,
 				C50638911A91E18C00F39D63 /* AppDelegate.m in Sources */,
-				C5DFD58F1A92308E00F37803 /* SSKeychain.m in Sources */,
 				C50638941A91E18C00F39D63 /* FirstViewController.m in Sources */,
-				C5DFD5961A923C4800F37803 /* ApplicationController.m in Sources */,
-				C5DFD5901A92308E00F37803 /* SSKeychainQuery.m in Sources */,
-				C5DFD59F1A9244EF00F37803 /* LoginController.m in Sources */,
-				C5DFD5891A922F5200F37803 /* AuthHelper.m in Sources */,
-				C5DFD5931A92392900F37803 /* ParserHelper.m in Sources */,
 				C506388E1A91E18C00F39D63 /* main.m in Sources */,
-				C5DFD5991A92402F00F37803 /* ApplicationHelper.m in Sources */,
 				C5DFD5811A920A1800F37803 /* LoginModel.m in Sources */,
-				C5DFD59C1A92426D00F37803 /* ConfigHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

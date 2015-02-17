@@ -14,8 +14,8 @@
     NSURLResponse *response;
     NSError *error;
     NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    //NSString *strdata=[[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-    //NSLog(@"%@",strdata);
+    NSString *strdata=[[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@",strdata);
     NSMutableDictionary *dic = [NSJSONSerialization JSONObjectWithData:urlData options:kNilOptions error:&error];
     return dic;
 };

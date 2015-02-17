@@ -7,7 +7,9 @@
 //
 
 #import "AppDelegate.h"
-
+#import "FirstViewController.h"
+#import "StartViewController.h"
+#import "AuthHelper.h"
 @interface AppDelegate ()
 
 @end
@@ -17,7 +19,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    AuthHelper *authHelper = [[AuthHelper alloc] init];
+    if([authHelper getAuthToken] == nil){
+        [self setView:[[StartViewController alloc] init] second:@"start"];
+    }else{
+        [self setView:[[FirstViewController alloc] init] second:@"feed"];
+    }
     return YES;
+}
+
+-(void)setView:(UIViewController *)controller second:(NSString *) controllerString{
+    self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    controller = (UIViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:controllerString];
+    [self.window addSubview:controller.view];
+    [self.window makeKeyAndVisible];
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
