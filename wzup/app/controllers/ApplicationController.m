@@ -7,7 +7,7 @@
 //
 
 #import "ApplicationController.h"
-#import "ApplicationHelper.h";
+#import "ApplicationHelper.h"
 #import "AuthHelper.h"
 #import "ParserHelper.h"
 @implementation ApplicationController

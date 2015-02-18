@@ -21,9 +21,9 @@
     // Override point for customization after application launch.
     AuthHelper *authHelper = [[AuthHelper alloc] init];
     if([authHelper getAuthToken] == nil){
-        [self setView:[[StartViewController alloc] init] second:@"start"];
+        //[self setView:[[StartViewController alloc] init] second:@"start"];
     }else{
-        [self setView:[[FirstViewController alloc] init] second:@"feed"];
+        //[self setView:[[FirstViewController alloc] init] second:@"feed"];
     }
     return YES;
 }

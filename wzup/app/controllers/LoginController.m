@@ -12,6 +12,8 @@
 
 -(void)login:(NSString *) username
         pass:(NSString *) password{
+    //Logout
+    [authHelper resetCredentials];
     //Create dictionary with username and password
     NSDictionary *credentials = @{
                                 @"username" : username,
@@ -24,7 +26,9 @@
     //Parse login request
     NSMutableDictionary *dic = [parserHelper parse:request];
     //Store parsed login data in sskey secure
-    [authHelper storeCredentials:dic];
+   [authHelper storeCredentials:dic];
+    
+   
     
     //Debugging
     NSLog([authHelper getAuthToken]);

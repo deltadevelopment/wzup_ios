@@ -10,6 +10,7 @@
 
 @interface AuthHelper : NSObject
 - (void) storeCredentials:(NSMutableDictionary *) credentials;
+-(void) resetCredentials;
 - (NSString*) getAuthToken;
 - (NSString *) getUserId;
 

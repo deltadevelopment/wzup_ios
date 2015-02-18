@@ -26,6 +26,11 @@
     [SSKeychain setPassword:authToken forService:@"authToken" account:@"AnyUser"];
 };
 
+-(void) resetCredentials{
+    [SSKeychain deletePasswordForService:@"userId" account:@"AnyUser"];
+    [SSKeychain deletePasswordForService:@"authToken" account:@"AnyUser"];
+}
+
 - (NSString*) getAuthToken{
     NSString *authToken = [SSKeychain passwordForService:@"authToken" account:@"AnyUser"];
     return authToken;

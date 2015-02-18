@@ -24,6 +24,7 @@
 		C590CFE91A937FFC003432D7 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFDE1A937FFC003432D7 /* SSKeychain.m */; };
 		C590CFEA1A937FFC003432D7 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFE01A937FFC003432D7 /* SSKeychainQuery.m */; };
 		C590CFF01A93A9E6003432D7 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFEF1A93A9E6003432D7 /* StartViewController.m */; };
+		C590CFF31A94FC0D003432D7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFF21A94FC0D003432D7 /* LoginViewController.m */; };
 		C5DFD5811A920A1800F37803 /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD5801A920A1800F37803 /* LoginModel.m */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,8 @@
 		C590CFE01A937FFC003432D7 /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
 		C590CFEE1A93A9E6003432D7 /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartViewController.h; path = ../StartViewController.h; sourceTree = "<group>"; };
 		C590CFEF1A93A9E6003432D7 /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StartViewController.m; path = ../StartViewController.m; sourceTree = "<group>"; };
+		C590CFF11A94FC0D003432D7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		C590CFF21A94FC0D003432D7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		C5DFD57F1A920A1800F37803 /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModel.h; sourceTree = "<group>"; };
 		C5DFD5801A920A1800F37803 /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,6 +99,8 @@
 		C506387F1A91E18C00F39D63 = {
 			isa = PBXGroup;
 			children = (
+				C590CFF11A94FC0D003432D7 /* LoginViewController.h */,
+				C590CFF21A94FC0D003432D7 /* LoginViewController.m */,
 				C506388A1A91E18C00F39D63 /* wzup */,
 				C50638A71A91E18C00F39D63 /* wzupTests */,
 				C50638891A91E18C00F39D63 /* Products */,
@@ -337,6 +342,7 @@
 				C50638941A91E18C00F39D63 /* FirstViewController.m in Sources */,
 				C506388E1A91E18C00F39D63 /* main.m in Sources */,
 				C5DFD5811A920A1800F37803 /* LoginModel.m in Sources */,
+				C590CFF31A94FC0D003432D7 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
