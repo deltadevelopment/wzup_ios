@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "FirstViewController.h"
+#import "FeedViewController.h"
 #import "StartViewController.h"
 #import "AuthHelper.h"
 @interface AppDelegate ()
@@ -18,23 +18,34 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+
+ 
     // Override point for customization after application launch.
     AuthHelper *authHelper = [[AuthHelper alloc] init];
+    [authHelper resetCredentials];
     if([authHelper getAuthToken] == nil){
-        //[self setView:[[StartViewController alloc] init] second:@"start"];
+        [self setView:[[StartViewController alloc] init] second:@"start"];
     }else{
-        //[self setView:[[FirstViewController alloc] init] second:@"feed"];
+        [self setView:[[FeedViewController alloc] init] second:@"feed"];
     }
     return YES;
 }
 
 -(void)setView:(UIViewController *)controller second:(NSString *) controllerString{
-    self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    //self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     controller = (UIViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:controllerString];
-    [self.window addSubview:controller.view];
     [self.window makeKeyAndVisible];
+    [self.window.rootViewController presentViewController:controller animated:YES completion:NULL];
+     
 
+}
+- (void)showLoginView
+{
+    //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    //LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+   
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

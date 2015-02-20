@@ -10,13 +10,9 @@
 
 @implementation ParserHelper
 
-- (NSMutableDictionary *) parse:(NSMutableURLRequest *) request{
-    NSURLResponse *response;
+- (NSMutableDictionary *) parse:(NSData *) response;{
     NSError *error;
-    NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    //NSString *strdata=[[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-    //NSLog(@"%@",strdata);
-    NSMutableDictionary *dic = [NSJSONSerialization JSONObjectWithData:urlData options:kNilOptions error:&error];
+    NSMutableDictionary *dic = [NSJSONSerialization JSONObjectWithData:response options:kNilOptions error:&error];
     return dic;
 };
 

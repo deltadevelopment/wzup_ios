@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		C506388E1A91E18C00F39D63 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C506388D1A91E18C00F39D63 /* main.m */; };
 		C50638911A91E18C00F39D63 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C50638901A91E18C00F39D63 /* AppDelegate.m */; };
-		C50638941A91E18C00F39D63 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C50638931A91E18C00F39D63 /* FirstViewController.m */; };
+		C50638941A91E18C00F39D63 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C50638931A91E18C00F39D63 /* FeedViewController.m */; };
 		C50638971A91E18C00F39D63 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C50638961A91E18C00F39D63 /* SecondViewController.m */; };
 		C506389A1A91E18C00F39D63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C50638981A91E18C00F39D63 /* Main.storyboard */; };
 		C506389C1A91E18C00F39D63 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C506389B1A91E18C00F39D63 /* Images.xcassets */; };
@@ -25,6 +25,9 @@
 		C590CFEA1A937FFC003432D7 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFE01A937FFC003432D7 /* SSKeychainQuery.m */; };
 		C590CFF01A93A9E6003432D7 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFEF1A93A9E6003432D7 /* StartViewController.m */; };
 		C590CFF31A94FC0D003432D7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFF21A94FC0D003432D7 /* LoginViewController.m */; };
+		C590CFF61A977886003432D7 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFF51A977886003432D7 /* RegisterViewController.m */; };
+		C590CFFC1A97905C003432D7 /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFFB1A97905C003432D7 /* RegisterController.m */; };
+		C590D0021A97B104003432D7 /* icon-ios7-arrow-back-128.png in Resources */ = {isa = PBXBuildFile; fileRef = C590D0011A97B104003432D7 /* icon-ios7-arrow-back-128.png */; };
 		C5DFD5811A920A1800F37803 /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD5801A920A1800F37803 /* LoginModel.m */; };
 /* End PBXBuildFile section */
 
@@ -44,8 +47,8 @@
 		C506388D1A91E18C00F39D63 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C506388F1A91E18C00F39D63 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C50638901A91E18C00F39D63 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C50638921A91E18C00F39D63 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		C50638931A91E18C00F39D63 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		C50638921A91E18C00F39D63 /* FeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FeedViewController.h; path = ../../FeedViewController.h; sourceTree = "<group>"; };
+		C50638931A91E18C00F39D63 /* FeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FeedViewController.m; path = ../../FeedViewController.m; sourceTree = "<group>"; };
 		C50638951A91E18C00F39D63 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		C50638961A91E18C00F39D63 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		C50638991A91E18C00F39D63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -70,10 +73,15 @@
 		C590CFDE1A937FFC003432D7 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
 		C590CFDF1A937FFC003432D7 /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychainQuery.h; sourceTree = "<group>"; };
 		C590CFE01A937FFC003432D7 /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
-		C590CFEE1A93A9E6003432D7 /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartViewController.h; path = ../StartViewController.h; sourceTree = "<group>"; };
-		C590CFEF1A93A9E6003432D7 /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StartViewController.m; path = ../StartViewController.m; sourceTree = "<group>"; };
-		C590CFF11A94FC0D003432D7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		C590CFF21A94FC0D003432D7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		C590CFEE1A93A9E6003432D7 /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartViewController.h; path = ../../../StartViewController.h; sourceTree = "<group>"; };
+		C590CFEF1A93A9E6003432D7 /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StartViewController.m; path = ../../../StartViewController.m; sourceTree = "<group>"; };
+		C590CFF11A94FC0D003432D7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ../../../LoginViewController.h; sourceTree = "<group>"; };
+		C590CFF21A94FC0D003432D7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ../../../LoginViewController.m; sourceTree = "<group>"; };
+		C590CFF41A977886003432D7 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		C590CFF51A977886003432D7 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		C590CFFA1A97905C003432D7 /* RegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterController.h; sourceTree = "<group>"; };
+		C590CFFB1A97905C003432D7 /* RegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterController.m; sourceTree = "<group>"; };
+		C590D0011A97B104003432D7 /* icon-ios7-arrow-back-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-ios7-arrow-back-128.png"; path = "../../../../Downloads/icon-ios7-arrow-back-128.png"; sourceTree = "<group>"; };
 		C5DFD57F1A920A1800F37803 /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModel.h; sourceTree = "<group>"; };
 		C5DFD5801A920A1800F37803 /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,8 +107,6 @@
 		C506387F1A91E18C00F39D63 = {
 			isa = PBXGroup;
 			children = (
-				C590CFF11A94FC0D003432D7 /* LoginViewController.h */,
-				C590CFF21A94FC0D003432D7 /* LoginViewController.m */,
 				C506388A1A91E18C00F39D63 /* wzup */,
 				C50638A71A91E18C00F39D63 /* wzupTests */,
 				C50638891A91E18C00F39D63 /* Products */,
@@ -122,10 +128,6 @@
 				C590CFCD1A937FFC003432D7 /* app */,
 				C506388F1A91E18C00F39D63 /* AppDelegate.h */,
 				C50638901A91E18C00F39D63 /* AppDelegate.m */,
-				C590CFEE1A93A9E6003432D7 /* StartViewController.h */,
-				C590CFEF1A93A9E6003432D7 /* StartViewController.m */,
-				C50638921A91E18C00F39D63 /* FirstViewController.h */,
-				C50638931A91E18C00F39D63 /* FirstViewController.m */,
 				C50638951A91E18C00F39D63 /* SecondViewController.h */,
 				C50638961A91E18C00F39D63 /* SecondViewController.m */,
 				C50638981A91E18C00F39D63 /* Main.storyboard */,
@@ -167,6 +169,7 @@
 		C590CFCD1A937FFC003432D7 /* app */ = {
 			isa = PBXGroup;
 			children = (
+				C590D0001A97B0F3003432D7 /* resources */,
 				C590CFCE1A937FFC003432D7 /* controllers */,
 				C590CFD31A937FFC003432D7 /* helpers */,
 				C590CFDC1A937FFC003432D7 /* lib */,
@@ -183,6 +186,8 @@
 				C590CFD01A937FFC003432D7 /* ApplicationController.m */,
 				C590CFD11A937FFC003432D7 /* LoginController.h */,
 				C590CFD21A937FFC003432D7 /* LoginController.m */,
+				C590CFFA1A97905C003432D7 /* RegisterController.h */,
+				C590CFFB1A97905C003432D7 /* RegisterController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -223,8 +228,24 @@
 		C590CFE21A937FFC003432D7 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				C590CFEE1A93A9E6003432D7 /* StartViewController.h */,
+				C590CFEF1A93A9E6003432D7 /* StartViewController.m */,
+				C50638921A91E18C00F39D63 /* FeedViewController.h */,
+				C50638931A91E18C00F39D63 /* FeedViewController.m */,
+				C590CFF11A94FC0D003432D7 /* LoginViewController.h */,
+				C590CFF21A94FC0D003432D7 /* LoginViewController.m */,
+				C590CFF41A977886003432D7 /* RegisterViewController.h */,
+				C590CFF51A977886003432D7 /* RegisterViewController.m */,
 			);
 			path = views;
+			sourceTree = "<group>";
+		};
+		C590D0001A97B0F3003432D7 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				C590D0011A97B104003432D7 /* icon-ios7-arrow-back-128.png */,
+			);
+			name = resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C506389A1A91E18C00F39D63 /* Main.storyboard in Resources */,
+				C590D0021A97B104003432D7 /* icon-ios7-arrow-back-128.png in Resources */,
 				C506389F1A91E18C00F39D63 /* LaunchScreen.xib in Resources */,
 				C506389C1A91E18C00F39D63 /* Images.xcassets in Resources */,
 			);
@@ -335,12 +357,14 @@
 				C590CFE51A937FFC003432D7 /* ApplicationHelper.m in Sources */,
 				C590CFE71A937FFC003432D7 /* ConfigHelper.m in Sources */,
 				C590CFE81A937FFC003432D7 /* ParserHelper.m in Sources */,
+				C590CFF61A977886003432D7 /* RegisterViewController.m in Sources */,
 				C590CFE91A937FFC003432D7 /* SSKeychain.m in Sources */,
 				C590CFE61A937FFC003432D7 /* AuthHelper.m in Sources */,
 				C50638971A91E18C00F39D63 /* SecondViewController.m in Sources */,
 				C50638911A91E18C00F39D63 /* AppDelegate.m in Sources */,
-				C50638941A91E18C00F39D63 /* FirstViewController.m in Sources */,
+				C50638941A91E18C00F39D63 /* FeedViewController.m in Sources */,
 				C506388E1A91E18C00F39D63 /* main.m in Sources */,
+				C590CFFC1A97905C003432D7 /* RegisterController.m in Sources */,
 				C5DFD5811A920A1800F37803 /* LoginModel.m in Sources */,
 				C590CFF31A94FC0D003432D7 /* LoginViewController.m in Sources */,
 			);

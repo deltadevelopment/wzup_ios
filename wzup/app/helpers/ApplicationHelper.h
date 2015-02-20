@@ -11,4 +11,5 @@
 @interface ApplicationHelper : NSObject
 -(NSString*) generateUrl:(NSString*) relativePath;
 -(NSString*) generateJsonFromDictionary:(NSDictionary *) dictionary;
+
 @end
