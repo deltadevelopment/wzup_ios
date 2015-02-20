@@ -15,6 +15,7 @@
     AuthHelper *authHelper;
     ParserHelper *parserHelper;
     ApplicationHelper *applicationHelper;
+    BOOL isErrors;
 }
 
 @property AuthHelper *authHelper;
@@ -22,11 +23,13 @@
 @property ApplicationHelper *applicationHelper;
 
 
--(NSMutableURLRequest *) getHttpRequest:(NSString *) url;
--(NSMutableURLRequest *) postHttpRequest:(NSString *) url
+-(NSData *) getHttpRequest:(NSString *) url;
+-(NSData  *) postHttpRequest:(NSString *) url
                                     json:(NSString *) data;
--(NSMutableURLRequest *) deleteHttpRequest:(NSString *) url;
--(NSMutableURLRequest *) putHttpRequest:(NSString *) url
+-(NSData  *) deleteHttpRequest:(NSString *) url;
+-(NSData  *) putHttpRequest:(NSString *) url
                                     json:(NSString *) data;
+
+-(BOOL)hasError;
 
 @end

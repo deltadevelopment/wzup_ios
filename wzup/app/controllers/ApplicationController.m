@@ -24,17 +24,41 @@
     return self;
 }
 
--(NSMutableURLRequest *) getHttpRequest:(NSString *) url{
+-(NSData*)getResp:(NSMutableURLRequest *) request{
+    NSURLResponse *response;
+    NSError *error;
+    NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    //NSLog(urlData);
+    
+  //  NSString *strdata=[[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
+   // NSLog(@"%@",strdata);
+    
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+    if([httpResponse statusCode] == 200 || [httpResponse statusCode] == 201){
+        isErrors = false;
+    }else{
+        isErrors = true;
+    }
+    NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+    return urlData;
+}
+
+-(BOOL)hasError{
+    return isErrors;
+};
+
+-(NSData *) getHttpRequest:(NSString *) url{
     
     NSURL * serviceUrl = [NSURL URLWithString:[applicationHelper generateUrl:url]];
     NSMutableURLRequest * serviceRequest = [NSMutableURLRequest requestWithURL:serviceUrl];
     [serviceRequest setValue:@"text" forHTTPHeaderField:@"Content-type"];
     [serviceRequest addValue:[authHelper getAuthToken] forHTTPHeaderField:@"X-AUTH-TOKEN"];
     [serviceRequest setHTTPMethod:@"GET"];
-    return serviceRequest;
+    return [self getResp:serviceRequest];
 };
 
--(NSMutableURLRequest *) postHttpRequest:(NSString *) url
+-(NSData *) postHttpRequest:(NSString *) url
                                     json:(NSString *) data{
     NSURL * serviceUrl = [NSURL URLWithString:[applicationHelper generateUrl:url]];
     NSMutableURLRequest * serviceRequest = [NSMutableURLRequest requestWithURL:serviceUrl];
@@ -42,26 +66,26 @@
     [serviceRequest addValue:[authHelper getAuthToken] forHTTPHeaderField:@"X-AUTH-TOKEN"];
     [serviceRequest setHTTPMethod:@"POST"];
     [serviceRequest setHTTPBody:[data dataUsingEncoding:NSASCIIStringEncoding]];
-    return serviceRequest;
+    return [self getResp:serviceRequest];
 };
 
--(NSMutableURLRequest *) deleteHttpRequest:(NSString *) url{
+-(NSData *) deleteHttpRequest:(NSString *) url{
     NSURL * serviceUrl = [NSURL URLWithString:[applicationHelper generateUrl:url]];
     NSMutableURLRequest * serviceRequest = [NSMutableURLRequest requestWithURL:serviceUrl];
     [serviceRequest setValue:@"text" forHTTPHeaderField:@"Content-type"];
       [serviceRequest addValue:[authHelper getAuthToken] forHTTPHeaderField:@"X-AUTH-TOKEN"];
     [serviceRequest setHTTPMethod:@"DELETE"];
-    return serviceRequest;
+    return [self getResp:serviceRequest];
 
 };
--(NSMutableURLRequest *) putHttpRequest:(NSString *) url
+-(NSData *) putHttpRequest:(NSString *) url
                                    json:(NSString *) data{
     NSURL * serviceUrl = [NSURL URLWithString:[applicationHelper generateUrl:url]];
     NSMutableURLRequest * serviceRequest = [NSMutableURLRequest requestWithURL:serviceUrl];
     [serviceRequest setValue:@"application/json" forHTTPHeaderField:@"Content-type"];
     [serviceRequest setHTTPMethod:@"PUT"];
     [serviceRequest setHTTPBody:[data dataUsingEncoding:NSASCIIStringEncoding]];
-    return serviceRequest;
+    return [self getResp:serviceRequest];
 
 };
 @end
