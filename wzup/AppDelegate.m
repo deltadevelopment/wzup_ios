@@ -25,7 +25,7 @@
     AuthHelper *authHelper = [[AuthHelper alloc] init];
     [authHelper resetCredentials];
     if([authHelper getAuthToken] == nil){
-        [self setView:[[StartViewController alloc] init] second:@"start"];
+        [self setView:[[StartViewController alloc] init] second:@"startNav"];
     }else{
         [self setView:[[FeedViewController alloc] init] second:@"feed"];
     }
@@ -37,7 +37,7 @@
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     controller = (UIViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:controllerString];
     [self.window makeKeyAndVisible];
-    [self.window.rootViewController presentViewController:controller animated:YES completion:NULL];
+    [self.window.rootViewController presentViewController:controller animated:NO completion:NULL];
      
 
 }

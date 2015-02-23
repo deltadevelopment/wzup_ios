@@ -18,7 +18,23 @@
 @implementation LoginViewController
 LoginController* loginController;
 CGPoint originalCenter;
+CGSize keyboardSize;
+CGFloat keyboardPos;
+BOOL loginButtonHasChangedPos;
+int padding = 15;
+CGFloat buttonY;
+
 - (void)viewDidLoad {
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSingleTap:)];
+    [self.view addGestureRecognizer:singleFingerTap];
+ 
+    
+   
+    [self addLine:self.usernameTextField];
+     [self addLine:self.passwordTextField];
+    //[[self navigationController] setNavigationBarHidden:NO animated:NO];
     originalCenter = self.loginButton.center;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [super viewDidLoad];
@@ -28,20 +44,92 @@ CGPoint originalCenter;
     [self setTextFieldStyle:self.usernameTextField];
     [self setTextFieldStyle:self.passwordTextField];
     // Do any additional setup after loading the view.
+    
     self.loginButton.hidden = YES;
+   
+
+    
+    [self.usernameTextField addTarget:self
+                               action:@selector(textFieldDidChange:)
+                     forControlEvents:UIControlEventEditingChanged];
+    [self.passwordTextField addTarget:self
+                               action:@selector(textFieldDidChange:)
+                     forControlEvents:UIControlEventEditingChanged];
+    
+
+}
+-(void)viewDidAppear:(BOOL)animated{
     CGRect btFrame = self.loginButton.frame;
     btFrame.origin.x = 0;
-    btFrame.origin.y = 370;
-    self.loginButton.frame = btFrame;
+    buttonY = btFrame.origin.y;
 }
 -(void)setTextFieldStyle:(UITextField *) textField{
     textField.borderStyle = UITextBorderStyleNone;
     [textField setBackgroundColor:[UIColor clearColor]];
 }
 
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
+    [self.usernameTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+}
+
+-(void)addLine:(UITextField *) textField{
+    CALayer *bottomBorder = [CALayer layer];
+    bottomBorder.frame = CGRectMake(0.0f, textField.frame.size.height + 5, self.view.frame.size.width, 1.0f);
+    bottomBorder.backgroundColor = [UIColor colorWithRed:0.741 green:0.765 blue:0.78 alpha:1].CGColor;
+    [textField.layer addSublayer:bottomBorder];
+    
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(20, 20, 20, 20)];
+    textField.leftView = paddingView;
+    textField.leftViewMode = UITextFieldViewModeAlways;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+-(void)textFieldDidChange:(UITextField *) textField{
+    [self showLoginButton];
+
+}
+
+- (void)textFieldDidBeginEditing:(NSNotification *)notification {
+    loginButtonHasChangedPos = FALSE;
+    [self showLoginButton];
+    
+}
+
+-(void)showButton{
+    loginButtonHasChangedPos = TRUE;
+    self.loginButton.hidden = NO;
+    CGRect btFrame = self.loginButton.frame;
+    btFrame.origin.x = 0;
+    
+    btFrame.origin.y = buttonY- keyboardSize.height;
+    self.loginButton.frame = btFrame;
+    self.loginButton.alpha =0;
+    
+    // animate
+    [UIView animateWithDuration:0.3 animations:^{
+        self.loginButton.alpha = 1;
+    }];
+    [self.view setNeedsDisplay];
+}
+
+-(void)showLoginButton{
+    if(self.usernameTextField.text.length > 0 && self.passwordTextField.text.length > 0){
+        if(!loginButtonHasChangedPos){
+            [self showButton];
+        }
+    }
+    else if(self.usernameTextField.text.length == 0 || self.passwordTextField.text.length == 0){
+        loginButtonHasChangedPos = FALSE;
+        CGRect btFrame = self.loginButton.frame;
+        btFrame.origin.x = 0;
+        btFrame.origin.y = buttonY + keyboardSize.height;
+        self.loginButton.frame = btFrame;
+    }
 }
 
 /*
@@ -55,21 +143,24 @@ CGPoint originalCenter;
  */
 - (void)keyboardDidShow:(NSNotification *)note
 {
-  //  self.loginButton.center = CGPointMake(originalCenter.x, originalCenter.y + 10);
-     self.loginButton.hidden = NO;
-    CGRect btFrame = self.loginButton.frame;
-    btFrame.origin.x = 0;
-    btFrame.origin.y = 370;
-    self.loginButton.frame = btFrame;
-}
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+
+    NSDictionary* info = [note userInfo];
+    NSValue* aValue = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
+    keyboardSize = [aValue CGRectValue].size;
+    loginButtonHasChangedPos = FALSE;
+    [self showLoginButton];
     
+
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
     if(textField == self.usernameTextField){
         [self.usernameTextField resignFirstResponder];
         [self.passwordTextField becomeFirstResponder];
         return YES;
     }
     else if(textField == self.passwordTextField){
+        
         [self login:nil];
         [self.passwordTextField resignFirstResponder];
         return NO;

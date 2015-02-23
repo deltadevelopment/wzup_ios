@@ -28,6 +28,8 @@
 		C590CFF61A977886003432D7 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFF51A977886003432D7 /* RegisterViewController.m */; };
 		C590CFFC1A97905C003432D7 /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFFB1A97905C003432D7 /* RegisterController.m */; };
 		C590D0021A97B104003432D7 /* icon-ios7-arrow-back-128.png in Resources */ = {isa = PBXBuildFile; fileRef = C590D0011A97B104003432D7 /* icon-ios7-arrow-back-128.png */; };
+		C590D0371A9B4075003432D7 /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590D0361A9B4075003432D7 /* NavigationViewController.m */; };
+		C590D0391A9B43A4003432D7 /* wz-monkey-bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C590D0381A9B43A4003432D7 /* wz-monkey-bg.jpg */; };
 		C5DFD5811A920A1800F37803 /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD5801A920A1800F37803 /* LoginModel.m */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +84,9 @@
 		C590CFFA1A97905C003432D7 /* RegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterController.h; sourceTree = "<group>"; };
 		C590CFFB1A97905C003432D7 /* RegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterController.m; sourceTree = "<group>"; };
 		C590D0011A97B104003432D7 /* icon-ios7-arrow-back-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-ios7-arrow-back-128.png"; path = "../../../../Downloads/icon-ios7-arrow-back-128.png"; sourceTree = "<group>"; };
+		C590D0351A9B4075003432D7 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
+		C590D0361A9B4075003432D7 /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
+		C590D0381A9B43A4003432D7 /* wz-monkey-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "wz-monkey-bg.jpg"; path = "../../../../Downloads/wz-monkey-bg.jpg"; sourceTree = "<group>"; };
 		C5DFD57F1A920A1800F37803 /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModel.h; sourceTree = "<group>"; };
 		C5DFD5801A920A1800F37803 /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,6 +112,8 @@
 		C506387F1A91E18C00F39D63 = {
 			isa = PBXGroup;
 			children = (
+				C590D0351A9B4075003432D7 /* NavigationViewController.h */,
+				C590D0361A9B4075003432D7 /* NavigationViewController.m */,
 				C506388A1A91E18C00F39D63 /* wzup */,
 				C50638A71A91E18C00F39D63 /* wzupTests */,
 				C50638891A91E18C00F39D63 /* Products */,
@@ -169,7 +176,7 @@
 		C590CFCD1A937FFC003432D7 /* app */ = {
 			isa = PBXGroup;
 			children = (
-				C590D0001A97B0F3003432D7 /* resources */,
+				C590D0001A97B0F3003432D7 /* res */,
 				C590CFCE1A937FFC003432D7 /* controllers */,
 				C590CFD31A937FFC003432D7 /* helpers */,
 				C590CFDC1A937FFC003432D7 /* lib */,
@@ -240,12 +247,13 @@
 			path = views;
 			sourceTree = "<group>";
 		};
-		C590D0001A97B0F3003432D7 /* resources */ = {
+		C590D0001A97B0F3003432D7 /* res */ = {
 			isa = PBXGroup;
 			children = (
+				C590D0381A9B43A4003432D7 /* wz-monkey-bg.jpg */,
 				C590D0011A97B104003432D7 /* icon-ios7-arrow-back-128.png */,
 			);
-			name = resources;
+			name = res;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,6 +337,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C590D0391A9B43A4003432D7 /* wz-monkey-bg.jpg in Resources */,
 				C506389A1A91E18C00F39D63 /* Main.storyboard in Resources */,
 				C590D0021A97B104003432D7 /* icon-ios7-arrow-back-128.png in Resources */,
 				C506389F1A91E18C00F39D63 /* LaunchScreen.xib in Resources */,
@@ -358,6 +367,7 @@
 				C590CFE71A937FFC003432D7 /* ConfigHelper.m in Sources */,
 				C590CFE81A937FFC003432D7 /* ParserHelper.m in Sources */,
 				C590CFF61A977886003432D7 /* RegisterViewController.m in Sources */,
+				C590D0371A9B4075003432D7 /* NavigationViewController.m in Sources */,
 				C590CFE91A937FFC003432D7 /* SSKeychain.m in Sources */,
 				C590CFE61A937FFC003432D7 /* AuthHelper.m in Sources */,
 				C50638971A91E18C00F39D63 /* SecondViewController.m in Sources */,
