@@ -1,32 +1,36 @@
 //
-//  NavigationViewController.m
+//  Navigation2ViewController.m
 //  wzup
 //
-//  Created by Simen Lie on 23/02/15.
+//  Created by Simen Lie on 24/02/15.
 //  Copyright (c) 2015 ddev. All rights reserved.
 //
 
-#import "NavigationViewController.h"
+#import "Navigation2ViewController.h"
 
-@interface NavigationViewController ()
+@interface Navigation2ViewController ()
 
 @end
 
-@implementation NavigationViewController
+@implementation Navigation2ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
- 
-   
+    
+}
+-(void)viewDidLayoutSubviews{
+    
+ [self.navigationBar setFrame:CGRectMake(0, 0, self.navigationBar.frame.size.width, 80)];
+}
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
--(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
 }
 
 /*
