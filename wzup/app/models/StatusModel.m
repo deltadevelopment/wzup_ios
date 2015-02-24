@@ -19,7 +19,7 @@
     _updated_at = dic[@"updated_at"];
     _user = [[UserModel alloc] init];
     [_user build:dic[@"user"]];
-   // NSLog(@"The status is %@",_body);
+   NSLog(@"The status is %@ %@",_body, _user_id);
 };
 
 -(NSString*) getStatusId{

@@ -9,6 +9,10 @@
 #import "FeedViewController.h"
 #import "LoginController.h"
 #import "AuthHelper.h"
+#import "FeedController.h"
+#import "StatusModel.h"
+#import "UserModel.h"
+#import "FeedTableViewCell.h"
 
 @interface FeedViewController ()
 
@@ -18,7 +22,11 @@
 LoginController *loginController;
 AuthHelper *authHelper;
 UIView *top;
+NSMutableArray *feed;
 - (void)viewDidLoad {
+    FeedController* feedController = [[FeedController alloc] init];
+    feed = [feedController getFeed];
+    NSLog(@"%lu", (unsigned long)[feed count]);
     authHelper = [[AuthHelper alloc] init];
     NSLog( [authHelper getAuthToken]);
      NSLog( [authHelper getUserId]);
@@ -92,4 +100,61 @@ UIView *top;
 - (IBAction)tes:(id)sender {
 
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [feed count];
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"row is %ld", (long)indexPath.row);
+    static NSString *CellIdentifier = @"feedCell";
+    FeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(cell == nil){
+        cell = [[FeedTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"feedCell"];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+    }
+   StatusModel *statusmodel = [feed objectAtIndex:indexPath.row];
+    UserModel *userModel = [statusmodel getUser];
+    [cell setStatus:[statusmodel getBody]];
+    [cell setName:[[statusmodel getUser] getUsername]];
+    [cell setProfileImg:@"miranda-kerr.jpg"];
+    [cell setStatusImg:@"miranda-kerr.jpg"];
+    [cell setAvailability:[[statusmodel getUser] getAvailability]];
+    
+   // NSLog(@"%@", [[statusmodel getUser] getAvailability]);
+    
+    
+    return cell;
+}
+
+-(void)viewDidLayoutSubviews
+{
+    if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+
+
+
+
 @end

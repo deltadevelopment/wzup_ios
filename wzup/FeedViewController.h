@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FeedViewController : UIViewController
+@interface FeedViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>{
+    IBOutlet UITableView* tableView;
+}
 - (IBAction)tes:(id)sender;
 
 

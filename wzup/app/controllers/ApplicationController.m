@@ -23,7 +23,10 @@
     }
     return self;
 }
-
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse {
+    NSLog(@"CASHMONEY");
+    return nil;
+}
 -(NSData*)getResp:(NSMutableURLRequest *) request{
     NSURLResponse *response;
     NSError *error;

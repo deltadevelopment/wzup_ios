@@ -13,7 +13,7 @@
 @property (nonatomic,strong) NSString * email;
 @property (nonatomic) id phone_number;
 @property (nonatomic,strong) NSString * display_name;
-@property (nonatomic) id availability;
+@property (nonatomic) int availability;
 @property (nonatomic,strong) NSDate * created_at;
 @property (nonatomic,strong) NSDate * updated_at;
 @property (nonatomic,strong) NSString * password_hash;
@@ -26,7 +26,7 @@
 -(NSString*) getEmail;
 -(id) getPhoneNumber;
 -(NSString*) getDisplayName;
--(id) getAvailability;
+-(int) getAvailability;
 -(NSDate*) getCreatedAt;
 -(NSDate*) getUpdatedAt;
 -(NSString*) getPasswordHash;

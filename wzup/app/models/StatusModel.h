@@ -27,7 +27,7 @@
 -(NSString*) getUserId;
 -(NSString*) getCreatedAt;
 -(NSString*) getUpdatedAt;
--(NSString*) getUser;
+-(UserModel*) getUser;
 
 
 @end

@@ -15,7 +15,7 @@
     _email  = dic[@"email"];
     _phone_number  = dic[@"phone_number"];
     _display_name  = dic[@"display_name"];
-    _availability  = dic[@"availability"];
+    _availability  = [[dic objectForKey:@"availability"] intValue];    
     _created_at  = dic[@"created_at"];
     _updated_at  = dic[@"updated_at"];
     _password_hash  = dic[@"password_hash"];
@@ -29,7 +29,7 @@
 -(NSString*) getEmail{return _email;};
 -(id) getPhoneNumber{return _phone_number;};
 -(NSString*) getDisplayName{return _display_name;};
--(id) getAvailability{return _availability;};
+-(int) getAvailability{return _availability;};
 -(NSDate*) getCreatedAt{return _created_at;};
 -(NSDate*) getUpdatedAt{return _updated_at;};
 -(NSString*) getPasswordHash{return _password_hash;};

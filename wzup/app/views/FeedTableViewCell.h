@@ -9,5 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface FeedTableViewCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UILabel *statusText;
+@property (weak, nonatomic) IBOutlet UIImageView *statusImage;
+@property (weak, nonatomic) IBOutlet UILabel *nameText;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+-(void)setStatus:(NSString*) status;
+-(void)setName:(NSString*) name;
+-(void)setProfileImg:(NSString*) img;
+-(void)setStatusImg:(NSString*) img;
+-(void)setAvailability:(NSInteger) av;
 @end
