@@ -27,10 +27,10 @@
 		C590CFF31A94FC0D003432D7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFF21A94FC0D003432D7 /* LoginViewController.m */; };
 		C590CFF61A977886003432D7 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFF51A977886003432D7 /* RegisterViewController.m */; };
 		C590CFFC1A97905C003432D7 /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFFB1A97905C003432D7 /* RegisterController.m */; };
-		C590D0021A97B104003432D7 /* icon-ios7-arrow-back-128.png in Resources */ = {isa = PBXBuildFile; fileRef = C590D0011A97B104003432D7 /* icon-ios7-arrow-back-128.png */; };
 		C590D0371A9B4075003432D7 /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590D0361A9B4075003432D7 /* NavigationViewController.m */; };
-		C590D0391A9B43A4003432D7 /* wz-monkey-bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C590D0381A9B43A4003432D7 /* wz-monkey-bg.jpg */; };
 		C5DFD5811A920A1800F37803 /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD5801A920A1800F37803 /* LoginModel.m */; };
+		F1A386AA1A9BD3260084A8EF /* wz-monkey-bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F1A386A91A9BD3260084A8EF /* wz-monkey-bg.jpg */; };
+		F1A386AD1A9BE9100084A8EF /* ApplicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A386AC1A9BE9100084A8EF /* ApplicationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,12 +83,13 @@
 		C590CFF51A977886003432D7 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		C590CFFA1A97905C003432D7 /* RegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterController.h; sourceTree = "<group>"; };
 		C590CFFB1A97905C003432D7 /* RegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterController.m; sourceTree = "<group>"; };
-		C590D0011A97B104003432D7 /* icon-ios7-arrow-back-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-ios7-arrow-back-128.png"; path = "../../../../Downloads/icon-ios7-arrow-back-128.png"; sourceTree = "<group>"; };
 		C590D0351A9B4075003432D7 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		C590D0361A9B4075003432D7 /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
-		C590D0381A9B43A4003432D7 /* wz-monkey-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "wz-monkey-bg.jpg"; path = "../../../../Downloads/wz-monkey-bg.jpg"; sourceTree = "<group>"; };
 		C5DFD57F1A920A1800F37803 /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModel.h; sourceTree = "<group>"; };
 		C5DFD5801A920A1800F37803 /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModel.m; sourceTree = "<group>"; };
+		F1A386A91A9BD3260084A8EF /* wz-monkey-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "wz-monkey-bg.jpg"; sourceTree = "<group>"; };
+		F1A386AB1A9BE9100084A8EF /* ApplicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationViewController.h; sourceTree = "<group>"; };
+		F1A386AC1A9BE9100084A8EF /* ApplicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +244,8 @@
 				C590CFF21A94FC0D003432D7 /* LoginViewController.m */,
 				C590CFF41A977886003432D7 /* RegisterViewController.h */,
 				C590CFF51A977886003432D7 /* RegisterViewController.m */,
+				F1A386AB1A9BE9100084A8EF /* ApplicationViewController.h */,
+				F1A386AC1A9BE9100084A8EF /* ApplicationViewController.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -250,8 +253,7 @@
 		C590D0001A97B0F3003432D7 /* res */ = {
 			isa = PBXGroup;
 			children = (
-				C590D0381A9B43A4003432D7 /* wz-monkey-bg.jpg */,
-				C590D0011A97B104003432D7 /* icon-ios7-arrow-back-128.png */,
+				F1A386A91A9BD3260084A8EF /* wz-monkey-bg.jpg */,
 			);
 			name = res;
 			sourceTree = "<group>";
@@ -337,10 +339,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C590D0391A9B43A4003432D7 /* wz-monkey-bg.jpg in Resources */,
 				C506389A1A91E18C00F39D63 /* Main.storyboard in Resources */,
-				C590D0021A97B104003432D7 /* icon-ios7-arrow-back-128.png in Resources */,
 				C506389F1A91E18C00F39D63 /* LaunchScreen.xib in Resources */,
+				F1A386AA1A9BD3260084A8EF /* wz-monkey-bg.jpg in Resources */,
 				C506389C1A91E18C00F39D63 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,6 +374,7 @@
 				C50638971A91E18C00F39D63 /* SecondViewController.m in Sources */,
 				C50638911A91E18C00F39D63 /* AppDelegate.m in Sources */,
 				C50638941A91E18C00F39D63 /* FeedViewController.m in Sources */,
+				F1A386AD1A9BE9100084A8EF /* ApplicationViewController.m in Sources */,
 				C506388E1A91E18C00F39D63 /* main.m in Sources */,
 				C590CFFC1A97905C003432D7 /* RegisterController.m in Sources */,
 				C5DFD5811A920A1800F37803 /* LoginModel.m in Sources */,

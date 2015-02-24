@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ApplicationViewController.h"
 
-@interface LoginViewController : UIViewController<UITextFieldDelegate>
+@interface LoginViewController : ApplicationViewController<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 - (IBAction)login:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loginIndicator;
-- (IBAction)back:(id)sender;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *verticalSpaceConstraint;
 
 @end
