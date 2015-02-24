@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
+@interface FeedViewController : UIViewController
+- (IBAction)tes:(id)sender;
 
 
 @end

@@ -8,6 +8,8 @@
 
 #import "LoginViewController.h"
 #import "LoginController.h"
+#import "FeedViewController.h"
+#import "StartViewController.h"
 
 @interface LoginViewController ()
 
@@ -17,16 +19,39 @@
 LoginController* loginController;
 
 - (void)viewDidLoad {
+    verticalSpaceConstraintButton = self.verticalSpaceConstraint;
+    [self addLine:self.usernameTextField];
+    [self addLine:self.passwordTextField];
     [super viewDidLoad];
     loginController = [[LoginController alloc] init];
     self.usernameTextField.delegate = self;
     self.passwordTextField.delegate = self;
-    // Do any additional setup after loading the view.
+    [self setTextFieldStyle:self.usernameTextField];
+    [self setTextFieldStyle:self.passwordTextField];
+    
+    self.loginButton.hidden = YES;
+    
+    [self.usernameTextField addTarget:self
+                               action:@selector(textFieldDidChange:)
+                     forControlEvents:UIControlEventEditingChanged];
+    [self.passwordTextField addTarget:self
+                               action:@selector(textFieldDidChange:)
+                     forControlEvents:UIControlEventEditingChanged];
+    [self setPlaceholderFont:self.usernameTextField];
+    [self setPlaceholderFont:self.passwordTextField];
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [self.usernameTextField becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+-(void)textFieldDidChange:(UITextField *) textField{
+    //[self showLoginButton];
+    [self showLogin];
+
 }
 
 /*
@@ -39,8 +64,8 @@ LoginController* loginController;
  }
  */
 
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    
     if(textField == self.usernameTextField){
         [self.usernameTextField resignFirstResponder];
         [self.passwordTextField becomeFirstResponder];
@@ -52,29 +77,42 @@ LoginController* loginController;
         return NO;
     }
     return YES;
-    
 }
 
 - (IBAction)login:(id)sender {
     //call on login controllers login method
-    [self.loginIndicator setHidden:false];
+    [self.loginIndicator setHidden:NO];
+        
     [self.loginIndicator startAnimating];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [loginController login:self.usernameTextField.text pass:self.passwordTextField.text];
         dispatch_async(dispatch_get_main_queue(), ^{
             // Update the UI
             [self.loginIndicator stopAnimating];
+            if([loginController hasError]){
+                [self errorAnimation];
+            }else{
+                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                 FeedViewController *viewController = (FeedViewController *)[storyboard instantiateViewControllerWithIdentifier:@"feed"];
+                 [self presentViewController:viewController animated:YES completion:nil];
+                
+            }
         });
-        
-       
     });
-  
-    NSLog(@"TEst");
 }
-
-
--(void)loginW{
+-(void)showLogin{
+    NSString *username = self.usernameTextField.text;
+    NSString *password = self.passwordTextField.text;
+    if(username.length > 0 && password.length > 0){
+        self.loginButton.hidden = NO;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.loginButton.alpha = 1;
+        }];
     }
-
+    else if(username.length == 0 || password.length == 0){
+        self.loginButton.hidden = YES;
+        self.loginButton.alpha =0;
+    }
+}
 
 @end
