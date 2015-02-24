@@ -22,14 +22,12 @@
     //Create json body from dictionary
     NSString *jsonData = [applicationHelper generateJsonFromDictionary:credentials];
     //Create the request with the body
-    NSMutableURLRequest *request =[self postHttpRequest:@"login"  json:jsonData];
+    //NSMutableURLRequest *request =[self postHttpRequest:@"login"  json:jsonData];
+    NSData *response = [self postHttpRequest:@"login"  json:jsonData];
     //Parse login request
-    NSMutableDictionary *dic = [parserHelper parse:request];
+    NSMutableDictionary *dic = [parserHelper parse:response];
     //Store parsed login data in sskey secure
    [authHelper storeCredentials:dic];
-    
-   
-    
     //Debugging
     NSLog([authHelper getAuthToken]);
     NSLog([authHelper getUserId]);

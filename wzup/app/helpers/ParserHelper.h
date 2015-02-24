@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ParserHelper : NSObject
-- (NSMutableDictionary *) parse:(NSMutableURLRequest *) request;
+@interface ParserHelper : NSObject<NSURLConnectionDelegate>
+- (NSMutableDictionary *) parse:(NSData *) response;
 @end
