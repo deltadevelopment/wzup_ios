@@ -52,9 +52,9 @@
                                 <exclude reference="hhu-NM-1Cu"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="iCe-Sn-Tc3"/>
                                 <exclude reference="Caq-fy-0D7"/>
                                 <exclude reference="ibI-Rm-vkf"/>
-                                <exclude reference="iCe-Sn-Tc3"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -62,15 +62,15 @@
                                 <include reference="hhu-NM-1Cu"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="iCe-Sn-Tc3"/>
                                 <include reference="Caq-fy-0D7"/>
                                 <include reference="ibI-Rm-vkf"/>
-                                <include reference="iCe-Sn-Tc3"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="OOD-S0-uro"/>
                     <connections>
-                        <outlet property="tableView" destination="hhu-NM-1Cu" id="1oJ-x3-yn4"/>
+                        <outlet property="tableviewe" destination="hhu-NM-1Cu" id="a3x-VX-h2f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huG-Yf-wgr" userLabel="First Responder" sceneMemberID="firstResponder"/>

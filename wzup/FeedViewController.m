@@ -104,20 +104,23 @@ NSMutableArray *feed;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [feed count];
 }
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"row is %ld", (long)indexPath.row);
+  
     static NSString *CellIdentifier = @"feedCell";
-    FeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    FeedTableViewCell *cell = (FeedTableViewCell *)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
+    [cell initCell];
     if(cell == nil){
-        cell = [[FeedTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"feedCell"];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+        cell = [[FeedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"feedCell"];
     }
-   StatusModel *statusmodel = [feed objectAtIndex:indexPath.row];
+
+    StatusModel *statusmodel = [feed objectAtIndex:indexPath.row];
     UserModel *userModel = [statusmodel getUser];
     [cell setStatus:[statusmodel getBody]];
     [cell setName:[[statusmodel getUser] getUsername]];
@@ -130,15 +133,18 @@ NSMutableArray *feed;
     
     return cell;
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 290;
+}
 
 -(void)viewDidLayoutSubviews
 {
-    if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [tableView setSeparatorInset:UIEdgeInsetsZero];
+    if ([_tableviewe respondsToSelector:@selector(setSeparatorInset:)]) {
+        [_tableviewe setSeparatorInset:UIEdgeInsetsZero];
     }
     
-    if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
-        [tableView setLayoutMargins:UIEdgeInsetsZero];
+    if ([_tableviewe respondsToSelector:@selector(setLayoutMargins:)]) {
+        [_tableviewe setLayoutMargins:UIEdgeInsetsZero];
     }
 }
 

@@ -18,4 +18,5 @@
 -(void)setProfileImg:(NSString*) img;
 -(void)setStatusImg:(NSString*) img;
 -(void)setAvailability:(NSInteger) av;
+-(void)initCell;
 @end

@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface FeedViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>{
-    IBOutlet UITableView* tableView;
+   
 }
+@property (weak, nonatomic) IBOutlet UITableView *tableviewe;
 - (IBAction)tes:(id)sender;
 
 
