@@ -18,11 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="290" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hhu-NM-1Cu">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="231" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hhu-NM-1Cu">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="feedCell" rowHeight="290" id="GlX-DL-HZd" customClass="FeedTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="feedCell" rowHeight="231" id="GlX-DL-HZd" customClass="FeedTableViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GlX-DL-HZd" id="gaF-Yt-mk6">
@@ -31,7 +31,7 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="9" y="15" width="391" height="748"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="763"/>
                                 </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="5tN-Qe-b67" id="XOZ-3K-bNI"/>
@@ -41,7 +41,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="hhu-NM-1Cu" firstAttribute="top" secondItem="yXf-eS-QSf" secondAttribute="bottom" constant="-49" id="Caq-fy-0D7"/>
+                            <constraint firstItem="hhu-NM-1Cu" firstAttribute="top" secondItem="yXf-eS-QSf" secondAttribute="top" id="Caq-fy-0D7"/>
+                            <constraint firstItem="hhu-NM-1Cu" firstAttribute="top" secondItem="yXf-eS-QSf" secondAttribute="top" id="dfQ-j9-rWx">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
                             <constraint firstItem="8Xf-f9-fTX" firstAttribute="top" secondItem="hhu-NM-1Cu" secondAttribute="bottom" constant="39" id="iCe-Sn-Tc3">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
@@ -52,9 +55,10 @@
                                 <exclude reference="hhu-NM-1Cu"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="iCe-Sn-Tc3"/>
                                 <exclude reference="Caq-fy-0D7"/>
+                                <exclude reference="dfQ-j9-rWx"/>
                                 <exclude reference="ibI-Rm-vkf"/>
+                                <exclude reference="iCe-Sn-Tc3"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -62,9 +66,10 @@
                                 <include reference="hhu-NM-1Cu"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="iCe-Sn-Tc3"/>
-                                <include reference="Caq-fy-0D7"/>
+                                <exclude reference="Caq-fy-0D7"/>
+                                <include reference="dfQ-j9-rWx"/>
                                 <include reference="ibI-Rm-vkf"/>
+                                <include reference="iCe-Sn-Tc3"/>
                             </mask>
                         </variation>
                     </view>

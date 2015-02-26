@@ -15,13 +15,21 @@ UIView *availability;
 UIImageView *statusImg;
 UIView *statusImgView;
 UILabel *statusLabel;
+bool isDrawed;
 - (void)awakeFromNib {
    
   
 }
+-(void)viewDidLOad{
+    
+}
+
 -(void)initCell{
-    NSLog(@"lager rad");
     // Initialization code
+    //231 per celle
+    //top = 48
+    //bilde = 145
+    //nede 38
     self.separatorInset = UIEdgeInsetsZero;
     self.profileImage.layer.cornerRadius = 15;
     self.profileImage.clipsToBounds = YES;
@@ -29,22 +37,22 @@ UILabel *statusLabel;
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth , 60)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth , 48)];
     //[view setBackgroundColor:[UIColor colorWithRed:0.557 green:0.267 blue:0.678 alpha:1]];
     
     
-    profileImg = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15,30, 30)];
+    profileImg = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10,30, 30)];
     // profileImg.image =[UIImage imageNamed:@"christer-dahl.jpeg"];
     profileImg.layer.cornerRadius = 15;
     profileImg.clipsToBounds = YES;
     
     
-    nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(55, 15,200, 30)];
+    nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(55, 8,200, 30)];
     [nameLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:18.0]];
     //nameLabel.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
     // nameLabel.text = @"Christer Hansen";
     
-    availability = [[UIImageView alloc] initWithFrame:CGRectMake(screenWidth - 25, 25,15, 15)];
+    availability = [[UIImageView alloc] initWithFrame:CGRectMake(screenWidth - 25, 18,15, 15)];
     [availability setBackgroundColor:[UIColor colorWithRed:0.18 green:0.8 blue:0.443 alpha:1]];
     
     availability.layer.cornerRadius = 7;
@@ -56,14 +64,18 @@ UILabel *statusLabel;
     
     
     //statusImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 60,screenWidth, 180)];
-    statusImgView = [[UIView alloc] initWithFrame:CGRectMake(0, 60,screenWidth, 180)];
+    statusImgView = [[UIView alloc] initWithFrame:CGRectMake(0, 48,screenWidth, 145)];
+    UITapGestureRecognizer *tapGr;
+    tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    tapGr.numberOfTapsRequired = 1;
+    [statusImgView addGestureRecognizer:tapGr];
     //statusImg.contentMode = UIViewContentModeTopLeft;
     //statusImg.image =[UIImage imageNamed:@"christer-dahl.jpeg"];
     
-    UIView *viewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 240, screenWidth , 50)];
+    UIView *viewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 193, screenWidth , 38)];
     // [viewBottom  setBackgroundColor:[UIColor colorWithRed:0.557 green:0.267 blue:0.678 alpha:1]];
     
-    statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 10,200, 30)];
+    statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 3,200, 30)];
     [statusLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:18.0]];
     //nameLabel.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
     UIView *viewAll = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth , 290)];
@@ -71,8 +83,13 @@ UILabel *statusLabel;
     [viewAll addSubview:statusImgView];
     [viewAll addSubview:viewBottom];
     [viewAll addSubview:view];
-    
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self addSubview:viewAll];
+}
+
+-(void)handleTap:(UITapGestureRecognizer *) sender{
+    NSLog(@"tap");
+    isSelected = YES;
 }
 
 
@@ -87,17 +104,19 @@ UILabel *statusLabel;
     profileImg.image =[UIImage imageNamed:img];
 }
 -(void)setStatusImg:(NSString*) img{
-   UIImage* image =[UIImage imageNamed:img];
-    [statusImgView setBackgroundColor:[UIColor colorWithPatternImage:image]];
-   // statusImgView.backgroundColor = ;
-    //statusImgView.clipToBounds = YES;
-    //float scale = statusImg.image.scale;
-    //CGRect cropRect = CGRectMake(0, 0,
-                                 //statusImg.image.size.width * scale, statusImg.image.size.height * 0.5 * scale);
-    //CGImageRef imageRef = CGImageCreateWithImageInRect(statusImg.image.CGImage, cropRect);
-    //UIImage* outImage = [UIImage imageWithCGImage:imageRef scale:statusImg.image.scale orientation:statusImg.image.imageOrientation];
-    //CGImageRelease(imageRef);
-    //statusImg.image = outImage;
+    
+    if(status == nil){
+        NSLog(@"scale");
+        status =[UIImage imageNamed:img];
+        status = [self imageByScalingAndCroppingForSize:statusImgView.frame.size img:status];
+        [statusImgView setBackgroundColor:[UIColor colorWithPatternImage:status]];
+    }
+   
+  
+}
+-(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+    NSLog(@"cell her a");
+    return YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -113,7 +132,6 @@ UILabel *statusLabel;
     }
     else if(av == 1){
         //Busy
-        NSLog(@"here");
         [availability setBackgroundColor:[UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1] ];
     }
     else if(av == 2){
@@ -121,6 +139,72 @@ UILabel *statusLabel;
         //SNOOZE
     }
     
+}
+
+- (UIImage*)imageByScalingAndCroppingForSize:(CGSize)targetSize img:(UIImage *) sourceImage
+{
+    UIImage *newImage = nil;
+    CGSize imageSize = sourceImage.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    CGFloat targetWidth = targetSize.width;
+    CGFloat targetHeight = targetSize.height;
+    CGFloat scaleFactor = 0.0;
+    CGFloat scaledWidth = targetWidth;
+    CGFloat scaledHeight = targetHeight;
+    CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
+    
+    if (CGSizeEqualToSize(imageSize, targetSize) == NO)
+    {
+        CGFloat widthFactor = targetWidth / width;
+        CGFloat heightFactor = targetHeight / height;
+        
+        if (widthFactor > heightFactor)
+        {
+            scaleFactor = widthFactor; // scale to fit height
+        }
+        else
+        {
+            scaleFactor = heightFactor; // scale to fit width
+        }
+        
+        scaledWidth  = width * scaleFactor;
+        scaledHeight = height * scaleFactor;
+        
+        // center the image
+        if (widthFactor > heightFactor)
+        {
+            thumbnailPoint.y = 0;
+        }
+        else
+        {
+            if (widthFactor < heightFactor)
+            {
+                thumbnailPoint.x = 0;
+            }
+        }
+    }
+    
+    UIGraphicsBeginImageContext(targetSize); // this will crop
+    
+    CGRect thumbnailRect = CGRectZero;
+    thumbnailRect.origin = thumbnailPoint;
+    thumbnailRect.size.width  = scaledWidth;
+    thumbnailRect.size.height = scaledHeight;
+    
+    [sourceImage drawInRect:thumbnailRect];
+    
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    if(newImage == nil)
+    {
+        NSLog(@"could not scale image");
+    }
+    
+    //pop the context to get back to the default
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 @end

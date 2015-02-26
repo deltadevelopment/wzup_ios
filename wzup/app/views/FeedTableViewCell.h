@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FeedTableViewCell : UITableViewCell
+@interface FeedTableViewCell : UITableViewCell{
+    UIImage * status;
+    BOOL isSelected;
+}
 @property (weak, nonatomic) IBOutlet UILabel *statusText;
 @property (weak, nonatomic) IBOutlet UIImageView *statusImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameText;
@@ -19,4 +22,5 @@
 -(void)setStatusImg:(NSString*) img;
 -(void)setAvailability:(NSInteger) av;
 -(void)initCell;
+-(void)drawCell;
 @end

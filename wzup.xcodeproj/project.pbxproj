@@ -18,8 +18,6 @@
 		C55BD4DF1A9C8EE90061327D /* StatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C55BD4DE1A9C8EE90061327D /* StatusModel.m */; };
 		C55BD4E21A9C91050061327D /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C55BD4E11A9C91050061327D /* UserModel.m */; };
 		C55BD4E51A9C967E0061327D /* FeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55BD4E41A9C967E0061327D /* FeedController.m */; };
-		C55BD4EA1A9CC47E0061327D /* christer-dahl.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C55BD4E91A9CC47E0061327D /* christer-dahl.jpeg */; };
-		C55BD4EC1A9CEAB30061327D /* miranda-kerr.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C55BD4EB1A9CEAB30061327D /* miranda-kerr.jpg */; };
 		C590CFE31A937FFC003432D7 /* ApplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFD01A937FFC003432D7 /* ApplicationController.m */; };
 		C590CFE41A937FFC003432D7 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFD21A937FFC003432D7 /* LoginController.m */; };
 		C590CFE51A937FFC003432D7 /* ApplicationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFD51A937FFC003432D7 /* ApplicationHelper.m */; };
@@ -35,12 +33,14 @@
 		C590D0371A9B4075003432D7 /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590D0361A9B4075003432D7 /* NavigationViewController.m */; };
 		C590D03F1A9C73BD003432D7 /* FeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C590D03E1A9C73BD003432D7 /* FeedTableViewCell.m */; };
 		C590D0481A9C7D70003432D7 /* Navigation2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590D0471A9C7D70003432D7 /* Navigation2ViewController.m */; };
-		C590D04A1A9C7F46003432D7 /* feed-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C590D0491A9C7F46003432D7 /* feed-icon.png */; };
-		C590D04C1A9C87DF003432D7 /* events-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C590D04B1A9C87DF003432D7 /* events-icon.png */; };
-		C590D04E1A9C87E7003432D7 /* profile-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C590D04D1A9C87E7003432D7 /* profile-icon.png */; };
 		C5DFD5811A920A1800F37803 /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD5801A920A1800F37803 /* LoginModel.m */; };
 		F1A386AA1A9BD3260084A8EF /* wz-monkey-bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F1A386A91A9BD3260084A8EF /* wz-monkey-bg.jpg */; };
 		F1A386AD1A9BE9100084A8EF /* ApplicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A386AC1A9BE9100084A8EF /* ApplicationViewController.m */; };
+		F1A386AF1A9E7DB20084A8EF /* miranda-kerr.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F1A386AE1A9E7DB20084A8EF /* miranda-kerr.jpg */; };
+		F1A386B11A9E7DC10084A8EF /* christer-dahl.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F1A386B01A9E7DC10084A8EF /* christer-dahl.jpeg */; };
+		F1A386B31A9E7E110084A8EF /* events-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F1A386B21A9E7E110084A8EF /* events-icon.png */; };
+		F1A386B51A9E7E1E0084A8EF /* profile-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F1A386B41A9E7E1E0084A8EF /* profile-icon.png */; };
+		F1A386B71A9E7E290084A8EF /* feed-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F1A386B61A9E7E290084A8EF /* feed-icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,8 +75,6 @@
 		C55BD4E11A9C91050061327D /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		C55BD4E31A9C967E0061327D /* FeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedController.h; sourceTree = "<group>"; };
 		C55BD4E41A9C967E0061327D /* FeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedController.m; sourceTree = "<group>"; };
-		C55BD4E91A9CC47E0061327D /* christer-dahl.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "christer-dahl.jpeg"; path = "../../../../Downloads/christer-dahl.jpeg"; sourceTree = "<group>"; };
-		C55BD4EB1A9CEAB30061327D /* miranda-kerr.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "miranda-kerr.jpg"; path = "../../../../Downloads/miranda-kerr.jpg"; sourceTree = "<group>"; };
 		C590CFCF1A937FFC003432D7 /* ApplicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationController.h; sourceTree = "<group>"; };
 		C590CFD01A937FFC003432D7 /* ApplicationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationController.m; sourceTree = "<group>"; };
 		C590CFD11A937FFC003432D7 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
@@ -107,14 +105,16 @@
 		C590D03E1A9C73BD003432D7 /* FeedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedTableViewCell.m; sourceTree = "<group>"; };
 		C590D0461A9C7D70003432D7 /* Navigation2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Navigation2ViewController.h; sourceTree = "<group>"; };
 		C590D0471A9C7D70003432D7 /* Navigation2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Navigation2ViewController.m; sourceTree = "<group>"; };
-		C590D0491A9C7F46003432D7 /* feed-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feed-icon.png"; path = "../../../../Downloads/feed-icon.png"; sourceTree = "<group>"; };
-		C590D04B1A9C87DF003432D7 /* events-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "events-icon.png"; path = "../../../../Downloads/events-icon.png"; sourceTree = "<group>"; };
-		C590D04D1A9C87E7003432D7 /* profile-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "profile-icon.png"; path = "../../../../Downloads/profile-icon.png"; sourceTree = "<group>"; };
 		C5DFD57F1A920A1800F37803 /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModel.h; sourceTree = "<group>"; };
 		C5DFD5801A920A1800F37803 /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModel.m; sourceTree = "<group>"; };
 		F1A386A91A9BD3260084A8EF /* wz-monkey-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "wz-monkey-bg.jpg"; sourceTree = "<group>"; };
 		F1A386AB1A9BE9100084A8EF /* ApplicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationViewController.h; sourceTree = "<group>"; };
 		F1A386AC1A9BE9100084A8EF /* ApplicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationViewController.m; sourceTree = "<group>"; };
+		F1A386AE1A9E7DB20084A8EF /* miranda-kerr.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "miranda-kerr.jpg"; sourceTree = "<group>"; };
+		F1A386B01A9E7DC10084A8EF /* christer-dahl.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "christer-dahl.jpeg"; sourceTree = "<group>"; };
+		F1A386B21A9E7E110084A8EF /* events-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "events-icon.png"; sourceTree = "<group>"; };
+		F1A386B41A9E7E1E0084A8EF /* profile-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-icon.png"; sourceTree = "<group>"; };
+		F1A386B61A9E7E290084A8EF /* feed-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feed-icon.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,11 +288,11 @@
 		C590D0001A97B0F3003432D7 /* res */ = {
 			isa = PBXGroup;
 			children = (
-				C55BD4EB1A9CEAB30061327D /* miranda-kerr.jpg */,
-				C55BD4E91A9CC47E0061327D /* christer-dahl.jpeg */,
-				C590D04B1A9C87DF003432D7 /* events-icon.png */,
-				C590D04D1A9C87E7003432D7 /* profile-icon.png */,
-				C590D0491A9C7F46003432D7 /* feed-icon.png */,
+				F1A386B01A9E7DC10084A8EF /* christer-dahl.jpeg */,
+				F1A386B21A9E7E110084A8EF /* events-icon.png */,
+				F1A386B61A9E7E290084A8EF /* feed-icon.png */,
+				F1A386B41A9E7E1E0084A8EF /* profile-icon.png */,
+				F1A386AE1A9E7DB20084A8EF /* miranda-kerr.jpg */,
 				F1A386A91A9BD3260084A8EF /* wz-monkey-bg.jpg */,
 			);
 			name = res;
@@ -379,15 +379,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C55BD4EA1A9CC47E0061327D /* christer-dahl.jpeg in Resources */,
+				F1A386AF1A9E7DB20084A8EF /* miranda-kerr.jpg in Resources */,
+				F1A386B11A9E7DC10084A8EF /* christer-dahl.jpeg in Resources */,
 				C506389A1A91E18C00F39D63 /* Main.storyboard in Resources */,
 				C506389F1A91E18C00F39D63 /* LaunchScreen.xib in Resources */,
-				C590D04E1A9C87E7003432D7 /* profile-icon.png in Resources */,
+				F1A386B51A9E7E1E0084A8EF /* profile-icon.png in Resources */,
+				F1A386B31A9E7E110084A8EF /* events-icon.png in Resources */,
 				F1A386AA1A9BD3260084A8EF /* wz-monkey-bg.jpg in Resources */,
 				C506389C1A91E18C00F39D63 /* Images.xcassets in Resources */,
-				C590D04A1A9C7F46003432D7 /* feed-icon.png in Resources */,
-				C55BD4EC1A9CEAB30061327D /* miranda-kerr.jpg in Resources */,
-				C590D04C1A9C87DF003432D7 /* events-icon.png in Resources */,
+				F1A386B71A9E7E290084A8EF /* feed-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
