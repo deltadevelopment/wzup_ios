@@ -85,10 +85,7 @@ CGFloat expandPos;
     //statusImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 60,screenWidth, 180)];
     statusImgView = [[UIView alloc] initWithFrame:CGRectMake(0, 48,screenWidth, 183)];
     
-    UITapGestureRecognizer *tapGr;
-    tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    tapGr.numberOfTapsRequired = 1;
-    [view addGestureRecognizer:tapGr];
+   
     //statusImg.contentMode = UIViewContentModeTopLeft;
     NSLog(@"Pos y: %f",viewBottom.frame.origin.y);
     
@@ -136,9 +133,17 @@ CGFloat expandPos;
 -(void)handleTap:(UITapGestureRecognizer *) sender{
  
     [[[ApplicationHelper alloc] init] setIndex:indexPath];
+    //ProfileViewController *myNewVC = [[ProfileViewController alloc] init];
+    
+    // do any setup you need for myNewVC
+    
+
+    
 }
 
-
+-(UIView*)getView{
+return view;
+}
 -(void)setStatus:(NSString*) status{
     statusLabel.text = status;
 

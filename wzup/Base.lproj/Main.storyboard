@@ -83,6 +83,47 @@
             </objects>
             <point key="canvasLocation" x="4558.5" y="-273.75"/>
         </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="A71-hH-LXz">
+            <objects>
+                <viewController storyboardIdentifier="profile" id="3rJ-Kr-Dal" customClass="ProfileViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jG3-B4-R8z"/>
+                        <viewControllerLayoutGuide type="bottom" id="bn9-5F-ICy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VT8-1K-3J3">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rp3-9N-mOB">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="169" y="244" width="42" height="21"/>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="rp3-9N-mOB"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="rp3-9N-mOB"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="testLabel" destination="rp3-9N-mOB" id="PkB-vL-cJO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dup-GA-f4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5242.5" y="-274.5"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="rXu-hH-Ejd">
             <objects>

@@ -22,6 +22,7 @@
 		C55BD4F11A9F62A80061327D /* StatusBilde2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C55BD4EF1A9F62A80061327D /* StatusBilde2.jpg */; };
 		C55BD4F21A9F62A80061327D /* statusBilde1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C55BD4F01A9F62A80061327D /* statusBilde1.jpg */; };
 		C55BD4F41A9F68360061327D /* statusBilde4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C55BD4F31A9F68360061327D /* statusBilde4.jpg */; };
+		C55BD4F71A9F763A0061327D /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55BD4F61A9F763A0061327D /* ProfileViewController.m */; };
 		C590CFE31A937FFC003432D7 /* ApplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFD01A937FFC003432D7 /* ApplicationController.m */; };
 		C590CFE41A937FFC003432D7 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFD21A937FFC003432D7 /* LoginController.m */; };
 		C590CFE51A937FFC003432D7 /* ApplicationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFD51A937FFC003432D7 /* ApplicationHelper.m */; };
@@ -83,6 +84,8 @@
 		C55BD4EF1A9F62A80061327D /* StatusBilde2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = StatusBilde2.jpg; path = ../../../../Downloads/StatusBilde2.jpg; sourceTree = "<group>"; };
 		C55BD4F01A9F62A80061327D /* statusBilde1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = statusBilde1.jpg; path = ../../../../Downloads/statusBilde1.jpg; sourceTree = "<group>"; };
 		C55BD4F31A9F68360061327D /* statusBilde4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = statusBilde4.jpg; path = ../../../../Downloads/statusBilde4.jpg; sourceTree = "<group>"; };
+		C55BD4F51A9F763A0061327D /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		C55BD4F61A9F763A0061327D /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		C590CFCF1A937FFC003432D7 /* ApplicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationController.h; sourceTree = "<group>"; };
 		C590CFD01A937FFC003432D7 /* ApplicationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationController.m; sourceTree = "<group>"; };
 		C590CFD11A937FFC003432D7 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
@@ -289,6 +292,8 @@
 				F1A386AC1A9BE9100084A8EF /* ApplicationViewController.m */,
 				C590D03D1A9C73BD003432D7 /* FeedTableViewCell.h */,
 				C590D03E1A9C73BD003432D7 /* FeedTableViewCell.m */,
+				C55BD4F51A9F763A0061327D /* ProfileViewController.h */,
+				C55BD4F61A9F763A0061327D /* ProfileViewController.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -425,6 +430,7 @@
 				C590CFE41A937FFC003432D7 /* LoginController.m in Sources */,
 				C590CFE31A937FFC003432D7 /* ApplicationController.m in Sources */,
 				C590D03F1A9C73BD003432D7 /* FeedTableViewCell.m in Sources */,
+				C55BD4F71A9F763A0061327D /* ProfileViewController.m in Sources */,
 				C590CFF01A93A9E6003432D7 /* StartViewController.m in Sources */,
 				C55BD4E51A9C967E0061327D /* FeedController.m in Sources */,
 				C590CFE51A937FFC003432D7 /* ApplicationHelper.m in Sources */,

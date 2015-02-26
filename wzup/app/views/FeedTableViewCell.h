@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *statusImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameText;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet UIView *view;
 @property bool shouldExpand;
 -(void)setStatus:(NSString*) status;
 -(void)setName:(NSString*) name;
@@ -30,5 +31,6 @@
 -(void)changeSize :(UIImage * ) img;
 -(void) resetView;
 -(void)anim;
+-(UIView*)getView;
 -(void)setExpand:(BOOL) s;
 @end

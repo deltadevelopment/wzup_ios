@@ -14,6 +14,7 @@
 #import "UserModel.h"
 #import "FeedTableViewCell.h"
 #import "ApplicationHelper.h"
+#import "ProfileViewController.h"
 
 @interface FeedViewController ()
 
@@ -27,6 +28,7 @@ NSIndexPath *oldIndex;
 NSMutableArray *feed;
 NSMutableArray *cells;
 NSIndexPath *indexCurrent;
+StatusModel *currentSelected;
 bool shouldExpand;
 - (void)viewDidLoad {
     FeedController* feedController = [[FeedController alloc] init];
@@ -113,6 +115,24 @@ bool shouldExpand;
     return 1;
 }
 
+-(void)handleTap:(UITapGestureRecognizer *) sender{
+    CGPoint tapLocation = [sender locationInView:self.tableviewe];
+    NSIndexPath *tapIndexPath = [self.tableviewe indexPathForRowAtPoint:tapLocation];
+  
+    
+    ProfileViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"profile"];
+    StatusModel *statusmodel = [feed objectAtIndex:tapIndexPath.row];
+    [vc setProfile:[statusmodel getBody]];
+    // OR myViewController *vc = [[myViewController alloc] init];
+    
+    // any setup code for *vc
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    // do any setup you need for myNewVC
+    
+    
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -122,6 +142,9 @@ bool shouldExpand;
     cell=nil;
     if(cell == nil){
         cell = [[FeedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"feedCell"];
+        
+     
+        
         if(oldIndex != nil){
         FeedTableViewCell *old = [tableView cellForRowAtIndexPath:indexCurrent];
         }
@@ -135,8 +158,13 @@ bool shouldExpand;
         [cell setIndexPath:indexPath];
         [cells addObject:cell];
     }
+    UITapGestureRecognizer *tapGr;
+    tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    tapGr.numberOfTapsRequired = 1;
+    [[cell getView] addGestureRecognizer:tapGr];
     
     StatusModel *statusmodel = [feed objectAtIndex:indexPath.row];
+    //currentSelected = statusmodel;
     UserModel *userModel = [statusmodel getUser];
     [cell setStatus:[statusmodel getBody]];
     [cell setName:[[statusmodel getUser] getUsername]];
@@ -202,6 +230,9 @@ bool shouldExpand;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath*)path
 // or it must be some other method
 {
+    StatusModel *statusmodel = [feed objectAtIndex:path.row];
+    currentSelected = statusmodel;
+    
     if(indexCurrent != nil){
         FeedTableViewCell *old = [tableView cellForRowAtIndexPath:indexCurrent];
         //[old resetView];
