@@ -11,7 +11,7 @@
 @interface FeedTableViewCell : UITableViewCell{
     UIImage * status;
     BOOL isSelected;
-    UIView *viewBottom;
+
     
 }
 @property (weak, nonatomic) IBOutlet UILabel *statusText;
@@ -27,6 +27,8 @@
 -(void)initCell;
 -(void)drawCell;
 -(void)setIndexPath:(NSIndexPath *) path;
--(void)changeSize;
+-(void)changeSize :(UIImage * ) img;
 -(void) resetView;
+-(void)anim;
+-(void)setExpand:(BOOL) s;
 @end

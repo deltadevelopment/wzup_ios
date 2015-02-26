@@ -20,6 +20,8 @@
     _user = [[UserModel alloc] init];
     [_user build:dic[@"user"]];
    NSLog(@"The status is %@ %@",_body, _user_id);
+    NSArray* pics = [[NSArray alloc] initWithObjects:@"statusBilde.jpg", @"StatusBilde2.jpg", @"statusBilde1.jpg",@"statusBilde4.jpg", nil];
+    imgPath =pics[rand()%4];
 };
 
 -(NSString*) getStatusId{
@@ -48,6 +50,11 @@
 -(UserModel*) getUser{
     return _user;
 };
+
+-(NSString*)getImgPath{
+
+    return imgPath;
+}
 
 
 @end

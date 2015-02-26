@@ -23,6 +23,7 @@
 LoginController *loginController;
 AuthHelper *authHelper;
 UIView *top;
+NSIndexPath *oldIndex;
 NSMutableArray *feed;
 NSMutableArray *cells;
 NSIndexPath *indexCurrent;
@@ -33,7 +34,7 @@ bool shouldExpand;
     cells = [[NSMutableArray alloc] init];
     authHelper = [[AuthHelper alloc] init];
     [super viewDidLoad];
-    
+    _tableviewe.separatorStyle = UITableViewCellSeparatorStyleNone;
     //loginController = [[LoginController alloc] init];
     //[loginController login:@"simentest" pass:@"simentest"];
     [super viewDidLoad];
@@ -121,6 +122,15 @@ bool shouldExpand;
     cell=nil;
     if(cell == nil){
         cell = [[FeedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"feedCell"];
+        if(oldIndex != nil){
+        FeedTableViewCell *old = [tableView cellForRowAtIndexPath:indexCurrent];
+        }
+        if(!shouldExpand){
+            [cell setExpand:YES];
+        }else{
+            [cell setExpand:NO];
+        }
+        
         [cell initCell];
         [cell setIndexPath:indexPath];
         [cells addObject:cell];
@@ -131,14 +141,17 @@ bool shouldExpand;
     [cell setStatus:[statusmodel getBody]];
     [cell setName:[[statusmodel getUser] getUsername]];
     [cell setProfileImg:@"miranda-kerr.jpg"];
-    [cell setStatusImg:@"miranda-kerr.jpg"];
+    UIImage *raw = [UIImage imageNamed:[statusmodel getImgPath]];
+    [cell setStatusImg:raw];
     [cell setAvailability:[[statusmodel getUser] getAvailability]];
     if(indexCurrent == indexPath){
         if(shouldExpand){
-         [cell changeSize];
+            [cell changeSize:raw];
+        }
+        else{
+           //[cell setExpand];
         }
        
-        
     }else{
         
     }
@@ -178,7 +191,9 @@ bool shouldExpand;
     {
         return 500;
     }
-    
+    else if([indexPath isEqual:indexCurrent]){
+        return 231;
+    }
     else {
         return 231;
     }
@@ -210,6 +225,10 @@ bool shouldExpand;
     [tableView beginUpdates];
     if(oldIndex != nil){
         if(oldIndex == indexCurrent){
+            if(!shouldExpand){
+                //[cell anim];
+            }
+         
             [tableView reloadRowsAtIndexPaths:@[oldIndex] withRowAnimation:UITableViewRowAnimationNone];
         }else{
             [tableView reloadRowsAtIndexPaths:@[indexCurrent, oldIndex] withRowAnimation:UITableViewRowAnimationNone];
@@ -221,6 +240,9 @@ bool shouldExpand;
     [tableView endUpdates];
     
 }
+
+
+
 
 
 

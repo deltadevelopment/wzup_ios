@@ -16,7 +16,13 @@ UIImageView *statusImg;
 UIView *statusImgView;
 UILabel *statusLabel;
 bool isDrawed;
+UIView *viewAll;
+UIView *view;
 NSIndexPath *indexPath;
+UIImage *rawImage;
+CGFloat screenWidth;
+    UIView *viewBottom;
+CGFloat expandPos;
 
 
 - (void)awakeFromNib {
@@ -25,6 +31,15 @@ NSIndexPath *indexPath;
 }
 -(void)viewDidLOad{
     
+}
+
+-(void)setExpand:(BOOL) s{
+    if(s == YES){
+    expandPos = 462;
+    }else{
+    expandPos = 0;
+    }
+
 }
 
 -(void)initCell{
@@ -37,10 +52,11 @@ NSIndexPath *indexPath;
     self.profileImage.layer.cornerRadius = 15;
     self.profileImage.clipsToBounds = YES;
     CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
+    screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth , 48)];
+    view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth , 48)];
+    
     //[view setBackgroundColor:[UIColor colorWithRed:0.557 green:0.267 blue:0.678 alpha:1]];
     
     
@@ -67,21 +83,38 @@ NSIndexPath *indexPath;
     
     
     //statusImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 60,screenWidth, 180)];
-    statusImgView = [[UIView alloc] initWithFrame:CGRectMake(0, 48,screenWidth, 145)];
+    statusImgView = [[UIView alloc] initWithFrame:CGRectMake(0, 48,screenWidth, 183)];
+    
     UITapGestureRecognizer *tapGr;
     tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     tapGr.numberOfTapsRequired = 1;
     [view addGestureRecognizer:tapGr];
     //statusImg.contentMode = UIViewContentModeTopLeft;
-    //statusImg.image =[UIImage imageNamed:@"christer-dahl.jpeg"];
+    NSLog(@"Pos y: %f",viewBottom.frame.origin.y);
     
     viewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 193, screenWidth , 38)];
-    // [viewBottom  setBackgroundColor:[UIColor colorWithRed:0.557 green:0.267 blue:0.678 alpha:1]];
+    viewBottom.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9f];
     
-    statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 3,200, 30)];
-    [statusLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:18.0]];
+    
+    
+    if(expandPos != 0){
+        //animer
+        viewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, expandPos, screenWidth , 38)];
+        viewBottom.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9f];
+        [self anim];
+    NSLog(@"--EXPPOS y: %f",expandPos);
+    }else{
+        viewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 193, screenWidth , 38)];
+        viewBottom.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9f];
+    }
+    expandPos = 0;
+
+    //[viewBottom  setBackgroundColor:[UIColor colorWithRed:0.557 green:0.267 blue:0.678 alpha:1]];
+    statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 3,screenWidth - 20, 30)];
+    [statusLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:16.0]];
     //nameLabel.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
-    UIView *viewAll = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth , 290)];
+    viewAll = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth , 231)];
+    //[viewAll setBackgroundColor:[UIColor colorWithRed:0.557 green:0.267 blue:0.678 alpha:1]];
     [viewBottom addSubview:statusLabel];
     [viewAll addSubview:statusImgView];
     [viewAll addSubview:viewBottom];
@@ -89,7 +122,17 @@ NSIndexPath *indexPath;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self addSubview:viewAll];
 }
-
+-(void)anim{
+    [UIView animateWithDuration:0.30
+                          delay:0.0
+                        options: UIViewAnimationCurveEaseIn
+                     animations:^{
+                         [viewBottom setFrame:CGRectMake(0, 193, screenWidth, 38)];
+                     }
+                     completion:^(BOOL finished){
+                         NSLog(@"Done!");
+                     }];
+}
 -(void)handleTap:(UITapGestureRecognizer *) sender{
  
     [[[ApplicationHelper alloc] init] setIndex:indexPath];
@@ -106,27 +149,40 @@ NSIndexPath *indexPath;
 -(void)setProfileImg:(NSString*) img{
     profileImg.image =[UIImage imageNamed:img];
 }
--(void)setStatusImg:(NSString*) img{
-    
-    if(status == nil){
-        status =[UIImage imageNamed:img];
-        status = [self imageByScalingAndCroppingForSize:statusImgView.frame.size img:status];
-        [statusImgView setBackgroundColor:[UIColor colorWithPatternImage:status]];
-    }
-   
-  
+-(void)setStatusImg:(UIImage*) img{
+        img = [self imageByScalingAndCroppingForSize:statusImgView.frame.size img:img];
+        [statusImgView setBackgroundColor:[UIColor colorWithPatternImage:img]];
 }
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     return YES;
 }
 
--(void)changeSize{
-     NSLog(@"change size");
+-(void)changeSize :(UIImage * ) img{
+    [self setSize:viewAll height:500 width:viewAll.frame.size.width];
+    [self setSize:statusImgView height:(500) - 48 width:statusImgView.frame.size.width];
+    img = [self imageByScalingAndCroppingForSize:statusImgView.frame.size img:img];
+    [statusImgView setBackgroundColor:[UIColor colorWithPatternImage:img]];
+    
+    
+    
     CGRect rect = viewBottom.frame;
     rect.origin.y  = 500 - 38;
     viewBottom.frame = rect;
+    expandPos = viewBottom.frame.origin.y;
+    
+    
     
 }
+-(void)setSize:(UIView *) view
+        height:(CGFloat) h
+        width:(CGFloat) w
+{
+    CGRect point = view.frame;
+    point.size.height = h;
+    point.size.width = w;
+    view.frame = point;
+}
+
 -(void) resetView{
     NSLog(@"reset");
     CGRect rect = viewBottom.frame;
@@ -164,6 +220,7 @@ NSIndexPath *indexPath;
 
 - (UIImage*)imageByScalingAndCroppingForSize:(CGSize)targetSize img:(UIImage *) sourceImage
 {
+  
     UIImage *newImage = nil;
     CGSize imageSize = sourceImage.size;
     CGFloat width = imageSize.width;
@@ -180,14 +237,12 @@ NSIndexPath *indexPath;
         CGFloat widthFactor = targetWidth / width;
         CGFloat heightFactor = targetHeight / height;
         
-        if (widthFactor > heightFactor)
-        {
+        
+              //NSLog(@"fit height %f", targetSize.width);
             scaleFactor = widthFactor; // scale to fit height
-        }
-        else
-        {
-            scaleFactor = heightFactor; // scale to fit width
-        }
+        
+      
+        
         
         scaledWidth  = width * scaleFactor;
         scaledHeight = height * scaleFactor;
