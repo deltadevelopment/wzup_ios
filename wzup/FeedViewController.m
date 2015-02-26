@@ -40,12 +40,7 @@ FeedController* feedController;
     
     feedController = [[FeedController alloc] init];
     feed = [feedController getFeed];
-    if([feedController hasError]){
-        NSLog(@"gggg");
-        StartViewController*loginController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"startNav"];
-        
-        [self presentModalViewController:loginController animated:YES];
-    };
+    [self checkErrors];
     cells = [[NSMutableArray alloc] init];
     authHelper = [[AuthHelper alloc] init];
     [super viewDidLoad];
@@ -69,12 +64,19 @@ FeedController* feedController;
     [top addSubview:rightButton];
     self.navigationItem.titleView = top;
 }
+-(void)checkErrors{
+    if([feedController hasError]){
+        StartViewController*loginController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"startNav"];
+        [self presentModalViewController:loginController animated:YES];
+    };
+}
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
+    
     feed = [feedController getFeed];
     indexCurrent = nil;
     [self.tableviewe reloadData];
-    
+      [self checkErrors];
     [refreshControl endRefreshing];
     
 }
