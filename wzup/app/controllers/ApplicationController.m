@@ -40,9 +40,15 @@
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
     if([httpResponse statusCode] == 200 || [httpResponse statusCode] == 201){
         isErrors = false;
-    }else{
+    }else if([httpResponse statusCode] == 403 ){
+        //[authHelper resetCredentials];
+        [authHelper resetCredentials];
         isErrors = true;
     }
+    else{
+        isErrors = true;
+    }
+   
     NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
     return urlData;
 }
@@ -91,4 +97,6 @@
     return [self getResp:serviceRequest];
 
 };
+
+
 @end

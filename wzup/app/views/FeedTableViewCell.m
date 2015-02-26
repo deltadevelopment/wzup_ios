@@ -95,6 +95,7 @@ CGFloat expandPos;
     
     
     if(expandPos != 0){
+        NSLog(@"EXPAND POS ER %f", expandPos);
         //animer
         viewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, expandPos, screenWidth , 38)];
         viewBottom.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9f];

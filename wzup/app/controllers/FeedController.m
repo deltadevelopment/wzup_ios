@@ -25,6 +25,9 @@ NSMutableArray *feed;
         [status build:statusRaw];
         [feed addObject:status];
     }
+    if(isErrors){
+        NSLog(@"ER FEIL HER JA");
+    }
 }
 
 

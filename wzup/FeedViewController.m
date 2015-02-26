@@ -15,7 +15,7 @@
 #import "FeedTableViewCell.h"
 #import "ApplicationHelper.h"
 #import "ProfileViewController.h"
-
+#import "StartViewController.h"
 @interface FeedViewController ()
 
 @end
@@ -30,13 +30,27 @@ NSMutableArray *cells;
 NSIndexPath *indexCurrent;
 StatusModel *currentSelected;
 bool shouldExpand;
+FeedController* feedController;
 - (void)viewDidLoad {
-    FeedController* feedController = [[FeedController alloc] init];
+  
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableviewe addSubview:refreshControl];
+    
+    feedController = [[FeedController alloc] init];
     feed = [feedController getFeed];
+    if([feedController hasError]){
+        NSLog(@"gggg");
+        StartViewController*loginController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"startNav"];
+        
+        [self presentModalViewController:loginController animated:YES];
+    };
     cells = [[NSMutableArray alloc] init];
     authHelper = [[AuthHelper alloc] init];
     [super viewDidLoad];
     _tableviewe.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableviewe.separatorColor = [[UIColor whiteColor] colorWithAlphaComponent:0.0f];
     //loginController = [[LoginController alloc] init];
     //[loginController login:@"simentest" pass:@"simentest"];
     [super viewDidLoad];
@@ -54,6 +68,15 @@ bool shouldExpand;
     [top addSubview:middleButton];
     [top addSubview:rightButton];
     self.navigationItem.titleView = top;
+}
+
+- (void)refresh:(UIRefreshControl *)refreshControl {
+    feed = [feedController getFeed];
+    indexCurrent = nil;
+    [self.tableviewe reloadData];
+    
+    [refreshControl endRefreshing];
+    
 }
 
 -(UIButton *)createButton:(NSString *) img x:(int) xPos{
@@ -168,7 +191,7 @@ bool shouldExpand;
     UserModel *userModel = [statusmodel getUser];
     [cell setStatus:[statusmodel getBody]];
     [cell setName:[[statusmodel getUser] getUsername]];
-    [cell setProfileImg:@"miranda-kerr.jpg"];
+    [cell setProfileImg:[statusmodel getImgPath]];
     UIImage *raw = [UIImage imageNamed:[statusmodel getImgPath]];
     [cell setStatusImg:raw];
     [cell setAvailability:[[statusmodel getUser] getAvailability]];
@@ -259,12 +282,14 @@ bool shouldExpand;
             if(!shouldExpand){
                 //[cell anim];
             }
-         
+            NSLog(@"1");
             [tableView reloadRowsAtIndexPaths:@[oldIndex] withRowAnimation:UITableViewRowAnimationNone];
         }else{
+            NSLog(@"2");
             [tableView reloadRowsAtIndexPaths:@[indexCurrent, oldIndex] withRowAnimation:UITableViewRowAnimationNone];
         }
     }else{
+        NSLog(@"3");
         [tableView reloadRowsAtIndexPaths:@[indexCurrent] withRowAnimation:UITableViewRowAnimationNone];
     }
     
