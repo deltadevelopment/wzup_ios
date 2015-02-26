@@ -55,10 +55,10 @@
                                 <exclude reference="hhu-NM-1Cu"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="iCe-Sn-Tc3"/>
                                 <exclude reference="Caq-fy-0D7"/>
                                 <exclude reference="dfQ-j9-rWx"/>
                                 <exclude reference="ibI-Rm-vkf"/>
-                                <exclude reference="iCe-Sn-Tc3"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -66,10 +66,10 @@
                                 <include reference="hhu-NM-1Cu"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="iCe-Sn-Tc3"/>
                                 <exclude reference="Caq-fy-0D7"/>
                                 <include reference="dfQ-j9-rWx"/>
                                 <include reference="ibI-Rm-vkf"/>
-                                <include reference="iCe-Sn-Tc3"/>
                             </mask>
                         </variation>
                     </view>
@@ -521,7 +521,7 @@
                                     <action selector="login:" destination="cSl-68-yRI" eventType="touchUpInside" id="YAJ-3i-XiY"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="testuser1" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RPY-C3-AJM">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="simenlie" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RPY-C3-AJM">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="cCn-tn-CxQ">
@@ -542,7 +542,7 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="testuser1" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vWg-Lo-iRp">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="simenlie" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vWg-Lo-iRp">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="3s6-Fe-gLt">

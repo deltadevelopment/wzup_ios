@@ -7,7 +7,7 @@
 //
 
 #import "FeedTableViewCell.h"
-
+#import "ApplicationHelper.h"
 @implementation FeedTableViewCell
 UIImageView *profileImg;
 UILabel *nameLabel;
@@ -16,6 +16,9 @@ UIImageView *statusImg;
 UIView *statusImgView;
 UILabel *statusLabel;
 bool isDrawed;
+NSIndexPath *indexPath;
+
+
 - (void)awakeFromNib {
    
   
@@ -68,11 +71,11 @@ bool isDrawed;
     UITapGestureRecognizer *tapGr;
     tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     tapGr.numberOfTapsRequired = 1;
-    [statusImgView addGestureRecognizer:tapGr];
+    [view addGestureRecognizer:tapGr];
     //statusImg.contentMode = UIViewContentModeTopLeft;
     //statusImg.image =[UIImage imageNamed:@"christer-dahl.jpeg"];
     
-    UIView *viewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 193, screenWidth , 38)];
+    viewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 193, screenWidth , 38)];
     // [viewBottom  setBackgroundColor:[UIColor colorWithRed:0.557 green:0.267 blue:0.678 alpha:1]];
     
     statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 3,200, 30)];
@@ -88,8 +91,8 @@ bool isDrawed;
 }
 
 -(void)handleTap:(UITapGestureRecognizer *) sender{
-    NSLog(@"tap");
-    isSelected = YES;
+ 
+    [[[ApplicationHelper alloc] init] setIndex:indexPath];
 }
 
 
@@ -106,7 +109,6 @@ bool isDrawed;
 -(void)setStatusImg:(NSString*) img{
     
     if(status == nil){
-        NSLog(@"scale");
         status =[UIImage imageNamed:img];
         status = [self imageByScalingAndCroppingForSize:statusImgView.frame.size img:status];
         [statusImgView setBackgroundColor:[UIColor colorWithPatternImage:status]];
@@ -115,14 +117,33 @@ bool isDrawed;
   
 }
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
-    NSLog(@"cell her a");
     return YES;
+}
+
+-(void)changeSize{
+     NSLog(@"change size");
+    CGRect rect = viewBottom.frame;
+    rect.origin.y  = 500 - 38;
+    viewBottom.frame = rect;
+    
+}
+-(void) resetView{
+    NSLog(@"reset");
+    CGRect rect = viewBottom.frame;
+    rect.origin.y  = 193;
+    viewBottom.frame = rect;
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    
+}
+
+-(void)setIndexPath:(NSIndexPath *) path{
+    indexPath = path;
 }
 -(void)setAvailability:(NSInteger) av{
     //NSLog(@"%i", (int)av);

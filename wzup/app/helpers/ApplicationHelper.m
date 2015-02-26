@@ -8,6 +8,7 @@
 
 #import "ApplicationHelper.h"
 #import "ConfigHelper.h"
+static NSIndexPath *currrentIndex = 0;
 @implementation ApplicationHelper
 -(NSString*) generateUrl:(NSString*) relativePath{
     ConfigHelper *configHelper = [[ConfigHelper alloc] init];
@@ -28,6 +29,13 @@
     jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"];
     return jsonString;
 }
+-(void)setIndex:(NSIndexPath *) path{
+    currrentIndex = path;
+}
+-(NSIndexPath*)getIndex{
+    return currrentIndex;
+}
+
 
 
 @end

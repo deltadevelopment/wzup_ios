@@ -13,6 +13,7 @@
 #import "StatusModel.h"
 #import "UserModel.h"
 #import "FeedTableViewCell.h"
+#import "ApplicationHelper.h"
 
 @interface FeedViewController ()
 
@@ -24,6 +25,8 @@ AuthHelper *authHelper;
 UIView *top;
 NSMutableArray *feed;
 NSMutableArray *cells;
+NSIndexPath *indexCurrent;
+bool shouldExpand;
 - (void)viewDidLoad {
     FeedController* feedController = [[FeedController alloc] init];
     feed = [feedController getFeed];
@@ -119,6 +122,7 @@ NSMutableArray *cells;
     if(cell == nil){
         cell = [[FeedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"feedCell"];
         [cell initCell];
+        [cell setIndexPath:indexPath];
         [cells addObject:cell];
     }
     
@@ -129,6 +133,15 @@ NSMutableArray *cells;
     [cell setProfileImg:@"miranda-kerr.jpg"];
     [cell setStatusImg:@"miranda-kerr.jpg"];
     [cell setAvailability:[[statusmodel getUser] getAvailability]];
+    if(indexCurrent == indexPath){
+        if(shouldExpand){
+         [cell changeSize];
+        }
+       
+        
+    }else{
+        
+    }
     
    // NSLog(@"%@", [[statusmodel getUser] getAvailability]);
     
@@ -158,27 +171,55 @@ NSMutableArray *cells;
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)path
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-   
-    FeedTableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:path];
-    if(cell.isSelected){
-        
-        return 300;
+    
+    if ([indexPath isEqual:indexCurrent] && shouldExpand)
+    {
+        return 500;
     }
     
-    
-    return 231;
-    
+    else {
+        return 231;
+    }
     
 }
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath*)path
 // or it must be some other method
 {
+    if(indexCurrent != nil){
+        FeedTableViewCell *old = [tableView cellForRowAtIndexPath:indexCurrent];
+        //[old resetView];
+    }
+    NSIndexPath *oldIndex = indexCurrent;
+    
+    indexCurrent = path;
+    FeedTableViewCell *cell = [tableView cellForRowAtIndexPath:path];
+    if(indexCurrent == oldIndex){
+        //indexCurrent = nil;
+        if(shouldExpand){
+            shouldExpand = false;
+        }else{
+            shouldExpand = true;
+        }
+        
+    }else{
+     shouldExpand = true;
+    }
+
     [tableView beginUpdates];
+    if(oldIndex != nil){
+        if(oldIndex == indexCurrent){
+            [tableView reloadRowsAtIndexPaths:@[oldIndex] withRowAnimation:UITableViewRowAnimationNone];
+        }else{
+            [tableView reloadRowsAtIndexPaths:@[indexCurrent, oldIndex] withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }else{
+        [tableView reloadRowsAtIndexPaths:@[indexCurrent] withRowAnimation:UITableViewRowAnimationNone];
+    }
     
     [tableView endUpdates];
+    
 }
 
 
