@@ -21,7 +21,7 @@
 }
 -(void)viewDidLayoutSubviews{
     
- [self.navigationBar setFrame:CGRectMake(0, 0, self.navigationBar.frame.size.width, 80)];
+ //[self.navigationBar setFrame:CGRectMake(0, 0, self.navigationBar.frame.size.width, 80)];
 }
 - (UIStatusBarStyle)preferredStatusBarStyle
 {

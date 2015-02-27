@@ -15,14 +15,72 @@
                         <viewControllerLayoutGuide type="bottom" id="8Xf-f9-fTX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="C1s-yu-WQZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="231" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hhu-NM-1Cu">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="feedCell" rowHeight="231" id="GlX-DL-HZd" customClass="FeedTableViewCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GlX-DL-HZd" id="gaF-Yt-mk6">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="763"/>
+                                </variation>
+                                <connections>
+                                    <outlet property="dataSource" destination="5tN-Qe-b67" id="XOZ-3K-bNI"/>
+                                    <outlet property="delegate" destination="5tN-Qe-b67" id="HZA-ng-h7P"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hhu-NM-1Cu" firstAttribute="top" secondItem="yXf-eS-QSf" secondAttribute="top" id="Caq-fy-0D7"/>
+                            <constraint firstItem="hhu-NM-1Cu" firstAttribute="top" secondItem="yXf-eS-QSf" secondAttribute="top" id="dfQ-j9-rWx">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="8Xf-f9-fTX" firstAttribute="top" secondItem="hhu-NM-1Cu" secondAttribute="bottom" constant="39" id="iCe-Sn-Tc3">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="hhu-NM-1Cu" firstAttribute="width" secondItem="C1s-yu-WQZ" secondAttribute="width" id="ibI-Rm-vkf"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="hhu-NM-1Cu"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Caq-fy-0D7"/>
+                                <exclude reference="dfQ-j9-rWx"/>
+                                <exclude reference="ibI-Rm-vkf"/>
+                                <exclude reference="iCe-Sn-Tc3"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="hhu-NM-1Cu"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Caq-fy-0D7"/>
+                                <include reference="dfQ-j9-rWx"/>
+                                <include reference="ibI-Rm-vkf"/>
+                                <include reference="iCe-Sn-Tc3"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="OOD-S0-uro"/>
+                    <connections>
+                        <outlet property="tableviewe" destination="hhu-NM-1Cu" id="a3x-VX-h2f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huG-Yf-wgr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4558.5" y="-270.75"/>
+            <point key="canvasLocation" x="4558.5" y="-273.75"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="rXu-hH-Ejd">
@@ -33,13 +91,14 @@
                         <viewControllerLayoutGuide type="bottom" id="jha-WD-NUA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8BN-G5-r0l">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D2Z-BU-DVZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5331" y="-270.75"/>
+            <point key="canvasLocation" x="6204" y="-299.25"/>
         </scene>
         <!--Start View Controller-->
         <scene sceneID="OGX-2f-Fbi">
@@ -462,7 +521,7 @@
                                     <action selector="login:" destination="cSl-68-yRI" eventType="touchUpInside" id="YAJ-3i-XiY"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RPY-C3-AJM">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="testuser1" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RPY-C3-AJM">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="cCn-tn-CxQ">
@@ -483,7 +542,7 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vWg-Lo-iRp">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="testuser1" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vWg-Lo-iRp">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="3s6-Fe-gLt">

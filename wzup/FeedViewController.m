@@ -9,6 +9,10 @@
 #import "FeedViewController.h"
 #import "LoginController.h"
 #import "AuthHelper.h"
+#import "FeedController.h"
+#import "StatusModel.h"
+#import "UserModel.h"
+#import "FeedTableViewCell.h"
 
 @interface FeedViewController ()
 
@@ -18,10 +22,13 @@
 LoginController *loginController;
 AuthHelper *authHelper;
 UIView *top;
+NSMutableArray *feed;
+NSMutableArray *cells;
 - (void)viewDidLoad {
+    FeedController* feedController = [[FeedController alloc] init];
+    feed = [feedController getFeed];
+    cells = [[NSMutableArray alloc] init];
     authHelper = [[AuthHelper alloc] init];
-    NSLog( [authHelper getAuthToken]);
-     NSLog( [authHelper getUserId]);
     [super viewDidLoad];
     
     //loginController = [[LoginController alloc] init];
@@ -29,12 +36,13 @@ UIView *top;
     [super viewDidLoad];
     top = [[UIView alloc] init];
     [top setFrame:CGRectMake(0, 0, 200, 35)];
-    NSLog(@"%f", self.view.center.x);
-    CGFloat center = (self.view.center.x/2) - (35/2);
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat center = (screenWidth/4) - (10);
     
-    UIButton *leftButton = [self createButton:@"feed-icon.png" x:center-100];
+    UIButton *leftButton = [self createButton:@"feed-icon.png" x:center-80];
     UIButton *middleButton = [self createButton:@"events-icon.png" x:center];
-    UIButton *rightButton = [self createButton:@"profile-icon.png" x:center + 100];
+    UIButton *rightButton = [self createButton:@"profile-icon.png" x:center + 80];
     
     [top addSubview:leftButton];
     [top addSubview:middleButton];
@@ -45,13 +53,13 @@ UIView *top;
 -(UIButton *)createButton:(NSString *) img x:(int) xPos{
     UIButton *navButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     UIImage *buttonImage = [UIImage imageNamed:img];
-    buttonImage = [self resizeImage:buttonImage newSize:CGSizeMake(35,35)];
+    buttonImage = [self resizeImage:buttonImage newSize:CGSizeMake(30,30)];
     [navButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
     [navButton setTitleColor:[UIColor colorWithRed:0.4 green:0.157 blue:0.396 alpha:1]  forState:UIControlStateNormal];
     [navButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
     // [navButton bringSubviewToFront:navButton.imageView];
     
-    [navButton setFrame:CGRectMake(xPos, -10, 35, 35)];
+    [navButton setFrame:CGRectMake(xPos, 0, 30, 30)];
     return navButton;
 }
 
@@ -92,4 +100,89 @@ UIView *top;
 - (IBAction)tes:(id)sender {
 
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [feed count];
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  
+    static NSString *CellIdentifier = @"feedCell";
+    FeedTableViewCell *cell = (FeedTableViewCell *)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
+    cell=nil;
+    if(cell == nil){
+        cell = [[FeedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"feedCell"];
+        [cell initCell];
+        [cells addObject:cell];
+    }
+    
+    StatusModel *statusmodel = [feed objectAtIndex:indexPath.row];
+    UserModel *userModel = [statusmodel getUser];
+    [cell setStatus:[statusmodel getBody]];
+    [cell setName:[[statusmodel getUser] getUsername]];
+    [cell setProfileImg:@"miranda-kerr.jpg"];
+    [cell setStatusImg:@"miranda-kerr.jpg"];
+    [cell setAvailability:[[statusmodel getUser] getAvailability]];
+    
+   // NSLog(@"%@", [[statusmodel getUser] getAvailability]);
+    
+    
+    return cell;
+}
+
+-(void)viewDidLayoutSubviews
+{
+    if ([_tableviewe respondsToSelector:@selector(setSeparatorInset:)]) {
+        [_tableviewe setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([_tableviewe respondsToSelector:@selector(setLayoutMargins:)]) {
+        [_tableviewe setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)path
+{
+   
+    FeedTableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:path];
+    if(cell.isSelected){
+        
+        return 300;
+    }
+    
+    
+    return 231;
+    
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath*)path
+// or it must be some other method
+{
+    [tableView beginUpdates];
+    
+    [tableView endUpdates];
+}
+
+
+
+
+
 @end
