@@ -20,11 +20,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     AuthHelper *authHelper = [[AuthHelper alloc] init];
-    //[authHelper resetCredentials];
+   // [authHelper resetCredentials];
     if([authHelper getAuthToken] == nil){
         [self setView:[[StartViewController alloc] init] second:@"startNav"];
     }else{
-        [self setView:[[FeedViewController alloc] init] second:@"feed"];
+        [self setView:[[FeedViewController alloc] init] second:@"feed2"];
     }
     return YES;
 }

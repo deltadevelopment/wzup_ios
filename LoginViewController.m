@@ -10,6 +10,7 @@
 #import "LoginController.h"
 #import "FeedViewController.h"
 #import "StartViewController.h"
+#import "Feed2ViewController.h"
 
 @interface LoginViewController ()
 
@@ -92,9 +93,12 @@ LoginController* loginController;
             if([loginController hasError]){
                 [self errorAnimation];
             }else{
-                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                 FeedViewController *viewController = (FeedViewController *)[storyboard instantiateViewControllerWithIdentifier:@"feed"];
-                 [self presentViewController:viewController animated:YES completion:nil];
+                 //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                 //FeedViewController *viewController = (FeedViewController *)[storyboard instantiateViewControllerWithIdentifier:@"feed"];
+              //   [self presentViewController:viewController animated:YES completion:nil];
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                Feed2ViewController *viewController = (Feed2ViewController *)[storyboard instantiateViewControllerWithIdentifier:@"feed2"];
+                [self presentViewController:viewController animated:YES completion:nil];
                 
             }
         });
