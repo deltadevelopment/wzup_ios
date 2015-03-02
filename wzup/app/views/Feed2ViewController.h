@@ -14,5 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *statusButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *statusButtonverticalSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *statusButtonHorizontalSpace;
+@property (weak, nonatomic) IBOutlet UIView *availabilityView;
+@property (weak, nonatomic) IBOutlet UILabel *statusText;
 
 @end

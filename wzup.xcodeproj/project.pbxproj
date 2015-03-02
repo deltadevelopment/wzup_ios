@@ -35,6 +35,7 @@
 		C590D03F1A9C73BD003432D7 /* FeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C590D03E1A9C73BD003432D7 /* FeedTableViewCell.m */; };
 		C590D0481A9C7D70003432D7 /* Navigation2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590D0471A9C7D70003432D7 /* Navigation2ViewController.m */; };
 		C5DFD5811A920A1800F37803 /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD5801A920A1800F37803 /* LoginModel.m */; };
+		C5FEC2C81AA480C400EB3C30 /* camera-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C5FEC2C71AA480C400EB3C30 /* camera-icon.png */; };
 		F15576151A9FCFA200202CF6 /* testBilde.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F15576141A9FCFA200202CF6 /* testBilde.jpg */; };
 		F15576181A9FD05300202CF6 /* Feed2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F15576171A9FD05300202CF6 /* Feed2ViewController.m */; };
 		F155761B1A9FD1D800202CF6 /* Feed2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F155761A1A9FD1D800202CF6 /* Feed2TableViewCell.m */; };
@@ -115,6 +116,7 @@
 		C590D0471A9C7D70003432D7 /* Navigation2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Navigation2ViewController.m; sourceTree = "<group>"; };
 		C5DFD57F1A920A1800F37803 /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModel.h; sourceTree = "<group>"; };
 		C5DFD5801A920A1800F37803 /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModel.m; sourceTree = "<group>"; };
+		C5FEC2C71AA480C400EB3C30 /* camera-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-icon.png"; path = "../../../../Downloads/camera-icon.png"; sourceTree = "<group>"; };
 		F15576141A9FCFA200202CF6 /* testBilde.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testBilde.jpg; sourceTree = "<group>"; };
 		F15576161A9FD05300202CF6 /* Feed2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed2ViewController.h; sourceTree = "<group>"; };
 		F15576171A9FD05300202CF6 /* Feed2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feed2ViewController.m; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 		C590D0001A97B0F3003432D7 /* res */ = {
 			isa = PBXGroup;
 			children = (
+				C5FEC2C71AA480C400EB3C30 /* camera-icon.png */,
 				F1A386B01A9E7DC10084A8EF /* christer-dahl.jpeg */,
 				F1A386B21A9E7E110084A8EF /* events-icon.png */,
 				F15576141A9FCFA200202CF6 /* testBilde.jpg */,
@@ -416,6 +419,7 @@
 				F1A386B31A9E7E110084A8EF /* events-icon.png in Resources */,
 				F1A386AA1A9BD3260084A8EF /* wz-monkey-bg.jpg in Resources */,
 				C506389C1A91E18C00F39D63 /* Images.xcassets in Resources */,
+				C5FEC2C81AA480C400EB3C30 /* camera-icon.png in Resources */,
 				F1A386B71A9E7E290084A8EF /* feed-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

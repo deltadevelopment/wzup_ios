@@ -13,4 +13,8 @@
 -(NSString*) generateJsonFromDictionary:(NSDictionary *) dictionary;
 -(void)setIndex:(NSIndexPath *) path;
 -(NSIndexPath*)getIndex;
+-(NSString*)getAvailableText;
+-(NSString*)getUnAvailableText;
+-(void)addAvailableTexts;
+-(void)addUnAvailableTexts;
 @end

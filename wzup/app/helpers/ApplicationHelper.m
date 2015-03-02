@@ -9,6 +9,8 @@
 #import "ApplicationHelper.h"
 #import "ConfigHelper.h"
 static NSIndexPath *currrentIndex = 0;
+NSArray *availableTexts;
+NSArray *unAvailableTexts;
 @implementation ApplicationHelper
 -(NSString*) generateUrl:(NSString*) relativePath{
     ConfigHelper *configHelper = [[ConfigHelper alloc] init];
@@ -36,6 +38,19 @@ static NSIndexPath *currrentIndex = 0;
     return currrentIndex;
 }
 
+-(void)addAvailableTexts{
+    availableTexts = [[NSArray alloc] initWithObjects:@"IM FREE", @"IM FREE2", @"IM FREE3",@"IM FREE4", nil];
+}
+-(void)addUnAvailableTexts{
+    unAvailableTexts = [[NSArray alloc] initWithObjects:@"BUSY BEE", @"BUSY BEE2", @"BUSY BEE3",@"BUSY BEE4", nil];
+}
+
+-(NSString*)getAvailableText{
+    return availableTexts[rand()%4];
+}
+-(NSString*)getUnAvailableText{
+    return unAvailableTexts[rand()%4];
+}
 
 
 @end

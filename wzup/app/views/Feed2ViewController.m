@@ -13,6 +13,8 @@
 #import "UserModel.h"
 #import "StartViewController.h"
 #import "ProfileViewController.h"
+#import "ApplicationHelper.h"
+#import <AudioToolbox/AudioToolbox.h>
 @interface Feed2ViewController ()
 
 @end
@@ -25,17 +27,30 @@ BOOL shouldExpand;
 CGRect screenBound;
 CGSize screenSize;
 CGFloat screenWidth;
+CGFloat horizontalSpaceDefault;
+ApplicationHelper *applicationHelper;
+bool availabilityFadeHasStarted;
+NSString* availableText;
+NSString* unAvailableText;
 - (void)viewDidLoad {
+    self.availabilityView.alpha = 0.0;
     [super viewDidLoad];
+    horizontalSpaceDefault = self.statusButtonHorizontalSpace.constant;
     screenBound = [[UIScreen mainScreen] bounds];
     screenSize = screenBound.size;
     screenWidth = screenSize.width;
-    
+    self.statusButton.layer.cornerRadius = 25;
+    self.availabilityView.hidden = YES;
+    self.availabilityView.backgroundColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.443 alpha:1];
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
     // Do any additional setup after loading the view.
     feedController = [[FeedController alloc] init];
+    applicationHelper = [[ApplicationHelper alloc] init];
+    [applicationHelper addAvailableTexts];
+    [applicationHelper addUnAvailableTexts];
+
     
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -51,20 +66,83 @@ CGFloat screenWidth;
     UIPanGestureRecognizer *gesture = [[UIPanGestureRecognizer alloc]
                                        initWithTarget:self
                                        action:@selector(labelDragged:)];
+
     [_statusButton addGestureRecognizer:gesture];
     
     
     
 }
 
+-(void)fadeInAvailabilityView{
+
+ 
+    if(!availabilityFadeHasStarted){
+        availableText = [applicationHelper getAvailableText];
+        unAvailableText =[applicationHelper getUnAvailableText];
+        self.availabilityView.hidden = NO;
+        availabilityFadeHasStarted = YES;
+        [UIView animateWithDuration:0.3f
+                              delay:0.0f
+                            options: UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             self.availabilityView.alpha = 0.9;
+                             //[self.view layoutIfNeeded];
+                         }
+                         completion:nil];
+    }
+}
+
+-(void)fadeOutAvailabilityView{
+    
+    
+    if(availabilityFadeHasStarted){
+        availabilityFadeHasStarted = NO;
+        
+        [UIView animateWithDuration:0.2f
+                              delay:0.0f
+                            options: UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             self.availabilityView.alpha = 1.0;
+                             
+                         }
+                         completion:^(BOOL finished){
+                             _statusButtonHorizontalSpace.constant = horizontalSpaceDefault;
+                             [UIView animateWithDuration:0.4f
+                                                   delay:0.4f
+                                                 options: UIViewAnimationOptionCurveLinear
+                                              animations:^{
+                                                  self.availabilityView.alpha = 0.0;
+                                                  self.availabilityView.hidden = NO;
+                                                  _statusButton.alpha = 1;
+                                              }
+                                              completion:nil];
+                         }];
+        
+        
+        
+        
+    }
+}
+
 - (void)labelDragged:(UIPanGestureRecognizer *)gesture
 {
+    
+    [self fadeInAvailabilityView];
     UILabel *label = (UILabel *)gesture.view;
     CGPoint translation = [gesture translationInView:label];
     float newX = _statusButtonHorizontalSpace.constant;
     
     //NSLog(@"gesture point %f",  translation.x);
-    
+    if(newX > 150){
+        //Change availability
+        self.availabilityView.backgroundColor = [UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1];
+        _statusText.text = unAvailableText;
+    }else{
+        //Change availability
+        
+        _statusText.text = availableText;
+        self.availabilityView.backgroundColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.443 alpha:1];
+    }
     
     if(translation.x < 0){
         //CHECK left
@@ -89,20 +167,32 @@ CGFloat screenWidth;
             //NSLog(@"constraint is %f", _statusButtonHorizontalSpace.constant);
         }
     }
-    
-    
-   
-    // move label , limit it to stay inside self.view.frame
+    if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateFailed || gesture.state == UIGestureRecognizerStateCancelled)
+    {
+       // _statusButton.hidden = YES;
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+        [self fadeOutStatusButton];
+        //_statusButton.alpha= 0;
+        [self fadeOutAvailabilityView];
+    }
+    else{
+      [gesture setTranslation:CGPointZero inView:label];
+    }
 
-  
-    
-    //possibly compute collision here and limit new coordinates further
-    
-    //label.center = CGPointMake(newx,newy);
-   // _statusButtonHorizontalSpace.constant = newx;
-    
-    // reset translation
-    [gesture setTranslation:CGPointZero inView:label];
+}
+
+-(void)fadeOutStatusButton{
+    [UIView animateWithDuration:0.3f
+                          delay:0.0f
+                        options: UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         
+                         _statusButton.alpha = 0.0;
+                     }
+                     completion:^(BOOL finished){
+                    
+                     }];
+
 }
 
 -(void)handleTap:(UITapGestureRecognizer *) sender{
