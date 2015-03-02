@@ -61,25 +61,45 @@ CGFloat screenWidth;
 {
     UILabel *label = (UILabel *)gesture.view;
     CGPoint translation = [gesture translationInView:label];
+    float newX = _statusButtonHorizontalSpace.constant;
     
+    //NSLog(@"gesture point %f",  translation.x);
+    
+    
+    if(translation.x < 0){
+        //CHECK left
+        //NSLog(@"constraint is %f", _statusButtonHorizontalSpace.constant);
+        
+        if(newX>= 300){
+            newX = 300;
+            _statusButtonHorizontalSpace.constant = newX;
+        }
+        else {
+            _statusButtonHorizontalSpace.constant -= translation.x;
+        } 
+    }
+    else{
+     //CHECK right
+        if(newX <= 16){
+            newX = 16;
+            _statusButtonHorizontalSpace.constant = newX;
+        }
+        else {
+            _statusButtonHorizontalSpace.constant -= translation.x;
+            //NSLog(@"constraint is %f", _statusButtonHorizontalSpace.constant);
+        }
+    }
+    
+    
+   
     // move label , limit it to stay inside self.view.frame
-    float newx = label.center.x + translation.x;
-    float newy = label.center.y + translation.y;
-    
-    if (newx<0) { newx = 0; }
-    if (newy<0) { newy = 0; }
-    
-    if (newx>self.view.frame.size.width) {
-        newx = self.view.frame.size.width;
-    }
-    
-    if (newy>self.view.frame.size.height) {
-        newy = self.view.frame.size.height;
-    }
+
+  
     
     //possibly compute collision here and limit new coordinates further
     
-    label.center = CGPointMake(newx,newy);
+    //label.center = CGPointMake(newx,newy);
+   // _statusButtonHorizontalSpace.constant = newx;
     
     // reset translation
     [gesture setTranslation:CGPointZero inView:label];

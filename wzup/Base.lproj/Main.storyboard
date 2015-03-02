@@ -82,12 +82,12 @@
                                 <exclude reference="szP-Ck-xxF"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Caq-fy-0D7"/>
-                                <exclude reference="dfQ-j9-rWx"/>
-                                <exclude reference="ibI-Rm-vkf"/>
                                 <exclude reference="3Oq-kg-Mxx"/>
                                 <exclude reference="iCe-Sn-Tc3"/>
                                 <exclude reference="jGv-9Q-yQC"/>
+                                <exclude reference="Caq-fy-0D7"/>
+                                <exclude reference="dfQ-j9-rWx"/>
+                                <exclude reference="ibI-Rm-vkf"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -96,12 +96,12 @@
                                 <include reference="szP-Ck-xxF"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Caq-fy-0D7"/>
-                                <include reference="dfQ-j9-rWx"/>
-                                <include reference="ibI-Rm-vkf"/>
                                 <include reference="3Oq-kg-Mxx"/>
                                 <include reference="iCe-Sn-Tc3"/>
                                 <include reference="jGv-9Q-yQC"/>
+                                <exclude reference="Caq-fy-0D7"/>
+                                <include reference="dfQ-j9-rWx"/>
+                                <include reference="ibI-Rm-vkf"/>
                             </mask>
                         </variation>
                     </view>
@@ -145,8 +145,7 @@
                                                     <exclude reference="r2v-u9-b0C"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="150" y="8" width="20" height="20"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <exclude reference="VJ3-3C-NqW"/>
                                                     <exclude reference="r2v-u9-b0C"/>
@@ -223,9 +222,6 @@
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="52" y="14" width="215" height="22"/>
-                                                            </variation>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ECd-7g-Aic">
                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -239,8 +235,7 @@
                                                                     <exclude reference="ZCD-Ni-aWd"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="297" y="17" width="15" height="15"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="constraints">
                                                                     <include reference="7HG-4v-lU1"/>
                                                                     <include reference="ZCD-Ni-aWd"/>
@@ -288,8 +283,7 @@
                                                             <exclude reference="LMh-Q7-Cls"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="subviews">
                                                             <include reference="tUp-96-pMo"/>
                                                             <include reference="UXa-52-mhb"/>
@@ -322,9 +316,6 @@
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="16"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
-                                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                        <rect key="frame" x="8" y="9" width="304" height="21"/>
-                                                                    </variation>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -347,8 +338,7 @@
                                                                     <exclude reference="wHP-vD-30H"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="0.0" y="144" width="320" height="38"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="subviews">
                                                                     <include reference="iBs-mp-2f5"/>
                                                                 </mask>
@@ -380,8 +370,7 @@
                                                             <exclude reference="tqE-ty-iVy"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="0.0" y="48" width="320" height="182"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="subviews">
                                                             <include reference="QTy-4f-UEQ"/>
                                                         </mask>
@@ -448,9 +437,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="600" y="0.0" width="400" height="800"/>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="YNG-4x-Brh" id="01m-me-6S1"/>
                                     <outlet property="delegate" destination="YNG-4x-Brh" id="5Km-nF-55y"/>
@@ -461,10 +447,10 @@
                                 <color key="backgroundColor" red="0.5568627451" green="0.2666666667" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="182-4w-XFP">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="40"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="50"/>
                                     </constraint>
                                     <constraint firstAttribute="width" constant="46" id="9DR-ui-VZG">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="40"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="50"/>
                                     </constraint>
                                 </constraints>
                                 <state key="normal" title="+">
@@ -499,12 +485,12 @@
                                 <exclude reference="9cm-hm-xKe"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="ae8-5L-ruP"/>
+                                <exclude reference="q40-ng-i1Y"/>
                                 <exclude reference="bte-FK-Yqk"/>
                                 <exclude reference="gjV-mM-g7B"/>
                                 <exclude reference="jxc-dl-ISd"/>
                                 <exclude reference="zxF-dh-INP"/>
-                                <exclude reference="ae8-5L-ruP"/>
-                                <exclude reference="q40-ng-i1Y"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -513,12 +499,12 @@
                                 <include reference="9cm-hm-xKe"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="ae8-5L-ruP"/>
+                                <include reference="q40-ng-i1Y"/>
                                 <include reference="bte-FK-Yqk"/>
                                 <include reference="gjV-mM-g7B"/>
                                 <include reference="jxc-dl-ISd"/>
                                 <include reference="zxF-dh-INP"/>
-                                <include reference="ae8-5L-ruP"/>
-                                <include reference="q40-ng-i1Y"/>
                             </mask>
                         </variation>
                     </view>
