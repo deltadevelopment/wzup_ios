@@ -11,5 +11,8 @@
 @interface Feed2ViewController : MainViewController<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
+@property (weak, nonatomic) IBOutlet UIButton *statusButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *statusButtonverticalSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *statusButtonHorizontalSpace;
 
 @end

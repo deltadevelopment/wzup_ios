@@ -72,13 +72,11 @@ FeedController* feedController;
 }
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
-    
     feed = [feedController getFeed];
     indexCurrent = nil;
     [self.tableviewe reloadData];
-      [self checkErrors];
+    [self checkErrors];
     [refreshControl endRefreshing];
-    
 }
 
 -(UIButton *)createButton:(NSString *) img x:(int) xPos{

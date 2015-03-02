@@ -48,8 +48,41 @@ CGFloat screenWidth;
         
     });
     
+    UIPanGestureRecognizer *gesture = [[UIPanGestureRecognizer alloc]
+                                       initWithTarget:self
+                                       action:@selector(labelDragged:)];
+    [_statusButton addGestureRecognizer:gesture];
     
     
+    
+}
+
+- (void)labelDragged:(UIPanGestureRecognizer *)gesture
+{
+    UILabel *label = (UILabel *)gesture.view;
+    CGPoint translation = [gesture translationInView:label];
+    
+    // move label , limit it to stay inside self.view.frame
+    float newx = label.center.x + translation.x;
+    float newy = label.center.y + translation.y;
+    
+    if (newx<0) { newx = 0; }
+    if (newy<0) { newy = 0; }
+    
+    if (newx>self.view.frame.size.width) {
+        newx = self.view.frame.size.width;
+    }
+    
+    if (newy>self.view.frame.size.height) {
+        newy = self.view.frame.size.height;
+    }
+    
+    //possibly compute collision here and limit new coordinates further
+    
+    label.center = CGPointMake(newx,newy);
+    
+    // reset translation
+    [gesture setTranslation:CGPointZero inView:label];
 }
 
 -(void)handleTap:(UITapGestureRecognizer *) sender{
