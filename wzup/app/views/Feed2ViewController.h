@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MainViewController.h"
-@interface Feed2ViewController : MainViewController<UITableViewDelegate, UITableViewDataSource>
+@interface Feed2ViewController : MainViewController<UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 @property (weak, nonatomic) IBOutlet UIButton *statusButton;
@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *statusButtonHorizontalSpace;
 @property (weak, nonatomic) IBOutlet UIView *availabilityView;
 @property (weak, nonatomic) IBOutlet UILabel *statusText;
+- (IBAction)addStatus:(id)sender;
 
 @end

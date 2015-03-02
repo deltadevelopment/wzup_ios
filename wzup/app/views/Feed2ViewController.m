@@ -11,10 +11,13 @@
 #import "FeedController.h"
 #import "StatusModel.h"
 #import "UserModel.h"
+#import "AuthHelper.h"
 #import "StartViewController.h"
 #import "ProfileViewController.h"
 #import "ApplicationHelper.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
+
 @interface Feed2ViewController ()
 
 @end
@@ -22,7 +25,9 @@
 @implementation Feed2ViewController
 NSIndexPath *indexCurrent;
 NSMutableArray *feed;
+AuthHelper *authHelper;
 FeedController* feedController;
+UIView *oldView;
 BOOL shouldExpand;
 CGRect screenBound;
 CGSize screenSize;
@@ -32,7 +37,14 @@ ApplicationHelper *applicationHelper;
 bool availabilityFadeHasStarted;
 NSString* availableText;
 NSString* unAvailableText;
+bool cameraIsShown;
+AVCaptureStillImageOutput * stillImageOutput;
+UIImage *imgTaken;
+AVCaptureSession *session;
+AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
 - (void)viewDidLoad {
+    
+    authHelper = [[AuthHelper alloc] init];
     self.availabilityView.alpha = 0.0;
     [super viewDidLoad];
     horizontalSpaceDefault = self.statusButtonHorizontalSpace.constant;
@@ -214,7 +226,8 @@ NSString* unAvailableText;
 }
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
-    
+   
+    [feed removeObjectAtIndex:0];
     feed = [feedController getFeed];
     indexCurrent = nil;
     [self.tableView reloadData];
@@ -257,19 +270,40 @@ NSString* unAvailableText;
         [[cell getTopBar] addGestureRecognizer:tapGr];
         StatusModel *status = [feed objectAtIndex:indexPath.row];
         cell.statusLabel.text = [status getBody];
+       
         cell.nameLabel.text = [[status getUser] getUsername];
+        if([[status getUser] getId ] == [[authHelper getUserId] intValue]){
+            NSLog(@"------------auth: %@ model: %d", [authHelper getUserId ], [[status getUser] getId ]);
+            if(imgTaken == nil && cameraIsShown){
+                shouldExpand = true;
+                indexCurrent = indexPath;
+                [cell.statusImage setBackgroundColor:nil];
+                [self initializeCamera:cell.statusImage];
+              
+            }
+           
+        }
         cell.profilePicture.image = [UIImage imageNamed:[status getImgPath]];
         //NSLog([status getImgPath]);
         cell.statusImg = [status getImgPath];
-        NSLog(@"often");
-        
       
         CGSize size = CGSizeMake(screenWidth, 500);
         UIImage * image = [UIImage imageNamed:[status getImgPath]];
         image = [self imageByScalingAndCroppingForSize:size img:image];
-        [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:nil]];
+        //[cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:nil]];
+        NSLog(@"--IMG setting %@", [status getImgPath]);
         [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
         [cell setAvailability:[[status getUser] getAvailability]];
+        if(imgTaken != nil){
+             if([[status getUser] getId ] == [[authHelper getUserId] intValue]){
+               
+                shouldExpand = false;
+               // session.stopRunning;
+                 
+                [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[self imageByScalingAndCroppingForSize:size img:imgTaken]]];
+            }
+            
+        }
     }
    
     return cell;
@@ -423,5 +457,185 @@ NSString* unAvailableText;
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)addStatus:(id)sender {
+    if(!cameraIsShown){
+       imgTaken = nil;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // Update the UI
+                [UIView animateWithDuration:0.3f
+                                      delay:0.0f
+                                    options: UIViewAnimationOptionCurveLinear
+                                 animations:^{
+                                     
+                                     _statusButtonHorizontalSpace.constant += 130;
+                                     [self.view layoutIfNeeded];
+                                 }
+                                 completion:^(BOOL finished){
+                                     
+                                 }];
+            });
+            
+        });
+        
+       
+        StatusModel *tempStatus = [feed objectAtIndex:0];
+         if([[tempStatus getUser] getId ] == [[authHelper getUserId] intValue]){
+         
+         }else{
+             StatusModel *status = [[StatusModel alloc] init];
+             UserModel *user = [[UserModel alloc] init];
+             [user setUsername:@"simenlie"];
+             [user setId:[[authHelper getUserId] intValue]];
+             [status setUser:user];
+             
+             [feed insertObject:status atIndex:0];
+         }
+     
+        [self.tableView reloadData];
+        cameraIsShown = YES;
+    }
+    else if(cameraIsShown){
+    //Take picture
+        
+        [self capImage];
+         cameraIsShown = NO;
+         
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // Update the UI
+                [UIView animateWithDuration:0.3f
+                                      delay:0.0f
+                                    options: UIViewAnimationOptionCurveLinear
+                                 animations:^{
+                                     
+                                     _statusButtonHorizontalSpace.constant = horizontalSpaceDefault;
+                                     [self.view layoutIfNeeded];
+                                 }
+                                 completion:^(BOOL finished){
+                                     
+                                 }];
+            });
+            
+        });
+       
+        
+        
+    }
+   
+   
+}
+
+
+- (void) initializeCamera:(UIView *) cameraView {
+    
+    session = [[AVCaptureSession alloc] init];
+    
+    
+    session.sessionPreset = AVCaptureSessionPresetPhoto;
+    
+        captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
+    
+    
+    [captureVideoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+    CGRect rect = cameraView.bounds;
+    rect.size.height = 480;
+    cameraView.bounds = rect;
+    captureVideoPreviewLayer.frame = cameraView.bounds;
+
+    [cameraView.layer addSublayer:captureVideoPreviewLayer];
+
+    
+    UIView *view = cameraView;
+    CALayer *viewLayer = [view layer];
+    [viewLayer setMasksToBounds:YES];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        CGRect bounds = [view bounds];
+        [captureVideoPreviewLayer setFrame:bounds];
+        
+        NSArray *devices = [AVCaptureDevice devices];
+        AVCaptureDevice *frontCamera;
+        AVCaptureDevice *backCamera;
+        
+        for (AVCaptureDevice *device in devices) {
+            
+            NSLog(@"Device name: %@", [device localizedName]);
+            
+            if ([device hasMediaType:AVMediaTypeVideo]) {
+                
+                if ([device position] == AVCaptureDevicePositionBack) {
+                    NSLog(@"Device position : back");
+                    backCamera = device;
+                }
+                else {
+                    NSLog(@"Device position : front");
+                    frontCamera = device;
+                }
+            }
+        }
+        
+        
+        NSError *error = nil;
+        AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:backCamera error:&error];
+        if (!input) {
+            NSLog(@"ERROR: trying to open camera: %@", error);
+        }
+        [session addInput:input];
+        
+        stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
+        NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
+        [stillImageOutput setOutputSettings:outputSettings];
+        
+        [session addOutput:stillImageOutput];
+        
+        [session startRunning];
+        
+    });
+    
+  
+    
+}
+
+- (void) capImage { //method to capture image from AVCaptureSession video feed
+    AVCaptureConnection *videoConnection = nil;
+    for (AVCaptureConnection *connection in stillImageOutput.connections) {
+        
+        for (AVCaptureInputPort *port in [connection inputPorts]) {
+            
+            if ([[port mediaType] isEqual:AVMediaTypeVideo] ) {
+                videoConnection = connection;
+                break;
+            }
+        }
+        
+        if (videoConnection) {
+            break;
+        }
+    }
+    
+    NSLog(@"about to request a capture from: %@", stillImageOutput);
+    [stillImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler: ^(CMSampleBufferRef imageSampleBuffer, NSError *error) {
+        
+        if (imageSampleBuffer != NULL) {
+            NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
+            //UIImage *imgTaken = [UIImage imageWithData:imageData];
+            imgTaken = [UIImage imageWithData:imageData];
+           //[feed removeObjectAtIndex:0];
+            [session stopRunning];
+            [captureVideoPreviewLayer removeFromSuperlayer];
+            [_tableView reloadData];
+            
+            //[self processImage:[UIImage imageWithData:imageData]];
+        }
+
+    }];
+}
+
+
 
 @end

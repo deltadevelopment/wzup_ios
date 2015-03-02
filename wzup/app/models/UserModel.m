@@ -21,6 +21,7 @@
     _password_hash  = dic[@"password_hash"];
     _password_salt  = dic[@"password_salt"];
     _private_profile  = dic[@"private_profile"];
+    _Id  = [[dic objectForKey:@"id"] intValue];    
     //User
     NSLog(@"The username is %@", _username);
 };
@@ -35,4 +36,5 @@
 -(NSString*) getPasswordHash{return _password_hash;};
 -(NSString*) getPasswordSalt{return _password_salt;};
 -(BOOL) isPrivateProfile{return _private_profile;};
+-(int) getId{return _Id;};
 @end
