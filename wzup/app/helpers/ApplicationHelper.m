@@ -39,10 +39,10 @@ NSArray *unAvailableTexts;
 }
 
 -(void)addAvailableTexts{
-    availableTexts = [[NSArray alloc] initWithObjects:@"IM FREE", @"IM FREE2", @"IM FREE3",@"IM FREE4", nil];
+    availableTexts = [[NSArray alloc] initWithObjects:@"IM FREE", @"LONELY BOY", @"HIT ME UP",@"I LOVE FUN", nil];
 }
 -(void)addUnAvailableTexts{
-    unAvailableTexts = [[NSArray alloc] initWithObjects:@"BUSY BEE", @"BUSY BEE2", @"BUSY BEE3",@"BUSY BEE4", nil];
+    unAvailableTexts = [[NSArray alloc] initWithObjects:@"BUSY BEE", @"AINT GOT TIME", @"LONE RANGER",@"IM INTROVERTED", nil];
 }
 
 -(NSString*)getAvailableText{

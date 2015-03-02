@@ -273,17 +273,21 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
        
         cell.nameLabel.text = [[status getUser] getUsername];
         if([[status getUser] getId ] == [[authHelper getUserId] intValue]){
+            
+            cell.statusLabel.text = @"Tap to add caption";
             NSLog(@"------------auth: %@ model: %d", [authHelper getUserId ], [[status getUser] getId ]);
             if(imgTaken == nil && cameraIsShown){
                 shouldExpand = true;
                 indexCurrent = indexPath;
                 [cell.statusImage setBackgroundColor:nil];
+                
                 [self initializeCamera:cell.statusImage];
               
             }
            
         }
-        cell.profilePicture.image = [UIImage imageNamed:[status getImgPath]];
+        //cell.profilePicture.image = [UIImage imageNamed:[status getImgPath]];
+        cell.profilePicture.image = [UIImage imageNamed:@"testBilde.jpg"];
         //NSLog([status getImgPath]);
         cell.statusImg = [status getImgPath];
       
@@ -297,9 +301,10 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
         if(imgTaken != nil){
              if([[status getUser] getId ] == [[authHelper getUserId] intValue]){
                
-                shouldExpand = false;
+                //shouldExpand = false;
                // session.stopRunning;
-                 
+                    cell.profilePicture.image = [UIImage imageNamed:@"testBilde.jpg"];
+                     cell.statusLabel.text = @"Tap to add caption";
                 [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[self imageByScalingAndCroppingForSize:size img:imgTaken]]];
             }
             
@@ -547,6 +552,7 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
     captureVideoPreviewLayer.frame = cameraView.bounds;
 
     [cameraView.layer addSublayer:captureVideoPreviewLayer];
+    
 
     
     UIView *view = cameraView;
@@ -623,6 +629,7 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
         
         if (imageSampleBuffer != NULL) {
             NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
+            [feedController sendImageToServer:imageData];
             //UIImage *imgTaken = [UIImage imageWithData:imageData];
             imgTaken = [UIImage imageWithData:imageData];
            //[feed removeObjectAtIndex:0];

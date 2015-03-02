@@ -10,4 +10,5 @@
 
 @interface FeedController : ApplicationController
 -(NSMutableArray*)getFeed;
+- (void)sendImageToServer:(NSData *)imageData;
 @end
