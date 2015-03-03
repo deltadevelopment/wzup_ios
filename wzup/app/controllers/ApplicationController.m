@@ -114,13 +114,21 @@
     
     [request setHTTPBody:imageData];
     NSLog(@"token is --- %@", token);
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO];
         if (connection) {
             NSLog(@"connection---");
         };
+        NSPort* port = [NSPort port];
+        NSRunLoop* rl = [NSRunLoop currentRunLoop]; // Get the runloop
+        [rl addPort:port forMode:NSDefaultRunLoopMode];
+        [connection scheduleInRunLoop:rl forMode:NSDefaultRunLoopMode];
+        [connection start];
+        [rl run];
+
+        
     });
-   
 
 }
 

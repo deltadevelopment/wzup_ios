@@ -263,7 +263,7 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
     //cell=nil;
     if(cell == nil){
         cell = [[Feed2TableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"customCell"];
-    
+       
     }
     if([feed count] != 0){
         UITapGestureRecognizer *tapGr;
@@ -294,23 +294,39 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
         cell.statusImg = [status getImgPath];
       
         CGSize size = CGSizeMake(screenWidth, 500);
-        UIImage * image = [UIImage imageNamed:[status getImgPath]];
-        image = [self imageByScalingAndCroppingForSize:size img:image];
-        //[cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:nil]];
-        NSLog(@"--IMG setting %@", [status getImgPath]);
-        [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
-        [cell setAvailability:[[status getUser] getAvailability]];
-        if(imgTaken != nil){
-             if([[status getUser] getId ] == [[authHelper getUserId] intValue]){
-               
-                //shouldExpand = false;
-               // session.stopRunning;
-                    cell.profilePicture.image = [UIImage imageNamed:@"testBilde.jpg"];
-                     cell.statusLabel.text = @"Tap to add caption";
-                [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[self imageByScalingAndCroppingForSize:size img:imgTaken]]];
+    
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+        
+        dispatch_async(queue, ^{
+            UIImage * image = [UIImage imageNamed:[status getImgPath]];
+            if([status getMediaUrl] == nil){
+                
+            }else{
+                image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[status getMediaUrl]]]];
             }
-            
-        }
+            image = [self imageByScalingAndCroppingForSize:size img:image];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
+                if(imgTaken != nil){
+                    if([[status getUser] getId ] == [[authHelper getUserId] intValue]){
+                        
+                        //shouldExpand = false;
+                        // session.stopRunning;
+                        cell.profilePicture.image = [UIImage imageNamed:@"testBilde.jpg"];
+                        cell.statusLabel.text = @"Tap to add caption";
+                        [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[self imageByScalingAndCroppingForSize:size img:imgTaken]]];
+                    }
+                    
+                }
+                [cell setNeedsLayout];
+            });
+        });
+        //image = [self imageByScalingAndCroppingForSize:size img:image];
+        //[cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:nil]];
+      //  NSLog(@"--IMG setting %@", [status getImgPath]);
+        //[cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
+        [cell setAvailability:[[status getUser] getAvailability]];
+        
     }
    
     return cell;
@@ -388,6 +404,7 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
 
 - (UIImage*)imageByScalingAndCroppingForSize:(CGSize)targetSize img:(UIImage *) sourceImage
 {
+    NSLog(@"----SCALING IMAGE");
     // NSLog(@"THE size is width: %f height: %f", targetSize.width, targetSize.height);
     UIImage *newImage = nil;
     CGSize imageSize = sourceImage.size;
@@ -633,15 +650,22 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
             NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
            
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                 [feedController sendImageToServer:imageData];
-             
-                
-            });
+           
             
-            
+          
            
              imgTaken = [UIImage imageWithData:imageData];
+            CGRect cropRect = CGRectMake(0 ,0 ,640 ,480);
+            UIGraphicsBeginImageContextWithOptions(cropRect.size, self.view, 1.0f);
+            [imgTaken drawInRect:cropRect];
+            UIImage * customScreenShot = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+        NSData* data = UIImagePNGRepresentation(customScreenShot);
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [feedController sendImageToServer:data];
+                
+                
+            });
             //UIImage *imgTaken = [UIImage imageWithData:imageData];
             
            //[feed removeObjectAtIndex:0];

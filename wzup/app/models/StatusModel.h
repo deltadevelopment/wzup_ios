@@ -18,6 +18,9 @@ NSString * imgPath;
 @property (nonatomic,strong) NSString * user_id;
 @property (nonatomic,strong) NSString * created_at;
 @property (nonatomic,strong) NSString * updated_at;
+@property (nonatomic,strong) NSString * media_key;
+@property (nonatomic,strong) NSString * media_type;
+@property (nonatomic,strong) NSString * media_url;
 @property (nonatomic,strong) NSString * imgPath;
 //Virtual
 @property (nonatomic,strong) UserModel * user;
@@ -32,6 +35,8 @@ NSString * imgPath;
 -(NSString*) getUpdatedAt;
 -(UserModel*) getUser;
 -(NSString*)getImgPath;
+-(NSString*)getMediaUrl;
+
 
 
 @end
