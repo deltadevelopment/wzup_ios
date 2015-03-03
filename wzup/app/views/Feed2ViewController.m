@@ -629,9 +629,11 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
         
         if (imageSampleBuffer != NULL) {
             NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
+           
             [feedController sendImageToServer:imageData];
+             imgTaken = [UIImage imageWithData:imageData];
             //UIImage *imgTaken = [UIImage imageWithData:imageData];
-            imgTaken = [UIImage imageWithData:imageData];
+            
            //[feed removeObjectAtIndex:0];
             [session stopRunning];
             [captureVideoPreviewLayer removeFromSuperlayer];
