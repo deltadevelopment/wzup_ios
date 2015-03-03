@@ -138,58 +138,60 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
 
 - (void)labelDragged:(UIPanGestureRecognizer *)gesture
 {
-    
-    [self fadeInAvailabilityView];
-    UILabel *label = (UILabel *)gesture.view;
-    CGPoint translation = [gesture translationInView:label];
-    float newX = _statusButtonHorizontalSpace.constant;
-    
-    //NSLog(@"gesture point %f",  translation.x);
-    if(newX > 150){
-        //Change availability
-        self.availabilityView.backgroundColor = [UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1];
-        _statusText.text = unAvailableText;
-    }else{
-        //Change availability
+    if(!cameraIsShown){
+        [self fadeInAvailabilityView];
+        UILabel *label = (UILabel *)gesture.view;
+        CGPoint translation = [gesture translationInView:label];
+        float newX = _statusButtonHorizontalSpace.constant;
         
-        _statusText.text = availableText;
-        self.availabilityView.backgroundColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.443 alpha:1];
-    }
-    
-    if(translation.x < 0){
-        //CHECK left
-        //NSLog(@"constraint is %f", _statusButtonHorizontalSpace.constant);
+        //NSLog(@"gesture point %f",  translation.x);
+        if(newX > 150){
+            //Change availability
+            self.availabilityView.backgroundColor = [UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1];
+            _statusText.text = unAvailableText;
+        }else{
+            //Change availability
+            
+            _statusText.text = availableText;
+            self.availabilityView.backgroundColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.443 alpha:1];
+        }
         
-        if(newX>= 300){
-            newX = 300;
-            _statusButtonHorizontalSpace.constant = newX;
-        }
-        else {
-            _statusButtonHorizontalSpace.constant -= translation.x;
-        } 
-    }
-    else{
-     //CHECK right
-        if(newX <= 16){
-            newX = 16;
-            _statusButtonHorizontalSpace.constant = newX;
-        }
-        else {
-            _statusButtonHorizontalSpace.constant -= translation.x;
+        if(translation.x < 0){
+            //CHECK left
             //NSLog(@"constraint is %f", _statusButtonHorizontalSpace.constant);
+            
+            if(newX>= 300){
+                newX = 300;
+                _statusButtonHorizontalSpace.constant = newX;
+            }
+            else {
+                _statusButtonHorizontalSpace.constant -= translation.x;
+            }
+        }
+        else{
+            //CHECK right
+            if(newX <= 16){
+                newX = 16;
+                _statusButtonHorizontalSpace.constant = newX;
+            }
+            else {
+                _statusButtonHorizontalSpace.constant -= translation.x;
+                //NSLog(@"constraint is %f", _statusButtonHorizontalSpace.constant);
+            }
+        }
+        if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateFailed || gesture.state == UIGestureRecognizerStateCancelled)
+        {
+            // _statusButton.hidden = YES;
+            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+            [self fadeOutStatusButton];
+            //_statusButton.alpha= 0;
+            [self fadeOutAvailabilityView];
+        }
+        else{
+            [gesture setTranslation:CGPointZero inView:label];
         }
     }
-    if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateFailed || gesture.state == UIGestureRecognizerStateCancelled)
-    {
-       // _statusButton.hidden = YES;
-        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
-        [self fadeOutStatusButton];
-        //_statusButton.alpha= 0;
-        [self fadeOutAvailabilityView];
-    }
-    else{
-      [gesture setTranslation:CGPointZero inView:label];
-    }
+  
 
 }
 
@@ -630,7 +632,15 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
         if (imageSampleBuffer != NULL) {
             NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
            
-            [feedController sendImageToServer:imageData];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                 [feedController sendImageToServer:imageData];
+             
+                
+            });
+            
+            
+           
              imgTaken = [UIImage imageWithData:imageData];
             //UIImage *imgTaken = [UIImage imageWithData:imageData];
             

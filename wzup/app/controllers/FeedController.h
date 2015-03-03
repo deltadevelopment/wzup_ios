@@ -8,7 +8,7 @@
 
 #import "ApplicationController.h"
 
-@interface FeedController : ApplicationController
+@interface FeedController : ApplicationController<NSURLConnectionDataDelegate>
 -(NSMutableArray*)getFeed;
 - (void)sendImageToServer:(NSData *)imageData;
 @end

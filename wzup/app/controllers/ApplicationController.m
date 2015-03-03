@@ -30,6 +30,7 @@
 -(NSData*)getResp:(NSMutableURLRequest *) request{
     NSURLResponse *response;
     NSError *error;
+    
     NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     //NSLog(urlData);
@@ -97,6 +98,54 @@
     return [self getResp:serviceRequest];
 
 };
+
+-(void)puttHttpRequestWithImage:(NSData *) imageData token:(NSString *) token{
+    //POST/PUT to Amazon
+    //STEP 2: Upload image to S3 with generated token from backend
+    
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[imageData length]];
+    
+    // Init the URLRequest
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setHTTPMethod:@"PUT"];
+    [request setURL:[NSURL URLWithString:token]];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    [request setHTTPBody:imageData];
+    NSLog(@"token is --- %@", token);
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+        if (connection) {
+            NSLog(@"connection---");
+        };
+    });
+   
+
+}
+
+- (void)connection:(NSURLConnection *)connection
+   didSendBodyData:(NSInteger)bytesWritten
+ totalBytesWritten:(NSInteger)totalBytesWritten
+totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
+    NSLog(@"Skrevet %ld av totalt %ld", (long)totalBytesWritten, (long)totalBytesExpectedToWrite);
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    
+    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+    NSLog(@"-----RESPO fra server");
+    NSLog(@"%ld", (long)[httpResponse statusCode]);
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
+    NSLog(@"JA");
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection{
+    NSLog(@"JA2");
+}
 
 
 @end

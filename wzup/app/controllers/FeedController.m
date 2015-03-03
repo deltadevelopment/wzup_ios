@@ -11,6 +11,9 @@
 #import "StatusModel.h"
 @implementation FeedController
 NSMutableArray *feed;
+NSString *token;
+NSString *key;
+
 -(NSMutableArray*)getFeed{
     [self getData];
     return  feed;
@@ -30,61 +33,52 @@ NSMutableArray *feed;
     }
 }
 - (void)sendImageToServer:(NSData *)imageData {
+    [self requestUpload];
+    NSLog(@"-----REQUESTED");
+    [self uploadImage:imageData];
+    NSLog(@"-----S3");
+    [self SetStatusWithMedia];
+    NSLog(@"-----updated backend");
+}
+
+
+-(void)requestUpload{
     //GET to backend
     //STEP 1: GET generated image upload url from backend
     NSData *response = [self getHttpRequest:@"status/generate_upload_url"];
     NSMutableDictionary *dic = [parserHelper parse:response];
-    NSString *token = dic[@"url"];
-     NSString *key = dic[@"key"];
-    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
-    NSLog(token);
+    token = dic[@"url"];
+    key = dic[@"key"];
     NSLog(key);
-    
+}
+
+-(void)uploadImage:(NSData *) imageData{
     //POST/PUT to Amazon
     //STEP 2: Upload image to S3 with generated token from backend
-    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[imageData length]];
+    [self puttHttpRequestWithImage:imageData token:token];
     
-    // Init the URLRequest
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setHTTPMethod:@"PUT"];
-    [request setURL:[NSURL URLWithString:token]];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+}
 
-   [request setHTTPBody:imageData];
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    if (connection) {
-        // response data of the request
-    }
-    NSLog(@"sendt");
-
+-(void)SetStatusWithMedia{
     //STEP 3: POST
-    //POST request
     NSDictionary *body = @{
                            @"status": @{
                                    @"media_key" : key,
                                    @"media_type" : @"1"
                                    }
                            };
-
+    
     //Create json body from dictionary
     NSString *jsonData = [applicationHelper generateJsonFromDictionary:body];
     //Create the request with the body
-
+    
     
     NSString *url = [NSString stringWithFormat:@"user/%@/status/add_media",[authHelper getUserId]];
     NSData *response2 = [self postHttpRequest:url json:jsonData];
-   
 }
 
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    
-NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
-    NSLog(@"-----RESPO fra server");
-    NSLog(@"%ld", (long)[httpResponse statusCode]);
-}
+
+
 
 @end

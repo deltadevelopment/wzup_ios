@@ -9,13 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "AuthHelper.h"
 #import "ParserHelper.h"
-#import "ApplicationHelper.h";
+#import "ApplicationHelper.h"
 
 @interface ApplicationController : NSObject{
     AuthHelper *authHelper;
     ParserHelper *parserHelper;
     ApplicationHelper *applicationHelper;
     BOOL isErrors;
+    NSURLConnection *connection;
 }
 
 @property AuthHelper *authHelper;
@@ -29,6 +30,7 @@
 -(NSData  *) deleteHttpRequest:(NSString *) url;
 -(NSData  *) putHttpRequest:(NSString *) url
                                     json:(NSString *) data;
+-(void)puttHttpRequestWithImage:(NSData *) imageData token:(NSString *) token;
 
 -(BOOL)hasError;
 
