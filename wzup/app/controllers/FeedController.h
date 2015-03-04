@@ -11,4 +11,5 @@
 @interface FeedController : ApplicationController<NSURLConnectionDataDelegate>
 -(NSMutableArray*)getFeed;
 - (void)sendImageToServer:(NSData *)imageData;
+-(void)setLoading:(UILabel *) label;
 @end

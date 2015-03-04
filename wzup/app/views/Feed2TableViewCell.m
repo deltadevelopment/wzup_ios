@@ -23,6 +23,7 @@
 
 -(void)attachUiToCell{
     NSLog(@"cropping");
+   self.uploadImageIndicatorLabel.hidden = YES;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
    self.availabilityPicture.backgroundColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.443 alpha:1];
     self.availabilityPicture.layer.cornerRadius = 7;
@@ -43,6 +44,11 @@
     return self.topBar;
 }
 
+-(void)stopImageLoading{
+    [_imageLoadingIndicator stopAnimating];
+    _imageLoadingIndicator.hidden = YES;
+    
+}
 -(void)setAvailability:(NSInteger) available{
     //NSLog(@"%i", (int)av);
     if(available == 0){

@@ -275,7 +275,7 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
        
         cell.nameLabel.text = [[status getUser] getUsername];
         if([[status getUser] getId ] == [[authHelper getUserId] intValue]){
-            
+            [feedController setLoading:[cell uploadImageIndicatorLabel]];
             cell.statusLabel.text = @"Tap to add caption";
             NSLog(@"------------auth: %@ model: %d", [authHelper getUserId ], [[status getUser] getId ]);
             if(imgTaken == nil && cameraIsShown){
@@ -299,13 +299,16 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
         
         dispatch_async(queue, ^{
             UIImage * image = [UIImage imageNamed:[status getImgPath]];
-            if([status getMediaUrl] == nil){
-                
+            if([status getMedia] == nil){
+                image =  [UIImage imageNamed:@"status-icon2.png"];
             }else{
-                image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[status getMediaUrl]]]];
+                image = [UIImage imageWithData:[status getMedia]];
+                
+                //image =  [UIImage imageNamed:@"testBilde.jpg"];
             }
             image = [self imageByScalingAndCroppingForSize:size img:image];
             dispatch_sync(dispatch_get_main_queue(), ^{
+                [cell stopImageLoading];
                 [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
                 if(imgTaken != nil){
                     if([[status getUser] getId ] == [[authHelper getUserId] intValue]){
@@ -315,6 +318,7 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
                         cell.profilePicture.image = [UIImage imageNamed:@"testBilde.jpg"];
                         cell.statusLabel.text = @"Tap to add caption";
                         [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[self imageByScalingAndCroppingForSize:size img:imgTaken]]];
+                        
                     }
                     
                 }
@@ -570,7 +574,8 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
     cameraView.bounds = rect;
     captureVideoPreviewLayer.frame = cameraView.bounds;
 
-    [cameraView.layer addSublayer:captureVideoPreviewLayer];
+    //[cameraView.layer addSublayer:captureVideoPreviewLayer];
+    [cameraView.layer insertSublayer:captureVideoPreviewLayer atIndex:0];
     
 
     
@@ -655,7 +660,7 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
           
            
              imgTaken = [UIImage imageWithData:imageData];
-            CGRect cropRect = CGRectMake(0 ,0 ,640 ,480);
+            CGRect cropRect = CGRectMake(0 ,0 ,480 ,640);
             UIGraphicsBeginImageContextWithOptions(cropRect.size, self.view, 1.0f);
             [imgTaken drawInRect:cropRect];
             UIImage * customScreenShot = UIGraphicsGetImageFromCurrentImageContext();

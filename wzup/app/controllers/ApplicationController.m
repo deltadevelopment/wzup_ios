@@ -10,6 +10,7 @@
 #import "ApplicationHelper.h"
 #import "AuthHelper.h"
 #import "ParserHelper.h"
+
 @implementation ApplicationController
 @synthesize authHelper, parserHelper, applicationHelper;
 
@@ -114,29 +115,44 @@
     
     [request setHTTPBody:imageData];
     NSLog(@"token is --- %@", token);
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO];
-        if (connection) {
+    
+    
+    NSURLConnection * connection2 = [[NSURLConnection alloc]
+                                    initWithRequest:request
+                                    delegate:self startImmediately:NO];
+    
+    [connection2 scheduleInRunLoop:[NSRunLoop mainRunLoop]
+                          forMode:NSDefaultRunLoopMode];
+    
+    [connection2 start];
+        if (connection2) {
             NSLog(@"connection---");
         };
-        NSPort* port = [NSPort port];
-        NSRunLoop* rl = [NSRunLoop currentRunLoop]; // Get the runloop
-        [rl addPort:port forMode:NSDefaultRunLoopMode];
-        [connection scheduleInRunLoop:rl forMode:NSDefaultRunLoopMode];
-        [connection start];
-        [rl run];
-
-        
-    });
-
+ 
 }
 
 - (void)connection:(NSURLConnection *)connection
    didSendBodyData:(NSInteger)bytesWritten
  totalBytesWritten:(NSInteger)totalBytesWritten
 totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
-    NSLog(@"Skrevet %ld av totalt %ld", (long)totalBytesWritten, (long)totalBytesExpectedToWrite);
+    long percentageDownloaded = (totalBytesWritten * 100)/totalBytesExpectedToWrite;
+    CGRect screenBound = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = screenBound.size;
+    CGFloat screenWidth = screenSize.width;
+    CGFloat screenHeight = screenSize.height;
+    if(loadingLabel != nil){
+        loadingLabel.hidden = NO;
+        double width = (percentageDownloaded* screenWidth)/100 ;
+        CGRect frame = loadingLabel.frame;
+        NSLog(@"%f", width);
+        frame.size.width = width;
+        loadingLabel.frame = frame;
+        [loadingLabel setNeedsDisplay];
+    }
+    if(percentageDownloaded == 100){
+        loadingLabel.hidden = YES;
+    }
+    //NSLog(@"Skrevet %ld av totalt %ld percentage %d", (long)totalBytesWritten, (long)totalBytesExpectedToWrite, percentageDownloaded);
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -153,6 +169,10 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
     NSLog(@"JA2");
+}
+
+- (void)connectionDidFinishDownloading:(NSURLConnection *)connection destinationURL:(NSURL *)destinationURL{
+    NSLog(@"tester her");
 }
 
 

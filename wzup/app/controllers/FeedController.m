@@ -9,6 +9,7 @@
 #import "FeedController.h"
 #import "AuthHelper.h"
 #import "StatusModel.h"
+#import <UIKit/UIKit.h>
 @implementation FeedController
 NSMutableArray *feed;
 NSString *token;
@@ -50,6 +51,11 @@ NSString *key;
     token = dic[@"url"];
     key = dic[@"key"];
     NSLog(key);
+}
+
+-(void)setLoading:(UILabel *) label{
+    loadingLabel = label;
+
 }
 
 -(void)uploadImage:(NSData *) imageData{

@@ -21,4 +21,8 @@
 -(void)setStatusImagePath:(NSString *)statusImage;
 -(void)setAvailability:(NSInteger) available;
 -(UIView*)getTopBar;
+-(void)stopImageLoading;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *imageLoadingIndicator;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *uploadImageIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *uploadImageIndicatorLabel;
 @end

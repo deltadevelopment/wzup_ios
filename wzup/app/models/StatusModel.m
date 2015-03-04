@@ -19,13 +19,17 @@
     _updated_at = dic[@"updated_at"];
     _user = [[UserModel alloc] init];
     _media_url = dic[@"media_url"];
-    NSLog(_media_url);
     [_user build:dic[@"user"]];
     
-   NSLog(@"The status is %@ %@",_body, _user_id);
-    NSArray* pics = [[NSArray alloc] initWithObjects:@"testBilde.jpg", @"testBilde.jpg", @"testBilde.jpg",@"testBilde.jpg", nil];
-    imgPath =pics[rand()%4];
+   //NSLog(@"The status is %@ %@",_body, _user_id);
+    //NSArray* pics = [[NSArray alloc] initWithObjects:@"testBilde.jpg", @"testBilde.jpg", @"testBilde.jpg",@"testBilde.jpg", nil];
+    //imgPath =pics[rand()%4];
+ 
 };
+
+-(void)downloadImage{
+    _media = [NSData dataWithContentsOfURL:[NSURL URLWithString:_media_url]];
+}
 
 -(NSString*) getStatusId{
     return _statusId;
@@ -62,4 +66,10 @@
     return _media_url;
 }
 
+-(NSData*)getMedia{
+    if(_media == nil){
+       [self downloadImage];
+    }
+    return _media;
+}
 @end

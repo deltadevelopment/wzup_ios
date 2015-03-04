@@ -22,6 +22,7 @@ NSString * imgPath;
 @property (nonatomic,strong) NSString * media_type;
 @property (nonatomic,strong) NSString * media_url;
 @property (nonatomic,strong) NSString * imgPath;
+@property (nonatomic,strong) NSData * media;
 //Virtual
 @property (nonatomic,strong) UserModel * user;
 
@@ -36,6 +37,7 @@ NSString * imgPath;
 -(UserModel*) getUser;
 -(NSString*)getImgPath;
 -(NSString*)getMediaUrl;
+-(NSData*)getMedia;
 
 
 
