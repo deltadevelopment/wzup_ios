@@ -19,6 +19,7 @@
 {
     self = [super init];
     if (self) {
+        imageUploaded = @selector(imageUploadDone);
         authHelper = [[AuthHelper alloc] init];
         parserHelper = [[ParserHelper alloc] init];
         applicationHelper = [[ApplicationHelper alloc] init];
@@ -154,6 +155,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
     if(percentageDownloaded == 100){
         loadingLabel.hidden = YES;
         [currentObject performSelector:aSelector];
+        [self performSelector:imageUploaded];
         NSLog(@"selector her ---");
         
     }
@@ -178,6 +180,10 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
 
 - (void)connectionDidFinishDownloading:(NSURLConnection *)connection destinationURL:(NSURL *)destinationURL{
     NSLog(@"tester her");
+}
+
+-(void)imageUploadDone{
+
 }
 
 

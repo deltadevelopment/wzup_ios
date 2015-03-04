@@ -58,6 +58,8 @@ SEL littleSelector;
     screenWidth = screenSize.width;
     screenHeight = screenSize.height;
     self.statusButton.layer.cornerRadius = 25;
+    //self.cancelButton.layer.cornerRadius = 25;
+    self.cancelButton.hidden = YES;
     self.availabilityView.hidden = YES;
     self.availabilityView.backgroundColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.443 alpha:1];
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
@@ -90,6 +92,11 @@ SEL littleSelector;
     
     
 }
+- (IBAction)cancelStatus:(id)sender {
+    NSLog(@"Canceling");
+       [self takingPhotoIsDone];
+}
+
 -(void)imageIsUploaded{
     NSLog(@"METHOD HERE");
     
@@ -248,19 +255,22 @@ SEL littleSelector;
 }
 
 -(void)handleTap:(UITapGestureRecognizer *) sender{
-    CGPoint tapLocation = [sender locationInView:self.tableView];
-    NSIndexPath *tapIndexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
-    
-    
-    ProfileViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"profile"];
-    StatusModel *statusmodel = [feed objectAtIndex:tapIndexPath.row];
-    [vc setProfile:[statusmodel getBody]];
-    // OR myViewController *vc = [[myViewController alloc] init];
-    
-    // any setup code for *vc
-    
-    [self.navigationController pushViewController:vc animated:YES];
-    // do any setup you need for myNewVC
+    if(!cameraIsShown){
+        CGPoint tapLocation = [sender locationInView:self.tableView];
+        NSIndexPath *tapIndexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
+        
+        
+        ProfileViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"profile"];
+        StatusModel *statusmodel = [feed objectAtIndex:tapIndexPath.row];
+        [vc setProfile:[statusmodel getBody]];
+        // OR myViewController *vc = [[myViewController alloc] init];
+        
+        // any setup code for *vc
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        // do any setup you need for myNewVC
+    }
+
     
     
 }
@@ -325,7 +335,7 @@ SEL littleSelector;
             [feedController setSelector:littleSelector withObject:self];
             
             
-            cell.statusLabel.text = @"Tap to add caption";
+            cell.statusLabel.text = @"";
             
          
             //Init tap gesture
@@ -347,7 +357,8 @@ SEL littleSelector;
            
         }
         //cell.profilePicture.image = [UIImage imageNamed:[status getImgPath]];
-        cell.profilePicture.image = [UIImage imageNamed:@"testBilde.jpg"];
+        cell.profilePicture.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", @"testBilde.jpg"]];
+        
         //NSLog([status getImgPath]);
         cell.statusImg = [status getImgPath];
       
@@ -356,7 +367,7 @@ SEL littleSelector;
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
         
         dispatch_async(queue, ^{
-            UIImage * image = [UIImage imageNamed:[status getImgPath]];
+            UIImage * image = [[UIImage alloc] init];
             if([status getMedia] == nil){
                 image =  [UIImage imageNamed:@"status-icon2.png"];
             }else{
@@ -369,8 +380,9 @@ SEL littleSelector;
                 [cell stopImageLoading];
                 [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
                 if(imgTaken != nil){
+                    NSLog(@"setting image ---------");
                     if([[status getUser] getId ] == [[authHelper getUserId] intValue]){
-                        
+                        NSLog(@"setting image22 ---------");
                         //shouldExpand = false;
                         // session.stopRunning;
                         cell.profilePicture.image = [UIImage imageNamed:@"testBilde.jpg"];
@@ -388,7 +400,7 @@ SEL littleSelector;
                                                                  selector:@selector(keyboardWillShow:)
                                                                      name:UIKeyboardWillShowNotification
                                                                    object:nil];
-                     
+                        
                         [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[self imageByScalingAndCroppingForSize:size img:imgTaken]]];
                     }
                 }
@@ -506,30 +518,32 @@ SEL littleSelector;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath*)path
 // or it must be some other method
 {
-    
-    NSIndexPath *oldIndex = indexCurrent;
-    
-    indexCurrent = path;
-   
-    if(cameraIsShown){
-    
-    }
-    else if(indexCurrent == oldIndex){
-        //indexCurrent = nil;
-        if(shouldExpand){
-            shouldExpand = false;
+    if(!cameraIsShown){
+        NSIndexPath *oldIndex = indexCurrent;
+        
+        indexCurrent = path;
+        
+        if(cameraIsShown){
+            
+        }
+        else if(indexCurrent == oldIndex){
+            //indexCurrent = nil;
+            if(shouldExpand){
+                shouldExpand = false;
+            }else{
+                shouldExpand = true;
+            }
+            
         }else{
             shouldExpand = true;
         }
         
-    }else{
-        shouldExpand = true;
+        [tableView beginUpdates];
+        
+        
+        [tableView endUpdates];
     }
-    
-    [tableView beginUpdates];
- 
-    
-    [tableView endUpdates];
+  
 
     
 }
@@ -638,6 +652,11 @@ SEL littleSelector;
 
 - (IBAction)addStatus:(id)sender {
     if(!cameraIsShown){
+        cameraIsShown = YES;
+        [_tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+        //Prepare for taking picture with camera
+        _tableView.scrollEnabled = NO;
+        
        imgTaken = nil;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
@@ -647,7 +666,8 @@ SEL littleSelector;
                                       delay:0.0f
                                     options: UIViewAnimationOptionCurveLinear
                                  animations:^{
-                                     
+                                     self.cancelButton.hidden = NO;
+                                     self.cancelButton.alpha = 0.7;
                                      _statusButtonHorizontalSpace.constant += 130;
                                      [self.view layoutIfNeeded];
                                  }
@@ -673,7 +693,7 @@ SEL littleSelector;
          }
      
         [self.tableView reloadData];
-        cameraIsShown = YES;
+        
     }
     else if(cameraIsShown){
     //Take picture
@@ -812,16 +832,81 @@ SEL littleSelector;
             //UIImage *imgTaken = [UIImage imageWithData:imageData];
             
            //[feed removeObjectAtIndex:0];
+     
             [session stopRunning];
             [captureVideoPreviewLayer removeFromSuperlayer];
-            [_tableView reloadData];
-            
+           _tableView.scrollEnabled = YES;
+             self.cancelButton.hidden = YES;
+           [_tableView reloadData];
             //[self processImage:[UIImage imageWithData:imageData]];
         }
 
     }];
 }
 
+-(void)takingPhotoIsDone{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        _tableView.scrollEnabled = YES;
+        
+        cameraIsShown = false;
+    
+        //shouldExpand = NO;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.cancelButton.hidden = YES;
+            if(_statusButtonHorizontalSpace.constant != horizontalSpaceDefault){
+                [UIView animateWithDuration:0.3f
+                                      delay:0.0f
+                                    options: UIViewAnimationOptionCurveLinear
+                                 animations:^{
+                                     
+                                     _statusButtonHorizontalSpace.constant = horizontalSpaceDefault;
+                                     [self.view layoutIfNeeded];
+                                 }
+                                 completion:^(BOOL finished){
+                                     [self removeCameraView];
+                                 }];
+                [_tableView reloadData];
+                
+            }
+        });
+        
+    });
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [session stopRunning];
+        [captureVideoPreviewLayer removeFromSuperlayer];
+    });
+    
+}
+-(void)removeCameraView{
+    shouldExpand = NO;
+    [UIView animateWithDuration:0.2f
+                          delay:0.7f
+                        options: UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         //swish out
+                         CGRect frame = currentCell.frame;
+                         //frame.origin.y -= frame.size.height;
+                         //currentCell.frame = frame;
+                         CGRect frame2 = _tableView.frame;
+                         frame2.origin.y -= frame.size.height;
+                         frame2.size.height += frame.size.height;
+                         _tableView.frame = frame2;
+                     }
+                     completion:^(BOOL finished){
+                         [feed removeObjectAtIndex:0];
+                         CGRect frame = currentCell.frame;
+                         CGRect frame2 = _tableView.frame;
+                         frame2.origin.y += frame.size.height;
+                         frame2.size.height -= frame.size.height;
+                         _tableView.frame = frame2;
+                         [self.tableView reloadData];
+                         [currentCell tickImage].hidden = YES;
+                         [currentCell tickImage].alpha = 0.0;
+                         currentCell = nil;
+                         currentCellsIndexPath = nil;
+                     }];
+
+}
 
 
 @end

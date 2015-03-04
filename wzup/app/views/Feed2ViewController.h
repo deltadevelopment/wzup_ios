@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIView *availabilityView;
 @property (weak, nonatomic) IBOutlet UILabel *statusText;
 - (IBAction)addStatus:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+- (IBAction)cancelStatus:(id)sender;
 
 -(void)imageIsUploaded;
 @end

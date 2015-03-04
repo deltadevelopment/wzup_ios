@@ -37,6 +37,7 @@
 		C5DFD5811A920A1800F37803 /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD5801A920A1800F37803 /* LoginModel.m */; };
 		C5FEC2CA1AA73A4B00EB3C30 /* tick.png in Resources */ = {isa = PBXBuildFile; fileRef = C5FEC2C91AA73A4B00EB3C30 /* tick.png */; };
 		C5FEC2CC1AA76EF700EB3C30 /* tick-black-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C5FEC2CB1AA76EF700EB3C30 /* tick-black-icon.png */; };
+		C5FEC2CE1AA793AB00EB3C30 /* cross-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C5FEC2CD1AA793AB00EB3C30 /* cross-icon.png */; };
 		F15576151A9FCFA200202CF6 /* testBilde.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F15576141A9FCFA200202CF6 /* testBilde.jpg */; };
 		F15576181A9FD05300202CF6 /* Feed2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F15576171A9FD05300202CF6 /* Feed2ViewController.m */; };
 		F155761B1A9FD1D800202CF6 /* Feed2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F155761A1A9FD1D800202CF6 /* Feed2TableViewCell.m */; };
@@ -122,6 +123,7 @@
 		C5DFD5801A920A1800F37803 /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModel.m; sourceTree = "<group>"; };
 		C5FEC2C91AA73A4B00EB3C30 /* tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tick.png; path = ../../../../Downloads/tick.png; sourceTree = "<group>"; };
 		C5FEC2CB1AA76EF700EB3C30 /* tick-black-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tick-black-icon.png"; path = "../../../../Downloads/tick-black-icon.png"; sourceTree = "<group>"; };
+		C5FEC2CD1AA793AB00EB3C30 /* cross-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cross-icon.png"; path = "../../../../Downloads/cross-icon.png"; sourceTree = "<group>"; };
 		F15576141A9FCFA200202CF6 /* testBilde.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testBilde.jpg; sourceTree = "<group>"; };
 		F15576161A9FD05300202CF6 /* Feed2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed2ViewController.h; sourceTree = "<group>"; };
 		F15576171A9FD05300202CF6 /* Feed2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feed2ViewController.m; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				F1A386B21A9E7E110084A8EF /* events-icon.png */,
 				F15576141A9FCFA200202CF6 /* testBilde.jpg */,
 				C5FEC2C91AA73A4B00EB3C30 /* tick.png */,
+				C5FEC2CD1AA793AB00EB3C30 /* cross-icon.png */,
 				F1A386B61A9E7E290084A8EF /* feed-icon.png */,
 				F1E0EB401AA68C5400EBBBD4 /* status-icon2.png */,
 				F1A386B41A9E7E1E0084A8EF /* profile-icon.png */,
@@ -423,6 +426,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1E0EB3F1AA67D3900EBBBD4 /* status-icon.png in Resources */,
+				C5FEC2CE1AA793AB00EB3C30 /* cross-icon.png in Resources */,
 				F1A386AF1A9E7DB20084A8EF /* miranda-kerr.jpg in Resources */,
 				F1A386B11A9E7DC10084A8EF /* christer-dahl.jpeg in Resources */,
 				C5FEC2CC1AA76EF700EB3C30 /* tick-black-icon.png in Resources */,

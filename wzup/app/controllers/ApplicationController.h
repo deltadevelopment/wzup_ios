@@ -21,6 +21,7 @@
     UILabel *loadingLabel;
     UIImageView *imageDone;
     SEL aSelector;
+    SEL imageUploaded;
     NSObject *currentObject;
 }
 
@@ -38,5 +39,6 @@
 -(void)puttHttpRequestWithImage:(NSData *) imageData token:(NSString *) token;
 
 -(BOOL)hasError;
+-(void)imageUploadDone;
 
 @end

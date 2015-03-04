@@ -35,11 +35,9 @@ NSString *key;
 }
 - (void)sendImageToServer:(NSData *)imageData {
     [self requestUpload];
-    NSLog(@"-----REQUESTED");
     [self uploadImage:imageData];
-    NSLog(@"-----S3");
-    [self SetStatusWithMedia];
-    NSLog(@"-----updated backend");
+    
+
 }
 
 
@@ -103,6 +101,9 @@ NSString *key;
     
     
 
+}
+-(void)imageUploadDone{
+    [self SetStatusWithMedia];
 }
 
 -(void)updateAvailability:(NSNumber *) availability{

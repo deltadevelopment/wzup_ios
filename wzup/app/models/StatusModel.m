@@ -28,7 +28,12 @@
 };
 
 -(void)downloadImage{
-    _media = [NSData dataWithContentsOfURL:[NSURL URLWithString:_media_url]];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        NSLog(@"Donwloading image with %@", _media_url);
+        _media = [NSData dataWithContentsOfURL:[NSURL URLWithString:_media_url]];
+        NSLog(@"image donwloaded");
+    });
+  
 }
 
 -(NSString*) getStatusId{
@@ -67,8 +72,11 @@
 }
 
 -(NSData*)getMedia{
-    if(_media == nil){
+    if(_media == nil && _media_url != nil){
        [self downloadImage];
+    }
+    else if(_media_url == nil){
+        return nil;
     }
     return _media;
 }
