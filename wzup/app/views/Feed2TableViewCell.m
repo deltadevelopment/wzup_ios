@@ -23,6 +23,11 @@
 
 -(void)attachUiToCell{
     NSLog(@"cropping");
+    self.editStatusTextField.borderStyle = UITextBorderStyleNone;
+    [self.editStatusTextField setBackgroundColor:[UIColor clearColor]];
+    self.editStatusTextField.hidden = YES;
+    self.tickImage.hidden = YES;
+    self.tickImage.alpha = 0.0;
    self.uploadImageIndicatorLabel.hidden = YES;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
    self.availabilityPicture.backgroundColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.443 alpha:1];

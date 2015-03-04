@@ -12,4 +12,5 @@
 -(NSMutableArray*)getFeed;
 - (void)sendImageToServer:(NSData *)imageData;
 -(void)setLoading:(UILabel *) label;
+-(void)updateStatus:(NSString *) status;
 @end

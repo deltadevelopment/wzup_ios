@@ -83,6 +83,28 @@ NSString *key;
     NSData *response2 = [self postHttpRequest:url json:jsonData];
 }
 
+-(void)updateStatus:(NSString *) status{
+    
+    NSDictionary *body = @{
+                                  @"status":@{
+                                          @"body" : status
+                                          }
+                                  };
+    //Create json body from dictionary
+    NSString *jsonData = [applicationHelper generateJsonFromDictionary:body];
+    //Create the request with the body
+    //NSMutableURLRequest *request =[self postHttpRequest:@"login"  json:jsonData];
+    NSString *url = [NSString stringWithFormat:@"user/%@/status", [authHelper getUserId]];
+    NSData *response = [self putHttpRequest:url  json:jsonData];
+    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    NSLog(@"%@",strdata);
+    //Parse login request
+    //NSMutableDictionary *dic = [parserHelper parse:response];
+    
+    
+
+}
+
 
 
 

@@ -94,8 +94,9 @@
     NSURL * serviceUrl = [NSURL URLWithString:[applicationHelper generateUrl:url]];
     NSMutableURLRequest * serviceRequest = [NSMutableURLRequest requestWithURL:serviceUrl];
     [serviceRequest setValue:@"application/json" forHTTPHeaderField:@"Content-type"];
+        [serviceRequest addValue:[authHelper getAuthToken] forHTTPHeaderField:@"X-AUTH-TOKEN"];
     [serviceRequest setHTTPMethod:@"PUT"];
-    [serviceRequest setHTTPBody:[data dataUsingEncoding:NSASCIIStringEncoding]];
+    [serviceRequest setHTTPBody:[data dataUsingEncoding:NSUTF8StringEncoding]];
     return [self getResp:serviceRequest];
 
 };

@@ -32,6 +32,7 @@ BOOL shouldExpand;
 CGRect screenBound;
 CGSize screenSize;
 CGFloat screenWidth;
+CGFloat screenHeight;
 CGFloat horizontalSpaceDefault;
 ApplicationHelper *applicationHelper;
 bool availabilityFadeHasStarted;
@@ -42,6 +43,8 @@ AVCaptureStillImageOutput * stillImageOutput;
 UIImage *imgTaken;
 AVCaptureSession *session;
 AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
+Feed2TableViewCell *currentCell;
+NSIndexPath *currentCellsIndexPath;
 - (void)viewDidLoad {
     
     authHelper = [[AuthHelper alloc] init];
@@ -51,6 +54,7 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
     screenBound = [[UIScreen mainScreen] bounds];
     screenSize = screenBound.size;
     screenWidth = screenSize.width;
+    screenHeight = screenSize.height;
     self.statusButton.layer.cornerRadius = 25;
     self.availabilityView.hidden = YES;
     self.availabilityView.backgroundColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.443 alpha:1];
@@ -227,6 +231,13 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
     
 }
 
+-(void)addCaption:(UITapGestureRecognizer *) sender{
+    NSLog(@"Adding capture");
+    
+    
+    
+}
+
 - (void)refresh:(UIRefreshControl *)refreshControl {
    
     [feed removeObjectAtIndex:0];
@@ -277,6 +288,15 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
         if([[status getUser] getId ] == [[authHelper getUserId] intValue]){
             [feedController setLoading:[cell uploadImageIndicatorLabel]];
             cell.statusLabel.text = @"Tap to add caption";
+            
+         
+            //Init tap gesture
+            UITapGestureRecognizer *tapGr;
+            tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addCaption:)];
+            tapGr.numberOfTapsRequired = 1;
+            [[cell bottomBar] addGestureRecognizer:tapGr];
+            
+            
             NSLog(@"------------auth: %@ model: %d", [authHelper getUserId ], [[status getUser] getId ]);
             if(imgTaken == nil && cameraIsShown){
                 shouldExpand = true;
@@ -317,10 +337,22 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
                         // session.stopRunning;
                         cell.profilePicture.image = [UIImage imageNamed:@"testBilde.jpg"];
                         cell.statusLabel.text = @"Tap to add caption";
-                        [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[self imageByScalingAndCroppingForSize:size img:imgTaken]]];
                         
+                        currentCell = cell;
+                        currentCellsIndexPath = indexPath;
+                        [currentCell editStatusTextField].text = @"";
+                        [currentCell editStatusTextField].hidden = NO;
+                        [currentCell editStatusTextField].delegate = self;
+                        [[currentCell editStatusTextField] addTarget:self
+                                                              action:@selector(textFieldDidChange:)
+                                                    forControlEvents:UIControlEventEditingChanged];
+                        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                                 selector:@selector(keyboardWillShow:)
+                                                                     name:UIKeyboardWillShowNotification
+                                                                   object:nil];
+                     
+                        [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[self imageByScalingAndCroppingForSize:size img:imgTaken]]];
                     }
-                    
                 }
                 [cell setNeedsLayout];
             });
@@ -336,6 +368,24 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
     return cell;
 }
 
+-(void)textFieldDidChange:(UITextField *) textField{
+    //[self showLoginButton];
+  
+    
+    
+}
+
+-(void)keyboardWillShow:(NSNotification *)note {
+    NSLog(@"tets");
+    [currentCell statusLabel].text = @"";
+    NSLog(@"here2");
+    shouldExpand = NO;
+    [_tableView beginUpdates];
+    
+    
+    [_tableView endUpdates];
+    
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
@@ -354,7 +404,78 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
     
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if(textField == [currentCell editStatusTextField]){
+        [[currentCell editStatusTextField] resignFirstResponder];
+        [self saveStatus];
+        return NO;
+    }
+ 
+    return YES;
+}
 
+-(void) saveStatus{
+    NSString *status = [currentCell editStatusTextField].text;
+    [currentCell editStatusTextField].hidden = YES;
+    [currentCell statusLabel].text = status;
+    [feedController updateStatus:status];
+   
+    //self.tickImage.hidden = YES;
+    //self.tickImage.alpha = 0.0;
+    
+    [UIView animateWithDuration:0.3f
+                          delay:0.5f
+                        options: UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         //swish out
+                         [currentCell tickImage].hidden = NO;
+                         [currentCell tickImage].alpha = 0.9;
+                        
+                     }
+                     completion:^(BOOL finished){
+                         [UIView animateWithDuration:0.2f
+                                               delay:0.7f
+                                             options: UIViewAnimationOptionCurveLinear
+                                          animations:^{
+                                              //swish out
+                                              CGRect frame = currentCell.frame;
+                                              //frame.origin.y -= frame.size.height;
+                                              //currentCell.frame = frame;
+                                              CGRect frame2 = _tableView.frame;
+                                              frame2.origin.y -= frame.size.height;
+                                              frame2.size.height += frame.size.height;
+                                              _tableView.frame = frame2;
+                                              
+                                              
+                                              
+                                          }
+                                          completion:^(BOOL finished){
+                                              [feed removeObjectAtIndex:0];
+                                              CGRect frame = currentCell.frame;
+                                              CGRect frame2 = _tableView.frame;
+                                              frame2.origin.y += frame.size.height;
+                                              frame2.size.height -= frame.size.height;
+                                              _tableView.frame = frame2;
+                                              [self.tableView reloadData];
+                                              [currentCell tickImage].hidden = YES;
+                                              [currentCell tickImage].alpha = 0.0;
+                                              currentCell = nil;
+                                              currentCellsIndexPath = nil;
+                                              
+                                          }];
+                         
+                     }];
+    
+
+    
+    
+    //[feed removeObjectAtIndex:0];
+    //[self.tableView reloadData];
+    //currentCell = nil;
+    //currentCellsIndexPath = nil;
+    //[_tableView reloadData];
+    NSLog(@"saving");
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath*)path
 // or it must be some other method
@@ -363,8 +484,11 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
     NSIndexPath *oldIndex = indexCurrent;
     
     indexCurrent = path;
-
-    if(indexCurrent == oldIndex){
+   
+    if(cameraIsShown){
+    
+    }
+    else if(indexCurrent == oldIndex){
         //indexCurrent = nil;
         if(shouldExpand){
             shouldExpand = false;
@@ -547,16 +671,9 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
                                      
                                  }];
             });
-            
         });
-       
-        
-        
     }
-   
-   
 }
-
 
 - (void) initializeCamera:(UIView *) cameraView {
     
@@ -653,13 +770,8 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
         
         if (imageSampleBuffer != NULL) {
             NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
-           
-            
-           
-            
-          
-           
-             imgTaken = [UIImage imageWithData:imageData];
+
+            imgTaken = [UIImage imageWithData:imageData];
             CGRect cropRect = CGRectMake(0 ,0 ,480 ,640);
             UIGraphicsBeginImageContextWithOptions(cropRect.size, self.view, 1.0f);
             [imgTaken drawInRect:cropRect];
