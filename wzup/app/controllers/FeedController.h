@@ -12,6 +12,9 @@
 -(NSMutableArray*)getFeed;
 - (void)sendImageToServer:(NSData *)imageData;
 -(void)setLoading:(UILabel *) label;
+-(void)setImageDone:(UIImageView *) image;
 -(void)updateStatus:(NSString *) status;
 -(void)updateAvailability:(NSNumber *) availability;
+-(void)setSelector: (SEL)theSelector withObject:(NSObject *) object;
+
 @end

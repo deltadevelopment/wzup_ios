@@ -46,8 +46,9 @@ AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
 Feed2TableViewCell *currentCell;
 NSIndexPath *currentCellsIndexPath;
 NSNumber *available;
+SEL littleSelector;
 - (void)viewDidLoad {
-    
+    littleSelector = @selector(imageIsUploaded);
     authHelper = [[AuthHelper alloc] init];
     self.availabilityView.alpha = 0.0;
     [super viewDidLoad];
@@ -88,6 +89,34 @@ NSNumber *available;
     
     
     
+}
+-(void)imageIsUploaded{
+    NSLog(@"METHOD HERE");
+    
+    [UIView animateWithDuration:0.3f
+                          delay:0.0f
+                        options: UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         //swish out
+                         [currentCell tickImage].hidden = NO;
+                         [currentCell tickImage].alpha = 0.9;
+                         
+                     }
+                     completion:^(BOOL finished){
+                         [UIView animateWithDuration:0.3f
+                                               delay:0.5f
+                                             options: UIViewAnimationOptionCurveLinear
+                                          animations:^{
+                                              //[currentCell tickImage].hidden = NO;
+                                              [currentCell tickImage].alpha = 0.0;
+                                              
+                                          }
+                                          completion:^(BOOL finished){
+                                              shouldExpand = NO;
+                                              [_tableView beginUpdates];
+                                              [_tableView endUpdates];
+                                          }];
+                     }];
 }
 
 -(void)fadeInAvailabilityView{
@@ -292,6 +321,10 @@ NSNumber *available;
         cell.nameLabel.text = [[status getUser] getUsername];
         if([[status getUser] getId ] == [[authHelper getUserId] intValue]){
             [feedController setLoading:[cell uploadImageIndicatorLabel]];
+            [feedController setImageDone:[cell tickImage]];
+            [feedController setSelector:littleSelector withObject:self];
+            
+            
             cell.statusLabel.text = @"Tap to add caption";
             
          
@@ -375,7 +408,16 @@ NSNumber *available;
 
 -(void)textFieldDidChange:(UITextField *) textField{
     //[self showLoginButton];
-  
+    if(textField.text.length > 39){
+    
+    }
+    NSLog(@"%lu", (unsigned long)textField.text.length);
+    
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        return (newLength > 40) ? NO : YES;
     
     
 }
@@ -433,43 +475,26 @@ NSNumber *available;
                         options: UIViewAnimationOptionCurveLinear
                      animations:^{
                          //swish out
-                         [currentCell tickImage].hidden = NO;
-                         [currentCell tickImage].alpha = 0.9;
+                         [currentCell captionTick].hidden = NO;
+                         [currentCell captionTick].alpha = 0.5;
                         
                      }
                      completion:^(BOOL finished){
-                         [UIView animateWithDuration:0.2f
-                                               delay:0.7f
+                         [UIView animateWithDuration:0.3f
+                                               delay:0.5f
                                              options: UIViewAnimationOptionCurveLinear
                                           animations:^{
                                               //swish out
-                                              CGRect frame = currentCell.frame;
-                                              //frame.origin.y -= frame.size.height;
-                                              //currentCell.frame = frame;
-                                              CGRect frame2 = _tableView.frame;
-                                              frame2.origin.y -= frame.size.height;
-                                              frame2.size.height += frame.size.height;
-                                              _tableView.frame = frame2;
+                                              [currentCell captionTick].alpha = 0.0;
+                                              
                                           }
                                           completion:^(BOOL finished){
-                                              [feed removeObjectAtIndex:0];
-                                              CGRect frame = currentCell.frame;
-                                              CGRect frame2 = _tableView.frame;
-                                              frame2.origin.y += frame.size.height;
-                                              frame2.size.height -= frame.size.height;
-                                              _tableView.frame = frame2;
-                                              [self.tableView reloadData];
-                                              [currentCell tickImage].hidden = YES;
-                                              [currentCell tickImage].alpha = 0.0;
-                                              currentCell = nil;
-                                              currentCellsIndexPath = nil;
+                                              //currentCell = nil;
+                                              //currentCellsIndexPath = nil;
+                                              
                                           }];
                          
                      }];
-    
-
-    
-    
     //[feed removeObjectAtIndex:0];
     //[self.tableView reloadData];
     //currentCell = nil;

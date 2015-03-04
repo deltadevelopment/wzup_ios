@@ -18,4 +18,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusText;
 - (IBAction)addStatus:(id)sender;
 
+-(void)imageIsUploaded;
 @end

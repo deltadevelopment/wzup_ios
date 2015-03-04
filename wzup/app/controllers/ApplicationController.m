@@ -10,6 +10,7 @@
 #import "ApplicationHelper.h"
 #import "AuthHelper.h"
 #import "ParserHelper.h"
+#import "Feed2ViewController.h"
 
 @implementation ApplicationController
 @synthesize authHelper, parserHelper, applicationHelper;
@@ -124,7 +125,7 @@
     
     [connection2 scheduleInRunLoop:[NSRunLoop mainRunLoop]
                           forMode:NSDefaultRunLoopMode];
-    
+   
     [connection2 start];
         if (connection2) {
             NSLog(@"connection---");
@@ -152,6 +153,9 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
     }
     if(percentageDownloaded == 100){
         loadingLabel.hidden = YES;
+        [currentObject performSelector:aSelector];
+        NSLog(@"selector her ---");
+        
     }
     //NSLog(@"Skrevet %ld av totalt %ld percentage %d", (long)totalBytesWritten, (long)totalBytesExpectedToWrite, percentageDownloaded);
 }

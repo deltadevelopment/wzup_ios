@@ -19,6 +19,9 @@
     BOOL isErrors;
     NSURLConnection *connection;
     UILabel *loadingLabel;
+    UIImageView *imageDone;
+    SEL aSelector;
+    NSObject *currentObject;
 }
 
 @property AuthHelper *authHelper;

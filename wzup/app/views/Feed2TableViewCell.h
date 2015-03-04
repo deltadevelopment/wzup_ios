@@ -27,5 +27,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *uploadImageIndicatorLabel;
 @property (weak, nonatomic) IBOutlet UITextField *editStatusTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *tickImage;
+@property (weak, nonatomic) IBOutlet UIImageView *captionTick;
 
 @end

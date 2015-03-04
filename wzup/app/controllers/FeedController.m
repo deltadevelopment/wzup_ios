@@ -123,6 +123,15 @@ NSString *key;
 
 }
 
+-(void)setImageDone:(UIImageView *) image{
+    imageDone = image;
+}
+
+-(void)setSelector: (SEL)theSelector withObject:(NSObject *) object{
+    aSelector = theSelector;
+    currentObject = object;
+    NSLog(@"selector sat");
+}
 
 
 
