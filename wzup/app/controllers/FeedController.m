@@ -97,11 +97,29 @@ NSString *key;
     NSString *url = [NSString stringWithFormat:@"user/%@/status", [authHelper getUserId]];
     NSData *response = [self putHttpRequest:url  json:jsonData];
     NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
-    NSLog(@"%@",strdata);
+   // NSLog(@"%@",strdata);
     //Parse login request
     //NSMutableDictionary *dic = [parserHelper parse:response];
     
     
+
+}
+
+-(void)updateAvailability:(NSNumber *) availability{
+    
+    NSDictionary *body = @{
+                           @"user":@{
+                                   @"availability" : availability
+                                   }
+                           };
+    //Create json body from dictionary
+    NSString *jsonData = [applicationHelper generateJsonFromDictionary:body];
+    //Create the request with the body
+    //NSMutableURLRequest *request =[self postHttpRequest:@"login"  json:jsonData];
+    NSString *url = [NSString stringWithFormat:@"user/%@", [authHelper getUserId]];
+    NSData *response = [self putHttpRequest:url  json:jsonData];
+    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    NSLog(@"%@",strdata);
 
 }
 

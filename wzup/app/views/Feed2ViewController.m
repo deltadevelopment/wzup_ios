@@ -45,6 +45,7 @@ AVCaptureSession *session;
 AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
 Feed2TableViewCell *currentCell;
 NSIndexPath *currentCellsIndexPath;
+NSNumber *available;
 - (void)viewDidLoad {
     
     authHelper = [[AuthHelper alloc] init];
@@ -151,11 +152,14 @@ NSIndexPath *currentCellsIndexPath;
         //NSLog(@"gesture point %f",  translation.x);
         if(newX > 150){
             //Change availability
+            available = [NSNumber numberWithInt:1];
             self.availabilityView.backgroundColor = [UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1];
             _statusText.text = unAvailableText;
-        }else{
-            //Change availability
             
+            
+        }else{
+            //Change availability to available
+            available = [NSNumber numberWithInt:0];
             _statusText.text = availableText;
             self.availabilityView.backgroundColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.443 alpha:1];
         }
@@ -190,6 +194,7 @@ NSIndexPath *currentCellsIndexPath;
             [self fadeOutStatusButton];
             //_statusButton.alpha= 0;
             [self fadeOutAvailabilityView];
+            [feedController updateAvailability:available];
         }
         else{
             [gesture setTranslation:CGPointZero inView:label];
@@ -445,9 +450,6 @@ NSIndexPath *currentCellsIndexPath;
                                               frame2.origin.y -= frame.size.height;
                                               frame2.size.height += frame.size.height;
                                               _tableView.frame = frame2;
-                                              
-                                              
-                                              
                                           }
                                           completion:^(BOOL finished){
                                               [feed removeObjectAtIndex:0];
@@ -461,7 +463,6 @@ NSIndexPath *currentCellsIndexPath;
                                               [currentCell tickImage].alpha = 0.0;
                                               currentCell = nil;
                                               currentCellsIndexPath = nil;
-                                              
                                           }];
                          
                      }];

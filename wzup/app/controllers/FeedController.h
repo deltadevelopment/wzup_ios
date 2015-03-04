@@ -13,4 +13,5 @@
 - (void)sendImageToServer:(NSData *)imageData;
 -(void)setLoading:(UILabel *) label;
 -(void)updateStatus:(NSString *) status;
+-(void)updateAvailability:(NSNumber *) availability;
 @end
