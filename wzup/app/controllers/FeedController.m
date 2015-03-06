@@ -134,6 +134,18 @@ NSString *key;
     NSLog(@"selector sat");
 }
 
+-(UserModel*)getUser{
+    NSString *url = [NSString stringWithFormat:@"user/%@", [authHelper getUserId]];
+    NSData *response = [self getHttpRequest:url];
+    //NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    NSMutableDictionary *dic = [parserHelper parse:response];
+    UserModel *user = [[UserModel alloc] init];
+    [user build:dic[@"user"]];
+    return user;
+    //NSLog(strdata);
+
+}
+
 
 
 

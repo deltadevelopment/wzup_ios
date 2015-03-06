@@ -49,7 +49,7 @@ UIView *top;
     
     [navButton setFrame:CGRectMake(xPos, 0, 30, 30)];
     return navButton;
-}
+}	
 
 - (UIImage *)resizeImage:(UIImage*)image newSize:(CGSize)newSize {
     CGRect newRect = CGRectIntegral(CGRectMake(0, 0, newSize.width, newSize.height));

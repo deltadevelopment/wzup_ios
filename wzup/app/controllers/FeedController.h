@@ -7,6 +7,7 @@
 //
 
 #import "ApplicationController.h"
+#import "UserModel.h"
 
 @interface FeedController : ApplicationController<NSURLConnectionDataDelegate>
 -(NSMutableArray*)getFeed;
@@ -16,5 +17,6 @@
 -(void)updateStatus:(NSString *) status;
 -(void)updateAvailability:(NSNumber *) availability;
 -(void)setSelector: (SEL)theSelector withObject:(NSObject *) object;
+-(UserModel*)getUser;
 
 @end

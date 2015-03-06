@@ -683,10 +683,9 @@ SEL littleSelector;
          if([[tempStatus getUser] getId ] == [[authHelper getUserId] intValue]){
          
          }else{
+            UserModel* user = [feedController getUser];
+            // NSLog(@"Username is: %@", [test getUsername]);
              StatusModel *status = [[StatusModel alloc] init];
-             UserModel *user = [[UserModel alloc] init];
-             [user setUsername:@"simenlie"];
-             [user setId:[[authHelper getUserId] intValue]];
              [status setUser:user];
              
              [feed insertObject:status atIndex:0];
