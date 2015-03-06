@@ -1,36 +1,32 @@
 //
-//  ProfileViewController.m
+//  ProfileNavigationViewController.m
 //  wzup
 //
-//  Created by Simen Lie on 26/02/15.
+//  Created by Simen Lie on 06/03/15.
 //  Copyright (c) 2015 ddev. All rights reserved.
 //
 
-#import "ProfileViewController.h"
+#import "ProfileNavigationViewController.h"
 
-@interface ProfileViewController ()
+@interface ProfileNavigationViewController ()
 
 @end
 
-@implementation ProfileViewController
+@implementation ProfileNavigationViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self showTopBar];
     // Do any additional setup after loading the view.
-}
-
--(void)setProfile:(NSString* ) profilename{
-    NSLog(@"profilename is %@", profilename);
-    _testLabel.text = profilename;
-    [_testLabel setNeedsDisplay];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 /*
 #pragma mark - Navigation
 

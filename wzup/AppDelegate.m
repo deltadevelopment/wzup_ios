@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "FeedViewController.h"
+#import "Feed2ViewController.h"
 #import "StartViewController.h"
 #import "AuthHelper.h"
 @interface AppDelegate ()
@@ -24,7 +24,7 @@
     if([authHelper getAuthToken] == nil){
         [self setView:[[StartViewController alloc] init] second:@"startNav"];
     }else{
-        [self setView:[[FeedViewController alloc] init] second:@"feed2"];
+        [self setView:[[Feed2ViewController alloc] init] second:@"feed2"];
     }
     return YES;
 }
@@ -35,8 +35,6 @@
     controller = (UIViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:controllerString];
     [self.window makeKeyAndVisible];
     [self.window.rootViewController presentViewController:controller animated:NO completion:NULL];
-     
-
 }
 - (void)showLoginView
 {

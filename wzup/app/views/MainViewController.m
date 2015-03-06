@@ -7,6 +7,8 @@
 //
 
 #import "MainViewController.h"
+#import "ProfileViewController.h"
+#import "Feed2ViewController.h"
 
 @interface MainViewController ()
 
@@ -25,12 +27,46 @@ UIView *top;
     UIButton *leftButton = [self createButton:@"feed-icon.png" x:center-80];
     UIButton *middleButton = [self createButton:@"events-icon.png" x:center];
     UIButton *rightButton = [self createButton:@"profile-icon.png" x:center + 80];
+    [rightButton addTarget:self
+                    action:@selector(showProfile)
+          forControlEvents:UIControlEventTouchUpInside];
+    [leftButton addTarget:self
+                   action:@selector(showFeed)
+         forControlEvents:UIControlEventTouchUpInside];
     
     [top addSubview:leftButton];
     [top addSubview:middleButton];
     [top addSubview:rightButton];
     self.navigationItem.titleView = top;
+    //self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+
     // Do any additional setup after loading the view.
+}
+
+-(void)showTopBar{
+  
+}
+-(void)hideTopBar{
+
+}
+
+-(void)showProfile{
+[self setView:[[ProfileViewController alloc] init] second:@"profileNav"];
+}
+
+-(void)showFeed{
+ [self setView:[[Feed2ViewController alloc] init] second:@"feed2"];
+}
+
+-(void)setView:(UIViewController *)controller second:(NSString *) controllerString{
+    //self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    controller = (UIViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:controllerString];
+    //[self.window makeKeyAndVisible];
+    [self.navigationController presentViewController:controller animated:NO completion:NULL];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

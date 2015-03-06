@@ -52,6 +52,7 @@ SEL littleSelector;
     authHelper = [[AuthHelper alloc] init];
     self.availabilityView.alpha = 0.0;
     [super viewDidLoad];
+    [self showTopBar];
     horizontalSpaceDefault = self.statusButtonHorizontalSpace.constant;
     screenBound = [[UIScreen mainScreen] bounds];
     screenSize = screenBound.size;
@@ -267,7 +268,7 @@ SEL littleSelector;
         
         // any setup code for *vc
         
-        [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController pushViewController:vc animated:NO];
         // do any setup you need for myNewVC
     }
 

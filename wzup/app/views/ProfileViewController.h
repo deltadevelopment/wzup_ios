@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ProfileViewController : UIViewController
+#import "MainViewController.h"
+@interface ProfileViewController : MainViewController
 @property (weak, nonatomic) IBOutlet UILabel *testLabel;
 -(void)setProfile:(NSString* ) profilename;
 @end

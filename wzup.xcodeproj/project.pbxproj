@@ -38,6 +38,7 @@
 		C5FEC2CA1AA73A4B00EB3C30 /* tick.png in Resources */ = {isa = PBXBuildFile; fileRef = C5FEC2C91AA73A4B00EB3C30 /* tick.png */; };
 		C5FEC2CC1AA76EF700EB3C30 /* tick-black-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C5FEC2CB1AA76EF700EB3C30 /* tick-black-icon.png */; };
 		C5FEC2CE1AA793AB00EB3C30 /* cross-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C5FEC2CD1AA793AB00EB3C30 /* cross-icon.png */; };
+		C5FEC2D11AA9FAA700EB3C30 /* ProfileNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FEC2D01AA9FAA700EB3C30 /* ProfileNavigationViewController.m */; };
 		F15576151A9FCFA200202CF6 /* testBilde.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F15576141A9FCFA200202CF6 /* testBilde.jpg */; };
 		F15576181A9FD05300202CF6 /* Feed2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F15576171A9FD05300202CF6 /* Feed2ViewController.m */; };
 		F155761B1A9FD1D800202CF6 /* Feed2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F155761A1A9FD1D800202CF6 /* Feed2TableViewCell.m */; };
@@ -124,6 +125,8 @@
 		C5FEC2C91AA73A4B00EB3C30 /* tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tick.png; path = ../../../../Downloads/tick.png; sourceTree = "<group>"; };
 		C5FEC2CB1AA76EF700EB3C30 /* tick-black-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tick-black-icon.png"; path = "../../../../Downloads/tick-black-icon.png"; sourceTree = "<group>"; };
 		C5FEC2CD1AA793AB00EB3C30 /* cross-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cross-icon.png"; path = "../../../../Downloads/cross-icon.png"; sourceTree = "<group>"; };
+		C5FEC2CF1AA9FAA700EB3C30 /* ProfileNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileNavigationViewController.h; sourceTree = "<group>"; };
+		C5FEC2D01AA9FAA700EB3C30 /* ProfileNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileNavigationViewController.m; sourceTree = "<group>"; };
 		F15576141A9FCFA200202CF6 /* testBilde.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testBilde.jpg; sourceTree = "<group>"; };
 		F15576161A9FD05300202CF6 /* Feed2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed2ViewController.h; sourceTree = "<group>"; };
 		F15576171A9FD05300202CF6 /* Feed2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feed2ViewController.m; sourceTree = "<group>"; };
@@ -320,6 +323,8 @@
 				F15576201A9FEEBB00202CF6 /* MainViewController.m */,
 				F15576221A9FEFDD00202CF6 /* FeedNavigationViewController.h */,
 				F15576231A9FEFDD00202CF6 /* FeedNavigationViewController.m */,
+				C5FEC2CF1AA9FAA700EB3C30 /* ProfileNavigationViewController.h */,
+				C5FEC2D01AA9FAA700EB3C30 /* ProfileNavigationViewController.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -472,6 +477,7 @@
 				C590CFE81A937FFC003432D7 /* ParserHelper.m in Sources */,
 				F15576211A9FEEBB00202CF6 /* MainViewController.m in Sources */,
 				C590CFF61A977886003432D7 /* RegisterViewController.m in Sources */,
+				C5FEC2D11AA9FAA700EB3C30 /* ProfileNavigationViewController.m in Sources */,
 				C590D0371A9B4075003432D7 /* NavigationViewController.m in Sources */,
 				C590CFE91A937FFC003432D7 /* SSKeychain.m in Sources */,
 				F155761B1A9FD1D800202CF6 /* Feed2TableViewCell.m in Sources */,
