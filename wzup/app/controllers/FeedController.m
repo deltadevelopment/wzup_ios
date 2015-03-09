@@ -53,7 +53,6 @@ NSString *key;
 
 -(void)setLoading:(UILabel *) label{
     loadingLabel = label;
-
 }
 
 -(void)uploadImage:(NSData *) imageData{

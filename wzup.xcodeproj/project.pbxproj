@@ -39,6 +39,8 @@
 		C5FEC2CC1AA76EF700EB3C30 /* tick-black-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C5FEC2CB1AA76EF700EB3C30 /* tick-black-icon.png */; };
 		C5FEC2CE1AA793AB00EB3C30 /* cross-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C5FEC2CD1AA793AB00EB3C30 /* cross-icon.png */; };
 		C5FEC2D11AA9FAA700EB3C30 /* ProfileNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FEC2D01AA9FAA700EB3C30 /* ProfileNavigationViewController.m */; };
+		C5FEC2D41AADAB0B00EB3C30 /* ProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FEC2D31AADAB0B00EB3C30 /* ProfileController.m */; };
+		C5FEC2D61AADD83800EB3C30 /* settings-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C5FEC2D51AADD83800EB3C30 /* settings-icon.png */; };
 		F15576151A9FCFA200202CF6 /* testBilde.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F15576141A9FCFA200202CF6 /* testBilde.jpg */; };
 		F15576181A9FD05300202CF6 /* Feed2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F15576171A9FD05300202CF6 /* Feed2ViewController.m */; };
 		F155761B1A9FD1D800202CF6 /* Feed2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F155761A1A9FD1D800202CF6 /* Feed2TableViewCell.m */; };
@@ -127,6 +129,9 @@
 		C5FEC2CD1AA793AB00EB3C30 /* cross-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cross-icon.png"; path = "../../../../Downloads/cross-icon.png"; sourceTree = "<group>"; };
 		C5FEC2CF1AA9FAA700EB3C30 /* ProfileNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileNavigationViewController.h; sourceTree = "<group>"; };
 		C5FEC2D01AA9FAA700EB3C30 /* ProfileNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileNavigationViewController.m; sourceTree = "<group>"; };
+		C5FEC2D21AADAB0B00EB3C30 /* ProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileController.h; sourceTree = "<group>"; };
+		C5FEC2D31AADAB0B00EB3C30 /* ProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileController.m; sourceTree = "<group>"; };
+		C5FEC2D51AADD83800EB3C30 /* settings-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings-icon.png"; path = "../../../../Downloads/settings-icon.png"; sourceTree = "<group>"; };
 		F15576141A9FCFA200202CF6 /* testBilde.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testBilde.jpg; sourceTree = "<group>"; };
 		F15576161A9FD05300202CF6 /* Feed2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed2ViewController.h; sourceTree = "<group>"; };
 		F15576171A9FD05300202CF6 /* Feed2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feed2ViewController.m; sourceTree = "<group>"; };
@@ -257,6 +262,8 @@
 				C590CFFB1A97905C003432D7 /* RegisterController.m */,
 				C55BD4E31A9C967E0061327D /* FeedController.h */,
 				C55BD4E41A9C967E0061327D /* FeedController.m */,
+				C5FEC2D21AADAB0B00EB3C30 /* ProfileController.h */,
+				C5FEC2D31AADAB0B00EB3C30 /* ProfileController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -337,6 +344,7 @@
 				C5FEC2CB1AA76EF700EB3C30 /* tick-black-icon.png */,
 				F1A386B21A9E7E110084A8EF /* events-icon.png */,
 				F15576141A9FCFA200202CF6 /* testBilde.jpg */,
+				C5FEC2D51AADD83800EB3C30 /* settings-icon.png */,
 				C5FEC2C91AA73A4B00EB3C30 /* tick.png */,
 				C5FEC2CD1AA793AB00EB3C30 /* cross-icon.png */,
 				F1A386B61A9E7E290084A8EF /* feed-icon.png */,
@@ -441,6 +449,7 @@
 				C506389F1A91E18C00F39D63 /* LaunchScreen.xib in Resources */,
 				F1A386B51A9E7E1E0084A8EF /* profile-icon.png in Resources */,
 				F15576151A9FCFA200202CF6 /* testBilde.jpg in Resources */,
+				C5FEC2D61AADD83800EB3C30 /* settings-icon.png in Resources */,
 				F1A386B31A9E7E110084A8EF /* events-icon.png in Resources */,
 				F1A386AA1A9BD3260084A8EF /* wz-monkey-bg.jpg in Resources */,
 				C506389C1A91E18C00F39D63 /* Images.xcassets in Resources */,
@@ -492,6 +501,7 @@
 				C590CFFC1A97905C003432D7 /* RegisterController.m in Sources */,
 				C590D0481A9C7D70003432D7 /* Navigation2ViewController.m in Sources */,
 				C5DFD5811A920A1800F37803 /* LoginModel.m in Sources */,
+				C5FEC2D41AADAB0B00EB3C30 /* ProfileController.m in Sources */,
 				C590CFF31A94FC0D003432D7 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -617,6 +627,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = wzup/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -630,6 +641,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = wzup/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

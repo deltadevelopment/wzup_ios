@@ -263,12 +263,12 @@ SEL littleSelector;
         
         ProfileViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"profile"];
         StatusModel *statusmodel = [feed objectAtIndex:tapIndexPath.row];
-        [vc setProfile:[statusmodel getBody]];
+        [vc setProfile:statusmodel];
         // OR myViewController *vc = [[myViewController alloc] init];
         
         // any setup code for *vc
         
-        [self.navigationController pushViewController:vc animated:NO];
+        [self.navigationController pushViewController:vc animated:YES];
         // do any setup you need for myNewVC
     }
 
@@ -329,7 +329,7 @@ SEL littleSelector;
         StatusModel *status = [feed objectAtIndex:indexPath.row];
         cell.statusLabel.text = [status getBody];
        
-        cell.nameLabel.text = [[status getUser] getUsername];
+        cell.nameLabel.text = [[status getUser] getDisplayName];
         if([[status getUser] getId ] == [[authHelper getUserId] intValue]){
             [feedController setLoading:[cell uploadImageIndicatorLabel]];
             [feedController setImageDone:[cell tickImage]];
@@ -430,7 +430,7 @@ SEL littleSelector;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
         NSUInteger newLength = [textField.text length] + [string length] - range.length;
-        return (newLength > 40) ? NO : YES;
+        return (newLength > 65) ? NO : YES;
     
     
 }

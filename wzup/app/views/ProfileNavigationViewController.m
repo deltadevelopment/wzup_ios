@@ -7,6 +7,7 @@
 //
 
 #import "ProfileNavigationViewController.h"
+#import "ProfileViewController.h"
 
 @interface ProfileNavigationViewController ()
 
@@ -17,6 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    ProfileViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"profile"];
+    [vc setOwnProfile:YES];
 }
 
 - (void)didReceiveMemoryWarning {

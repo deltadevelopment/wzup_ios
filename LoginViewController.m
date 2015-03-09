@@ -20,6 +20,14 @@
 LoginController* loginController;
 
 - (void)viewDidLoad {
+    
+    NSLog([[UIDevice currentDevice] name]);
+    NSString *name = [[UIDevice currentDevice] name];
+    if(![name isEqualToString:@"Simen sin iPhone"]){
+        self.usernameTextField.text = @"christiandalsvaag";
+        self.passwordTextField.text = @"christiandalsvaag";
+    }
+    
     verticalSpaceConstraintButton = self.verticalSpaceConstraint;
     [self addLine:self.usernameTextField];
     [self addLine:self.passwordTextField];

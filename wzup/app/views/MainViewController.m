@@ -39,7 +39,8 @@ UIView *top;
     [top addSubview:rightButton];
     self.navigationItem.titleView = top;
     //self.navigationItem.leftBarButtonItem = nil;
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain
+                                                                            target:nil action:nil];
 
     // Do any additional setup after loading the view.
 }
@@ -52,11 +53,11 @@ UIView *top;
 }
 
 -(void)showProfile{
-[self setView:[[ProfileViewController alloc] init] second:@"profileNav"];
+    [self setView:[[ProfileViewController alloc] init] second:@"profileNav"];
 }
 
 -(void)showFeed{
- [self setView:[[Feed2ViewController alloc] init] second:@"feed2"];
+    [self setView:[[Feed2ViewController alloc] init] second:@"feed2"];
 }
 
 -(void)setView:(UIViewController *)controller second:(NSString *) controllerString{
@@ -112,6 +113,83 @@ UIView *top;
     return newImage;
 }
 
+- (UIImage*)imageByScalingAndCroppingForSize:(CGSize)targetSize img:(UIImage *) sourceImage
+{
+    NSLog(@"----SCALING IMAGE");
+    // NSLog(@"THE size is width: %f height: %f", targetSize.width, targetSize.height);
+    UIImage *newImage = nil;
+    CGSize imageSize = sourceImage.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    CGFloat targetWidth = targetSize.width;
+    CGFloat targetHeight = targetSize.height;
+    CGFloat scaleFactor = 0.0;
+    CGFloat scaledWidth = targetWidth;
+    CGFloat scaledHeight = targetHeight;
+    CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
+    
+    if (CGSizeEqualToSize(imageSize, targetSize) == NO)
+    {
+        CGFloat widthFactor = targetWidth / width;
+        CGFloat heightFactor = targetHeight / height;
+        
+        
+        //NSLog(@"fit height %f", targetSize.width);
+        scaleFactor = widthFactor; // scale to fit height
+        
+        
+        
+        
+        scaledWidth  = width * scaleFactor;
+        scaledHeight = height * scaleFactor;
+        
+        // center the image
+        if (widthFactor > heightFactor)
+        {
+            thumbnailPoint.y = 0;
+        }
+        else
+        {
+            if (widthFactor < heightFactor)
+            {
+                thumbnailPoint.x = 0;
+            }
+        }
+    }
+    
+    UIGraphicsBeginImageContext(targetSize); // this will crop
+    
+    CGRect thumbnailRect = CGRectZero;
+    thumbnailRect.origin = thumbnailPoint;
+    thumbnailRect.size.width  = scaledWidth;
+    thumbnailRect.size.height = scaledHeight;
+    
+    [sourceImage drawInRect:thumbnailRect];
+    
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    if(newImage == nil)
+    {
+        NSLog(@"could not scale image");
+    }
+    
+    //pop the context to get back to the default
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+-(CGSize)getSize{
+    CGRect screenBound = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = screenBound.size;
+    CGFloat screenWidth = screenSize.width;
+    CGSize size = CGSizeMake(screenWidth, 500);
+    return size;
+}
+
+-(UIImage*)getCroppedImage:(UIImage*)sourceImage{
+    return [self imageByScalingAndCroppingForSize:[self getSize] img:sourceImage];
+}
 /*
 #pragma mark - Navigation
 

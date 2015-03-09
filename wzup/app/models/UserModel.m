@@ -29,7 +29,14 @@
 -(NSString*) getUsername{return _username;};
 -(NSString*) getEmail{return _email;};
 -(id) getPhoneNumber{return _phone_number;};
--(NSString*) getDisplayName{return _display_name;};
+-(NSString*) getDisplayName{
+    if((NSNull*)_display_name == [NSNull null]){
+        return [NSString stringWithFormat:@"@%@",_username];
+    }
+    
+    return _display_name;
+
+};
 -(int) getAvailability{return _availability;};
 -(NSDate*) getCreatedAt{return _created_at;};
 -(NSDate*) getUpdatedAt{return _updated_at;};

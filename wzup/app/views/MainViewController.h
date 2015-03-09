@@ -10,4 +10,7 @@
 
 @interface MainViewController : UIViewController
 -(void)showTopBar;
+-(CGSize)getSize;
+- (UIImage*)imageByScalingAndCroppingForSize:(CGSize)targetSize img:(UIImage *) sourceImage;
+-(UIImage*)getCroppedImage:(UIImage*)sourceImage;
 @end
