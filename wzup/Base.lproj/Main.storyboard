@@ -641,8 +641,7 @@
                                         <exclude reference="om3-8G-cCW"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="600" y="64" width="400" height="736"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="vtR-2S-Q3T"/>
                                     </mask>
@@ -828,8 +827,7 @@
                                                                 <exclude reference="tDT-Tl-MFJ"/>
                                                             </mask>
                                                         </variation>
-                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                            <rect key="frame" x="8" y="9" width="50" height="51"/>
+                                                        <variation key="heightClass=regular-widthClass=compact">
                                                             <mask key="constraints">
                                                                 <include reference="7Ct-AL-yVu"/>
                                                                 <include reference="tDT-Tl-MFJ"/>
@@ -877,8 +875,7 @@
                                                                 <exclude reference="pph-iL-eMe"/>
                                                             </mask>
                                                         </variation>
-                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                            <rect key="frame" x="364" y="24" width="20" height="20"/>
+                                                        <variation key="heightClass=regular-widthClass=compact">
                                                             <mask key="constraints">
                                                                 <include reference="ZGX-JP-OIC"/>
                                                                 <include reference="pph-iL-eMe"/>
@@ -902,8 +899,7 @@
                                                                 <exclude reference="eiX-uh-ooR"/>
                                                             </mask>
                                                         </variation>
-                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                            <rect key="frame" x="313" y="28" width="11" height="11"/>
+                                                        <variation key="heightClass=regular-widthClass=compact">
                                                             <mask key="constraints">
                                                                 <include reference="Axu-Cq-14f"/>
                                                                 <include reference="eiX-uh-ooR"/>
@@ -942,18 +938,18 @@
                                                     </mask>
                                                     <mask key="constraints">
                                                         <exclude reference="Zvx-VE-J8f"/>
-                                                        <exclude reference="f6E-Qk-fRO"/>
-                                                        <exclude reference="gRh-mR-oKw"/>
                                                         <exclude reference="mEy-JG-rZw"/>
                                                         <exclude reference="wXi-CL-rFd"/>
-                                                        <exclude reference="BTb-Kx-6tb"/>
-                                                        <exclude reference="q7P-Rm-ALJ"/>
                                                         <exclude reference="A4o-ex-fgT"/>
                                                         <exclude reference="H1U-8g-VYd"/>
                                                         <exclude reference="PZa-So-PCr"/>
                                                         <exclude reference="QmH-h8-m0f"/>
                                                         <exclude reference="gUc-rN-aPg"/>
                                                         <exclude reference="gih-Q1-vpW"/>
+                                                        <exclude reference="f6E-Qk-fRO"/>
+                                                        <exclude reference="gRh-mR-oKw"/>
+                                                        <exclude reference="BTb-Kx-6tb"/>
+                                                        <exclude reference="q7P-Rm-ALJ"/>
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=compact">
@@ -965,18 +961,18 @@
                                                     </mask>
                                                     <mask key="constraints">
                                                         <include reference="Zvx-VE-J8f"/>
-                                                        <include reference="f6E-Qk-fRO"/>
-                                                        <include reference="gRh-mR-oKw"/>
                                                         <include reference="mEy-JG-rZw"/>
                                                         <include reference="wXi-CL-rFd"/>
-                                                        <include reference="BTb-Kx-6tb"/>
-                                                        <include reference="q7P-Rm-ALJ"/>
                                                         <include reference="A4o-ex-fgT"/>
                                                         <include reference="H1U-8g-VYd"/>
                                                         <exclude reference="PZa-So-PCr"/>
                                                         <include reference="QmH-h8-m0f"/>
                                                         <exclude reference="gUc-rN-aPg"/>
                                                         <exclude reference="gih-Q1-vpW"/>
+                                                        <include reference="f6E-Qk-fRO"/>
+                                                        <include reference="gRh-mR-oKw"/>
+                                                        <include reference="BTb-Kx-6tb"/>
+                                                        <include reference="q7P-Rm-ALJ"/>
                                                     </mask>
                                                 </variation>
                                             </view>
@@ -1097,18 +1093,12 @@
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
-                                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                    <rect key="frame" x="24" y="8" width="42" height="21"/>
-                                                                </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fHV-rp-XcT">
                                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
-                                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                    <rect key="frame" x="24" y="37" width="42" height="21"/>
-                                                                </variation>
                                                             </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1130,23 +1120,22 @@
                                                                 <exclude reference="fHV-rp-XcT"/>
                                                             </mask>
                                                             <mask key="constraints">
+                                                                <exclude reference="JZf-hD-8GY"/>
                                                                 <exclude reference="Dn7-GE-ygX"/>
                                                                 <exclude reference="HBp-y1-2pk"/>
                                                                 <exclude reference="M0k-oI-PPH"/>
-                                                                <exclude reference="JZf-hD-8GY"/>
                                                             </mask>
                                                         </variation>
-                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                            <rect key="frame" x="289" y="0.0" width="111" height="70"/>
+                                                        <variation key="heightClass=regular-widthClass=compact">
                                                             <mask key="subviews">
                                                                 <include reference="yXr-Fs-dHy"/>
                                                                 <include reference="fHV-rp-XcT"/>
                                                             </mask>
                                                             <mask key="constraints">
+                                                                <include reference="JZf-hD-8GY"/>
                                                                 <include reference="Dn7-GE-ygX"/>
                                                                 <include reference="HBp-y1-2pk"/>
                                                                 <include reference="M0k-oI-PPH"/>
-                                                                <include reference="JZf-hD-8GY"/>
                                                             </mask>
                                                         </variation>
                                                     </view>
@@ -1158,18 +1147,12 @@
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
-                                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                    <rect key="frame" x="31" y="8" width="42" height="21"/>
-                                                                </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="following" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tl7-5o-JMC">
                                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
-                                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                    <rect key="frame" x="31" y="37" width="42" height="21"/>
-                                                                </variation>
                                                             </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1197,8 +1180,7 @@
                                                                 <exclude reference="laP-RZ-cCP"/>
                                                             </mask>
                                                         </variation>
-                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                            <rect key="frame" x="174" y="0.0" width="116" height="70"/>
+                                                        <variation key="heightClass=regular-widthClass=compact">
                                                             <mask key="subviews">
                                                                 <include reference="GHh-vM-dDx"/>
                                                                 <include reference="Tl7-5o-JMC"/>
@@ -1219,18 +1201,12 @@
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
-                                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                    <rect key="frame" x="24" y="8" width="59" height="21"/>
-                                                                </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="followers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BY7-1m-b86">
                                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
-                                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                    <rect key="frame" x="24" y="37" width="42" height="21"/>
-                                                                </variation>
                                                             </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1252,23 +1228,22 @@
                                                                 <exclude reference="BY7-1m-b86"/>
                                                             </mask>
                                                             <mask key="constraints">
+                                                                <exclude reference="amz-wo-623"/>
                                                                 <exclude reference="I6j-5o-Pao"/>
                                                                 <exclude reference="YbR-Zu-t0O"/>
                                                                 <exclude reference="kML-0A-1xf"/>
-                                                                <exclude reference="amz-wo-623"/>
                                                             </mask>
                                                         </variation>
-                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                            <rect key="frame" x="73" y="0.0" width="101" height="70"/>
+                                                        <variation key="heightClass=regular-widthClass=compact">
                                                             <mask key="subviews">
                                                                 <include reference="g36-zJ-TGp"/>
                                                                 <include reference="BY7-1m-b86"/>
                                                             </mask>
                                                             <mask key="constraints">
+                                                                <include reference="amz-wo-623"/>
                                                                 <include reference="I6j-5o-Pao"/>
                                                                 <include reference="YbR-Zu-t0O"/>
                                                                 <include reference="kML-0A-1xf"/>
-                                                                <include reference="amz-wo-623"/>
                                                             </mask>
                                                         </variation>
                                                     </view>
@@ -1280,18 +1255,12 @@
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
-                                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                    <rect key="frame" x="16" y="8" width="42" height="21"/>
-                                                                </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="degrees" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3s1-Ni-OPj">
                                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
-                                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                    <rect key="frame" x="16" y="41" width="50" height="21"/>
-                                                                </variation>
                                                             </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1312,25 +1281,24 @@
                                                                 <exclude reference="3s1-Ni-OPj"/>
                                                             </mask>
                                                             <mask key="constraints">
+                                                                <exclude reference="kah-yE-q5l"/>
                                                                 <exclude reference="2mS-pD-sdg"/>
                                                                 <exclude reference="Rz2-tT-dLS"/>
                                                                 <exclude reference="fJ3-P0-1Ah"/>
                                                                 <exclude reference="uZE-Jr-9lF"/>
-                                                                <exclude reference="kah-yE-q5l"/>
                                                             </mask>
                                                         </variation>
-                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                            <rect key="frame" x="0.0" y="0.0" width="74" height="70"/>
+                                                        <variation key="heightClass=regular-widthClass=compact">
                                                             <mask key="subviews">
                                                                 <include reference="6VB-U2-JRA"/>
                                                                 <include reference="3s1-Ni-OPj"/>
                                                             </mask>
                                                             <mask key="constraints">
+                                                                <include reference="kah-yE-q5l"/>
                                                                 <include reference="2mS-pD-sdg"/>
                                                                 <include reference="Rz2-tT-dLS"/>
                                                                 <exclude reference="fJ3-P0-1Ah"/>
                                                                 <include reference="uZE-Jr-9lF"/>
-                                                                <include reference="kah-yE-q5l"/>
                                                             </mask>
                                                         </variation>
                                                     </view>
@@ -1394,9 +1362,6 @@
                                                     </mask>
                                                     <mask key="constraints">
                                                         <exclude reference="iMb-9d-PqG"/>
-                                                        <exclude reference="8dS-1C-bUh"/>
-                                                        <exclude reference="oYc-9g-i5C"/>
-                                                        <exclude reference="tyU-wK-vCb"/>
                                                         <exclude reference="0FW-zc-Rca"/>
                                                         <exclude reference="4Sa-Eb-120"/>
                                                         <exclude reference="9Mq-T4-LtH"/>
@@ -1405,6 +1370,9 @@
                                                         <exclude reference="JE9-jw-af0"/>
                                                         <exclude reference="WF6-yN-M06"/>
                                                         <exclude reference="jPI-yr-RPE"/>
+                                                        <exclude reference="8dS-1C-bUh"/>
+                                                        <exclude reference="oYc-9g-i5C"/>
+                                                        <exclude reference="tyU-wK-vCb"/>
                                                         <exclude reference="75m-xw-ON1"/>
                                                         <exclude reference="N1a-vj-uJ4"/>
                                                         <exclude reference="PFb-Mu-g9m"/>
@@ -1421,9 +1389,6 @@
                                                     </mask>
                                                     <mask key="constraints">
                                                         <include reference="iMb-9d-PqG"/>
-                                                        <include reference="8dS-1C-bUh"/>
-                                                        <include reference="oYc-9g-i5C"/>
-                                                        <include reference="tyU-wK-vCb"/>
                                                         <include reference="0FW-zc-Rca"/>
                                                         <include reference="4Sa-Eb-120"/>
                                                         <include reference="9Mq-T4-LtH"/>
@@ -1432,6 +1397,9 @@
                                                         <include reference="JE9-jw-af0"/>
                                                         <include reference="WF6-yN-M06"/>
                                                         <include reference="jPI-yr-RPE"/>
+                                                        <include reference="8dS-1C-bUh"/>
+                                                        <include reference="oYc-9g-i5C"/>
+                                                        <include reference="tyU-wK-vCb"/>
                                                         <include reference="75m-xw-ON1"/>
                                                         <include reference="N1a-vj-uJ4"/>
                                                         <include reference="PFb-Mu-g9m"/>
@@ -1441,7 +1409,7 @@
                                                 </variation>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.1019607843" green="0.73725490199999999" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="JqB-JU-N0s" firstAttribute="leading" secondItem="cBP-s5-27q" secondAttribute="leading" id="2hv-Ly-VGM"/>
                                             <constraint firstAttribute="trailing" secondItem="EUP-JK-iGC" secondAttribute="trailing" constant="115" id="6Mo-Oc-Ywa">
@@ -1474,22 +1442,22 @@
                                                 <exclude reference="EUP-JK-iGC"/>
                                             </mask>
                                             <mask key="constraints">
-                                                <exclude reference="Tci-lc-UgK"/>
-                                                <exclude reference="bV3-qU-K05"/>
-                                                <exclude reference="iXz-tA-iwo"/>
-                                                <exclude reference="o4f-FR-IGm"/>
-                                                <exclude reference="2hv-Ly-VGM"/>
-                                                <exclude reference="J87-BO-K2x"/>
-                                                <exclude reference="ZKC-gA-a7j"/>
-                                                <exclude reference="Jxj-2Q-Zoi"/>
-                                                <exclude reference="az6-jz-sJ6"/>
-                                                <exclude reference="w2Z-yL-7bD"/>
                                                 <exclude reference="6Mo-Oc-Ywa"/>
                                                 <exclude reference="DKc-4I-Zra"/>
                                                 <exclude reference="EOZ-lO-2Ls"/>
                                                 <exclude reference="IPt-Fs-rgb"/>
                                                 <exclude reference="ZiZ-aA-NP9"/>
                                                 <exclude reference="g86-IA-fBy"/>
+                                                <exclude reference="2hv-Ly-VGM"/>
+                                                <exclude reference="J87-BO-K2x"/>
+                                                <exclude reference="ZKC-gA-a7j"/>
+                                                <exclude reference="Tci-lc-UgK"/>
+                                                <exclude reference="bV3-qU-K05"/>
+                                                <exclude reference="iXz-tA-iwo"/>
+                                                <exclude reference="o4f-FR-IGm"/>
+                                                <exclude reference="Jxj-2Q-Zoi"/>
+                                                <exclude reference="az6-jz-sJ6"/>
+                                                <exclude reference="w2Z-yL-7bD"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
@@ -1500,22 +1468,22 @@
                                                 <include reference="EUP-JK-iGC"/>
                                             </mask>
                                             <mask key="constraints">
-                                                <include reference="Tci-lc-UgK"/>
-                                                <exclude reference="bV3-qU-K05"/>
-                                                <include reference="iXz-tA-iwo"/>
-                                                <include reference="o4f-FR-IGm"/>
-                                                <include reference="2hv-Ly-VGM"/>
-                                                <include reference="J87-BO-K2x"/>
-                                                <include reference="ZKC-gA-a7j"/>
-                                                <include reference="Jxj-2Q-Zoi"/>
-                                                <include reference="az6-jz-sJ6"/>
-                                                <include reference="w2Z-yL-7bD"/>
                                                 <include reference="6Mo-Oc-Ywa"/>
                                                 <include reference="DKc-4I-Zra"/>
                                                 <exclude reference="EOZ-lO-2Ls"/>
                                                 <exclude reference="IPt-Fs-rgb"/>
                                                 <include reference="ZiZ-aA-NP9"/>
                                                 <exclude reference="g86-IA-fBy"/>
+                                                <include reference="2hv-Ly-VGM"/>
+                                                <include reference="J87-BO-K2x"/>
+                                                <include reference="ZKC-gA-a7j"/>
+                                                <include reference="Tci-lc-UgK"/>
+                                                <exclude reference="bV3-qU-K05"/>
+                                                <include reference="iXz-tA-iwo"/>
+                                                <include reference="o4f-FR-IGm"/>
+                                                <include reference="Jxj-2Q-Zoi"/>
+                                                <include reference="az6-jz-sJ6"/>
+                                                <include reference="w2Z-yL-7bD"/>
                                             </mask>
                                         </variation>
                                     </view>

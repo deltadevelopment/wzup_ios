@@ -20,7 +20,6 @@
 LoginController* loginController;
 
 - (void)viewDidLoad {
-    
     NSLog([[UIDevice currentDevice] name]);
     NSString *name = [[UIDevice currentDevice] name];
     if(![name isEqualToString:@"Simen sin iPhone"]){
@@ -48,6 +47,7 @@ LoginController* loginController;
                      forControlEvents:UIControlEventEditingChanged];
     [self setPlaceholderFont:self.usernameTextField];
     [self setPlaceholderFont:self.passwordTextField];
+    [self showLogin];
 }
 -(void)viewDidAppear:(BOOL)animated{
     [self.usernameTextField becomeFirstResponder];
@@ -113,8 +113,10 @@ LoginController* loginController;
     });
 }
 -(void)showLogin{
+  
     NSString *username = self.usernameTextField.text;
     NSString *password = self.passwordTextField.text;
+      NSLog(@"login show %@ %@", username, password);
     if(username.length > 0 && password.length > 0){
         self.loginButton.hidden = NO;
         [UIView animateWithDuration:0.3 animations:^{
