@@ -48,12 +48,18 @@ bool isOwnProfile = YES;
 }
 
 -(void)attachToGUI{
+    NSLog(@"ATTCH");
+    if(isOwnProfile){
+        [self updateGUIForOwnProfile];
+    }else{
+        [self updateGUIForOthersProfile];
+    }
     self.profileImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", @"testBilde.jpg"]];
     self.profileImage.layer.cornerRadius = 25;
     self.profileImage.clipsToBounds = YES;
     self.availability.layer.cornerRadius = 5;
     self.availability.clipsToBounds = YES;
-    self.settingsButton.alpha = 0.5f;
+    
     self.bottomBar.alpha = 0.9f;
     [self.nameLabel sizeToFit];
     
@@ -68,7 +74,36 @@ bool isOwnProfile = YES;
     [self setBorderTopBottom:self.hotness];
     self.degreeLabel.textColor = [UIColor colorWithRed:0.204 green:0.596 blue:0.859 alpha:1];
     self.pointsIndicator.backgroundColor = [UIColor colorWithRed:0.204 green:0.596 blue:0.859 alpha:1];
+    
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(subscribeAction:)];
+    [self.notifications addGestureRecognizer:singleFingerTap];
 
+
+}
+
+-(void)updateGUIForOwnProfile{
+    self.settingsButton.alpha = 0.5f;
+    self.searchButton.hidden = NO;
+    self.notificationsLabel.hidden = YES;
+    self.subscribeText.hidden = YES;
+    self.followView.hidden = YES;
+    
+
+}
+-(void)updateGUIForOthersProfile{
+    self.searchButton.hidden = YES;
+    self.notificationsLabel.hidden = NO;
+    self.subscribeText.hidden = NO;
+    [self.settingsButton setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", @"testBilde.jpg"]] forState:UIControlStateNormal];
+    self.followView.hidden = NO;
+
+}
+
+- (void)subscribeAction:(UITapGestureRecognizer *)recognizer {
+    NSLog(@"subscribing");
+    //Subscribe implementation here
 }
 
 -(void)setBorder:(UIView *) view{
@@ -191,4 +226,10 @@ bool isOwnProfile = YES;
 }
 */
 
+- (IBAction)showSearch:(id)sender {
+}
+- (IBAction)followAction:(id)sender {
+    
+    NSLog(@"follow");
+}
 @end

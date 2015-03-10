@@ -27,6 +27,11 @@ UIView *top;
     UIButton *leftButton = [self createButton:@"feed-icon.png" x:center-80];
     UIButton *middleButton = [self createButton:@"events-icon.png" x:center];
     UIButton *rightButton = [self createButton:@"profile-icon.png" x:center + 80];
+    //UILabel *label = [[UILabel alloc] init];
+    //label.text = @"4";
+    //[label setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:16]];
+    //label.textColor = [UIColor whiteColor];
+    //[label setFrame:CGRectMake(250, 0, 30, 30)];
     [rightButton addTarget:self
                     action:@selector(showProfile)
           forControlEvents:UIControlEventTouchUpInside];
@@ -37,6 +42,7 @@ UIView *top;
     [top addSubview:leftButton];
     [top addSubview:middleButton];
     [top addSubview:rightButton];
+    //[top addSubview:label];
     self.navigationItem.titleView = top;
     //self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain

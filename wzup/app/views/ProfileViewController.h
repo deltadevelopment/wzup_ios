@@ -30,7 +30,16 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomBarInfo;
 @property (weak, nonatomic) IBOutlet UILabel *degreeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followersLabel;
+- (IBAction)followAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *followingLabel;
+@property (weak, nonatomic) IBOutlet UIButton *followButton;
+@property (weak, nonatomic) IBOutlet UILabel *subscribeText;
+@property (weak, nonatomic) IBOutlet UIView *followView;
+@property (weak, nonatomic) IBOutlet UILabel *followButtonText;
+@property (weak, nonatomic) IBOutlet UIButton *searchButton;
+@property (weak, nonatomic) IBOutlet UILabel *notificationsLabel;
+
+- (IBAction)showSearch:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *availability;
 -(void)setOwnProfile:(bool) isProfile;
 @end
