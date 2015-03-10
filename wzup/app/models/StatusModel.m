@@ -72,9 +72,12 @@
 }
 
 -(NSData*)getMedia{
-    if(_media == nil && _media_url != nil){
-       [self downloadImage];
+    if(![_media isKindOfClass:[NSNull class]] && ![_media_url isKindOfClass:[NSNull class]]){
+        if(_media == nil && _media_url != nil){
+            [self downloadImage];
+        }
     }
+   
     else if(_media_url == nil){
         return nil;
     }
