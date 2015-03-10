@@ -7,7 +7,7 @@
 //
 
 #import "StartViewController.h"
-
+#import "FollowModel.h"
 @interface StartViewController ()
 
 @end
@@ -18,6 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     NSLog(@"Start");
+    FollowModel *f = [[FollowModel alloc] init];
    //[[self navigationController] setNavigationBarHidden:YES animated:NO];
 }
 

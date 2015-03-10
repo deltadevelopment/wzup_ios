@@ -152,8 +152,7 @@ FeedController* feedController;
     
     [self.navigationController pushViewController:vc animated:YES];
     // do any setup you need for myNewVC
-    
-    
+
 }
 
 

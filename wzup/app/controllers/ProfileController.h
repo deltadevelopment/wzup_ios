@@ -9,7 +9,14 @@
 #import "ApplicationController.h"
 #import "UserModel.h"
 #import "StatusModel.h"
-
+#import "FollowModel.h"
 @interface ProfileController : ApplicationController
 -(StatusModel*)getUser;
+
+-(NSMutableArray*)getFollowers;
+-(NSMutableArray*)getFollowing;
+-(NSUInteger)getNumberOfFollowers;
+-(NSUInteger)getNumberOfFollowing;
+-(void)initFollowers;
+-(void)initFollowing;
 @end

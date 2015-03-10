@@ -17,6 +17,8 @@
 @implementation ProfileViewController
 ProfileController *profileController;
 StatusModel *status;
+NSUInteger NumberOfFollowers;
+NSUInteger NumberOfFollowings;
 bool isExpanded = YES;
 bool isOwnProfile = YES;
 - (void)viewDidLoad {
@@ -92,14 +94,19 @@ bool isOwnProfile = YES;
 }
 
 -(void)getData{
-   status = [profileController getUser];
+    status = [profileController getUser];
+    [profileController initFollowers];
+    [profileController initFollowing];
+    NumberOfFollowers = [profileController getNumberOfFollowers];
+    NumberOfFollowings = [profileController getNumberOfFollowing];
 }
 -(void)updateGUI{
     self.nameLabel.text =[[status getUser] getDisplayName];
     [self getMedia];
     self.statusTextLabel.text = [status getBody];
     [self updateAvailability:[[status getUser] getAvailability]];
-   
+    self.followersLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)NumberOfFollowers];
+    self.followingLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)NumberOfFollowings];
 }
 
 -(void)updateAvailability:(NSInteger) available{
