@@ -21,6 +21,7 @@ NSUInteger NumberOfFollowers;
 NSUInteger NumberOfFollowings;
 bool isExpanded = YES;
 bool isOwnProfile = YES;
+bool isFollowee;
 - (void)viewDidLoad {
     isExpanded = YES;
     [super viewDidLoad];
@@ -74,13 +75,6 @@ bool isOwnProfile = YES;
     [self setBorderTopBottom:self.hotness];
     self.degreeLabel.textColor = [UIColor colorWithRed:0.204 green:0.596 blue:0.859 alpha:1];
     self.pointsIndicator.backgroundColor = [UIColor colorWithRed:0.204 green:0.596 blue:0.859 alpha:1];
-    
-    UITapGestureRecognizer *singleFingerTap =
-    [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(subscribeAction:)];
-    [self.notifications addGestureRecognizer:singleFingerTap];
-
-
 }
 
 -(void)updateGUIForOwnProfile{
@@ -98,12 +92,26 @@ bool isOwnProfile = YES;
     self.subscribeText.hidden = NO;
     [self.settingsButton setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", @"testBilde.jpg"]] forState:UIControlStateNormal];
     self.followView.hidden = NO;
-
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(subscribeAction:)];
+    [self.notifications addGestureRecognizer:singleFingerTap];
+    
+    UITapGestureRecognizer *followTapGesture =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(followAction:)];
+    [self.followView addGestureRecognizer:followTapGesture];
+    self.followButtonText.text = [[status getUser] isFollowee] ? @"Unfollow" :@"Follow";
 }
 
 - (void)subscribeAction:(UITapGestureRecognizer *)recognizer {
     NSLog(@"subscribing");
     //Subscribe implementation here
+}
+
+- (void)followAction:(UITapGestureRecognizer *)recognizer {
+    NSString* userId = [NSString stringWithFormat:@"%d", [[status getUser] getId]];
+    [[status getUser] isFollowee] ? [profileController unfollowUserWithUserId:userId] : [profileController followUserWithUserId:userId];
 }
 
 -(void)setBorder:(UIView *) view{
@@ -176,12 +184,14 @@ bool isOwnProfile = YES;
 }
 
 -(void)setProfile:(StatusModel* ) statusProfile{
-    //NSLog(@"profilename is %@", profilename);
-    //_testLabel.text = profilename;
     isOwnProfile = NO;
-       NSLog(@"called2");
     status = statusProfile;
-    //[_testLabel setNeedsDisplay];
+    NSString* userId = [NSString stringWithFormat:@"%d", [[status getUser] getId]];
+    profileController  = [[ProfileController alloc] init];
+    [profileController initFollowersWithUserId:userId];
+    [profileController initFollowingWithUserId:userId];
+    NumberOfFollowers = [profileController getNumberOfFollowers];
+    NumberOfFollowings = [profileController getNumberOfFollowing];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -228,8 +238,5 @@ bool isOwnProfile = YES;
 
 - (IBAction)showSearch:(id)sender {
 }
-- (IBAction)followAction:(id)sender {
-    
-    NSLog(@"follow");
-}
+
 @end

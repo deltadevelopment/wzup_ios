@@ -17,6 +17,10 @@
 -(NSMutableArray*)getFollowing;
 -(NSUInteger)getNumberOfFollowers;
 -(NSUInteger)getNumberOfFollowing;
+-(void)initFollowingWithUserId:(NSString*) Id;
+-(void)initFollowersWithUserId:(NSString*) Id;
 -(void)initFollowers;
 -(void)initFollowing;
+-(void)unfollowUserWithUserId:(NSString *) userId;
+-(void)followUserWithUserId:(NSString *) userId;
 @end

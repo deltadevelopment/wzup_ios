@@ -679,11 +679,16 @@ SEL littleSelector;
             
         });
         
-       
-        StatusModel *tempStatus = [feed objectAtIndex:0];
+        NSLog(@"error testing");
+        StatusModel *tempStatus = nil;
+        if([feed count] > 0){
+        tempStatus = [feed objectAtIndex:0];
+        }
+        
          if([[tempStatus getUser] getId ] == [[authHelper getUserId] intValue]){
          
          }else{
+                  NSLog(@"error testing2");
             UserModel* user = [feedController getUser];
             // NSLog(@"Username is: %@", [test getUsername]);
              StatusModel *status = [[StatusModel alloc] init];

@@ -19,6 +19,7 @@
 @property (nonatomic,strong) NSString * password_hash;
 @property (nonatomic,strong) NSString * password_salt;
 @property (nonatomic) BOOL private_profile;
+@property (nonatomic) BOOL is_followee;
 @property (nonatomic) int Id;
 
 -(void)build:(NSMutableDictionary *)dic;
@@ -34,4 +35,5 @@
 -(NSString*) getPasswordSalt;
 -(BOOL) isPrivateProfile;
 -(int) getId;
+-(bool)isFollowee;
 @end

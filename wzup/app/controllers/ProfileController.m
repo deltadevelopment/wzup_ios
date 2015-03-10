@@ -14,20 +14,21 @@ NSMutableArray *following;
 -(StatusModel*)getUser{
     NSString *url = [NSString stringWithFormat:@"user/%@/status", [authHelper getUserId]];
     NSData *response = [self getHttpRequest:url];
-    //NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
-    //NSLog(strdata);
+    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    NSLog(strdata);
     NSMutableDictionary *dic = [parserHelper parse:response];
     StatusModel *status = [[StatusModel alloc] init];
     [status build:dic[@"status"]];
     return status;
 }
 
--(void)initFollowers{
+-(void)initFollowersWithUserId:(NSString*) Id{
+    NSLog(@"eher");
     followers = [[NSMutableArray alloc] init];
-    NSString *url = [NSString stringWithFormat:@"user/%@/followers", [authHelper getUserId]];
+    NSString *url = [NSString stringWithFormat:@"user/%@/followers", Id];
     NSData *response = [self getHttpRequest:url];
-    //NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
-    //NSLog(strdata);
+    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    NSLog(strdata);
     NSMutableDictionary *dic = [parserHelper parse:response];
     NSArray *followersRaw = dic[@"followings"];
     for(NSMutableDictionary* followerRaw in followersRaw){
@@ -35,11 +36,14 @@ NSMutableArray *following;
         [follower build:followerRaw];
         [followers addObject:follower];
     }
-}
+};
 
--(void)initFollowing{
+-(void)initFollowers{
+    [self initFollowersWithUserId:[authHelper getUserId]];
+}
+-(void)initFollowingWithUserId:(NSString*) Id{
     following = [[NSMutableArray alloc] init];
-    NSString *url = [NSString stringWithFormat:@"user/%@/followees", [authHelper getUserId]];
+    NSString *url = [NSString stringWithFormat:@"user/%@/followees", Id];
     NSData *response = [self getHttpRequest:url];
     //NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
     //NSLog(strdata);
@@ -50,6 +54,28 @@ NSMutableArray *following;
         [follower build:followerRaw];
         [following addObject:follower];
     }
+}
+
+-(void)unfollowUserWithUserId:(NSString *) userId{
+    NSString *url = [NSString stringWithFormat:@"user/%@/follow/%@", [authHelper getUserId], userId];
+    NSData *response = [self deleteHttpRequest:url];
+    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    NSLog(strdata);
+    NSMutableDictionary *dic = [parserHelper parse:response];
+    
+    
+    
+}
+-(void)followUserWithUserId:(NSString *) userId{
+    NSString *url = [NSString stringWithFormat:@"user/%@/follow/%@", [authHelper getUserId], userId];
+    NSData *response = [self postHttpRequest:url json:nil];
+    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    NSLog(strdata);
+    NSMutableDictionary *dic = [parserHelper parse:response];
+}
+
+-(void)initFollowing{
+    [self initFollowingWithUserId:[authHelper getUserId]];
 }
 
 -(NSMutableArray*)getFollowers{
