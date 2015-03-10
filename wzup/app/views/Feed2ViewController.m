@@ -284,8 +284,10 @@ SEL littleSelector;
 }
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
-   
+    if([feed count] > 0){
     [feed removeObjectAtIndex:0];
+    }
+    
     feed = [feedController getFeed];
     indexCurrent = nil;
     [self.tableView reloadData];

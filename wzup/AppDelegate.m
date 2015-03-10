@@ -10,6 +10,7 @@
 #import "Feed2ViewController.h"
 #import "StartViewController.h"
 #import "AuthHelper.h"
+#import "SearchViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -20,11 +21,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     AuthHelper *authHelper = [[AuthHelper alloc] init];
-   [authHelper resetCredentials];
+   //[authHelper resetCredentials];
     if([authHelper getAuthToken] == nil){
         [self setView:[[StartViewController alloc] init] second:@"startNav"];
     }else{
-        [self setView:[[Feed2ViewController alloc] init] second:@"feed2"];
+        [self setView:[[SearchViewController alloc] init] second:@"search"];
+        //[self setView:[[Feed2ViewController alloc] init] second:@"feed2"];
     }
     return YES;
 }
