@@ -641,7 +641,8 @@
                                         <exclude reference="om3-8G-cCW"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="64" width="400" height="736"/>
                                     <mask key="subviews">
                                         <include reference="vtR-2S-Q3T"/>
                                     </mask>
@@ -1635,7 +1636,8 @@
                                         <exclude reference="dDD-Bj-fg0"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="64" width="400" height="736"/>
                                     <mask key="subviews">
                                         <include reference="cBP-s5-27q"/>
                                     </mask>
@@ -1764,7 +1766,7 @@
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="15" y="119" width="20" height="20"/>
+                                    <rect key="frame" x="21" y="119" width="20" height="20"/>
                                     <mask key="constraints">
                                         <include reference="Lmc-Si-own"/>
                                         <include reference="ooD-zP-BJI"/>
@@ -1777,7 +1779,7 @@
                                 <color key="textColor" red="0.5568627451" green="0.2666666667" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="15" y="168" width="95" height="21"/>
+                                    <rect key="frame" x="15" y="168" width="69" height="15"/>
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUb-BC-izT">
@@ -1786,7 +1788,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="15" y="203" width="42" height="21"/>
+                                    <rect key="frame" x="15" y="201" width="42" height="21"/>
                                 </variation>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="TDb-MX-Jzg">
@@ -1806,7 +1808,7 @@
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="364" y="203" width="20" height="20"/>
+                                    <rect key="frame" x="364" y="201" width="20" height="20"/>
                                     <mask key="constraints">
                                         <exclude reference="0Ec-Qp-T7z"/>
                                         <include reference="Vp5-KG-EtA"/>
@@ -1844,20 +1846,20 @@
                                 <exclude reference="TDb-MX-Jzg"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="4pw-Pl-B0n"/>
+                                <exclude reference="TEk-Ho-vMO"/>
                                 <exclude reference="7o7-S0-olx"/>
                                 <exclude reference="Ht2-mG-84Y"/>
                                 <exclude reference="agM-eP-t7l"/>
                                 <exclude reference="b9F-Bj-bCR"/>
-                                <exclude reference="LIF-kb-ENx"/>
-                                <exclude reference="czZ-ic-ij6"/>
                                 <exclude reference="4dM-gc-SZD"/>
                                 <exclude reference="rDB-QU-18X"/>
-                                <exclude reference="4pw-Pl-B0n"/>
-                                <exclude reference="TEk-Ho-vMO"/>
                                 <exclude reference="WUh-Ud-VjB"/>
                                 <exclude reference="hdL-GI-NQV"/>
                                 <exclude reference="sfK-fV-FdE"/>
                                 <exclude reference="w1P-wy-oaP"/>
+                                <exclude reference="LIF-kb-ENx"/>
+                                <exclude reference="czZ-ic-ij6"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1869,20 +1871,20 @@
                                 <include reference="TDb-MX-Jzg"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="4pw-Pl-B0n"/>
+                                <include reference="TEk-Ho-vMO"/>
                                 <include reference="7o7-S0-olx"/>
                                 <exclude reference="Ht2-mG-84Y"/>
                                 <include reference="agM-eP-t7l"/>
                                 <exclude reference="b9F-Bj-bCR"/>
-                                <include reference="LIF-kb-ENx"/>
-                                <include reference="czZ-ic-ij6"/>
                                 <include reference="4dM-gc-SZD"/>
                                 <include reference="rDB-QU-18X"/>
-                                <include reference="4pw-Pl-B0n"/>
-                                <include reference="TEk-Ho-vMO"/>
                                 <exclude reference="WUh-Ud-VjB"/>
                                 <exclude reference="hdL-GI-NQV"/>
                                 <include reference="sfK-fV-FdE"/>
                                 <include reference="w1P-wy-oaP"/>
+                                <include reference="LIF-kb-ENx"/>
+                                <include reference="czZ-ic-ij6"/>
                             </mask>
                         </variation>
                     </view>
@@ -2503,7 +2505,7 @@
             <objects>
                 <navigationController storyboardIdentifier="feed2" automaticallyAdjustsScrollViewInsets="NO" id="vs3-HY-6pg" customClass="FeedNavigationViewController" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oIg-cE-4bm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="oIg-cE-4bm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2526,7 +2528,7 @@
             <objects>
                 <navigationController storyboardIdentifier="profileNav" automaticallyAdjustsScrollViewInsets="NO" id="pd0-5l-EkC" customClass="ProfileNavigationViewController" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="f0U-pQ-dKi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="f0U-pQ-dKi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
