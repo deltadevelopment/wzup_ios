@@ -1918,7 +1918,8 @@
                                                     <exclude reference="OyE-ig-QbB"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="8" y="9" width="50" height="50"/>
                                                 <mask key="constraints">
                                                     <include reference="Gdq-H9-nhW"/>
                                                     <include reference="OyE-ig-QbB"/>
@@ -1927,18 +1928,35 @@
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J0z-pw-wgF">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="71" y="25" width="42" height="21"/>
+                                            </variation>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRH-Zd-kSj">
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="74" id="bru-ak-8dx"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
                                             <inset key="contentEdgeInsets" minX="10" minY="6" maxX="10" maxY="6"/>
-                                            <state key="normal" title="follow">
+                                            <state key="normal" title="Unfollow">
                                                 <color key="titleColor" red="0.60784313729999995" green="0.34901960780000002" blue="0.71372549019999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="bru-ak-8dx"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="311" y="22" width="74" height="30"/>
+                                                <mask key="constraints">
+                                                    <include reference="bru-ak-8dx"/>
+                                                </mask>
+                                            </variation>
                                             <connections>
                                                 <action selector="followAction:" destination="Ktf-Hi-Rys" eventType="touchUpInside" id="Nav-0U-yqQ"/>
                                             </connections>
@@ -2007,7 +2025,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="40h-tf-tJP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5526" y="1697.25"/>
+            <point key="canvasLocation" x="5526" y="1696.5"/>
         </scene>
         <!--Start View Controller-->
         <scene sceneID="OGX-2f-Fbi">

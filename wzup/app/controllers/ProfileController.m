@@ -10,6 +10,7 @@
 
 @implementation ProfileController
 NSMutableArray *followers;
+NSMutableArray *requestingFollowers;
 NSMutableArray *following;
 
 -(StatusModel*)getUser{
@@ -75,12 +76,38 @@ NSMutableArray *following;
     NSMutableDictionary *dic = [parserHelper parse:response];
 }
 
+
+-(void)initRequestingFollowers{
+    [self initRequestingFollowersWithUserId:[authHelper getUserId]];
+}
+
+-(void)initRequestingFollowersWithUserId:(NSString*) Id{
+    requestingFollowers = [[NSMutableArray alloc] init];
+    NSString *url = [NSString stringWithFormat:@"user/%@/following_requests", Id];
+    NSData *response = [self getHttpRequest:url];
+    //NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    //NSLog(@"HER: %@",strdata);
+    ParserHelper* parserHelper = [[ParserHelper alloc] init];
+    NSMutableDictionary *dic2 = [parserHelper parse:response];
+    NSArray *followersRaw = dic2[@"followings"];
+    for(NSMutableDictionary* followerRaw in followersRaw){
+        FollowModel *follower = [[FollowModel alloc] init];
+        [follower build:followerRaw];
+        [requestingFollowers addObject:follower];
+    }
+};
+
+
 -(void)initFollowing{
     [self initFollowingWithUserId:[authHelper getUserId]];
 }
 
 -(NSMutableArray*)getFollowers{
     return followers;
+}
+
+-(NSMutableArray*)getRequestingFollowers{
+    return requestingFollowers;
 }
 
 -(NSMutableArray*)getFollowing{

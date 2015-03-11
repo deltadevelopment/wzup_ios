@@ -23,4 +23,6 @@
 -(void)initFollowing;
 -(void)unfollowUserWithUserId:(NSString *) userId;
 -(void)followUserWithUserId:(NSString *) userId;
+-(void)initRequestingFollowers;
+-(NSMutableArray*)getRequestingFollowers;
 @end
