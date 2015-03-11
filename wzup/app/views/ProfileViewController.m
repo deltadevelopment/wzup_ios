@@ -29,13 +29,19 @@ bool isFollowee;
 
     profileController = [[ProfileController alloc] init];
     [self attachToGUI];
-    if(isOwnProfile){
-        [self getData];
-    }
-    [self updateGUI];
-    [self attachGestures];
     
-    // Do any additional setup after loading the view.
+    if(isOwnProfile){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            [self getData];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self updateGUI];
+                [self attachGestures];
+            });
+        });
+    }
+   
 }
 
 -(void)setOwnProfile:(bool) isProfile{
@@ -46,6 +52,8 @@ bool isFollowee;
     tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     tapGr.numberOfTapsRequired = 1;
     [self.expandArea addGestureRecognizer:tapGr];
+
+    
 }
 
 -(void)attachToGUI{
@@ -55,7 +63,7 @@ bool isFollowee;
     }else{
         [self updateGUIForOthersProfile];
     }
-    self.profileImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", @"testBilde.jpg"]];
+   // self.profileImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", @"testBilde.jpg"]];
     self.profileImage.layer.cornerRadius = 25;
     self.profileImage.clipsToBounds = YES;
     self.availability.layer.cornerRadius = 5;
@@ -184,14 +192,23 @@ bool isFollowee;
 }
 
 -(void)setProfile:(StatusModel* ) statusProfile{
-    isOwnProfile = NO;
-    status = statusProfile;
-    NSString* userId = [NSString stringWithFormat:@"%d", [[status getUser] getId]];
-    profileController  = [[ProfileController alloc] init];
-    [profileController initFollowersWithUserId:userId];
-    [profileController initFollowingWithUserId:userId];
-    NumberOfFollowers = [profileController getNumberOfFollowers];
-    NumberOfFollowings = [profileController getNumberOfFollowing];
+    
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        isOwnProfile = NO;
+        status = statusProfile;
+        NSString* userId = [NSString stringWithFormat:@"%d", [[status getUser] getId]];
+        profileController  = [[ProfileController alloc] init];
+        [profileController initFollowersWithUserId:userId];
+        [profileController initFollowingWithUserId:userId];
+        NumberOfFollowers = [profileController getNumberOfFollowers];
+        NumberOfFollowings = [profileController getNumberOfFollowing];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateGUI];
+            [self attachGestures];
+        });
+    });
+   
 }
 
 - (void)didReceiveMemoryWarning {

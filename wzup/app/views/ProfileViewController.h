@@ -36,7 +36,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *subscribeText;
 @property (weak, nonatomic) IBOutlet UIView *followView;
 @property (weak, nonatomic) IBOutlet UILabel *followButtonText;
+@property (weak, nonatomic) IBOutlet UIView *showFollowingView;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
+@property (weak, nonatomic) IBOutlet UIView *showFollowersView;
 @property (weak, nonatomic) IBOutlet UILabel *notificationsLabel;
 
 - (IBAction)showSearch:(id)sender;
