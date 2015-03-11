@@ -22,7 +22,10 @@
     _password_salt  = dic[@"password_salt"];
     _private_profile  = dic[@"private_profile"];
     _Id  = [[dic objectForKey:@"id"] intValue];
-    _is_followee = dic[@"is_followee"];
+   // NSLog(@"the followee is %@", dic[@"is_followee"]);
+    if((NSNull*)dic[@"is_followee"] != [NSNull null]){
+    _is_followee = [[dic objectForKey:@"is_followee"] boolValue];
+    }
     //User
     NSLog(@"The username is %@", _username);
 };

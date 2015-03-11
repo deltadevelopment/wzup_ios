@@ -16,6 +16,7 @@ NSMutableArray *following;
     NSString *url = [NSString stringWithFormat:@"user/%@/status", [authHelper getUserId]];
     NSData *response = [self getHttpRequest:url];
     NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    ParserHelper* parserHelper = [[ParserHelper alloc] init];
     NSMutableDictionary *dic = [parserHelper parse:response];
     StatusModel *status = [[StatusModel alloc] init];
     [status build:dic[@"status"]];

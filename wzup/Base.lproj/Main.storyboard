@@ -1897,6 +1897,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="followers" id="5av-Bq-COU" customClass="followersTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" id="X8u-q8-zB3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1917,8 +1918,7 @@
                                                     <exclude reference="OyE-ig-QbB"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="8" y="9" width="50" height="50"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <include reference="Gdq-H9-nhW"/>
                                                     <include reference="OyE-ig-QbB"/>
@@ -1930,9 +1930,6 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="71" y="25" width="249" height="21"/>
-                                            </variation>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRH-Zd-kSj">
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -1942,9 +1939,6 @@
                                                 <color key="titleColor" red="0.60784313729999995" green="0.34901960780000002" blue="0.71372549019999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="323" y="22" width="62" height="30"/>
-                                            </variation>
                                             <connections>
                                                 <action selector="followAction:" destination="Ktf-Hi-Rys" eventType="touchUpInside" id="Nav-0U-yqQ"/>
                                             </connections>
@@ -1968,15 +1962,15 @@
                                             <exclude reference="uRH-Zd-kSj"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="KZQ-Rj-EOg"/>
-                                            <exclude reference="Ku8-aW-5dy"/>
-                                            <exclude reference="flf-5z-DvG"/>
-                                            <exclude reference="vQ6-hH-TFP"/>
                                             <exclude reference="5Z3-Rj-ELG"/>
                                             <exclude reference="VF8-H6-8A2"/>
                                             <exclude reference="j8A-TA-VsG"/>
                                             <exclude reference="9If-iL-oPp"/>
                                             <exclude reference="9iI-xF-AkT"/>
+                                            <exclude reference="KZQ-Rj-EOg"/>
+                                            <exclude reference="Ku8-aW-5dy"/>
+                                            <exclude reference="flf-5z-DvG"/>
+                                            <exclude reference="vQ6-hH-TFP"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -1986,15 +1980,15 @@
                                             <include reference="uRH-Zd-kSj"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="KZQ-Rj-EOg"/>
-                                            <include reference="Ku8-aW-5dy"/>
-                                            <exclude reference="flf-5z-DvG"/>
-                                            <include reference="vQ6-hH-TFP"/>
                                             <include reference="5Z3-Rj-ELG"/>
                                             <include reference="VF8-H6-8A2"/>
                                             <exclude reference="j8A-TA-VsG"/>
                                             <include reference="9If-iL-oPp"/>
                                             <include reference="9iI-xF-AkT"/>
+                                            <exclude reference="KZQ-Rj-EOg"/>
+                                            <include reference="Ku8-aW-5dy"/>
+                                            <exclude reference="flf-5z-DvG"/>
+                                            <include reference="vQ6-hH-TFP"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>

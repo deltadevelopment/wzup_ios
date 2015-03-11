@@ -69,6 +69,7 @@ ProfileController *profileController;
         cell = [[followerTableViewCell  alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
     }
+    NSLog(@" followee %d", [[follower getUser] isFollowee]);
     if([[follower getUser] isFollowee]){
         [cell.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
     }
@@ -83,12 +84,26 @@ ProfileController *profileController;
     NSIndexPath *tapIndexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
     
     FollowModel *follower = [followers objectAtIndex:tapIndexPath.row];
+    followerTableViewCell *cell = [self.tableView cellForRowAtIndexPath:tapIndexPath];
     NSString *userId = [NSString stringWithFormat:@"%d", [[follower getUser] getId]];
-    [profileController followUserWithUserId:userId];
-    
-    
+    [[follower getUser] isFollowee] ? [self unFollowWithFollower:follower cell:cell] : [self followWithFollower:follower cell:cell];    
 }
 
+-(void) followWithFollower:(FollowModel *) follower
+                      cell:(followerTableViewCell*) cell{
+    NSString *userId = [NSString stringWithFormat:@"%d", [[follower getUser] getId]];
+    [[follower getUser] setIs_followee:true];
+    [profileController followUserWithUserId:userId];
+      [cell.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+}
+-(void)unFollowWithFollower:(FollowModel *) follower cell:(followerTableViewCell*) cell
+{
+    NSString *userId = [NSString stringWithFormat:@"%d", [[follower getUser] getId]];
+      [[follower getUser] setIs_followee:false];
+    [profileController unfollowUserWithUserId:userId];
+     [cell.followButton setTitle:@"Follow" forState:UIControlStateNormal];
+    
+}
 
 /*
 // Override to support conditional editing of the table view.
