@@ -44,9 +44,14 @@ UIImage *imgTaken;
 AVCaptureSession *session;
 AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
 Feed2TableViewCell *currentCell;
+Feed2TableViewCell *cameraCell;
 NSIndexPath *currentCellsIndexPath;
 NSNumber *available;
 SEL littleSelector;
+bool frontFacing;
+AVCaptureDevice *frontCamera;
+AVCaptureDevice *backCamera;
+UITapGestureRecognizer *flipCameratapGr;
 - (void)viewDidLoad {
     littleSelector = @selector(imageIsUploaded);
     authHelper = [[AuthHelper alloc] init];
@@ -276,6 +281,20 @@ SEL littleSelector;
     
 }
 
+-(void)flipCamera:(UITapGestureRecognizer *) sender{
+    if(cameraIsShown){
+        [session stopRunning];
+        [captureVideoPreviewLayer removeFromSuperlayer];
+        [_tableView reloadData];
+        frontFacing = frontFacing ? NO : YES;
+        [self initializeCamera:cameraCell.statusImage];
+    }
+
+  
+    
+    
+}
+
 -(void)addCaption:(UITapGestureRecognizer *) sender{
     NSLog(@"Adding capture");
     
@@ -354,6 +373,11 @@ SEL littleSelector;
                 indexCurrent = indexPath;
                 [cell.statusImage setBackgroundColor:nil];
                 
+                flipCameratapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(flipCamera:)];
+                flipCameratapGr.numberOfTapsRequired = 1;
+                flipCameratapGr.cancelsTouchesInView = NO;
+                [[cell statusImage] addGestureRecognizer:flipCameratapGr];
+                cameraCell = cell;
                 [self initializeCamera:cell.statusImage];
               
             }
@@ -388,6 +412,9 @@ SEL littleSelector;
                         NSLog(@"setting image22 ---------");
                         //shouldExpand = false;
                         // session.stopRunning;
+                        
+                        [[cell statusImage] removeGestureRecognizer:flipCameratapGr];
+                        
                         cell.profilePicture.image = [UIImage imageNamed:@"testBilde.jpg"];
                         cell.statusLabel.text = @"Tap to add caption";
                         
@@ -451,7 +478,7 @@ SEL littleSelector;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    //NSLog(@"row for height");
+    NSLog(@"row for height");
     if ([indexPath isEqual:indexCurrent] && shouldExpand)
     {
         return 500;
@@ -521,6 +548,7 @@ SEL littleSelector;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath*)path
 // or it must be some other method
 {
+    NSLog(@"testerer");
     if(!cameraIsShown){
         NSIndexPath *oldIndex = indexCurrent;
         
@@ -684,15 +712,15 @@ SEL littleSelector;
         NSLog(@"error testing");
         StatusModel *tempStatus = nil;
         if([feed count] > 0){
-        tempStatus = [feed objectAtIndex:0];
+            tempStatus = [feed objectAtIndex:0];
         }
         
          if([[tempStatus getUser] getId ] == [[authHelper getUserId] intValue]){
          
          }else{
-                  NSLog(@"error testing2");
-            UserModel* user = [feedController getUser];
-            // NSLog(@"Username is: %@", [test getUsername]);
+             NSLog(@"error testing2");
+             UserModel* user = [feedController getUser];
+             // NSLog(@"Username is: %@", [test getUsername]);
              StatusModel *status = [[StatusModel alloc] init];
              [status setUser:user];
              
@@ -742,6 +770,7 @@ SEL littleSelector;
     CGRect rect = cameraView.bounds;
     rect.size.height = 480;
     cameraView.bounds = rect;
+    NSLog(@"height: %f",cameraView.bounds.size.height);
     captureVideoPreviewLayer.frame = cameraView.bounds;
 
     //[cameraView.layer addSublayer:captureVideoPreviewLayer];
@@ -759,8 +788,6 @@ SEL littleSelector;
         [captureVideoPreviewLayer setFrame:bounds];
         
         NSArray *devices = [AVCaptureDevice devices];
-        AVCaptureDevice *frontCamera;
-        AVCaptureDevice *backCamera;
         
         for (AVCaptureDevice *device in devices) {
             
@@ -778,15 +805,20 @@ SEL littleSelector;
                 }
             }
         }
-        
-        
+        //DEnne biten inn i annen kode
         NSError *error = nil;
-        AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:backCamera error:&error];
+        AVCaptureDeviceInput *input;
+        if(frontFacing){
+            input = [AVCaptureDeviceInput deviceInputWithDevice:frontCamera error:&error];
+        }else{
+            input = [AVCaptureDeviceInput deviceInputWithDevice:backCamera error:&error];
+        }
+        
         if (!input) {
             NSLog(@"ERROR: trying to open camera: %@", error);
         }
         [session addInput:input];
-        
+        //SLUTT BIt I KODE HER
         stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
         NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
         [stillImageOutput setOutputSettings:outputSettings];
