@@ -11,11 +11,11 @@
 @implementation ProfileController
 NSMutableArray *followers;
 NSMutableArray *following;
+
 -(StatusModel*)getUser{
     NSString *url = [NSString stringWithFormat:@"user/%@/status", [authHelper getUserId]];
     NSData *response = [self getHttpRequest:url];
     NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
-    NSLog(strdata);
     NSMutableDictionary *dic = [parserHelper parse:response];
     StatusModel *status = [[StatusModel alloc] init];
     [status build:dic[@"status"]];
@@ -23,14 +23,14 @@ NSMutableArray *following;
 }
 
 -(void)initFollowersWithUserId:(NSString*) Id{
-    NSLog(@"eher");
     followers = [[NSMutableArray alloc] init];
     NSString *url = [NSString stringWithFormat:@"user/%@/followers", Id];
     NSData *response = [self getHttpRequest:url];
-    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
-    NSLog(strdata);
-    NSMutableDictionary *dic = [parserHelper parse:response];
-    NSArray *followersRaw = dic[@"followings"];
+    //NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    //NSLog(@"HER: %@",strdata);
+    ParserHelper* parserHelper = [[ParserHelper alloc] init];
+    NSMutableDictionary *dic2 = [parserHelper parse:response];
+    NSArray *followersRaw = dic2[@"followings"];
     for(NSMutableDictionary* followerRaw in followersRaw){
         FollowModel *follower = [[FollowModel alloc] init];
         [follower build:followerRaw];

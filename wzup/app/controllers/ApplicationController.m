@@ -50,10 +50,11 @@
         isErrors = true;
     }
     else{
+        NSLog(@"ERROR");
         isErrors = true;
     }
    
-    NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+    NSLog(@"response status code: %ld on %@", (long)[httpResponse statusCode], [request URL]);
     return urlData;
 }
 
@@ -62,7 +63,6 @@
 };
 
 -(NSData *) getHttpRequest:(NSString *) url{
-    
     NSURL * serviceUrl = [NSURL URLWithString:[applicationHelper generateUrl:url]];
     NSMutableURLRequest * serviceRequest = [NSMutableURLRequest requestWithURL:serviceUrl];
     [serviceRequest setValue:@"text" forHTTPHeaderField:@"Content-type"];

@@ -8,6 +8,7 @@
 
 #import "ProfileViewController.h"
 #import "ProfileController.h"
+#import "followersTableViewController.h"
 
 
 @interface ProfileViewController ()
@@ -52,6 +53,11 @@ bool isFollowee;
     tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     tapGr.numberOfTapsRequired = 1;
     [self.expandArea addGestureRecognizer:tapGr];
+    
+    UITapGestureRecognizer *followerstapGr;
+    followerstapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFollowers:)];
+    followerstapGr.numberOfTapsRequired = 1;
+    [self.showFollowersView addGestureRecognizer:followerstapGr];
 
     
 }
@@ -224,6 +230,14 @@ bool isFollowee;
         [self animate:-269];
     }
     isExpanded = isExpanded == YES ? NO : YES;
+}
+
+-(void)showFollowers:(UITapGestureRecognizer *) sender{
+    NSLog(@"showFolloers");
+    followersTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"followers"];
+    NSLog(@"length %lu", (unsigned long)[[profileController getFollowers] count]);
+    [vc setFollowers:[profileController getFollowers]];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)animate:(NSInteger) constant{

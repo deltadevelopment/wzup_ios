@@ -15,9 +15,11 @@
     //Logout
     [authHelper resetCredentials];
     //Create dictionary with username and password
+    NSString *uniqueIdentifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     NSDictionary *credentials = @{
                                 @"username" : username,
-                                @"password" : password
+                                @"password" : password,
+                                @"device_id" : uniqueIdentifier
                                 };
     //Create json body from dictionary
     NSString *jsonData = [applicationHelper generateJsonFromDictionary:credentials];

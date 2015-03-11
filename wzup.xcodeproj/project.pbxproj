@@ -15,6 +15,8 @@
 		C506389C1A91E18C00F39D63 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C506389B1A91E18C00F39D63 /* Images.xcassets */; };
 		C506389F1A91E18C00F39D63 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C506389D1A91E18C00F39D63 /* LaunchScreen.xib */; };
 		C50638AB1A91E18C00F39D63 /* wzupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C50638AA1A91E18C00F39D63 /* wzupTests.m */; };
+		C55718CE1AB09A3700C4CE3D /* followersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55718CD1AB09A3700C4CE3D /* followersTableViewController.m */; };
+		C55718D11AB09F5700C4CE3D /* followerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C55718D01AB09F5700C4CE3D /* followerTableViewCell.m */; };
 		C55BD4DF1A9C8EE90061327D /* StatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C55BD4DE1A9C8EE90061327D /* StatusModel.m */; };
 		C55BD4E21A9C91050061327D /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C55BD4E11A9C91050061327D /* UserModel.m */; };
 		C55BD4E51A9C967E0061327D /* FeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55BD4E41A9C967E0061327D /* FeedController.m */; };
@@ -89,6 +91,10 @@
 		C50638A41A91E18C00F39D63 /* wzupTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wzupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C50638A91A91E18C00F39D63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C50638AA1A91E18C00F39D63 /* wzupTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wzupTests.m; sourceTree = "<group>"; };
+		C55718CC1AB09A3700C4CE3D /* followersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = followersTableViewController.h; sourceTree = "<group>"; };
+		C55718CD1AB09A3700C4CE3D /* followersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = followersTableViewController.m; sourceTree = "<group>"; };
+		C55718CF1AB09F5700C4CE3D /* followerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = followerTableViewCell.h; sourceTree = "<group>"; };
+		C55718D01AB09F5700C4CE3D /* followerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = followerTableViewCell.m; sourceTree = "<group>"; };
 		C55BD4DD1A9C8EE90061327D /* StatusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusModel.h; sourceTree = "<group>"; };
 		C55BD4DE1A9C8EE90061327D /* StatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusModel.m; sourceTree = "<group>"; };
 		C55BD4E01A9C91050061327D /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
@@ -348,6 +354,10 @@
 				C5FEC2D01AA9FAA700EB3C30 /* ProfileNavigationViewController.m */,
 				C595D29B1AAF63F6006CC479 /* SearchViewController.h */,
 				C595D29C1AAF63F6006CC479 /* SearchViewController.m */,
+				C55718CC1AB09A3700C4CE3D /* followersTableViewController.h */,
+				C55718CD1AB09A3700C4CE3D /* followersTableViewController.m */,
+				C55718CF1AB09F5700C4CE3D /* followerTableViewCell.h */,
+				C55718D01AB09F5700C4CE3D /* followerTableViewCell.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -499,6 +509,7 @@
 				C590CFE41A937FFC003432D7 /* LoginController.m in Sources */,
 				C590CFE31A937FFC003432D7 /* ApplicationController.m in Sources */,
 				F15576181A9FD05300202CF6 /* Feed2ViewController.m in Sources */,
+				C55718CE1AB09A3700C4CE3D /* followersTableViewController.m in Sources */,
 				C590D03F1A9C73BD003432D7 /* FeedTableViewCell.m in Sources */,
 				C55BD4F71A9F763A0061327D /* ProfileViewController.m in Sources */,
 				C590CFF01A93A9E6003432D7 /* StartViewController.m in Sources */,
@@ -513,6 +524,7 @@
 				C590D0371A9B4075003432D7 /* NavigationViewController.m in Sources */,
 				C590CFE91A937FFC003432D7 /* SSKeychain.m in Sources */,
 				F155761B1A9FD1D800202CF6 /* Feed2TableViewCell.m in Sources */,
+				C55718D11AB09F5700C4CE3D /* followerTableViewCell.m in Sources */,
 				C595D29D1AAF63F6006CC479 /* SearchViewController.m in Sources */,
 				C590CFE61A937FFC003432D7 /* AuthHelper.m in Sources */,
 				C50638971A91E18C00F39D63 /* SecondViewController.m in Sources */,

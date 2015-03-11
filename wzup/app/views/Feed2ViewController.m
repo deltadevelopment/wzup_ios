@@ -384,7 +384,7 @@ UITapGestureRecognizer *flipCameratapGr;
            
         }
         //cell.profilePicture.image = [UIImage imageNamed:[status getImgPath]];
-        cell.profilePicture.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", @"testBilde.jpg"]];
+        cell.profilePicture.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", @"status-icon2.png"]];
         
         //NSLog([status getImgPath]);
         cell.statusImg = [status getImgPath];
