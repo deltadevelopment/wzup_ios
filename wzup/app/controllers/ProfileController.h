@@ -25,4 +25,5 @@
 -(void)followUserWithUserId:(NSString *) userId;
 -(void)initRequestingFollowers;
 -(NSMutableArray*)getRequestingFollowers;
+-(void)AcceptFollowingWithUserId:(NSString *) Id;
 @end

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface followersTableViewController : UITableViewController
--(void)setFollowers:(NSMutableArray*) followers;
+-(void)setFollowers:(NSMutableArray*) theFollowers withBool:(bool) isFollower;
 @end

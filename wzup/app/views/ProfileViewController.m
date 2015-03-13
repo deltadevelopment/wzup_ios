@@ -58,6 +58,11 @@ bool isFollowee;
     followerstapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFollowers:)];
     followerstapGr.numberOfTapsRequired = 1;
     [self.showFollowersView addGestureRecognizer:followerstapGr];
+    
+    UITapGestureRecognizer *followingtapGr;
+    followingtapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFollowing:)];
+    followingtapGr.numberOfTapsRequired = 1;
+    [self.showFollowingView addGestureRecognizer:followingtapGr];
 
     
 }
@@ -236,7 +241,15 @@ bool isFollowee;
     NSLog(@"showFolloers");
     followersTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"followers"];
     NSLog(@"length %lu", (unsigned long)[[profileController getFollowers] count]);
-    [vc setFollowers:[profileController getFollowers]];
+    [vc setFollowers:[profileController getFollowers] withBool:YES];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)showFollowing:(UITapGestureRecognizer *) sender{
+    NSLog(@"showFolloers");
+    followersTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"followers"];
+    //NSLog(@"length %lu", (unsigned long)[[profileController getFollowers] count]);
+    [vc setFollowers:[profileController getFollowing] withBool:NO];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

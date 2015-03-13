@@ -64,9 +64,6 @@ NSMutableArray *following;
     NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
     NSLog(strdata);
     NSMutableDictionary *dic = [parserHelper parse:response];
-    
-    
-    
 }
 -(void)followUserWithUserId:(NSString *) userId{
     NSString *url = [NSString stringWithFormat:@"user/%@/follow/%@", [authHelper getUserId], userId];
@@ -85,8 +82,8 @@ NSMutableArray *following;
     requestingFollowers = [[NSMutableArray alloc] init];
     NSString *url = [NSString stringWithFormat:@"user/%@/following_requests", Id];
     NSData *response = [self getHttpRequest:url];
-    //NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
-    //NSLog(@"HER: %@",strdata);
+    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    NSLog(@"waiting for accept: %@",strdata);
     ParserHelper* parserHelper = [[ParserHelper alloc] init];
     NSMutableDictionary *dic2 = [parserHelper parse:response];
     NSArray *followersRaw = dic2[@"followings"];
@@ -95,7 +92,25 @@ NSMutableArray *following;
         [follower build:followerRaw];
         [requestingFollowers addObject:follower];
     }
+    for(FollowModel *follower in requestingFollowers){
+        NSLog(@"%@", [[follower getUser] getUsername]);
+    }
 };
+
+-(void)AcceptFollowingWithUserId:(NSString *) Id{
+///user/#{user_id}/accept_following/#{followee_id}
+    
+    NSString *url = [NSString stringWithFormat:@"user/%@/accept_following/%@", [authHelper getUserId], Id];
+    NSData *response = [self postHttpRequest:url json:nil];
+    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    NSLog(@"accepted response: %@",strdata);
+    
+    
+    //ParserHelper* parserHelper = [[ParserHelper alloc] init];
+    //NSMutableDictionary *dic2 = [parserHelper parse:response];
+    //NSArray *followersRaw = dic2[@"followings"];
+    
+}
 
 
 -(void)initFollowing{
