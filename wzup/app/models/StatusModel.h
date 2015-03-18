@@ -29,6 +29,7 @@ NSString * imgPath;
 -(void)build:(NSMutableDictionary *)dic;
 
 -(NSString*) getStatusId;
+-(NSString*)getMediaType;
 -(NSString*) getBody;
 -(NSString*) getLocation;
 -(NSString*) getUserId;

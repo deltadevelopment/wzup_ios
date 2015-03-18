@@ -21,6 +21,8 @@
 		C55BD4E21A9C91050061327D /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C55BD4E11A9C91050061327D /* UserModel.m */; };
 		C55BD4E51A9C967E0061327D /* FeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55BD4E41A9C967E0061327D /* FeedController.m */; };
 		C55BD4F71A9F763A0061327D /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55BD4F61A9F763A0061327D /* ProfileViewController.m */; };
+		C58E31CE1AB9EAA400654B30 /* MediaHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C58E31CD1AB9EAA400654B30 /* MediaHelper.m */; };
+		C58E31D11ABA094F00654B30 /* VideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = C58E31D01ABA094F00654B30 /* VideoController.m */; };
 		C590CFE31A937FFC003432D7 /* ApplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFD01A937FFC003432D7 /* ApplicationController.m */; };
 		C590CFE41A937FFC003432D7 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFD21A937FFC003432D7 /* LoginController.m */; };
 		C590CFE51A937FFC003432D7 /* ApplicationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFD51A937FFC003432D7 /* ApplicationHelper.m */; };
@@ -103,6 +105,10 @@
 		C55BD4E41A9C967E0061327D /* FeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedController.m; sourceTree = "<group>"; };
 		C55BD4F51A9F763A0061327D /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		C55BD4F61A9F763A0061327D /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		C58E31CC1AB9EAA400654B30 /* MediaHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaHelper.h; sourceTree = "<group>"; };
+		C58E31CD1AB9EAA400654B30 /* MediaHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaHelper.m; sourceTree = "<group>"; };
+		C58E31CF1ABA094F00654B30 /* VideoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoController.h; sourceTree = "<group>"; };
+		C58E31D01ABA094F00654B30 /* VideoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoController.m; sourceTree = "<group>"; };
 		C590CFCF1A937FFC003432D7 /* ApplicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationController.h; sourceTree = "<group>"; };
 		C590CFD01A937FFC003432D7 /* ApplicationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationController.m; sourceTree = "<group>"; };
 		C590CFD11A937FFC003432D7 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
@@ -282,6 +288,8 @@
 				C55BD4E41A9C967E0061327D /* FeedController.m */,
 				C5FEC2D21AADAB0B00EB3C30 /* ProfileController.h */,
 				C5FEC2D31AADAB0B00EB3C30 /* ProfileController.m */,
+				C58E31CF1ABA094F00654B30 /* VideoController.h */,
+				C58E31D01ABA094F00654B30 /* VideoController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -297,6 +305,8 @@
 				C590CFD91A937FFC003432D7 /* ConfigHelper.m */,
 				C590CFDA1A937FFC003432D7 /* ParserHelper.h */,
 				C590CFDB1A937FFC003432D7 /* ParserHelper.m */,
+				C58E31CC1AB9EAA400654B30 /* MediaHelper.h */,
+				C58E31CD1AB9EAA400654B30 /* MediaHelper.m */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -533,9 +543,11 @@
 				C50638941A91E18C00F39D63 /* FeedViewController.m in Sources */,
 				C55BD4DF1A9C8EE90061327D /* StatusModel.m in Sources */,
 				F1A386AD1A9BE9100084A8EF /* ApplicationViewController.m in Sources */,
+				C58E31D11ABA094F00654B30 /* VideoController.m in Sources */,
 				C506388E1A91E18C00F39D63 /* main.m in Sources */,
 				C590CFFC1A97905C003432D7 /* RegisterController.m in Sources */,
 				C590D0481A9C7D70003432D7 /* Navigation2ViewController.m in Sources */,
+				C58E31CE1AB9EAA400654B30 /* MediaHelper.m in Sources */,
 				C5DFD5811A920A1800F37803 /* LoginModel.m in Sources */,
 				C5FEC2D41AADAB0B00EB3C30 /* ProfileController.m in Sources */,
 				C590CFF31A94FC0D003432D7 /* LoginViewController.m in Sources */,

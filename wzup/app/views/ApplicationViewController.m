@@ -29,7 +29,6 @@
     NSValue* aValue = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
     keyboardSize = [aValue CGRectValue].size;
     verticalSpaceConstraintButton.constant += keyboardSize.height;
-    
 }
 
 -(void)keyboardWillHide {

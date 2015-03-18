@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MainViewController.h"
 #import "StatusModel.h"
+#import <MediaPlayer/MediaPlayer.h>
 @interface ProfileViewController : MainViewController
 @property (weak, nonatomic) IBOutlet UILabel *testLabel;
 @property (weak, nonatomic) IBOutlet UIView *topBar;
@@ -40,7 +41,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) IBOutlet UIView *showFollowersView;
 @property (weak, nonatomic) IBOutlet UILabel *notificationsLabel;
-
+@property (strong, nonatomic) MPMoviePlayerController *moviePlayer;
 - (IBAction)showSearch:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *availability;
 -(void)setOwnProfile:(bool) isProfile;

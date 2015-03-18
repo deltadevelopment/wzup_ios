@@ -20,8 +20,9 @@
     _user = [[UserModel alloc] init];
     _media_url = dic[@"media_url"];
     [_user build:dic[@"user"]];
+    _media_type = dic[@"media_type"];
     
-   //NSLog(@"The status is %@ %@",_body, _user_id);
+//NSLog(@"The status is %@ %@",_body, _user_id);
     //NSArray* pics = [[NSArray alloc] initWithObjects:@"testBilde.jpg", @"testBilde.jpg", @"testBilde.jpg",@"testBilde.jpg", nil];
     //imgPath =pics[rand()%4];
  
@@ -69,6 +70,10 @@
 }
 -(NSString*)getMediaUrl{
     return _media_url;
+}
+
+-(NSString*)getMediaType{
+    return _media_type;
 }
 
 -(NSData*)getMedia{

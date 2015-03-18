@@ -17,6 +17,7 @@
 #import "ApplicationHelper.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
+#import "MediaHelper.h"
 
 @interface Feed2ViewController ()
 
@@ -52,9 +53,12 @@ bool frontFacing;
 AVCaptureDevice *frontCamera;
 AVCaptureDevice *backCamera;
 UITapGestureRecognizer *flipCameratapGr;
+MediaHelper *mediaHelper;
+
 - (void)viewDidLoad {
     littleSelector = @selector(imageIsUploaded);
     authHelper = [[AuthHelper alloc] init];
+    mediaHelper = [[MediaHelper alloc] init];
     self.availabilityView.alpha = 0.0;
     [super viewDidLoad];
     [self showTopBar];
@@ -94,7 +98,10 @@ UITapGestureRecognizer *flipCameratapGr;
                                        action:@selector(labelDragged:)];
 
     [_statusButton addGestureRecognizer:gesture];
-    
+    UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc]
+                                                 initWithTarget:self action:@selector(recordVideo:)];
+    [longGesture setMinimumPressDuration:1];
+    [_statusButton addGestureRecognizer:longGesture];
     
     
 }
@@ -289,17 +296,10 @@ UITapGestureRecognizer *flipCameratapGr;
         frontFacing = frontFacing ? NO : YES;
         [self initializeCamera:cameraCell.statusImage];
     }
-
-  
-    
-    
 }
 
 -(void)addCaption:(UITapGestureRecognizer *) sender{
     NSLog(@"Adding capture");
-    
-    
-    
 }
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
@@ -681,6 +681,42 @@ UITapGestureRecognizer *flipCameratapGr;
 }
 */
 
+-(void)recordVideo:(UILongPressGestureRecognizer *) recognizer{
+    if (recognizer.state == UIGestureRecognizerStateBegan)
+    {
+        // Long press detected, start the timer
+        if(cameraIsShown){
+            NSLog(@"starter filme her");
+            
+            //YES == front camera
+            [session stopRunning];
+            [captureVideoPreviewLayer removeFromSuperlayer];
+            [mediaHelper setView:cameraCell.statusImage];
+            [mediaHelper initaliseVideo];
+            [mediaHelper CameraToggleButtonPressed:YES];
+            [mediaHelper StartStopRecording];
+            
+            
+        }
+        
+    }
+    else
+    {
+        if (recognizer.state == UIGestureRecognizerStateCancelled
+            || recognizer.state == UIGestureRecognizerStateFailed
+            || recognizer.state == UIGestureRecognizerStateEnded)
+        {
+            // Long press ended, stop the timer
+            if(cameraIsShown){
+                NSLog(@"slutter filme her");
+                [mediaHelper StartStopRecording];
+            }
+        }
+    }
+
+
+}
+
 - (IBAction)addStatus:(id)sender {
     if(!cameraIsShown){
         cameraIsShown = YES;
@@ -855,28 +891,25 @@ UITapGestureRecognizer *flipCameratapGr;
         
         if (imageSampleBuffer != NULL) {
             NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
-
             imgTaken = [UIImage imageWithData:imageData];
             CGRect cropRect = CGRectMake(0 ,0 ,480 ,640);
             UIGraphicsBeginImageContextWithOptions(cropRect.size, self.view, 1.0f);
             [imgTaken drawInRect:cropRect];
             UIImage * customScreenShot = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
-        NSData* data = UIImagePNGRepresentation(customScreenShot);
+            NSData* data = UIImagePNGRepresentation(customScreenShot);
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 [feedController sendImageToServer:data];
-                
-                
             });
             //UIImage *imgTaken = [UIImage imageWithData:imageData];
             
            //[feed removeObjectAtIndex:0];
-     
+            
             [session stopRunning];
             [captureVideoPreviewLayer removeFromSuperlayer];
-           _tableView.scrollEnabled = YES;
-             self.cancelButton.hidden = YES;
-           [_tableView reloadData];
+            _tableView.scrollEnabled = YES;
+            self.cancelButton.hidden = YES;
+            [_tableView reloadData];
             //[self processImage:[UIImage imageWithData:imageData]];
         }
 

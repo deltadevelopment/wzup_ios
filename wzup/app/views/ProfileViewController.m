@@ -9,6 +9,8 @@
 #import "ProfileViewController.h"
 #import "ProfileController.h"
 #import "followersTableViewController.h"
+#import "MediaHelper.h"
+
 
 
 @interface ProfileViewController ()
@@ -23,7 +25,20 @@ NSUInteger NumberOfFollowings;
 bool isExpanded = YES;
 bool isOwnProfile = YES;
 bool isFollowee;
+MediaHelper *mediaHelper;
 - (void)viewDidLoad {
+    mediaHelper = [[MediaHelper alloc]init];
+    /*
+    [mediaHelper initaliseVideo];
+    //YES == front camera
+    [mediaHelper CameraToggleButtonPressed:YES];
+    [mediaHelper StartStopRecording];
+    [NSTimer scheduledTimerWithTimeInterval:4.0
+                                     target:self
+                                   selector:@selector(stopRecording)
+                                   userInfo:nil
+                                    repeats:NO];
+     */
     isExpanded = YES;
     [super viewDidLoad];
     [self showTopBar];
@@ -43,6 +58,10 @@ bool isFollowee;
         });
     }
    
+}
+-(void)stopRecording{
+    [mediaHelper StartStopRecording];
+
 }
 
 -(void)setOwnProfile:(bool) isProfile{
@@ -194,12 +213,62 @@ bool isFollowee;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
     
     dispatch_async(queue, ^{
-        UIImage *image = [UIImage imageWithData:[status getMedia]];
-        image = [self getCroppedImage:image];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [self.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
-        });
+        if([[status getMediaType] intValue] == 1){
+            UIImage *image = [UIImage imageWithData:[status getMedia]];
+            image = [self getCroppedImage:image];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
+            });
+        }else{
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                //[self getVideo];
+            });
+        }
+       
     });
+}
+
+-(void)getVideo{
+    NSURL *url = [NSURL URLWithString:[status getMediaUrl]];
+   // [NSURl file]
+    MPMoviePlayerController *player = [[MPMoviePlayerController alloc] initWithContentURL:url];
+    player.view.frame = CGRectMake(0,0, 480, 640);
+    NSLog(@"video: %@",[status getMediaUrl]);
+    [self.statusImage addSubview:player.view];
+    [player play];
+}
+
+-(void)playMovie
+{
+    NSURL *url = [NSURL URLWithString:[status getMediaUrl]];
+    NSLog(@"video: %@",[status getMediaUrl]);
+    _moviePlayer =  [[MPMoviePlayerController alloc]
+                     initWithContentURL:[NSURL fileURLWithPath:[status getMediaUrl] isDirectory:NO]];
+  
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(moviePlayBackDidFinish:)
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+                                               object:_moviePlayer];
+    
+    _moviePlayer.controlStyle = MPMovieControlStyleDefault;
+    _moviePlayer.shouldAutoplay = YES;
+    [self.view addSubview:_moviePlayer.view];
+    [_moviePlayer setFullscreen:YES animated:YES];
+}
+
+- (void) moviePlayBackDidFinish:(NSNotification*)notification {
+    MPMoviePlayerController *player = [notification object];
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:MPMoviePlayerPlaybackDidFinishNotification
+     object:player];
+    
+    if ([player
+         respondsToSelector:@selector(setFullscreen:animated:)])
+    {
+        [player.view removeFromSuperview];
+    }
 }
 
 -(void)setProfile:(StatusModel* ) statusProfile{
