@@ -36,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UILabel *subscribeText;
 @property (weak, nonatomic) IBOutlet UIView *followView;
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (weak, nonatomic) IBOutlet UILabel *followButtonText;
 @property (weak, nonatomic) IBOutlet UIView *showFollowingView;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
@@ -44,5 +45,6 @@
 @property (strong, nonatomic) MPMoviePlayerController *moviePlayer;
 - (IBAction)showSearch:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *availability;
+- (IBAction)playVideo:(id)sender;
 -(void)setOwnProfile:(bool) isProfile;
 @end

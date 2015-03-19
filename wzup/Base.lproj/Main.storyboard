@@ -1135,22 +1135,36 @@
                                                             </mask>
                                                         </variation>
                                                     </view>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mpu-5u-pYP">
+                                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                        <state key="normal" title="play">
+                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="playVideo:" destination="3rJ-Kr-Dal" eventType="touchUpInside" id="ah2-Sy-WNC"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstItem="Mpu-5u-pYP" firstAttribute="top" secondItem="p0R-gD-uRz" secondAttribute="top" constant="184" id="4jD-4A-zv5"/>
                                                     <constraint firstAttribute="height" constant="305" id="EW8-mh-PFZ">
                                                         <variation key="heightClass=regular-widthClass=compact" constant="480"/>
                                                     </constraint>
                                                     <constraint firstAttribute="bottom" secondItem="seq-Wl-4xd" secondAttribute="bottom" id="PTz-Xw-4U6"/>
+                                                    <constraint firstItem="Mpu-5u-pYP" firstAttribute="leading" secondItem="p0R-gD-uRz" secondAttribute="leading" constant="177" id="dOT-W1-YGH"/>
                                                     <constraint firstAttribute="trailing" secondItem="seq-Wl-4xd" secondAttribute="trailing" id="koD-oQ-2bQ"/>
                                                     <constraint firstItem="seq-Wl-4xd" firstAttribute="leading" secondItem="p0R-gD-uRz" secondAttribute="leading" id="veI-Bd-31D"/>
                                                 </constraints>
                                                 <variation key="default">
                                                     <mask key="subviews">
                                                         <exclude reference="seq-Wl-4xd"/>
+                                                        <exclude reference="Mpu-5u-pYP"/>
                                                     </mask>
                                                     <mask key="constraints">
                                                         <exclude reference="EW8-mh-PFZ"/>
+                                                        <exclude reference="4jD-4A-zv5"/>
+                                                        <exclude reference="dOT-W1-YGH"/>
                                                         <exclude reference="PTz-Xw-4U6"/>
                                                         <exclude reference="koD-oQ-2bQ"/>
                                                         <exclude reference="veI-Bd-31D"/>
@@ -1159,9 +1173,12 @@
                                                 <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="subviews">
                                                         <include reference="seq-Wl-4xd"/>
+                                                        <include reference="Mpu-5u-pYP"/>
                                                     </mask>
                                                     <mask key="constraints">
                                                         <include reference="EW8-mh-PFZ"/>
+                                                        <include reference="4jD-4A-zv5"/>
+                                                        <include reference="dOT-W1-YGH"/>
                                                         <include reference="PTz-Xw-4U6"/>
                                                         <include reference="koD-oQ-2bQ"/>
                                                         <include reference="veI-Bd-31D"/>
@@ -1700,6 +1717,7 @@
                         <outlet property="nameLabel" destination="LS5-aG-fS1" id="fGS-E5-aUj"/>
                         <outlet property="notifications" destination="oOT-t3-gxe" id="MFF-4R-C70"/>
                         <outlet property="notificationsLabel" destination="yXr-Fs-dHy" id="kD4-pQ-CPQ"/>
+                        <outlet property="playButton" destination="Mpu-5u-pYP" id="QDj-b0-uHk"/>
                         <outlet property="pointsIndicator" destination="JqB-JU-N0s" id="h8B-IM-Z5U"/>
                         <outlet property="profileImage" destination="Ave-e3-FiK" id="Llc-Mf-d8R"/>
                         <outlet property="searchButton" destination="vyf-6O-Fgc" id="0A3-Wf-rSL"/>

@@ -25,7 +25,9 @@ NSUInteger NumberOfFollowings;
 bool isExpanded = YES;
 bool isOwnProfile = YES;
 bool isFollowee;
+bool isPlaying;
 MediaHelper *mediaHelper;
+MPMoviePlayerController *player;
 - (void)viewDidLoad {
     mediaHelper = [[MediaHelper alloc]init];
     /*
@@ -54,14 +56,34 @@ MediaHelper *mediaHelper;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self updateGUI];
                 [self attachGestures];
+                [self initMedia];
             });
         });
     }
    
 }
+-(void)initMedia{
+    SEL mediaDone = @selector(mediaIsDownloaded:);
+    [status getMedia:self withSelector:mediaDone withObject:self];
+}
 -(void)stopRecording{
     [mediaHelper StartStopRecording];
 
+}
+
+- (IBAction)playVideo:(id)sender {
+    if(player != nil){
+        if(isPlaying){
+            isPlaying = NO;
+            [player stop];
+            [player.view removeFromSuperview];
+        }else{
+            isPlaying = YES;
+            //[self.statusImage addSubview:player.view];
+            [self.statusImage insertSubview:player.view belowSubview:self.bottomBar];
+            [player play];
+        }
+    }
 }
 
 -(void)setOwnProfile:(bool) isProfile{
@@ -176,6 +198,7 @@ MediaHelper *mediaHelper;
 
 -(void)getData{
     status = [profileController getUser];
+
     [profileController initFollowers];
     [profileController initFollowing];
     NumberOfFollowers = [profileController getNumberOfFollowers];
@@ -207,54 +230,80 @@ MediaHelper *mediaHelper;
     
 }
 
+-(void)mediaIsDownloaded:(NSObject *) object{
+    if([[status getMediaType] intValue] == 1){
+        UIImage *image = [UIImage imageWithData:[status getMedia]];
+        image = [self getCroppedImage:image];
+        self.playButton.hidden = YES;
+        [self.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
+        
+    }else{
+        [self getVideo];
+    }
+}
+
 
 
 -(void)getMedia{
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-    
-    dispatch_async(queue, ^{
-        if([[status getMediaType] intValue] == 1){
-            UIImage *image = [UIImage imageWithData:[status getMedia]];
-            image = [self getCroppedImage:image];
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [self.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
-            });
-        }else{
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                //[self getVideo];
-            });
-        }
-       
-    });
+
 }
 
 -(void)getVideo{
-    NSURL *url = [NSURL URLWithString:[status getMediaUrl]];
-   // [NSURl file]
-    MPMoviePlayerController *player = [[MPMoviePlayerController alloc] initWithContentURL:url];
-    player.view.frame = CGRectMake(0,0, 480, 640);
-    NSLog(@"video: %@",[status getMediaUrl]);
-    [self.statusImage addSubview:player.view];
-    [player play];
-}
-
--(void)playMovie
-{
-    NSURL *url = [NSURL URLWithString:[status getMediaUrl]];
-    NSLog(@"video: %@",[status getMediaUrl]);
-    _moviePlayer =  [[MPMoviePlayerController alloc]
-                     initWithContentURL:[NSURL fileURLWithPath:[status getMediaUrl] isDirectory:NO]];
+    NSData *data = [status getMedia];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *appFile = [documentsDirectory stringByAppendingPathComponent:@"MyFile.mov"];
+    [data writeToFile:appFile atomically:YES];
+    NSURL *movieUrl = [NSURL fileURLWithPath:appFile];
   
+    //NSString *dataString = [[NSString alloc] initWithData:[status getMedia] encoding:NSUTF8StringEncoding];
+    NSLog(@"video: %@",@"mdia is downloaded");
+    //NSURL *url = [NSURL URLWithString:dataString];
+    player = [[MPMoviePlayerController alloc] initWithContentURL:movieUrl];
+    player.view.frame = CGRectMake(0,0, 480, 640);
+    //NSLog(@"video: %@",[status getMediaUrl]);
+    player.movieSourceType = MPMovieSourceTypeFile;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(moviePlayBackDidFinish:)
                                                  name:MPMoviePlayerPlaybackDidFinishNotification
-                                               object:_moviePlayer];
+                                               object:player];
     
-    _moviePlayer.controlStyle = MPMovieControlStyleDefault;
-    _moviePlayer.shouldAutoplay = YES;
-    [self.view addSubview:_moviePlayer.view];
-    [_moviePlayer setFullscreen:YES animated:YES];
+    AVAsset *asset = [AVAsset assetWithURL:movieUrl];
+    
+    //  Get thumbnail at the very start of the video
+    CMTime thumbnailTime = [asset duration];
+    thumbnailTime.value = 0;
+    
+    //  Get image from the video at the given time
+    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    imageGenerator.appliesPreferredTrackTransform = YES;
+
+    CGImageRef imageRef = [imageGenerator copyCGImageAtTime:thumbnailTime actualTime:NULL error:NULL];
+    UIImage *thumbnail = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    [self.statusImage setBackgroundColor:[UIColor colorWithPatternImage:thumbnail]];
+}
+
+-(void)playMovie
+{
+    NSData *data = [status getMedia];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *appFile = [documentsDirectory stringByAppendingPathComponent:@"MyFile.mov"];
+    [data writeToFile:appFile atomically:YES];
+    NSURL *movieUrl = [NSURL fileURLWithPath:appFile];
+    MPMoviePlayerViewController *mp = [[MPMoviePlayerViewController alloc] initWithContentURL:movieUrl];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(moviePlayBackDidFinish:)
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+                                               object:mp];
+    
+    mp.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
+    [self.statusImage addSubview:mp.view];
+    [mp.moviePlayer play];
+    //[self presentMoviePlayerViewControllerAnimated:mp];
 }
 
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {
@@ -263,12 +312,10 @@ MediaHelper *mediaHelper;
      removeObserver:self
      name:MPMoviePlayerPlaybackDidFinishNotification
      object:player];
+    isPlaying = NO;
+    [player stop];
+    [player.view removeFromSuperview];
     
-    if ([player
-         respondsToSelector:@selector(setFullscreen:animated:)])
-    {
-        [player.view removeFromSuperview];
-    }
 }
 
 -(void)setProfile:(StatusModel* ) statusProfile{

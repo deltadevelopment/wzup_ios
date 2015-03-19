@@ -31,6 +31,7 @@ NSString * imgPath;
 -(NSString*) getStatusId;
 -(NSString*)getMediaType;
 -(NSString*) getBody;
+-(void)getMedia:(NSObject*)object;
 -(NSString*) getLocation;
 -(NSString*) getUserId;
 -(NSString*) getCreatedAt;
@@ -39,6 +40,7 @@ NSString * imgPath;
 -(NSString*)getImgPath;
 -(NSString*)getMediaUrl;
 -(NSData*)getMedia;
+-(void)getMedia:(NSObject*)object withSelector:(SEL)mediaDoneSelector withObject:(NSObject*) element;
 
 
 

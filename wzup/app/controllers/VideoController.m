@@ -79,6 +79,8 @@ NSString *key;
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     
     [request setHTTPBody:imageData];
+   //[request addData:audioData withFileName:videoName andContentType:@"video/mov" forKey:@"videoFile"];
+
     NSLog(@"token is --- %@", token);
     
     

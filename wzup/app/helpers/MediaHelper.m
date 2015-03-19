@@ -390,7 +390,7 @@ didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
       fromConnections:(NSArray *)connections
                 error:(NSError *)error
 {
-    
+    NSLog(@"Local path: %@", [outputFileURL path]);
     NSLog(@"didFinishRecordingToOutputFileAtURL - enter");
     
     BOOL RecordedSuccessfully = YES;

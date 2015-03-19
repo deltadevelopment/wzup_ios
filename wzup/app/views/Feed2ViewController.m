@@ -349,7 +349,8 @@ MediaHelper *mediaHelper;
         [[cell getTopBar] addGestureRecognizer:tapGr];
         StatusModel *status = [feed objectAtIndex:indexPath.row];
         cell.statusLabel.text = [status getBody];
-       
+        SEL setImageSelector = @selector(setMediaToCell:);
+        [status getMedia:self withSelector:setImageSelector withObject:cell];
         cell.nameLabel.text = [[status getUser] getDisplayName];
         if([[status getUser] getId ] == [[authHelper getUserId] intValue]){
             [feedController setLoading:[cell uploadImageIndicatorLabel]];
@@ -404,7 +405,7 @@ MediaHelper *mediaHelper;
             }
             image = [self imageByScalingAndCroppingForSize:size img:image];
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [cell stopImageLoading];
+                
                 [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
                 if(imgTaken != nil){
                     NSLog(@"setting image ---------");
@@ -446,6 +447,23 @@ MediaHelper *mediaHelper;
     }
    
     return cell;
+}
+
+-(void)setMediaToCell:(Feed2TableViewCell *)cell{
+    CGSize size = CGSizeMake(screenWidth, 500);
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    StatusModel *status = [feed objectAtIndex:indexPath.row];
+    NSLog(@"media is downloaded here ---");
+    UIImage * image = [[UIImage alloc] init];
+    [cell stopImageLoading];
+    if([status getMedia] == nil){
+        image =  [UIImage imageNamed:@"status-icon2.png"];
+    }else{
+        image = [UIImage imageWithData:[status getMedia]];
+    }
+    image = [self imageByScalingAndCroppingForSize:size img:image];
+    [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
 }
 
 -(void)textFieldDidChange:(UITextField *) textField{
