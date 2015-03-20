@@ -58,6 +58,8 @@ MediaHelper *mediaHelper;
 CircleIndicator *circleIndicator;
 NSTimer *recordTimer;
 bool hasStoppedRecording;
+MPMoviePlayerController *player;
+bool isPlaying;
 
 - (void)viewDidLoad {
     littleSelector = @selector(imageIsUploaded);
@@ -137,7 +139,7 @@ bool hasStoppedRecording;
                                              options: UIViewAnimationOptionCurveLinear
                                           animations:^{
                                               //[currentCell tickImage].hidden = NO;
-                                             [currentCell tickImage].alpha = 0.0;
+                                              [currentCell tickImage].alpha = 0.0;
                                               
                                           }
                                           completion:^(BOOL finished){
@@ -343,7 +345,92 @@ bool hasStoppedRecording;
 
     return [feed count];
 }
+-(void)initMedia:(NSIndexPath *) indexPath{
+    SEL mediaDone = @selector(mediaIsDownloaded:);
+    StatusModel *status = [feed objectAtIndex:indexPath.row];
+    [status getMedia:self withSelector:mediaDone withObject:indexPath];
+}
 
+-(void)mediaIsDownloaded:(NSIndexPath *) indexPath{
+    StatusModel *status = [feed objectAtIndex:indexPath.row];
+    Feed2TableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    if([[status getMediaType] intValue] == 1){
+        UIImage *image = [UIImage imageWithData:[status getMedia]];
+        image = [self getCroppedImage:image];
+        //self.playButton.hidden = YES;
+        [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
+        
+    }else{
+        [self getVideo:indexPath];
+        //[self playVideo:cell];
+    }
+}
+
+-(void)getVideo:(NSIndexPath *) indexPath{
+    StatusModel *status = [feed objectAtIndex:indexPath.row];
+    Feed2TableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    NSData *data = [status getMedia];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *appFile = [documentsDirectory stringByAppendingPathComponent:@"MyFile.mov"];
+    [data writeToFile:appFile atomically:YES];
+    NSURL *movieUrl = [NSURL fileURLWithPath:appFile];
+    
+    //NSString *dataString = [[NSString alloc] initWithData:[status getMedia] encoding:NSUTF8StringEncoding];
+    NSLog(@"video: %@",@"mdia is downloaded");
+    //NSURL *url = [NSURL URLWithString:dataString];
+    player = [[MPMoviePlayerController alloc] initWithContentURL:movieUrl];
+    player.view.frame = CGRectMake(0,0, 480, 640);
+    //NSLog(@"video: %@",[status getMediaUrl]);
+    player.movieSourceType = MPMovieSourceTypeFile;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(moviePlayBackDidFinish:)
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+                                               object:player];
+    
+    AVAsset *asset = [AVAsset assetWithURL:movieUrl];
+    
+    //  Get thumbnail at the very start of the video
+    CMTime thumbnailTime = [asset duration];
+    thumbnailTime.value = 0;
+    
+    //  Get image from the video at the given time
+    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    imageGenerator.appliesPreferredTrackTransform = YES;
+    
+    CGImageRef imageRef = [imageGenerator copyCGImageAtTime:thumbnailTime actualTime:NULL error:NULL];
+    UIImage *thumbnail = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:thumbnail]];
+}
+
+
+- (void) moviePlayBackDidFinish:(NSNotification*)notification {
+    MPMoviePlayerController *player = [notification object];
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:MPMoviePlayerPlaybackDidFinishNotification
+     object:player];
+    isPlaying = NO;
+    [player stop];
+    [player.view removeFromSuperview];
+}
+
+- (IBAction)playVideo:(Feed2TableViewCell *) cell {
+    if(player != nil){
+        if(isPlaying){
+            isPlaying = NO;
+            [player stop];
+            [player.view removeFromSuperview];
+        }else{
+            isPlaying = YES;
+            //[self.statusImage addSubview:player.view];
+            [cell.statusImage insertSubview:player.view belowSubview:cell.bottomBar];
+            [player play];
+        }
+    }
+}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -358,11 +445,14 @@ bool hasStoppedRecording;
     }
     
     if([feed count] != 0){
+  
         UITapGestureRecognizer *tapGr;
         tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         tapGr.numberOfTapsRequired = 1;
         [[cell getTopBar] addGestureRecognizer:tapGr];
         StatusModel *status = [feed objectAtIndex:indexPath.row];
+        [self initMedia:indexPath];
+                
         cell.statusLabel.text = [status getBody];
         SEL setImageSelector = @selector(setMediaToCell:);
         [status getMedia:self withSelector:setImageSelector withObject:cell];
@@ -445,7 +535,7 @@ bool hasStoppedRecording;
                   
                 }
                 
-                [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
+               // [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
                 if(imgTaken != nil){
                     NSLog(@"setting image ---------");
                     if([[status getUser] getId ] == [[authHelper getUserId] intValue]){
@@ -502,7 +592,10 @@ bool hasStoppedRecording;
         image = [UIImage imageWithData:[status getMedia]];
     }
     image = [self imageByScalingAndCroppingForSize:size img:image];
-    [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
+    if([[status getMediaType] integerValue] == 1){
+     [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
+    }
+   
 }
 
 -(void)textFieldDidChange:(UITextField *) textField{
@@ -630,6 +723,10 @@ bool hasStoppedRecording;
         
         
         [tableView endUpdates];
+    }
+    if(shouldExpand){
+    Feed2TableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
+        [self playVideo:cell];
     }
   
 
