@@ -17,6 +17,10 @@
     }
     return self;
 }
+-(void)storeDeviceId:(NSString *) deviceId{
+    NSLog(@"the devi id is: %@", deviceId);
+    [SSKeychain setPassword:deviceId forService:@"deviceId" account:@"AnyUser"];
+}
 
 - (void) storeCredentials:(NSMutableDictionary *) credentials{
     NSString *userIdInt = credentials[@"user_id"];
@@ -39,5 +43,9 @@
     NSString *userId = [SSKeychain passwordForService:@"userId" account:@"AnyUser"];
     return userId;
 };
+
+-(NSString *)getDeviceId{
+    return [SSKeychain passwordForService:@"deviceId" account:@"AnyUser"];
+}
 
 @end

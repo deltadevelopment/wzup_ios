@@ -25,8 +25,12 @@
     AVCaptureSession *CaptureSession;
     AVCaptureMovieFileOutput *MovieFileOutput;
     AVCaptureDeviceInput *VideoInputDevice;
+    SEL mediaSuccessSelector;
+    NSObject *mediaSuccessObject;
     
 }
+-(void)setMediaDoneSelector:(SEL) successSelector
+                 withObject:(NSObject*) object;
 @property (retain) AVCaptureVideoPreviewLayer *PreviewLayer;
 - (void)StartStopRecording;
 -(void)initaliseVideo;

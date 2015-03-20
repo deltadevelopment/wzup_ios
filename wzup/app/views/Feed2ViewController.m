@@ -18,7 +18,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 #import "MediaHelper.h"
-
+#import "CircleIndicator.h"
 @interface Feed2ViewController ()
 
 @end
@@ -35,6 +35,7 @@ CGSize screenSize;
 CGFloat screenWidth;
 CGFloat screenHeight;
 CGFloat horizontalSpaceDefault;
+CGFloat horizontalSpaceDefaultIndicator;
 ApplicationHelper *applicationHelper;
 bool availabilityFadeHasStarted;
 NSString* availableText;
@@ -54,15 +55,20 @@ AVCaptureDevice *frontCamera;
 AVCaptureDevice *backCamera;
 UITapGestureRecognizer *flipCameratapGr;
 MediaHelper *mediaHelper;
+CircleIndicator *circleIndicator;
+NSTimer *recordTimer;
+bool hasStoppedRecording;
 
 - (void)viewDidLoad {
     littleSelector = @selector(imageIsUploaded);
     authHelper = [[AuthHelper alloc] init];
     mediaHelper = [[MediaHelper alloc] init];
+    [mediaHelper setMediaDoneSelector:@selector(mediaIsUploaded:) withObject:self];
     self.availabilityView.alpha = 0.0;
     [super viewDidLoad];
     [self showTopBar];
     horizontalSpaceDefault = self.statusButtonHorizontalSpace.constant;
+     horizontalSpaceDefaultIndicator = self.indicatorHorizontalSpace.constant;
     screenBound = [[UIScreen mainScreen] bounds];
     screenSize = screenBound.size;
     screenWidth = screenSize.width;
@@ -80,6 +86,9 @@ MediaHelper *mediaHelper;
     applicationHelper = [[ApplicationHelper alloc] init];
     [applicationHelper addAvailableTexts];
     [applicationHelper addUnAvailableTexts];
+
+    
+    
 
     
     
@@ -111,7 +120,7 @@ MediaHelper *mediaHelper;
 }
 
 -(void)imageIsUploaded{
-    NSLog(@"METHOD HERE");
+    NSLog(@"MEDIA SUCCESS IMAGE");
     
     [UIView animateWithDuration:0.3f
                           delay:0.0f
@@ -128,7 +137,7 @@ MediaHelper *mediaHelper;
                                              options: UIViewAnimationOptionCurveLinear
                                           animations:^{
                                               //[currentCell tickImage].hidden = NO;
-                                              [currentCell tickImage].alpha = 0.0;
+                                             [currentCell tickImage].alpha = 0.0;
                                               
                                           }
                                           completion:^(BOOL finished){
@@ -173,6 +182,7 @@ MediaHelper *mediaHelper;
                          }
                          completion:^(BOOL finished){
                              _statusButtonHorizontalSpace.constant = horizontalSpaceDefault;
+                             _indicatorHorizontalSpace.constant = horizontalSpaceDefaultIndicator;
                              [UIView animateWithDuration:0.4f
                                                    delay:0.4f
                                                  options: UIViewAnimationOptionCurveLinear
@@ -197,7 +207,7 @@ MediaHelper *mediaHelper;
         UILabel *label = (UILabel *)gesture.view;
         CGPoint translation = [gesture translationInView:label];
         float newX = _statusButtonHorizontalSpace.constant;
-        
+        float newX2 = _indicatorHorizontalSpace.constant;
         //NSLog(@"gesture point %f",  translation.x);
         if(newX > 150){
             //Change availability
@@ -220,9 +230,11 @@ MediaHelper *mediaHelper;
             if(newX>= 300){
                 newX = 300;
                 _statusButtonHorizontalSpace.constant = newX;
+                _indicatorHorizontalSpace.constant = newX2;
             }
             else {
                 _statusButtonHorizontalSpace.constant -= translation.x;
+                _indicatorHorizontalSpace.constant -= translation.x;
             }
         }
         else{
@@ -230,9 +242,11 @@ MediaHelper *mediaHelper;
             if(newX <= 16){
                 newX = 16;
                 _statusButtonHorizontalSpace.constant = newX;
+                      _indicatorHorizontalSpace.constant = newX2;
             }
             else {
                 _statusButtonHorizontalSpace.constant -= translation.x;
+                      _indicatorHorizontalSpace.constant -= translation.x;
                 //NSLog(@"constraint is %f", _statusButtonHorizontalSpace.constant);
             }
         }
@@ -342,6 +356,7 @@ MediaHelper *mediaHelper;
         cell = [[Feed2TableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"customCell"];
        
     }
+    
     if([feed count] != 0){
         UITapGestureRecognizer *tapGr;
         tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -405,6 +420,30 @@ MediaHelper *mediaHelper;
             }
             image = [self imageByScalingAndCroppingForSize:size img:image];
             dispatch_sync(dispatch_get_main_queue(), ^{
+                if(hasStoppedRecording){
+                    if([[status getUser] getId ] == [[authHelper getUserId] intValue]){
+                        [[cell statusImage] removeGestureRecognizer:flipCameratapGr];
+                        
+                        cell.profilePicture.image = [UIImage imageNamed:@"testBilde.jpg"];
+                        cell.statusLabel.text = @"Tap to add caption";
+                        
+                        currentCell = cell;
+                        currentCellsIndexPath = indexPath;
+                        [currentCell editStatusTextField].text = @"";
+                        [currentCell editStatusTextField].hidden = NO;
+                        [currentCell editStatusTextField].delegate = self;
+                        [[currentCell editStatusTextField] addTarget:self
+                                                              action:@selector(textFieldDidChange:)
+                                                    forControlEvents:UIControlEventEditingChanged];
+                        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                                 selector:@selector(keyboardWillShow:)
+                                                                     name:UIKeyboardWillShowNotification
+                                                                   object:nil];
+                        
+                        //[cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[self imageByScalingAndCroppingForSize:size img:imgTaken]]];
+                    }
+                  
+                }
                 
                 [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
                 if(imgTaken != nil){
@@ -699,13 +738,42 @@ MediaHelper *mediaHelper;
 }
 */
 
+-(void)decrementSpin{
+    [circleIndicator incrementSpin];
+    if(circleIndicator.percent == 100){
+        //STOP RECORDING
+        [self stopRecording];
+    }
+}
+
+-(void)stopRecording{
+    if(!hasStoppedRecording){
+        //NSLog(@"");
+        [mediaHelper StartStopRecording];
+        [recordTimer invalidate];
+        [self closeCamera];
+        [circleIndicator removeFromSuperview];
+        circleIndicator.percent = 0;
+        hasStoppedRecording = YES;
+        //shouldExpand = NO;
+               _tableView.scrollEnabled = YES;
+        self.cancelButton.hidden = YES;
+        [_tableView reloadData];
+    }
+}
+
+
 -(void)recordVideo:(UILongPressGestureRecognizer *) recognizer{
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
         // Long press detected, start the timer
         if(cameraIsShown){
             NSLog(@"starter filme her");
-            
+             hasStoppedRecording = NO;
+            circleIndicator = [[CircleIndicator alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
+            [self.indicatorView addSubview:circleIndicator];
+            [circleIndicator setIndicatorWithMaxTime:2];
+            recordTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(decrementSpin) userInfo:nil repeats:YES];
             //YES == front camera
             [session stopRunning];
             [captureVideoPreviewLayer removeFromSuperlayer];
@@ -718,6 +786,8 @@ MediaHelper *mediaHelper;
         }
         
     }
+    
+    
     else
     {
         if (recognizer.state == UIGestureRecognizerStateCancelled
@@ -726,8 +796,7 @@ MediaHelper *mediaHelper;
         {
             // Long press ended, stop the timer
             if(cameraIsShown){
-                NSLog(@"slutter filme her");
-                [mediaHelper StartStopRecording];
+                [self stopRecording];
             }
         }
     }
@@ -754,6 +823,7 @@ MediaHelper *mediaHelper;
                                      self.cancelButton.hidden = NO;
                                      self.cancelButton.alpha = 0.7;
                                      _statusButtonHorizontalSpace.constant += 130;
+                                     _indicatorHorizontalSpace.constant += 130;
                                      [self.view layoutIfNeeded];
                                  }
                                  completion:^(BOOL finished){
@@ -800,6 +870,7 @@ MediaHelper *mediaHelper;
                                  animations:^{
                                      
                                      _statusButtonHorizontalSpace.constant = horizontalSpaceDefault;
+                                     _indicatorHorizontalSpace.constant = 6;
                                      [self.view layoutIfNeeded];
                                  }
                                  completion:^(BOOL finished){
@@ -808,6 +879,29 @@ MediaHelper *mediaHelper;
             });
         });
     }
+}
+
+-(void)closeCamera{
+    cameraIsShown = NO;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Update the UI
+            [UIView animateWithDuration:0.3f
+                                  delay:0.0f
+                                options: UIViewAnimationOptionCurveLinear
+                             animations:^{
+                                 
+                                 _statusButtonHorizontalSpace.constant = horizontalSpaceDefault;
+                                 _indicatorHorizontalSpace.constant = 6;
+                                 [self.view layoutIfNeeded];
+                             }
+                             completion:^(BOOL finished){
+                                 
+                             }];
+        });
+    });
 }
 
 - (void) initializeCamera:(UIView *) cameraView {
@@ -882,8 +976,31 @@ MediaHelper *mediaHelper;
         [session startRunning];
         
     });
+}
+
+-(void)mediaIsUploaded:(NSNumber*) percentageDownloaded{
+    NSLog(@"downloaded: %@", percentageDownloaded);
+    CGRect screenBound = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = screenBound.size;
+    CGFloat screenWidth = screenSize.width;
+    CGFloat screenHeight = screenSize.height;
+    UILabel *loadingLabel = [currentCell uploadImageIndicatorLabel];
     
-  
+    if(loadingLabel != nil){
+        loadingLabel.hidden = NO;
+        double width = ([percentageDownloaded longLongValue]* screenWidth)/100 ;
+        CGRect frame = loadingLabel.frame;
+        NSLog(@"%f", width);
+        frame.size.width = width;
+        loadingLabel.frame = frame;
+        [loadingLabel setNeedsDisplay];
+    }
+    if([percentageDownloaded longLongValue] == 100){
+        loadingLabel.hidden = YES;
+        [self imageIsUploaded];
+        
+    }
+    
     
 }
 
@@ -939,7 +1056,7 @@ MediaHelper *mediaHelper;
         _tableView.scrollEnabled = YES;
         
         cameraIsShown = false;
-    
+        
         //shouldExpand = NO;
         dispatch_async(dispatch_get_main_queue(), ^{
             self.cancelButton.hidden = YES;
@@ -950,6 +1067,7 @@ MediaHelper *mediaHelper;
                                  animations:^{
                                      
                                      _statusButtonHorizontalSpace.constant = horizontalSpaceDefault;
+                                     _indicatorHorizontalSpace.constant = 6;
                                      [self.view layoutIfNeeded];
                                  }
                                  completion:^(BOOL finished){

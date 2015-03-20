@@ -13,14 +13,16 @@
 -(void)login:(NSString *) username
         pass:(NSString *) password{
     //Logout
-    [authHelper resetCredentials];
+   // [authHelper resetCredentials];
     //Create dictionary with username and password
     NSString *uniqueIdentifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    NSLog(@"Device Id sending: %@", [authHelper getDeviceId]);
     NSDictionary *credentials = @{
-                                @"username" : username,
-                                @"password" : password,
-                                @"device_id" : uniqueIdentifier
-                                };
+                                  @"username" : username,
+                                  @"password" : password,
+                                  @"device_id" : [authHelper getDeviceId],
+                                  @"device_type":@"ios"
+                                  };
     //Create json body from dictionary
     NSString *jsonData = [applicationHelper generateJsonFromDictionary:credentials];
     //Create the request with the body

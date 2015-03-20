@@ -232,8 +232,9 @@ VideoController *videoController;
     //[[[self view] layer] addSublayer:[[self CaptureManager] previewLayer]];
     //We use this instead so it goes on a layer behind our UI controls (avoids us having to manually bring each control to the front):
     CameraView = [[UIView alloc] init];
-    [view addSubview:CameraView];
-    [view sendSubviewToBack:CameraView];
+    //[view addSubview:CameraView];
+     [view.layer insertSublayer:CameraView.layer atIndex:0];
+    //[view sendSubviewToBack:CameraView];
     
     [[CameraView layer] addSublayer:_PreviewLayer];
     //----- START THE CAPTURE SESSION RUNNING -----
@@ -421,13 +422,21 @@ didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
         }
         NSString *path = [outputFileURL path];
         NSData *data = [[NSFileManager defaultManager] contentsAtPath:path];
-        [videoController sendVideoToServer:data];
+        
+        [videoController sendVideoToServer:data withSelector:mediaSuccessSelector withObject:mediaSuccessObject withArg:nil];
         CaptureSession = nil;
         MovieFileOutput = nil;
         VideoInputDevice = nil;
         //[library release];
         
     }
+}
+
+-(void)setMediaDoneSelector:(SEL) successSelector
+                 withObject:(NSObject*) object
+{
+    mediaSuccessSelector = successSelector;
+    mediaSuccessObject = object;
 }
 
 

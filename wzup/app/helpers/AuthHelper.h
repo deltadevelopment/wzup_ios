@@ -13,6 +13,8 @@
 -(void) resetCredentials;
 - (NSString*) getAuthToken;
 - (NSString *) getUserId;
+-(NSString *)getDeviceId;
+-(void)storeDeviceId:(NSString *) deviceId;
 
 
 @end

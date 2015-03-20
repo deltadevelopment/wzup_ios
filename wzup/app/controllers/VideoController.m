@@ -22,6 +22,16 @@ NSString *key;
     return self;
 }
 
+-(void)sendVideoToServer:(NSData *)imageData
+            withSelector:(SEL) success
+              withObject:(NSObject*)object withArg:(NSObject *) arg
+{
+    mediaUploadSuccess = success;
+    mediaUploadSuccessObject = object;
+    mediaUploadSuccessArg = arg;
+    [self sendVideoToServer:imageData];
+}
+
 - (void)sendVideoToServer:(NSData *)imageData {
     [self requestUpload];
     [self puttHttpRequestWithImage:imageData token:token];
@@ -103,15 +113,13 @@ NSString *key;
  totalBytesWritten:(NSInteger)totalBytesWritten
 totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
     long percentageDownloaded = (totalBytesWritten * 100)/totalBytesExpectedToWrite;
-    CGRect screenBound = [[UIScreen mainScreen] bounds];
-    CGSize screenSize = screenBound.size;
-    CGFloat screenWidth = screenSize.width;
-    CGFloat screenHeight = screenSize.height;
- 
+
+    [mediaUploadSuccessObject performSelector:mediaUploadSuccess withObject:[NSNumber numberWithInt:percentageDownloaded]];
     if(percentageDownloaded == 100){
         NSLog(@"Video upload done");
         NSLog(key);
         [self SetStatusWithMedia];
+        
     }
     //NSLog(@"Skrevet %ld av totalt %ld percentage %d", (long)totalBytesWritten, (long)totalBytesExpectedToWrite, percentageDownloaded);
 }

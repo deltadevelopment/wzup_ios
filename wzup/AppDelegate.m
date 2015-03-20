@@ -11,16 +11,18 @@
 #import "StartViewController.h"
 #import "AuthHelper.h"
 #import "SearchViewController.h"
+#import "PlaygroundViewController.h"
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
-
+AuthHelper *authHelper;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    
+    authHelper = [[AuthHelper alloc] init];
+    //[authHelper resetCredentials];
     if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
     {
         // iOS 8 Notifications
@@ -37,9 +39,9 @@
     
     
     // Override point for customization after application launch.
-    AuthHelper *authHelper = [[AuthHelper alloc] init];
-   [authHelper resetCredentials];
+
     if([authHelper getAuthToken] == nil){
+        //[self setView:[[PlaygroundViewController alloc] init] second:@"playground"];
         [self setView:[[StartViewController alloc] init] second:@"startNav"];
     }else{
         //[self setView:[[SearchViewController alloc] init] second:@"search"];
@@ -49,7 +51,14 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSString *str = [[[deviceToken description]
+      stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
+     stringByReplacingOccurrencesOfString:@" "
+     withString:@""];
+    [authHelper storeDeviceId:str];
+    
     NSLog(@"Did Register for Remote Notifications with Device Token (%@)", deviceToken);
+    
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {

@@ -19,6 +19,8 @@
 - (IBAction)addStatus:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 - (IBAction)cancelStatus:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *indicatorView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *indicatorHorizontalSpace;
 
 -(void)imageIsUploaded;
 @end

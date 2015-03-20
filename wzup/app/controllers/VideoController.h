@@ -15,6 +15,11 @@
     AuthHelper *authHelper;
     ParserHelper *parserHelper;
     ApplicationHelper *applicationHelper;
+    SEL mediaUploadSuccess;
+    NSObject *mediaUploadSuccessObject;
+    NSObject *mediaUploadSuccessArg;
 }
-- (void)sendVideoToServer:(NSData *)imageData;
+-(void)sendVideoToServer:(NSData *)imageData
+            withSelector:(SEL) success
+              withObject:(NSObject*)object withArg:(NSObject *) arg;
 @end

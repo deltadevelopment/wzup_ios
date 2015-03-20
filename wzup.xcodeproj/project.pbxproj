@@ -15,6 +15,8 @@
 		C506389C1A91E18C00F39D63 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C506389B1A91E18C00F39D63 /* Images.xcassets */; };
 		C506389F1A91E18C00F39D63 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C506389D1A91E18C00F39D63 /* LaunchScreen.xib */; };
 		C50638AB1A91E18C00F39D63 /* wzupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C50638AA1A91E18C00F39D63 /* wzupTests.m */; };
+		C527757B1ABC52E900ED3E15 /* PlaygroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C527757A1ABC52E900ED3E15 /* PlaygroundViewController.m */; };
+		C527757E1ABC54D900ED3E15 /* CircleIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = C527757D1ABC54D900ED3E15 /* CircleIndicator.m */; };
 		C55718CE1AB09A3700C4CE3D /* followersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55718CD1AB09A3700C4CE3D /* followersTableViewController.m */; };
 		C55718D11AB09F5700C4CE3D /* followerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C55718D01AB09F5700C4CE3D /* followerTableViewCell.m */; };
 		C55BD4DF1A9C8EE90061327D /* StatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C55BD4DE1A9C8EE90061327D /* StatusModel.m */; };
@@ -93,6 +95,10 @@
 		C50638A41A91E18C00F39D63 /* wzupTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wzupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C50638A91A91E18C00F39D63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C50638AA1A91E18C00F39D63 /* wzupTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wzupTests.m; sourceTree = "<group>"; };
+		C52775791ABC52E900ED3E15 /* PlaygroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaygroundViewController.h; sourceTree = "<group>"; };
+		C527757A1ABC52E900ED3E15 /* PlaygroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaygroundViewController.m; sourceTree = "<group>"; };
+		C527757C1ABC54D900ED3E15 /* CircleIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleIndicator.h; sourceTree = "<group>"; };
+		C527757D1ABC54D900ED3E15 /* CircleIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleIndicator.m; sourceTree = "<group>"; };
 		C55718CC1AB09A3700C4CE3D /* followersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = followersTableViewController.h; sourceTree = "<group>"; };
 		C55718CD1AB09A3700C4CE3D /* followersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = followersTableViewController.m; sourceTree = "<group>"; };
 		C55718CF1AB09F5700C4CE3D /* followerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = followerTableViewCell.h; sourceTree = "<group>"; };
@@ -368,6 +374,10 @@
 				C55718CD1AB09A3700C4CE3D /* followersTableViewController.m */,
 				C55718CF1AB09F5700C4CE3D /* followerTableViewCell.h */,
 				C55718D01AB09F5700C4CE3D /* followerTableViewCell.m */,
+				C52775791ABC52E900ED3E15 /* PlaygroundViewController.h */,
+				C527757A1ABC52E900ED3E15 /* PlaygroundViewController.m */,
+				C527757C1ABC54D900ED3E15 /* CircleIndicator.h */,
+				C527757D1ABC54D900ED3E15 /* CircleIndicator.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -537,6 +547,7 @@
 				F155761B1A9FD1D800202CF6 /* Feed2TableViewCell.m in Sources */,
 				C55718D11AB09F5700C4CE3D /* followerTableViewCell.m in Sources */,
 				C595D29D1AAF63F6006CC479 /* SearchViewController.m in Sources */,
+				C527757E1ABC54D900ED3E15 /* CircleIndicator.m in Sources */,
 				C590CFE61A937FFC003432D7 /* AuthHelper.m in Sources */,
 				C50638971A91E18C00F39D63 /* SecondViewController.m in Sources */,
 				C55BD4E21A9C91050061327D /* UserModel.m in Sources */,
@@ -544,6 +555,7 @@
 				C50638941A91E18C00F39D63 /* FeedViewController.m in Sources */,
 				C55BD4DF1A9C8EE90061327D /* StatusModel.m in Sources */,
 				F1A386AD1A9BE9100084A8EF /* ApplicationViewController.m in Sources */,
+				C527757B1ABC52E900ED3E15 /* PlaygroundViewController.m in Sources */,
 				C58E31D11ABA094F00654B30 /* VideoController.m in Sources */,
 				C506388E1A91E18C00F39D63 /* main.m in Sources */,
 				C590CFFC1A97905C003432D7 /* RegisterController.m in Sources */,
