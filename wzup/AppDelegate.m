@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "Feed2ViewController.h"
+#import "FeedViewController.h"
 #import "StartViewController.h"
 #import "AuthHelper.h"
 #import "SearchViewController.h"
@@ -22,7 +22,7 @@ AuthHelper *authHelper;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     authHelper = [[AuthHelper alloc] init];
-    //[authHelper resetCredentials];
+  //[authHelper resetCredentials];
     if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
     {
         // iOS 8 Notifications
@@ -45,7 +45,8 @@ AuthHelper *authHelper;
         [self setView:[[StartViewController alloc] init] second:@"startNav"];
     }else{
         //[self setView:[[SearchViewController alloc] init] second:@"search"];
-        [self setView:[[Feed2ViewController alloc] init] second:@"feed2"];
+        [self setView:[[FeedViewController alloc] init] second:@"feed2"];
+       // [self setView:[[FeedTableViewController alloc] init] second:@"FeedNavigation"];
     }
     return YES;
 }

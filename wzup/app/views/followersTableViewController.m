@@ -25,33 +25,31 @@ bool isFollowers;
     [super viewDidLoad];
     profileController = [[ProfileController alloc] init];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        if(isFollowers){
-            [profileController initRequestingFollowers];
-            requestingFollowers = [profileController getRequestingFollowers];
-            if([requestingFollowers count] != 0){
-                sections = 2;
-            }
-        }else{
-            //INITIALISER FOLLOWEES REQUESTS HER
-            //[profileController initPendingFollowees];
-            //requestingFollowers = [profileController getRequestingFollowers];
-            //if([requestingFollowers count] != 0){
-              //  sections = 2;
-            //}
-        }
-        
-        NSLog(@"amount %lu", (unsigned long)[[profileController getFollowers] count ]);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    });
+    if(isFollowers){
+        //[profileController initRequestingFollowers];
+        [profileController initRequestingFollowers:self
+                                       withSuccess:@selector(requestingFollowersWasReturned:)
+                                        withError:@selector(requestingFollowersWasNotReturned:)];
+    }else{
+        //INITIALISER FOLLOWEES REQUESTS HER
+        //[profileController initPendingFollowees];
+        //requestingFollowers = [profileController getRequestingFollowers];
+        //if([requestingFollowers count] != 0){
+        //  sections = 2;
+        //}
+    }
+}
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+-(void)requestingFollowersWasReturned:(NSData *) data{
+    requestingFollowers = [profileController getRequestingFollowers:data];
+    if([requestingFollowers count] != 0){
+        sections = 2;
+    }
+    [self.tableView reloadData];
+}
+
+-(void)requestingFollowersWasNotReturned:(NSError *) error{
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 -(void)setFollowers:(NSMutableArray*) theFollowers withBool:(bool) isFollower{

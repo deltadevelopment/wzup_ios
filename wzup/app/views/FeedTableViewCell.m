@@ -1,292 +1,180 @@
 //
-//  FeedTableViewCell.m
+//  Feed2TableViewCell.m
 //  wzup
 //
-//  Created by Simen Lie on 24/02/15.
+//  Created by Simen Lie on 26.02.15.
 //  Copyright (c) 2015 ddev. All rights reserved.
 //
 
 #import "FeedTableViewCell.h"
-#import "ApplicationHelper.h"
-@implementation FeedTableViewCell
-UIImageView *profileImg;
-UILabel *nameLabel;
-UIView *availability;
-UIImageView *statusImg;
-UIView *statusImgView;
-UILabel *statusLabel;
-bool isDrawed;
-UIView *viewAll;
-UIView *view;
-NSIndexPath *indexPath;
-UIImage *rawImage;
-CGFloat screenWidth;
-    UIView *viewBottom;
-CGFloat expandPos;
-
-
-- (void)awakeFromNib {
-   
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
+#import "UIHelper.h"
+@implementation FeedTableViewCell{
+    MPMoviePlayerController *player;
+    UIImage *thumbnail;
   
 }
--(void)viewDidLOad{
-    
+
+-(UIImage*)getThumbnail{
+    return thumbnail;
 }
 
--(void)setExpand:(BOOL) s{
-    if(s == YES){
-    expandPos = 462;
-    }else{
-    expandPos = 0;
-    }
-
-}
-
--(void)initCell{
+- (void)awakeFromNib {
     // Initialization code
-    //231 per celle
-    //top = 48
-    //bilde = 145
-    //nede 38
-    self.separatorInset = UIEdgeInsetsZero;
-    self.profileImage.layer.cornerRadius = 15;
-    self.profileImage.clipsToBounds = YES;
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-    
-    view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth , 48)];
-    
-    //[view setBackgroundColor:[UIColor colorWithRed:0.557 green:0.267 blue:0.678 alpha:1]];
-    
-    
-    profileImg = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10,30, 30)];
-    // profileImg.image =[UIImage imageNamed:@"christer-dahl.jpeg"];
-    profileImg.layer.cornerRadius = 15;
-    profileImg.clipsToBounds = YES;
-    
-    
-    nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(55, 8,200, 30)];
-    [nameLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:18.0]];
-    //nameLabel.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
-    // nameLabel.text = @"Christer Hansen";
-    
-    availability = [[UIImageView alloc] initWithFrame:CGRectMake(screenWidth - 25, 18,15, 15)];
-    [availability setBackgroundColor:[UIColor colorWithRed:0.18 green:0.8 blue:0.443 alpha:1]];
-    
-    availability.layer.cornerRadius = 7;
-    availability.clipsToBounds = YES;
-    
-    [view addSubview:availability];
-    [view addSubview:profileImg];
-    [view addSubview:nameLabel];
-    
-    
-    //statusImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 60,screenWidth, 180)];
-    statusImgView = [[UIView alloc] initWithFrame:CGRectMake(0, 48,screenWidth, 183)];
-    
-   
-    //statusImg.contentMode = UIViewContentModeTopLeft;
-    NSLog(@"Pos y: %f",viewBottom.frame.origin.y);
-    
-    viewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 193, screenWidth , 38)];
-    viewBottom.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9f];
-    
-    
-    
-    if(expandPos != 0){
-        NSLog(@"EXPAND POS ER %f", expandPos);
-        //animer
-        viewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, expandPos, screenWidth , 38)];
-        viewBottom.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9f];
-        [self anim];
-    NSLog(@"--EXPPOS y: %f",expandPos);
-    }else{
-        viewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 193, screenWidth , 38)];
-        viewBottom.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9f];
-    }
-    expandPos = 0;
-
-    //[viewBottom  setBackgroundColor:[UIColor colorWithRed:0.557 green:0.267 blue:0.678 alpha:1]];
-    statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 3,screenWidth - 20, 30)];
-    [statusLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:16.0]];
-    //nameLabel.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
-    viewAll = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth , 231)];
-    //[viewAll setBackgroundColor:[UIColor colorWithRed:0.557 green:0.267 blue:0.678 alpha:1]];
-    [viewBottom addSubview:statusLabel];
-    [viewAll addSubview:statusImgView];
-    [viewAll addSubview:viewBottom];
-    [viewAll addSubview:view];
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
-    [self addSubview:viewAll];
-}
--(void)anim{
-    [UIView animateWithDuration:0.30
-                          delay:0.0
-                        options: UIViewAnimationCurveEaseIn
-                     animations:^{
-                         [viewBottom setFrame:CGRectMake(0, 193, screenWidth, 38)];
-                     }
-                     completion:^(BOOL finished){
-                         NSLog(@"Done!");
-                     }];
-}
--(void)handleTap:(UITapGestureRecognizer *) sender{
- 
-    [[[ApplicationHelper alloc] init] setIndex:indexPath];
-    //ProfileViewController *myNewVC = [[ProfileViewController alloc] init];
-    
-    // do any setup you need for myNewVC
-    
-
-    
-}
-
--(UIView*)getView{
-return view;
-}
--(void)setStatus:(NSString*) status{
-    statusLabel.text = status;
-
-}
--(void)setName:(NSString*) name{
-    nameLabel.text = name;
-}
--(void)setProfileImg:(NSString*) img{
-    profileImg.image =[UIImage imageNamed:img];
-}
--(void)setStatusImg:(UIImage*) img{
-        img = [self imageByScalingAndCroppingForSize:statusImgView.frame.size img:img];
-        [statusImgView setBackgroundColor:[UIColor colorWithPatternImage:img]];
-}
--(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
-    return YES;
-}
-
--(void)changeSize :(UIImage * ) img{
-    [self setSize:viewAll height:500 width:viewAll.frame.size.width];
-    [self setSize:statusImgView height:(500) - 48 width:statusImgView.frame.size.width];
-    img = [self imageByScalingAndCroppingForSize:statusImgView.frame.size img:img];
-    [statusImgView setBackgroundColor:[UIColor colorWithPatternImage:img]];
-    
-    
-    
-    CGRect rect = viewBottom.frame;
-    rect.origin.y  = 500 - 38;
-    viewBottom.frame = rect;
-    expandPos = viewBottom.frame.origin.y;
-    
-    
-    
-}
--(void)setSize:(UIView *) view
-        height:(CGFloat) h
-        width:(CGFloat) w
-{
-    CGRect point = view.frame;
-    point.size.height = h;
-    point.size.width = w;
-    view.frame = point;
-}
-
--(void) resetView{
-    NSLog(@"reset");
-    CGRect rect = viewBottom.frame;
-    rect.origin.y  = 193;
-    viewBottom.frame = rect;
-
+    [self attachUiToCell];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+-(void)attachUiToCell{
+    NSLog(@"cropping");
+    self.editStatusTextField.borderStyle = UITextBorderStyleNone;
+    [self.editStatusTextField setBackgroundColor:[UIColor clearColor]];
+    self.editStatusTextField.hidden = YES;
+    self.tickImage.hidden = YES;
+    self.tickImage.alpha = 0.0;
+    self.captionTick.hidden = YES;
+    self.captionTick.alpha = 0.0;
+   self.uploadImageIndicatorLabel.hidden = YES;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+   self.availabilityPicture.backgroundColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.443 alpha:1];
+    self.availabilityPicture.layer.cornerRadius = 7;
+    self.availabilityPicture.clipsToBounds = YES;
+    self.profilePicture.layer.cornerRadius = 15;
+    self.profilePicture.clipsToBounds = YES;
+    self.bottomBar.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9f];
+    
+    
+    
+    //UIImage * image = [UIImage imageNamed:@"testBilde.jpg"];
+    //image = [self imageByScalingAndCroppingForSize:size img:image];
+    //[self.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
     
 }
 
--(void)setIndexPath:(NSIndexPath *) path{
-    indexPath = path;
+-(void)getVideo:(NSData *)data{
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *appFile = [documentsDirectory stringByAppendingPathComponent:@"MyFile.mov"];
+    [data writeToFile:appFile atomically:YES];
+    NSURL *movieUrl = [NSURL fileURLWithPath:appFile];
+    
+    //NSString *dataString = [[NSString alloc] initWithData:[status getMedia] encoding:NSUTF8StringEncoding];
+    NSLog(@"video: %@",@"mdia is downloaded");
+    //NSURL *url = [NSURL URLWithString:dataString];
+    player = [[MPMoviePlayerController alloc] initWithContentURL:movieUrl];
+    [UIHelper initialize];
+    player.view.frame = [UIHelper getFrame];
+    //NSLog(@"video: %@",[status getMediaUrl]);
+    player.movieSourceType = MPMovieSourceTypeFile;
+     player.controlStyle = MPMovieControlStyleNone;
+    player.backgroundView.backgroundColor = [UIColor clearColor];
+    for(UIView *aSubView in player.view.subviews) {
+        aSubView.backgroundColor = [UIColor clearColor];
+    }
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(moviePlayBackDidFinish:)
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+                                               object:player];
+    
+    AVAsset *asset = [AVAsset assetWithURL:movieUrl];
+    
+    //  Get thumbnail at the very start of the video
+    CMTime thumbnailTime = [asset duration];
+    thumbnailTime.value = 0;
+    
+    //  Get image from the video at the given time
+    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    imageGenerator.appliesPreferredTrackTransform = YES;
+    
+    CGImageRef imageRef = [imageGenerator copyCGImageAtTime:thumbnailTime actualTime:NULL error:NULL];
+   thumbnail = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    [self.statusImage setBackgroundColor:[UIColor colorWithPatternImage:thumbnail]];
+    
+   
+   
+    
 }
--(void)setAvailability:(NSInteger) av{
+
+- (void) hidecontrol {
+    [[NSNotificationCenter defaultCenter] removeObserver:self     name:MPMoviePlayerNowPlayingMovieDidChangeNotification object:player];
+    [player setControlStyle:MPMovieControlStyleFullscreen];
+    
+}
+
+- (IBAction)playVideo {
+    if(player != nil){
+       if(!isPlaying){
+            isPlaying = YES;
+            //[self.statusImage addSubview:player.view];
+            [self.statusImage insertSubview:player.view belowSubview:self.bottomBar];
+            [player play];
+        }
+    }
+}
+
+-(void)stopVideo{
+    if(player != nil){
+        if(isPlaying){
+            isPlaying = NO;
+            [player stop];
+            [player.view removeFromSuperview];
+        }
+    }
+    
+}
+
+- (void) moviePlayBackDidFinish:(NSNotification*)notification {
+    MPMoviePlayerController *player = [notification object];
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:MPMoviePlayerPlaybackDidFinishNotification
+     object:player];
+    isPlaying = NO;
+    [player stop];
+    [player.view removeFromSuperview];
+}
+
+-(UIView*)getTopBar{
+    return self.topBar;
+}
+
+-(void)stopImageLoading{
+    [_imageLoadingIndicator stopAnimating];
+    _imageLoadingIndicator.hidden = YES;
+    
+}
+
+
+-(void)setAvailability:(NSInteger) available{
     //NSLog(@"%i", (int)av);
-    if(av == 0){
+    if(available == 0){
         //available
-        [availability setBackgroundColor:[UIColor colorWithRed:0.18 green:0.8 blue:0.443 alpha:1]];
+        [self.availabilityPicture setBackgroundColor:[UIColor colorWithRed:0.18 green:0.8 blue:0.443 alpha:1]];
     }
-    else if(av == 1){
+    else if(available == 1){
         //Busy
-        [availability setBackgroundColor:[UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1] ];
+        [self.availabilityPicture setBackgroundColor:[UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1] ];
     }
-    else if(av == 2){
-        [availability setBackgroundColor:[UIColor colorWithRed:0.741 green:0.765 blue:0.78 alpha:1]];
+    else if(available == 2){
+        [self.availabilityPicture setBackgroundColor:[UIColor colorWithRed:0.741 green:0.765 blue:0.78 alpha:1]];
         //SNOOZE
     }
     
 }
 
-- (UIImage*)imageByScalingAndCroppingForSize:(CGSize)targetSize img:(UIImage *) sourceImage
-{
-  
-    UIImage *newImage = nil;
-    CGSize imageSize = sourceImage.size;
-    CGFloat width = imageSize.width;
-    CGFloat height = imageSize.height;
-    CGFloat targetWidth = targetSize.width;
-    CGFloat targetHeight = targetSize.height;
-    CGFloat scaleFactor = 0.0;
-    CGFloat scaledWidth = targetWidth;
-    CGFloat scaledHeight = targetHeight;
-    CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
-    
-    if (CGSizeEqualToSize(imageSize, targetSize) == NO)
-    {
-        CGFloat widthFactor = targetWidth / width;
-        CGFloat heightFactor = targetHeight / height;
-        
-        
-              //NSLog(@"fit height %f", targetSize.width);
-            scaleFactor = widthFactor; // scale to fit height
-        
-      
-        
-        
-        scaledWidth  = width * scaleFactor;
-        scaledHeight = height * scaleFactor;
-        
-        // center the image
-        if (widthFactor > heightFactor)
-        {
-            thumbnailPoint.y = 0;
-        }
-        else
-        {
-            if (widthFactor < heightFactor)
-            {
-                thumbnailPoint.x = 0;
-            }
-        }
-    }
-    
-    UIGraphicsBeginImageContext(targetSize); // this will crop
-    
-    CGRect thumbnailRect = CGRectZero;
-    thumbnailRect.origin = thumbnailPoint;
-    thumbnailRect.size.width  = scaledWidth;
-    thumbnailRect.size.height = scaledHeight;
-    
-    [sourceImage drawInRect:thumbnailRect];
-    
-    newImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    if(newImage == nil)
-    {
-        NSLog(@"could not scale image");
-    }
-    
-    //pop the context to get back to the default
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-}
+
+
+
 
 @end

@@ -49,16 +49,13 @@ MPMoviePlayerController *player;
     [self attachToGUI];
     
     if(isOwnProfile){
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      
             
             [self getData];
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self updateGUI];
-                [self attachGestures];
-                [self initMedia];
-            });
-        });
+          
+        
+        
     }
    
 }
@@ -197,13 +194,50 @@ MPMoviePlayerController *player;
 }
 
 -(void)getData{
-    status = [profileController getUser];
-
-    [profileController initFollowers];
-    [profileController initFollowing];
-    NumberOfFollowers = [profileController getNumberOfFollowers];
-    NumberOfFollowings = [profileController getNumberOfFollowing];
+    [profileController requestUser:self withSuccess:@selector(userWasReturned:) withError:@selector(userWasNotReturned:)];
+    [profileController initFollowers:self withSuccess:@selector(followersWasReturned:) withError:@selector(followersWasNotReturned:)];
+    [profileController initFollowing:self withSuccess:@selector(followingWasReturned:) withError:@selector(followingWasNotReturned:)];
 }
+-(void)refreshGUI{
+    [self updateGUI];
+    [self attachGestures];
+    [self initMedia];
+}
+
+#pragma --CALLBACKS--
+
+#pragma success
+-(void)userWasReturned:(NSData *) data{
+    status = [profileController getUser:data];
+    [self refreshGUI];
+}
+
+-(void)followersWasReturned:(NSData*) data{
+    [profileController getFollowers:data];
+    NumberOfFollowers = [profileController getNumberOfFollowers];
+    [self refreshGUI];
+}
+
+-(void)followingWasReturned:(NSData *) data{
+    [profileController getFollowing:data];
+    NumberOfFollowings = [profileController getNumberOfFollowing];
+    [self refreshGUI];
+}
+
+#pragma error
+-(void)userWasNotReturned:(NSError *) error{
+    
+}
+
+-(void)followersWasNotReturned:(NSError*) error{
+    
+}
+
+-(void)followingWasNotReturned:(NSError *) error{
+    
+}
+#pragma --GUI--
+
 -(void)updateGUI{
     self.nameLabel.text =[[status getUser] getDisplayName];
     [self getMedia];
@@ -319,23 +353,12 @@ MPMoviePlayerController *player;
 }
 
 -(void)setProfile:(StatusModel* ) statusProfile{
-    
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        isOwnProfile = NO;
-        status = statusProfile;
-        NSString* userId = [NSString stringWithFormat:@"%d", [[status getUser] getId]];
-        profileController  = [[ProfileController alloc] init];
-        [profileController initFollowersWithUserId:userId];
-        [profileController initFollowingWithUserId:userId];
-        NumberOfFollowers = [profileController getNumberOfFollowers];
-        NumberOfFollowings = [profileController getNumberOfFollowing];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self updateGUI];
-            [self attachGestures];
-        });
-    });
-   
+    isOwnProfile = NO;
+    status = statusProfile;
+    NSString* userId = [NSString stringWithFormat:@"%d", [[status getUser] getId]];
+    profileController  = [[ProfileController alloc] init];
+    [profileController initFollowersWithUserId:userId withObject:self withSuccess:@selector(followersWasReturned:) withError:@selector(followersWasNotReturned:)];
+    [profileController initFollowingWithUserId:userId withObject:self withSuccess:@selector(followingWasReturned:) withError:@selector(followingWasNotReturned:)];
 }
 
 - (void)didReceiveMemoryWarning {

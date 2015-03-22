@@ -1,36 +1,41 @@
 //
-//  FeedTableViewCell.h
+//  Feed2TableViewCell.h
 //  wzup
 //
-//  Created by Simen Lie on 24/02/15.
+//  Created by Simen Lie on 26.02.15.
 //  Copyright (c) 2015 ddev. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface FeedTableViewCell : UITableViewCell{
-    UIImage * status;
-    BOOL isSelected;
 
-    
+@interface FeedTableViewCell : UITableViewCell{
+  bool isPlaying;
 }
-@property (weak, nonatomic) IBOutlet UILabel *statusText;
-@property (weak, nonatomic) IBOutlet UIImageView *statusImage;
-@property (weak, nonatomic) IBOutlet UILabel *nameText;
-@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
-@property (weak, nonatomic) IBOutlet UIView *view;
-@property bool shouldExpand;
--(void)setStatus:(NSString*) status;
--(void)setName:(NSString*) name;
--(void)setProfileImg:(NSString*) img;
--(void)setStatusImg:(NSString*) img;
--(void)setAvailability:(NSInteger) av;
--(void)initCell;
--(void)drawCell;
--(void)setIndexPath:(NSIndexPath *) path;
--(void)changeSize :(UIImage * ) img;
--(void) resetView;
--(void)anim;
--(UIView*)getView;
--(void)setExpand:(BOOL) s;
+@property (nonatomic) bool isPlaying;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
+@property (weak, nonatomic) IBOutlet UIImageView *availabilityPicture;
+@property (weak, nonatomic) IBOutlet UIView *topBar;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIView *statusImage;
+@property (weak, nonatomic) IBOutlet UIView *bottomBar;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property (weak, nonatomic) IBOutlet NSString *statusImg;
+
+-(void)setStatusImagePath:(NSString *)statusImage;
+-(void)setAvailability:(NSInteger) available;
+-(UIView*)getTopBar;
+-(void)stopImageLoading;
+-(void)getVideo:(NSData *)data;
+- (IBAction)playVideo;
+-(void)stopVideo;
+
+-(UIImage*)getThumbnail;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *imageLoadingIndicator;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *uploadImageIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *uploadImageIndicatorLabel;
+@property (weak, nonatomic) IBOutlet UITextField *editStatusTextField;
+@property (weak, nonatomic) IBOutlet UIImageView *tickImage;
+@property (weak, nonatomic) IBOutlet UIImageView *captionTick;
+
 @end

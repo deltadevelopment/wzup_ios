@@ -26,8 +26,12 @@
     NSString *userIdInt = credentials[@"user_id"];
      NSString *userId = [NSString stringWithFormat: @"%@", userIdInt];
     NSString *authToken = credentials[@"auth_token"];
+    NSLog(@"storing credentials");
     [SSKeychain setPassword:userId forService:@"userId" account:@"AnyUser"];
     [SSKeychain setPassword:authToken forService:@"authToken" account:@"AnyUser"];
+    NSLog(@"crdentials stored");
+    NSLog(@"userID: %@", userId);
+    NSLog(@"authToken: %@", authToken);
 };
 
 -(void) resetCredentials{

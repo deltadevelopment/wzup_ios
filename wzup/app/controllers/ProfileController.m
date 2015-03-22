@@ -13,43 +13,80 @@ NSMutableArray *followers;
 NSMutableArray *requestingFollowers;
 NSMutableArray *following;
 
--(StatusModel*)getUser{
+-(void)requestUser:(NSObject *) view
+withSuccess:(SEL) success
+withError:(SEL) errorAction{
     NSString *url = [NSString stringWithFormat:@"user/%@/status", [authHelper getUserId]];
-    NSData *response = [self getHttpRequest:url];
-    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    [self getHttpRequest:url withObject:view withSuccess:success withError:errorAction withArgs:nil];
+}
+
+-(StatusModel*)getUser:(NSData *) data{
     ParserHelper* parserHelper = [[ParserHelper alloc] init];
-    NSMutableDictionary *dic = [parserHelper parse:response];
+    NSMutableDictionary *dic = [parserHelper parse:data];
     StatusModel *status = [[StatusModel alloc] init];
     [status build:dic[@"status"]];
     return status;
 }
 
--(void)initFollowersWithUserId:(NSString*) Id{
-    followers = [[NSMutableArray alloc] init];
+-(void)initFollowers:(NSObject *)view
+         withSuccess:(SEL) success
+           withError:(SEL) errorAction
+
+{
+    [self initFollowersWithUserId:[authHelper getUserId] withObject:view withSuccess:success withError:errorAction];
+};
+
+-(void)initFollowersWithUserId:(NSString*) Id
+                    withObject:(NSObject *)view
+                   withSuccess:(SEL) success
+                     withError:(SEL) errorAction
+
+{
+
     NSString *url = [NSString stringWithFormat:@"user/%@/followers", Id];
-    NSData *response = [self getHttpRequest:url];
-    //NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
-    //NSLog(@"HER: %@",strdata);
+   // NSData *response = [self getHttpRequest:url];
+    [self getHttpRequest:url withObject:view withSuccess:success withError:errorAction withArgs:nil];
+
+    
+};
+
+-(void)getFollowers:(NSData *) data{
+    followers = [[NSMutableArray alloc] init];
     ParserHelper* parserHelper = [[ParserHelper alloc] init];
-    NSMutableDictionary *dic2 = [parserHelper parse:response];
+    NSMutableDictionary *dic2 = [parserHelper parse:data];
     NSArray *followersRaw = dic2[@"followings"];
     for(NSMutableDictionary* followerRaw in followersRaw){
         FollowModel *follower = [[FollowModel alloc] init];
         [follower build:followerRaw];
         [followers addObject:follower];
     }
-};
-
--(void)initFollowers{
-    [self initFollowersWithUserId:[authHelper getUserId]];
 }
--(void)initFollowingWithUserId:(NSString*) Id{
-    following = [[NSMutableArray alloc] init];
+
+-(void)initFollowing:(NSObject *)view
+                   withSuccess:(SEL) success
+                     withError:(SEL) errorAction
+{
+    [self initFollowingWithUserId:[authHelper getUserId] withObject:view withSuccess:success withError:errorAction];
+    
+}
+
+-(void)initFollowingWithUserId:(NSString*) Id
+                    withObject:(NSObject *)view
+                   withSuccess:(SEL) success
+                     withError:(SEL) errorAction
+{
+    
     NSString *url = [NSString stringWithFormat:@"user/%@/followees", Id];
-    NSData *response = [self getHttpRequest:url];
+    //NSData *response = [self getHttpRequest:url];
+    [self getHttpRequest:url withObject:view withSuccess:success withError:errorAction withArgs:nil];
     //NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
     //NSLog(strdata);
-    NSMutableDictionary *dic = [parserHelper parse:response];
+ 
+}
+
+-(void)getFollowing:(NSData *) data{
+    following = [[NSMutableArray alloc] init];
+    NSMutableDictionary *dic = [parserHelper parse:data];
     NSArray *followersRaw = dic[@"followings"];
     for(NSMutableDictionary* followerRaw in followersRaw){
         FollowModel *follower = [[FollowModel alloc] init];
@@ -58,52 +95,80 @@ NSMutableArray *following;
     }
 }
 
--(void)unfollowUserWithUserId:(NSString *) userId{
+-(void)unfollowUserWithUserId:(NSString *) userId
+                   withObject:(NSObject *)view
+                  withSuccess:(SEL) success
+                    withError:(SEL) errorAction
+{
     NSString *url = [NSString stringWithFormat:@"user/%@/follow/%@", [authHelper getUserId], userId];
-    NSData *response = [self deleteHttpRequest:url];
-    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
-    NSLog(strdata);
-    NSMutableDictionary *dic = [parserHelper parse:response];
+    //NSData *response = [self deleteHttpRequest:url];
+    [self deleteHttpRequest:url withObject:view withSuccess:success withError:errorAction withArgs:nil];
+
+    //NSMutableDictionary *dic = [parserHelper parse:response];
 }
--(void)followUserWithUserId:(NSString *) userId{
+-(void)followUserWithUserId:(NSString *) userId
+                 withObject:(NSObject *)view
+                withSuccess:(SEL) success
+                  withError:(SEL) errorAction
+{
     NSString *url = [NSString stringWithFormat:@"user/%@/follow/%@", [authHelper getUserId], userId];
-    NSData *response = [self postHttpRequest:url json:nil];
-    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
-    NSLog(strdata);
-    NSMutableDictionary *dic = [parserHelper parse:response];
+  //  NSData *response = [self postHttpRequest:url json:nil];
+    [self postHttpRequest:url json:nil withObject:view withSuccess:success withError:errorAction withArgs:nil];
+    //NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+ //   NSLog(strdata);
+   // NSMutableDictionary *dic = [parserHelper parse:response];
 }
 
+-(void)initRequestingFollowers:(NSObject *)view
+                   withSuccess:(SEL) success
+                     withError:(SEL) errorAction
+{
+    
+    [self initRequestingFollowersWithUserId:[authHelper getUserId] withObject:view withSuccess:success withError:errorAction];
+    
+};
 
--(void)initRequestingFollowers{
-    [self initRequestingFollowersWithUserId:[authHelper getUserId]];
-}
 
--(void)initRequestingFollowersWithUserId:(NSString*) Id{
-    requestingFollowers = [[NSMutableArray alloc] init];
+-(void)initRequestingFollowersWithUserId:(NSString*) Id
+                              withObject:(NSObject *)view
+                             withSuccess:(SEL) success
+                               withError:(SEL) errorAction
+{
+    
     NSString *url = [NSString stringWithFormat:@"user/%@/following_requests", Id];
-    NSData *response = [self getHttpRequest:url];
-    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
-    NSLog(@"waiting for accept: %@",strdata);
+   // NSData *response = [self getHttpRequest:url];
+    [self getHttpRequest:url withObject:view withSuccess:success withError:errorAction withArgs:nil];
+    //NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    //NSLog(@"waiting for accept: %@",strdata);
+   
+};
+
+-(NSMutableArray *)getRequestingFollowers:(NSData *) data{
+    requestingFollowers = [[NSMutableArray alloc] init];
     ParserHelper* parserHelper = [[ParserHelper alloc] init];
-    NSMutableDictionary *dic2 = [parserHelper parse:response];
+    NSMutableDictionary *dic2 = [parserHelper parse:data];
     NSArray *followersRaw = dic2[@"followings"];
     for(NSMutableDictionary* followerRaw in followersRaw){
         FollowModel *follower = [[FollowModel alloc] init];
         [follower build:followerRaw];
         [requestingFollowers addObject:follower];
     }
-    for(FollowModel *follower in requestingFollowers){
-        NSLog(@"%@", [[follower getUser] getUsername]);
-    }
-};
+    return requestingFollowers;
 
--(void)AcceptFollowingWithUserId:(NSString *) Id{
+}
+
+-(void)AcceptFollowingWithUserId:(NSString *) Id
+                      withObject:(NSObject *)view
+                     withSuccess:(SEL) success
+                       withError:(SEL) errorAction
+{
 ///user/#{user_id}/accept_following/#{followee_id}
     
     NSString *url = [NSString stringWithFormat:@"user/%@/accept_following/%@", [authHelper getUserId], Id];
-    NSData *response = [self postHttpRequest:url json:nil];
-    NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
-    NSLog(@"accepted response: %@",strdata);
+  //  NSData *response = [self postHttpRequest:url json:nil];
+    [self postHttpRequest:url json:nil withObject:view withSuccess:success withError:errorAction withArgs:nil];
+   // NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
+    //NSLog(@"accepted response: %@",strdata);
     
     
     //ParserHelper* parserHelper = [[ParserHelper alloc] init];
@@ -112,10 +177,6 @@ NSMutableArray *following;
     
 }
 
-
--(void)initFollowing{
-    [self initFollowingWithUserId:[authHelper getUserId]];
-}
 
 -(NSMutableArray*)getFollowers{
     return followers;

@@ -40,6 +40,7 @@ NSString * imgPath;
 -(NSString*)getImgPath;
 -(NSString*)getMediaUrl;
 -(NSData*)getMedia;
+
 -(void)getMedia:(NSObject*)object withSelector:(SEL)mediaDoneSelector withObject:(NSObject*) element;
 
 

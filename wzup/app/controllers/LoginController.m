@@ -11,30 +11,27 @@
 @implementation LoginController
 
 -(void)login:(NSString *) username
-        pass:(NSString *) password{
-    //Logout
-   // [authHelper resetCredentials];
-    //Create dictionary with username and password
-    NSString *uniqueIdentifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        pass:(NSString *) password
+  withObject:(NSObject *) view
+ withSuccess:(SEL) success
+   withError:(SEL) errorAction
+{
     NSLog(@"Device Id sending: %@", [authHelper getDeviceId]);
     NSDictionary *credentials = @{
                                   @"username" : username,
                                   @"password" : password,
-                                  @"device_id" : [authHelper getDeviceId],
+                                  @"device_id" : [authHelper getDeviceId] == nil ? @"Device not supported" : [authHelper getDeviceId],
                                   @"device_type":@"ios"
                                   };
-    //Create json body from dictionary
     NSString *jsonData = [applicationHelper generateJsonFromDictionary:credentials];
-    //Create the request with the body
-    //NSMutableURLRequest *request =[self postHttpRequest:@"login"  json:jsonData];
-    NSData *response = [self postHttpRequest:@"login"  json:jsonData];
-    //Parse login request
-    NSMutableDictionary *dic = [parserHelper parse:response];
+    [self postHttpRequest:@"login" json:jsonData withObject:view withSuccess:success withError:errorAction withArgs:nil];
+}
+
+-(void)storeCredentials:(NSData *) data{
+    NSMutableDictionary *dic = [parserHelper parse:data];
     //Store parsed login data in sskey secure
-   [authHelper storeCredentials:dic];
-    //Debugging
-    NSLog([authHelper getAuthToken]);
-    NSLog([authHelper getUserId]);
+    NSLog(@"reciv: %@", dic[@"auth_token"]);
+    [authHelper storeCredentials:dic];
 }
 
 @end

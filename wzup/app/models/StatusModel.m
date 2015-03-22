@@ -102,7 +102,6 @@
 -(NSString*)getMediaType{
     return _media_type;
 }
-
 -(void)getMedia:(NSObject*)object withSelector:(SEL)mediaDoneSelector withObject:(NSObject*) element{
     NSLog(@"get----");
     if(![_media isKindOfClass:[NSNull class]] && ![_media_url isKindOfClass:[NSNull class]]){

@@ -8,9 +8,9 @@
 
 #import "LoginViewController.h"
 #import "LoginController.h"
-#import "FeedViewController.h"
 #import "StartViewController.h"
-#import "Feed2ViewController.h"
+#import "FeedViewController.h"
+#import "FeedNavigationViewController.h"
 
 @interface LoginViewController ()
 
@@ -93,25 +93,44 @@ LoginController* loginController;
     [self.loginIndicator setHidden:NO];
         
     [self.loginIndicator startAnimating];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [loginController login:self.usernameTextField.text pass:self.passwordTextField.text];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // Update the UI
-            [self.loginIndicator stopAnimating];
-            if([loginController hasError]){
-                [self errorAnimation];
-            }else{
-                 //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                 //FeedViewController *viewController = (FeedViewController *)[storyboard instantiateViewControllerWithIdentifier:@"feed"];
-              //   [self presentViewController:viewController animated:YES completion:nil];
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                Feed2ViewController *viewController = (Feed2ViewController *)[storyboard instantiateViewControllerWithIdentifier:@"feed2"];
-                [self presentViewController:viewController animated:YES completion:nil];
-                
-            }
-        });
-    });
+    
+    [loginController login:self.usernameTextField.text
+                      pass:self.passwordTextField.text
+                withObject:self
+               withSuccess:@selector(loginWasSuccessful:)
+                 withError:@selector(loginWasNotSuccessful:)];
 }
+
+-(void)loginWasSuccessful:(NSData *) data{
+    [self.loginIndicator stopAnimating];
+    [loginController storeCredentials:data];
+   // [self setView:[[Feed2ViewController alloc] init] second:@"feed2"];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FeedViewController *sfvc = [storyboard instantiateViewControllerWithIdentifier:@"feed2"];
+    [sfvc setModalPresentationStyle:UIModalPresentationFullScreen];
+    [self presentModalViewController:sfvc animated:YES];
+    
+    
+    
+}
+
+-(void)setView:(UIViewController *)controller second:(NSString *) controllerString{
+    //self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    controller = (UIViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:controllerString];
+    FeedNavigationViewController *nav= (UIViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:controllerString];
+    //[self makeKeyAndVisible];
+    [nav popToRootViewControllerAnimated:YES];
+    [self presentViewController:nav animated:NO completion:NULL];
+}
+
+-(void)loginWasNotSuccessful:(NSError *) error{
+    [self.loginIndicator stopAnimating];
+    [self errorAnimation];
+    NSLog([error localizedDescription]);
+}
+
+
 -(void)showLogin{
   
     NSString *username = self.usernameTextField.text;

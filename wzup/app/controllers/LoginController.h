@@ -6,9 +6,13 @@
 //  Copyright (c) 2015 ddev. All rights reserved.
 //
 
-#import "ApplicationController.h"
+#import "ApplicationController2.h"
 
-@interface LoginController : ApplicationController
+@interface LoginController : ApplicationController2
 -(void)login:(NSString *) username
-        pass:(NSString *) password;
+        pass:(NSString *) password
+  withObject:(NSObject *) view
+ withSuccess:(SEL) success
+   withError:(SEL) errorAction;
+-(void)storeCredentials:(NSData *) data;
 @end

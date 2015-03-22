@@ -17,6 +17,9 @@ NSString *passwordError;
 -(void)registerUser:(NSString *) username
                pass:(NSString *) password
               email:(NSString *) email
+         withObject:(NSObject *) view
+        withSuccess:(SEL) success
+          withError:(SEL) errorAction
 {
     //Logout
     [authHelper resetCredentials];
@@ -32,15 +35,10 @@ NSString *passwordError;
     NSString *jsonData = [applicationHelper generateJsonFromDictionary:credentials];
     //Create the request with the body
     //NSMutableURLRequest *request =[self postHttpRequest:@"login"  json:jsonData];
-    NSData *response = [self postHttpRequest:@"register"  json:jsonData];
+  //  NSData *response = [self postHttpRequest:@"register"  json:jsonData];
+    [self postHttpRequest:@"register" json:jsonData withObject:view withSuccess:success withError:errorAction withArgs:nil];
     //Parse login request
-    NSMutableDictionary *dic = [parserHelper parse:response];
-    NSArray *usernameErrorArray = dic[@"username"];
-    NSArray *passwordErrorArray = dic[@"password"];
-    NSArray *emailErrorArray = dic[@"email"];
-    usernameError =usernameErrorArray[0];
-    emailError = emailErrorArray[0];
-    passwordError = passwordErrorArray[0];
+   
     
 
     
@@ -48,6 +46,18 @@ NSString *passwordError;
     //  NSLog(passwordError[0]);
       // NSLog(emailError[0]);
 };
+
+-(void)parseData:(NSData *) data{
+    NSMutableDictionary *dic = [parserHelper parse:data];
+    NSArray *usernameErrorArray = dic[@"username"];
+    NSArray *passwordErrorArray = dic[@"password"];
+    NSArray *emailErrorArray = dic[@"email"];
+    usernameError =usernameErrorArray[0];
+    emailError = emailErrorArray[0];
+    passwordError = passwordErrorArray[0];
+}
+
+
 -(NSString *) getUsernameError{
     if(usernameError == nil){
         return nil;

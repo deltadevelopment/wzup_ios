@@ -6,14 +6,18 @@
 //  Copyright (c) 2015 ddev. All rights reserved.
 //
 
-#import "ApplicationController.h"
+#import "ApplicationController2.h"
 
-@interface RegisterController : ApplicationController
+@interface RegisterController : ApplicationController2
 -(void)registerUser:(NSString *) username
                pass:(NSString *) password
-               email:(NSString *) email;
+              email:(NSString *) email
+         withObject:(NSObject *) view
+        withSuccess:(SEL) success
+          withError:(SEL) errorAction;
 -(NSDictionary*) getErrors;
 -(NSString *) getUsernameError;
 -(NSString *) getPasswordError;
 -(NSString *) getEmailError;
+-(void)parseData:(NSData *) data;
 @end

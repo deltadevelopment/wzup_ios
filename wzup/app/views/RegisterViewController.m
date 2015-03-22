@@ -124,28 +124,43 @@ LoginController *loginController;
     [self.regIndicator setHidden:NO];
     
     [self.regIndicator startAnimating];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [registerController registerUser:self.usernameTextField.text
-                                    pass:self.passwordTextField.text
-                                   email:self.emailTextField.text];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // Update the UI
-             [self.regIndicator stopAnimating];
-            if([registerController hasError]){
-                [self errorAnimation];
-                [self showError:self.usernameError errorMsg:[registerController getUsernameError]];
-                 [self showError:self.emailError errorMsg:[registerController getEmailError]];
-                 [self showError:self.passwordError errorMsg:[registerController getPasswordError]];
-                
-            }else{
-                [loginController login:self.usernameTextField.text
-                                  pass:self.passwordTextField.text ];
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                FeedViewController *viewController = (FeedViewController *)[storyboard instantiateViewControllerWithIdentifier:@"feed"];
-                [self presentViewController:viewController animated:YES completion:nil];
-            }
-        });
-    });
+    
+    [registerController registerUser:self.usernameTextField.text
+                                pass:self.passwordTextField.text
+                               email:self.emailTextField.text
+                          withObject:self
+                         withSuccess:@selector(registerWasSuccessful:)
+                           withError:@selector(registerWasNotSuccessful:)];
+
+}
+-(void)registerWasSuccessful:(NSData *) data{
+    [loginController login:self.usernameTextField.text
+                      pass:self.passwordTextField.text
+                withObject:self
+               withSuccess:@selector(loginWasSuccessful:)
+                 withError:@selector(loginWasNotSuccessful:)];
+}
+
+-(void)registerWasNotSuccessful:(NSError *) error{
+    NSLog([error localizedDescription]);
+    [self errorAnimation];
+    [self showError:self.usernameError errorMsg:[registerController getUsernameError]];
+    [self showError:self.emailError errorMsg:[registerController getEmailError]];
+    [self showError:self.passwordError errorMsg:[registerController getPasswordError]];
+}
+
+-(void)loginWasSuccessful:(NSData *) data{
+    [self.regIndicator stopAnimating];
+    [loginController storeCredentials:data];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FeedViewController *viewController = (FeedViewController *)[storyboard instantiateViewControllerWithIdentifier:@"feed"];
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+-(void)loginWasNotSuccessful:(NSError *) error{
+    [self.regIndicator stopAnimating];
+    [self errorAnimation];
+    NSLog([error localizedDescription]);
 }
 
 -(void)showError:(UILabel*) errorLabel

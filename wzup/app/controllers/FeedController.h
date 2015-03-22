@@ -6,17 +6,39 @@
 //  Copyright (c) 2015 ddev. All rights reserved.
 //
 
-#import "ApplicationController.h"
+#import "ApplicationController2.h"
 #import "UserModel.h"
 
-@interface FeedController : ApplicationController<NSURLConnectionDataDelegate>
--(NSMutableArray*)getFeed;
+@interface FeedController : ApplicationController2<NSURLConnectionDataDelegate>
+
+-(void)requestUpload;
+-(void)requestFeed:(NSObject *) view
+       withSuccess:(SEL) success
+         withError:(SEL) errorAction;
+
+-(NSMutableArray *)getFeed:(NSData*) data;
 - (void)sendImageToServer:(NSData *)imageData;
--(void)setLoading:(UILabel *) label;
--(void)setImageDone:(UIImageView *) image;
--(void)updateStatus:(NSString *) status;
--(void)updateAvailability:(NSNumber *) availability;
+
+-(void)updateStatus:(NSString *) status
+         withObject:(NSObject *) view
+        withSuccess:(SEL) success
+          withError:(SEL) errorAction;
+-(void)updateAvailability:(NSNumber *) availability
+               withObject:(NSObject *) view
+              withSuccess:(SEL) success
+                withError:(SEL) errorAction;
+
+
 -(void)setSelector: (SEL)theSelector withObject:(NSObject *) object;
--(UserModel*)getUser;
+
+-(void)requestUser:(NSObject *) view
+       withSuccess:(SEL) success
+         withError:(SEL) errorAction;
+
+-(UserModel*)getUser:(NSData *) data;
+-(NSMutableArray*)getFeed;
+-(void)SetStatusWithMedia:(NSObject *) view
+              withSuccess:(SEL) success
+                withError:(SEL) errorAction;
 
 @end

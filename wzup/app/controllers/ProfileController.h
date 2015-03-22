@@ -6,24 +6,76 @@
 //  Copyright (c) 2015 ddev. All rights reserved.
 //
 
-#import "ApplicationController.h"
+#import "ApplicationController2.h"
 #import "UserModel.h"
 #import "StatusModel.h"
 #import "FollowModel.h"
-@interface ProfileController : ApplicationController
--(StatusModel*)getUser;
+@interface ProfileController : ApplicationController2
+-(void)requestUser:(NSObject *) view
+       withSuccess:(SEL) success
+         withError:(SEL) errorAction;
+
+-(StatusModel*)getUser:(NSData *) data;
+
+-(void)initRequestingFollowers:(NSObject *)view
+                   withSuccess:(SEL) success
+                     withError:(SEL) errorAction;
+
+
+-(void)initFollowers:(NSObject *)view
+         withSuccess:(SEL) success
+           withError:(SEL) errorAction;
+
+-(void)initFollowing:(NSObject *)view
+         withSuccess:(SEL) success
+           withError:(SEL) errorAction;
+
+-(void)initFollowersWithUserId:(NSString*) Id
+                    withObject:(NSObject *)view
+                   withSuccess:(SEL) success
+                     withError:(SEL) errorAction;
+
+-(void)getFollowers:(NSData *) data;
+
+
+-(void)initFollowingWithUserId:(NSString*) Id
+                    withObject:(NSObject *)view
+                   withSuccess:(SEL) success
+                     withError:(SEL) errorAction;
+
+-(void)getFollowing:(NSData *) data;
+
+-(void)unfollowUserWithUserId:(NSString *) userId
+                   withObject:(NSObject *)view
+                  withSuccess:(SEL) success
+                    withError:(SEL) errorAction;
+
+-(void)followUserWithUserId:(NSString *) userId
+                 withObject:(NSObject *)view
+                withSuccess:(SEL) success
+                  withError:(SEL) errorAction;
+
+
+-(void)initRequestingFollowersWithUserId:(NSString*) Id
+                              withObject:(NSObject *)view
+                             withSuccess:(SEL) success
+                               withError:(SEL) errorAction;
+
+-(NSMutableArray *)getRequestingFollowers:(NSData *) data;
+
+-(void)AcceptFollowingWithUserId:(NSString *) Id
+                      withObject:(NSObject *)view
+                     withSuccess:(SEL) success
+                       withError:(SEL) errorAction;
+
+
 
 -(NSMutableArray*)getFollowers;
 -(NSMutableArray*)getFollowing;
 -(NSUInteger)getNumberOfFollowers;
 -(NSUInteger)getNumberOfFollowing;
--(void)initFollowingWithUserId:(NSString*) Id;
--(void)initFollowersWithUserId:(NSString*) Id;
--(void)initFollowers;
--(void)initFollowing;
 -(void)unfollowUserWithUserId:(NSString *) userId;
 -(void)followUserWithUserId:(NSString *) userId;
--(void)initRequestingFollowers;
 -(NSMutableArray*)getRequestingFollowers;
 -(void)AcceptFollowingWithUserId:(NSString *) Id;
 @end

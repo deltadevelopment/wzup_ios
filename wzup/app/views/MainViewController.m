@@ -8,7 +8,7 @@
 
 #import "MainViewController.h"
 #import "ProfileViewController.h"
-#import "Feed2ViewController.h"
+#import "FeedViewController.h"
 
 @interface MainViewController ()
 
@@ -63,7 +63,7 @@ UIView *top;
 }
 
 -(void)showFeed{
-    [self setView:[[Feed2ViewController alloc] init] second:@"feed2"];
+    [self setView:[[FeedViewController alloc] init] second:@"feed2"];
 }
 
 -(void)setView:(UIViewController *)controller second:(NSString *) controllerString{
@@ -189,7 +189,7 @@ UIView *top;
     CGRect screenBound = [[UIScreen mainScreen] bounds];
     CGSize screenSize = screenBound.size;
     CGFloat screenWidth = screenSize.width;
-    CGSize size = CGSizeMake(screenWidth, 500);
+    CGSize size = CGSizeMake(screenWidth, 640);
     return size;
 }
 
