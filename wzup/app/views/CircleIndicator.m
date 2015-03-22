@@ -32,14 +32,14 @@ float updateValue;
     UIBezierPath* bezierPath = [UIBezierPath bezierPath];
     // sirkel
     [bezierPath addArcWithCenter:CGPointMake(rect.size.width / 2, rect.size.height / 2)
-                          radius:28
+                          radius:35
                       startAngle:startAngle
                         endAngle:(endAngle - startAngle) * (_percent / 100.0) + startAngle
                        clockwise:YES];
     
     // runding rundt
-    bezierPath.lineWidth = 6;
-    [[UIColor redColor] setStroke];
+    bezierPath.lineWidth = 5;
+    [[UIColor colorWithRed:0.608 green:0.349 blue:0.714 alpha:1] setStroke];
     [bezierPath stroke];
 }
 

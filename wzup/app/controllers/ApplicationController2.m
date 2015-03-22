@@ -96,10 +96,21 @@
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue currentQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               
                                if (data != nil && error == nil)
                                {
                                    //Ferdig lastet ned
-                                   [view performSelector:success withObject:data];
+                                   
+                                   NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                   NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+                                   NSInteger statuscode = [httpResponse statusCode];
+                                   if(statuscode < 300){
+                                       [view performSelector:success withObject:data];
+                                   }else{
+                                       NSMutableDictionary *errors = [parserHelper parse:data];
+                                       NSError *httpError = [NSError errorWithDomain:@"world" code:200 userInfo:errors];
+                                       [view performSelector:errorAction withObject:httpError];
+                                   }
                                }
                                else
                                {

@@ -10,19 +10,21 @@
 #import "ProfileController.h"
 #import "followersTableViewController.h"
 #import "MediaHelper.h"
+#import "UIHelper.h"
 
 
 
 @interface ProfileViewController ()
 
 @end
-
+static int const EXPAND_SIZE = 540;
+static int const DESPAND_SIZE = 211;
 @implementation ProfileViewController
 ProfileController *profileController;
 StatusModel *status;
 NSUInteger NumberOfFollowers;
 NSUInteger NumberOfFollowings;
-bool isExpanded = YES;
+bool isExpanded;
 bool isOwnProfile = YES;
 bool isFollowee;
 bool isPlaying;
@@ -34,31 +36,38 @@ MPMoviePlayerController *player;
     [mediaHelper initaliseVideo];
     //YES == front camera
     [mediaHelper CameraToggleButtonPressed:YES];
-    [mediaHelper StartStopRecording];
-    [NSTimer scheduledTimerWithTimeInterval:4.0
-                                     target:self
-                                   selector:@selector(stopRecording)
-                                   userInfo:nil
-                                    repeats:NO];
+     [mediaHelper StartStopRecording];
+     [NSTimer scheduledTimerWithTimeInterval:4.0
+     target:self
+     selector:@selector(stopRecording)
+     userInfo:nil
+     repeats:NO];
      */
-    isExpanded = YES;
+    isExpanded = NO;
     [super viewDidLoad];
     [self showTopBar];
-
+    self.playButton.hidden = YES;
     profileController = [[ProfileController alloc] init];
     [self attachToGUI];
     
     if(isOwnProfile){
-      
-            
-            [self getData];
-            
-          
-        
-        
+        [self getData];
     }
    
+   
 }
+
+#pragma mark - gesture delegate
+// this allows you to dispatch touches
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    return YES;
+}
+// this enables you to handle multiple recognizers on single view
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+
 -(void)initMedia{
     SEL mediaDone = @selector(mediaIsDownloaded:);
     [status getMedia:self withSelector:mediaDone withObject:self];
@@ -76,8 +85,18 @@ MPMoviePlayerController *player;
             [player.view removeFromSuperview];
         }else{
             isPlaying = YES;
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(moviePlayBackDidFinish:)
+                                                         name:MPMoviePlayerPlaybackDidFinishNotification
+                                                       object:player];
+            
+         
             //[self.statusImage addSubview:player.view];
             [self.statusImage insertSubview:player.view belowSubview:self.bottomBar];
+            UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onPlayerTapped:)];
+            singleFingerTap.numberOfTapsRequired = 1;
+            singleFingerTap.delegate = self;
+            [player.view addGestureRecognizer:singleFingerTap];
             [player play];
         }
     }
@@ -90,6 +109,7 @@ MPMoviePlayerController *player;
     UITapGestureRecognizer *tapGr;
     tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     tapGr.numberOfTapsRequired = 1;
+    //tapGr.delegate = self;
     [self.expandArea addGestureRecognizer:tapGr];
     
     UITapGestureRecognizer *followerstapGr;
@@ -268,16 +288,13 @@ MPMoviePlayerController *player;
     if([[status getMediaType] intValue] == 1){
         UIImage *image = [UIImage imageWithData:[status getMedia]];
         image = [self getCroppedImage:image];
-        self.playButton.hidden = YES;
+        
         [self.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
         
     }else{
         [self getVideo];
     }
 }
-
-
-
 -(void)getMedia{
 
 }
@@ -294,14 +311,12 @@ MPMoviePlayerController *player;
     NSLog(@"video: %@",@"mdia is downloaded");
     //NSURL *url = [NSURL URLWithString:dataString];
     player = [[MPMoviePlayerController alloc] initWithContentURL:movieUrl];
-    player.view.frame = CGRectMake(0,0, 480, 640);
+    [UIHelper initialize];
+    player.view.frame = [UIHelper getFrame];
     //NSLog(@"video: %@",[status getMediaUrl]);
     player.movieSourceType = MPMovieSourceTypeFile;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(moviePlayBackDidFinish:)
-                                                 name:MPMoviePlayerPlaybackDidFinishNotification
-                                               object:player];
+    player.controlStyle = MPMovieControlStyleNone;
+
     
     AVAsset *asset = [AVAsset assetWithURL:movieUrl];
     
@@ -329,15 +344,15 @@ MPMoviePlayerController *player;
     NSURL *movieUrl = [NSURL fileURLWithPath:appFile];
     MPMoviePlayerViewController *mp = [[MPMoviePlayerViewController alloc] initWithContentURL:movieUrl];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(moviePlayBackDidFinish:)
-                                                 name:MPMoviePlayerPlaybackDidFinishNotification
-                                               object:mp];
     
     mp.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
     [self.statusImage addSubview:mp.view];
     [mp.moviePlayer play];
     //[self presentMoviePlayerViewControllerAnimated:mp];
+}
+
+-(void)quitVideo:(UITapGestureRecognizer *) sender{
+    NSLog(@"wquit");
 }
 
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {
@@ -349,8 +364,22 @@ MPMoviePlayerController *player;
     isPlaying = NO;
     [player stop];
     [player.view removeFromSuperview];
+    [self despand];
+    isExpanded = NO;
     
 }
+
+
+- (void)onPlayerTapped:(UITapGestureRecognizer *) sender
+{
+    isPlaying = NO;
+    [player stop];
+    [player.view removeFromSuperview];
+    [self despand];
+    isExpanded = NO;
+
+}
+
 
 -(void)setProfile:(StatusModel* ) statusProfile{
     isOwnProfile = NO;
@@ -367,12 +396,14 @@ MPMoviePlayerController *player;
 }
 
 -(void)handleTap:(UITapGestureRecognizer *) sender{
-    
+    NSLog(@"tapped");
     if(!isExpanded){
-        [self animate:269];
+        //[self animate:269];
+        [self expand];
     }else{
-        [self animate:-269];
+        [self despand];
     }
+    [self playVideo:nil];
     isExpanded = isExpanded == YES ? NO : YES;
 }
 
@@ -392,21 +423,38 @@ MPMoviePlayerController *player;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
--(void)animate:(NSInteger) constant{
+-(void)expand{
     [UIView animateWithDuration:0.2f
                           delay:0.0f
                         options: UIViewAnimationOptionCurveLinear
                      animations:^{
                          //swish out
-                         self.expandHeight.constant += constant;
-                         self.expandView.constant += constant;
+                         self.expandHeight.constant = EXPAND_SIZE;
+                         self.expandView.constant = EXPAND_SIZE;
                          [self.view layoutIfNeeded];
                      }
                      completion:^(BOOL finished){
-                       
+                         
                          
                      }];
+    
+}
 
+-(void)despand{
+    [UIView animateWithDuration:0.2f
+                          delay:0.0f
+                        options: UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         //swish out
+                         self.expandHeight.constant = DESPAND_SIZE;
+                         self.expandView.constant = DESPAND_SIZE;
+                         [self.view layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished){
+                         
+                         
+                     }];
+    
 }
 
 /*

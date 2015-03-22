@@ -64,6 +64,8 @@
 		F1C6A0401ABDB07D004FBB39 /* ApplicationController2.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6A03F1ABDB07D004FBB39 /* ApplicationController2.m */; };
 		F1C6A0461ABDC200004FBB39 /* SuperButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6A0451ABDC200004FBB39 /* SuperButton.m */; };
 		F1C6A0491ABE5964004FBB39 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6A0481ABE5964004FBB39 /* UIHelper.m */; };
+		F1C6A04E1ABF60E9004FBB39 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = F1C6A04D1ABF60E9004FBB39 /* play.png */; };
+		F1C6A0501ABF7010004FBB39 /* play-black.png in Resources */ = {isa = PBXBuildFile; fileRef = F1C6A04F1ABF7010004FBB39 /* play-black.png */; };
 		F1E0EB3B1AA6704200EBBBD4 /* camera-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F1E0EB3A1AA6704200EBBBD4 /* camera-icon.png */; };
 		F1E0EB3F1AA67D3900EBBBD4 /* status-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F1E0EB3E1AA67D3900EBBBD4 /* status-icon.png */; };
 		F1E0EB411AA68C5400EBBBD4 /* status-icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = F1E0EB401AA68C5400EBBBD4 /* status-icon2.png */; };
@@ -180,6 +182,8 @@
 		F1C6A0451ABDC200004FBB39 /* SuperButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuperButton.m; sourceTree = "<group>"; };
 		F1C6A0471ABE5964004FBB39 /* UIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIHelper.h; sourceTree = "<group>"; };
 		F1C6A0481ABE5964004FBB39 /* UIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIHelper.m; sourceTree = "<group>"; };
+		F1C6A04D1ABF60E9004FBB39 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		F1C6A04F1ABF7010004FBB39 /* play-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-black.png"; sourceTree = "<group>"; };
 		F1E0EB3A1AA6704200EBBBD4 /* camera-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon.png"; sourceTree = "<group>"; };
 		F1E0EB3E1AA67D3900EBBBD4 /* status-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-icon.png"; sourceTree = "<group>"; };
 		F1E0EB401AA68C5400EBBBD4 /* status-icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-icon2.png"; sourceTree = "<group>"; };
@@ -373,10 +377,12 @@
 				F1A386B01A9E7DC10084A8EF /* christer-dahl.jpeg */,
 				F1A386B21A9E7E110084A8EF /* events-icon.png */,
 				F15576141A9FCFA200202CF6 /* testBilde.jpg */,
+				F1C6A04D1ABF60E9004FBB39 /* play.png */,
 				F1C6A0271ABDA4B8004FBB39 /* plus-icon.png */,
 				F1C6A0231ABDA3F8004FBB39 /* tick.png */,
 				F1C6A0291ABDA4C9004FBB39 /* cross-icon.png */,
 				F1C6A02A1ABDA4C9004FBB39 /* search-icon.png */,
+				F1C6A04F1ABF7010004FBB39 /* play-black.png */,
 				F1C6A02B1ABDA4C9004FBB39 /* tick-black-icon.png */,
 				F1A386B61A9E7E290084A8EF /* feed-icon.png */,
 				F1C6A0251ABDA48D004FBB39 /* settings-icon.png */,
@@ -514,7 +520,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1C6A0501ABF7010004FBB39 /* play-black.png in Resources */,
 				F1E0EB3F1AA67D3900EBBBD4 /* status-icon.png in Resources */,
+				F1C6A04E1ABF60E9004FBB39 /* play.png in Resources */,
 				F1A386AF1A9E7DB20084A8EF /* miranda-kerr.jpg in Resources */,
 				F1A386B11A9E7DC10084A8EF /* christer-dahl.jpeg in Resources */,
 				F1C6A0281ABDA4B8004FBB39 /* plus-icon.png in Resources */,

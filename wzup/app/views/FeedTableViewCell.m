@@ -14,6 +14,8 @@
 @implementation FeedTableViewCell{
     MPMoviePlayerController *player;
     UIImage *thumbnail;
+    SEL videoDonePlaying;
+    NSObject *view;
   
 }
 
@@ -58,6 +60,17 @@
     
 }
 
+-(void)showVideoIcon{
+    self.captionTick.hidden = NO;
+    self.captionTick.alpha = 0.5;
+    self.captionTick.image = [UIImage imageNamed:@"play-black.png"];
+}
+
+-(void)hideVideoIcon{
+    self.captionTick.hidden = YES;
+    self.captionTick.alpha = 0.0;
+}
+
 -(void)getVideo:(NSData *)data{
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -81,10 +94,7 @@
     }
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(moviePlayBackDidFinish:)
-                                                 name:MPMoviePlayerPlaybackDidFinishNotification
-                                               object:player];
+   
     
     AVAsset *asset = [AVAsset assetWithURL:movieUrl];
     
@@ -115,6 +125,10 @@
 - (IBAction)playVideo {
     if(player != nil){
        if(!isPlaying){
+           [[NSNotificationCenter defaultCenter] addObserver:self
+                                                    selector:@selector(moviePlayBackDidFinish:)
+                                                        name:MPMoviePlayerPlaybackDidFinishNotification
+                                                      object:player];
             isPlaying = YES;
             //[self.statusImage addSubview:player.view];
             [self.statusImage insertSubview:player.view belowSubview:self.bottomBar];
@@ -133,6 +147,10 @@
     }
     
 }
+-(void)setVideoDoneCallback:(NSObject *) callbackView withSuccess:(SEL) success{
+    view = callbackView;
+    videoDonePlaying = success;
+}
 
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {
     MPMoviePlayerController *player = [notification object];
@@ -143,6 +161,8 @@
     isPlaying = NO;
     [player stop];
     [player.view removeFromSuperview];
+    [view performSelector:videoDonePlaying withObject:nil];
+    
 }
 
 -(UIView*)getTopBar{

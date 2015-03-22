@@ -68,11 +68,15 @@ static int const EXPAND_SIZE = 549;
 - (void)viewDidLoad {
         [super viewDidLoad];
     NSLog(@"------tre--------");
+    
     authHelper = [[AuthHelper alloc] init];
     mediaHelper = [[MediaHelper alloc] init];
     [mediaHelper setMediaDoneSelector:@selector(mediaIsUploaded:) withObject:self];
     self.availabilityView.alpha = 0.0;
 
+    //TEMP
+
+    //TEMP SLUTT
     [self showTopBar];
     horizontalSpaceDefault = self.statusButtonHorizontalSpace.constant;
      horizontalSpaceDefaultIndicator = self.indicatorHorizontalSpace.constant;
@@ -172,6 +176,7 @@ static int const EXPAND_SIZE = 549;
     [self.tableView reloadData];
     NSLog(@"count: %lu", (unsigned long)[feed count]);
     NSLog(@"Feed recieved");
+    //[self statusButtonRecording];
 }
 
 -(void)feedNotRecieved:(NSError *)error{
@@ -430,6 +435,7 @@ static int const EXPAND_SIZE = 549;
             [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[status getCroppedImage]]];
             
         }else{
+         
             [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[cell getThumbnail]]];
         }
     }
@@ -459,9 +465,18 @@ static int const EXPAND_SIZE = 549;
     FeedTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     NSData *data = [status getMedia];
     [cell getVideo:data];
+    [cell setVideoDoneCallback:self withSuccess:@selector(videoDonePlayingInCell)];
 
 }
 
+-(void)videoDonePlayingInCell{
+    NSLog(@"Video done playin feed view");
+    shouldExpand = NO;
+    [_tableView beginUpdates];
+    
+    
+    [_tableView endUpdates];
+}
 
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {
     MPMoviePlayerController *player = [notification object];
@@ -574,6 +589,10 @@ static int const EXPAND_SIZE = 549;
                         [[cell statusImage] removeGestureRecognizer:flipCameratapGr];
                         
                         cell.profilePicture.image = [UIImage imageNamed:@"testBilde.jpg"];
+                        //[cell getVideo:[mediaHelper getLastRecordedVideo]];
+                        [status setMedia_type:@"2"];
+                        [status setMedia:[mediaHelper getLastRecordedVideo]];
+                        [self getVideo:indexPath];
                         cell.statusLabel.text = @"Tap to add caption";
                         
                         currentCell = cell;
@@ -631,7 +650,11 @@ static int const EXPAND_SIZE = 549;
       //  NSLog(@"--IMG setting %@", [status getImgPath]);
         //[cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
         [cell setAvailability:[[status getUser] getAvailability]];
-        
+        if([[status getMediaType] intValue] == 2){
+           [cell showVideoIcon];
+        }else{
+            [cell hideVideoIcon];
+        }
     }
    
     return cell;
@@ -798,6 +821,7 @@ static int const EXPAND_SIZE = 549;
     if([[status getMediaType] intValue] != 1){
         FeedTableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
         if(shouldExpand){
+            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:path.row inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
             [cell playVideo];
         }else{
             [cell stopVideo];
@@ -909,8 +933,10 @@ static int const EXPAND_SIZE = 549;
 
 -(void)decrementSpin{
     [circleIndicator incrementSpin];
-    if(circleIndicator.percent == 100){
+    NSLog(@"spinn");
+    if(circleIndicator.percent >100){
         //STOP RECORDING
+          NSLog(@"stop recording");
         [self stopRecording];
     }
 }
@@ -931,6 +957,23 @@ static int const EXPAND_SIZE = 549;
     }
 }
 
+-(void)statusButtonRecording{
+   self.statusButton.layer.cornerRadius = 30;
+    [UIView animateWithDuration:0.3f
+                          delay:0.0f
+                        options: UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         self.statusButtonHeight.constant += 10;
+                         self.statusButtonWidth.constant +=10;
+                         
+                    
+                         [self.statusButton layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished){
+                         
+                     }];
+}
+
 
 -(void)recordVideo:(UILongPressGestureRecognizer *) recognizer{
     if (recognizer.state == UIGestureRecognizerStateBegan)
@@ -938,10 +981,12 @@ static int const EXPAND_SIZE = 549;
         // Long press detected, start the timer
         if(cameraIsShown){
             NSLog(@"starter filme her");
+            
              hasStoppedRecording = NO;
-            circleIndicator = [[CircleIndicator alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
+            circleIndicator = [[CircleIndicator alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
             [self.indicatorView addSubview:circleIndicator];
-            [circleIndicator setIndicatorWithMaxTime:2];
+            
+            [circleIndicator setIndicatorWithMaxTime:10];
             recordTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(decrementSpin) userInfo:nil repeats:YES];
             //YES == front camera
             [session stopRunning];
@@ -966,6 +1011,7 @@ static int const EXPAND_SIZE = 549;
             // Long press ended, stop the timer
             if(cameraIsShown){
                 [self stopRecording];
+              
             }
         }
     }
@@ -1045,7 +1091,7 @@ static int const EXPAND_SIZE = 549;
                                  animations:^{
                                      
                                      _statusButtonHorizontalSpace.constant = horizontalSpaceDefault;
-                                     _indicatorHorizontalSpace.constant = 6;
+                                     _indicatorHorizontalSpace.constant = 1;
                                      [self.view layoutIfNeeded];
                                  }
                                  completion:^(BOOL finished){

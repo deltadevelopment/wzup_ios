@@ -10,7 +10,7 @@
 #import "MainViewController.h"
 #import "StatusModel.h"
 #import <MediaPlayer/MediaPlayer.h>
-@interface ProfileViewController : MainViewController
+@interface ProfileViewController : MainViewController<UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *testLabel;
 @property (weak, nonatomic) IBOutlet UIView *topBar;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;

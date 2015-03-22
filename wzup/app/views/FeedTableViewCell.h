@@ -29,7 +29,9 @@
 -(void)getVideo:(NSData *)data;
 - (IBAction)playVideo;
 -(void)stopVideo;
-
+-(void)setVideoDoneCallback:(NSObject *) callbackView withSuccess:(SEL) success;
+-(void)showVideoIcon;
+-(void)hideVideoIcon;
 -(UIImage*)getThumbnail;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *imageLoadingIndicator;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *uploadImageIndicator;

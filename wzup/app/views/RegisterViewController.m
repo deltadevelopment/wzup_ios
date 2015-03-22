@@ -134,19 +134,26 @@ LoginController *loginController;
 
 }
 -(void)registerWasSuccessful:(NSData *) data{
+ NSString *strdata=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(strdata);
+    /*
     [loginController login:self.usernameTextField.text
                       pass:self.passwordTextField.text
                 withObject:self
                withSuccess:@selector(loginWasSuccessful:)
                  withError:@selector(loginWasNotSuccessful:)];
+     */
 }
 
 -(void)registerWasNotSuccessful:(NSError *) error{
-    NSLog([error localizedDescription]);
+    [registerController parseData:[error userInfo]];
+    
     [self errorAnimation];
+    [self.regIndicator stopAnimating];
     [self showError:self.usernameError errorMsg:[registerController getUsernameError]];
     [self showError:self.emailError errorMsg:[registerController getEmailError]];
     [self showError:self.passwordError errorMsg:[registerController getPasswordError]];
+    
 }
 
 -(void)loginWasSuccessful:(NSData *) data{
@@ -160,7 +167,8 @@ LoginController *loginController;
 -(void)loginWasNotSuccessful:(NSError *) error{
     [self.regIndicator stopAnimating];
     [self errorAnimation];
-    NSLog([error localizedDescription]);
+    
+  
 }
 
 -(void)showError:(UILabel*) errorLabel

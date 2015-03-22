@@ -25,17 +25,21 @@
 -(NSDictionary *) loginBody:(NSString *) username
                        pass:(NSString *) password
 {
-    NSDictionary* body = @{
-                           @"username" : username,
-                           @"password" : password
-                           };
-    NSDictionary* bodyWithDevice = @{
-                                     @"username" : username,
-                                     @"password" : password,
-                                     @"device_id" : [authHelper getDeviceId],
-                                     @"device_type":@"ios"
-                                     };
-    return [authHelper getDeviceId] == nil ? body : bodyWithDevice;
+    NSDictionary *body;
+    if([authHelper getDeviceId] == nil){
+        body = @{
+                 @"username" : username,
+                 @"password" : password
+                 };
+    }else{
+        body= @{
+                @"username" : username,
+                @"password" : password,
+                @"device_id" : [authHelper getDeviceId],
+                @"device_type":@"ios"
+                };
+    }
+    return body;
 }
 
 -(void)storeCredentials:(NSData *) data{

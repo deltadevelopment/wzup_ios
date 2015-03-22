@@ -19,6 +19,7 @@ AVCaptureDevice *VideoDevice;
 AVCaptureDevicePosition position;
 UIView *CameraView;
 VideoController *videoController;
+NSData *lastRecordedVideo;
 
 -(id)init{
     movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
@@ -422,7 +423,7 @@ didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
         }
         NSString *path = [outputFileURL path];
         NSData *data = [[NSFileManager defaultManager] contentsAtPath:path];
-        
+        lastRecordedVideo = data;
         [videoController sendVideoToServer:data withSelector:mediaSuccessSelector withObject:mediaSuccessObject withArg:nil];
         CaptureSession = nil;
         MovieFileOutput = nil;
@@ -430,6 +431,9 @@ didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
         //[library release];
         
     }
+}
+-(NSData*)getLastRecordedVideo{
+    return lastRecordedVideo;
 }
 
 -(void)setMediaDoneSelector:(SEL) successSelector

@@ -19,5 +19,6 @@
 -(NSString *) getUsernameError;
 -(NSString *) getPasswordError;
 -(NSString *) getEmailError;
--(void)parseData:(NSData *) data;
+
+-(void)parseData:(NSDictionary *) dic;
 @end

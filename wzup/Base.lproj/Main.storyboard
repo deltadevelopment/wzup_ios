@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="t17-wV-qsY">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -11,6 +12,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="FeedTable" id="9hI-gm-nQj" customClass="FeedTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="139" sectionHeaderHeight="22" sectionFooterHeight="22" id="qGs-Ab-xhF">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -220,7 +222,7 @@
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
+                                                        <rect key="frame" x="0.0" y="1" width="320" height="48"/>
                                                         <mask key="subviews">
                                                             <include reference="tUp-96-pMo"/>
                                                             <include reference="UXa-52-mhb"/>
@@ -253,9 +255,6 @@
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="16"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
-                                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                        <rect key="frame" x="8" y="9" width="304" height="21"/>
-                                                                    </variation>
                                                                 </label>
                                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="g6F-a2-P9i">
                                                                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
@@ -269,8 +268,7 @@
                                                                             <exclude reference="Pej-kw-Ufb"/>
                                                                         </mask>
                                                                     </variation>
-                                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                        <rect key="frame" x="8" y="5" width="304" height="30"/>
+                                                                    <variation key="heightClass=regular-widthClass=compact">
                                                                         <mask key="constraints">
                                                                             <include reference="Pej-kw-Ufb"/>
                                                                         </mask>
@@ -288,8 +286,7 @@
                                                                             <exclude reference="goj-gK-5a1"/>
                                                                         </mask>
                                                                     </variation>
-                                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                        <rect key="frame" x="290" y="11" width="22" height="22"/>
+                                                                    <variation key="heightClass=regular-widthClass=compact">
                                                                         <mask key="constraints">
                                                                             <include reference="9rU-0c-qXU"/>
                                                                             <include reference="goj-gK-5a1"/>
@@ -333,8 +330,7 @@
                                                                     <exclude reference="qrK-eq-OHy"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="0.0" y="144" width="320" height="38"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="subviews">
                                                                     <include reference="iBs-mp-2f5"/>
                                                                     <include reference="g6F-a2-P9i"/>
@@ -395,8 +391,7 @@
                                                                     <exclude reference="f6x-ne-d2d"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="0.0" y="0.0" width="320" height="4"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="constraints">
                                                                     <exclude reference="Hcs-Sr-KFz"/>
                                                                     <include reference="f6x-ne-d2d"/>
@@ -452,7 +447,7 @@
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="0.0" y="48" width="320" height="182"/>
+                                                        <rect key="frame" x="0.0" y="49" width="400" height="182"/>
                                                         <mask key="subviews">
                                                             <include reference="QTy-4f-UEQ"/>
                                                             <include reference="AYU-qm-876"/>
@@ -617,10 +612,10 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="76" id="PX8-WR-JRt">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="70"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="80"/>
                                     </constraint>
                                     <constraint firstAttribute="width" constant="88" id="pnY-9H-WtG">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="70"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="80"/>
                                     </constraint>
                                 </constraints>
                                 <variation key="default">
@@ -672,13 +667,13 @@
                         <constraints>
                             <constraint firstItem="lja-gp-Rmf" firstAttribute="top" secondItem="Ik9-WI-SWI" secondAttribute="bottom" constant="30" id="3Cf-hM-V72"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6aI-9i-tWZ" secondAttribute="trailing" constant="16" id="3nO-VJ-cf0">
-                                <variation key="heightClass=regular-widthClass=compact" constant="6"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="1"/>
                             </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="Ik9-WI-SWI" secondAttribute="trailing" constant="17" id="54H-Y0-gE3"/>
                             <constraint firstItem="mKF-vL-mLd" firstAttribute="top" secondItem="vp5-Md-2Bt" secondAttribute="bottom" id="C1t-T6-q0P"/>
                             <constraint firstItem="mKF-vL-mLd" firstAttribute="leading" secondItem="QZE-7T-bN7" secondAttribute="leadingMargin" constant="-16" id="FYg-us-DeC"/>
                             <constraint firstItem="lja-gp-Rmf" firstAttribute="top" secondItem="6aI-9i-tWZ" secondAttribute="bottom" constant="30" id="N5v-YH-4pZ">
-                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="15"/>
                             </constraint>
                             <constraint firstItem="lja-gp-Rmf" firstAttribute="top" secondItem="9cm-hm-xKe" secondAttribute="bottom" constant="20" id="ae8-5L-ruP">
                                 <variation key="heightClass=regular-widthClass=compact" constant="30"/>
@@ -753,7 +748,9 @@
                         <outlet property="indicatorHorizontalSpace" destination="3nO-VJ-cf0" id="hff-Ho-8Zi"/>
                         <outlet property="indicatorView" destination="6aI-9i-tWZ" id="Sfg-r7-Akh"/>
                         <outlet property="statusButton" destination="9cm-hm-xKe" id="BLg-K8-k1E"/>
+                        <outlet property="statusButtonHeight" destination="182-4w-XFP" id="Av5-mF-FfN"/>
                         <outlet property="statusButtonHorizontalSpace" destination="q40-ng-i1Y" id="LNm-Vx-Psg"/>
+                        <outlet property="statusButtonWidth" destination="9DR-ui-VZG" id="jiE-RO-Dtb"/>
                         <outlet property="statusButtonverticalSpace" destination="ae8-5L-ruP" id="gCV-8s-g93"/>
                         <outlet property="statusText" destination="vtR-2S-Q3T" id="4vA-VM-pel"/>
                         <outlet property="tableView" destination="ygs-Q7-QFN" id="W6g-DB-iOF"/>
@@ -761,7 +758,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AIp-qU-zWm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4801" y="383"/>
+            <point key="canvasLocation" x="4800" y="381.75"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="A71-hH-LXz">
@@ -1118,7 +1115,7 @@
                                                 <constraints>
                                                     <constraint firstItem="Mpu-5u-pYP" firstAttribute="top" secondItem="p0R-gD-uRz" secondAttribute="top" constant="184" id="4jD-4A-zv5"/>
                                                     <constraint firstAttribute="height" constant="305" id="EW8-mh-PFZ">
-                                                        <variation key="heightClass=regular-widthClass=compact" constant="480"/>
+                                                        <variation key="heightClass=regular-widthClass=compact" constant="211"/>
                                                     </constraint>
                                                     <constraint firstAttribute="bottom" secondItem="seq-Wl-4xd" secondAttribute="bottom" id="PTz-Xw-4U6"/>
                                                     <constraint firstItem="Mpu-5u-pYP" firstAttribute="leading" secondItem="p0R-gD-uRz" secondAttribute="leading" constant="177" id="dOT-W1-YGH"/>
@@ -2027,7 +2024,7 @@
                                     <rect key="frame" x="16" y="92" width="368" height="527"/>
                                 </variation>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="olL-73-80S">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="olL-73-80S">
                                 <rect key="frame" x="46" y="513" width="284" height="87"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2684,6 +2681,7 @@
                         <viewControllerLayoutGuide type="bottom" id="83C-8Y-531"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="xEo-Bl-b1D">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ohz-6a-nR9">

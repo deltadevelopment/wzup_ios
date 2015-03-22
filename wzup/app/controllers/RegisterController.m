@@ -47,8 +47,7 @@ NSString *passwordError;
       // NSLog(emailError[0]);
 };
 
--(void)parseData:(NSData *) data{
-    NSMutableDictionary *dic = [parserHelper parse:data];
+-(void)parseData:(NSDictionary *) dic{
     NSArray *usernameErrorArray = dic[@"username"];
     NSArray *passwordErrorArray = dic[@"password"];
     NSArray *emailErrorArray = dic[@"email"];

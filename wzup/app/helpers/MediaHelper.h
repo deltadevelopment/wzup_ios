@@ -28,7 +28,9 @@
     SEL mediaSuccessSelector;
     NSObject *mediaSuccessObject;
     
+    
 }
+-(NSData*)getLastRecordedVideo;
 -(void)setMediaDoneSelector:(SEL) successSelector
                  withObject:(NSObject*) object;
 @property (retain) AVCaptureVideoPreviewLayer *PreviewLayer;
