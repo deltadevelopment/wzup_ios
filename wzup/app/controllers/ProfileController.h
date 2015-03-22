@@ -74,8 +74,6 @@
 -(NSMutableArray*)getFollowing;
 -(NSUInteger)getNumberOfFollowers;
 -(NSUInteger)getNumberOfFollowing;
--(void)unfollowUserWithUserId:(NSString *) userId;
--(void)followUserWithUserId:(NSString *) userId;
 -(NSMutableArray*)getRequestingFollowers;
 -(void)AcceptFollowingWithUserId:(NSString *) Id;
 @end

@@ -188,7 +188,20 @@ MPMoviePlayerController *player;
 
 - (void)followAction:(UITapGestureRecognizer *)recognizer {
     NSString* userId = [NSString stringWithFormat:@"%d", [[status getUser] getId]];
-    [[status getUser] isFollowee] ? [profileController unfollowUserWithUserId:userId] : [profileController followUserWithUserId:userId];
+    if([[status getUser] isFollowee]){
+        [profileController unfollowUserWithUserId:userId withObject:self withSuccess:@selector(followedSuccesfully:) withError:@selector(followedWithError:)];
+    }else{
+        [profileController unfollowUserWithUserId:userId withObject:self withSuccess:@selector(followedSuccesfully:) withError:@selector(followedWithError:)];
+    }
+   // [[status getUser] isFollowee] ? [profileController unfollowUserWithUserId:userId] : [profileController followUserWithUserId:userId];
+}
+
+-(void)followedSuccesfully:(NSData *) data{
+
+}
+
+-(void)followedWithError:(NSError *) error{
+    
 }
 
 -(void)setBorder:(UIView *) view{

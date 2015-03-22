@@ -19,6 +19,7 @@
 NSMutableArray* followers;
 NSMutableArray* requestingFollowers;
 ProfileController *profileController;
+followerTableViewCell *currentCell;
 int sections = 1;
 bool isFollowers;
 - (void)viewDidLoad {
@@ -179,16 +180,36 @@ bool isFollowers;
                       cell:(followerTableViewCell*) cell{
     NSString *userId = [NSString stringWithFormat:@"%d", [[follower getUser] getId]];
     [[follower getUser] setIs_followee:true];
-    [profileController followUserWithUserId:userId];
-    [cell.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+    //[profileController followUserWithUserId:userId];
+    [profileController followUserWithUserId:userId withObject:self withSuccess:@selector(followedSuccesfully:) withError:@selector(followedWithError:)];
+    currentCell = cell;
 }
 -(void)unFollowWithFollower:(FollowModel *) follower cell:(followerTableViewCell*) cell
 {
     NSString *userId = [NSString stringWithFormat:@"%d", [[follower getUser] getId]];
     [[follower getUser] setIs_followee:false];
-    [profileController unfollowUserWithUserId:userId];
-    [cell.followButton setTitle:@"Follow" forState:UIControlStateNormal];
+    [profileController unfollowUserWithUserId:userId withObject:self withSuccess:@selector(unfollowedSuccesfully:) withError:@selector(unfollowedWithError:)];
+  //  [profileController unfollowUserWithUserId:userId];
+    currentCell = cell;
+ 
 }
+
+-(void)followedSuccesfully:(NSData *) data{
+    [currentCell.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+}
+
+-(void)followedWithError:(NSError *) error{
+    
+}
+
+-(void)unfollowedSuccesfully:(NSData *) data{
+     [currentCell.followButton setTitle:@"Follow" forState:UIControlStateNormal];
+}
+
+-(void)unfollowedWithError:(NSError *) error{
+    
+}
+
 
 /*
 // Override to support conditional editing of the table view.
