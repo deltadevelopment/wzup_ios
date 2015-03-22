@@ -30,29 +30,29 @@
 
 -(void)downloadImage{
  
-        NSLog(@"Donwloading image with %@", _media_url);
+        //NSLog(@"Donwloading image with %@", _media_url);
         _media = [NSData dataWithContentsOfURL:[NSURL URLWithString:_media_url]];
-        NSLog(@"image donwloaded");
+       // NSLog(@"image donwloaded");
     
   
 }
 
 -(void)downloadImage3:(NSObject*) object withSelector:(SEL)mediaDoneSelector  withObject:(NSObject*) element{
-    NSLog(@"downloading image");
-    NSLog(_media_url);
+    //NSLog(@"downloading image");
+    //NSLog(_media_url);
     NSURL *url = [NSURL URLWithString:_media_url];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     //[request setTimeoutInterval: 10.0]; // Will timeout after 10 seconds
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue currentQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               NSLog(@"downloading");
+                               //NSLog(@"downloading");
                                if (data != nil && error == nil)
                                {
                                    //NSString *sourceHTML = [[NSString alloc] initWithData:data];
                                    // It worked, your source HTML is in sourceHTML
                                    _media = data;
-                                        NSLog(@"image is not cached");
+                                       // NSLog(@"image is not cached");
                                 [object performSelector:mediaDoneSelector withObject:element];
                                }
                                else
@@ -103,10 +103,10 @@
     return _media_type;
 }
 -(void)getMedia:(NSObject*)object withSelector:(SEL)mediaDoneSelector withObject:(NSObject*) element{
-    NSLog(@"get----");
+    //NSLog(@"get----");
     if(![_media isKindOfClass:[NSNull class]] && ![_media_url isKindOfClass:[NSNull class]]){
         if(_media == nil && _media_url != nil){
-            NSLog(@"get----2");
+      //      NSLog(@"get----2");
           
               [self downloadImage3:object withSelector:mediaDoneSelector withObject:element];
             
@@ -118,7 +118,7 @@
         
     }
     else{
-        NSLog(@"image is cached");
+        //NSLog(@"image is cached");
         [object performSelector:mediaDoneSelector withObject:element];
     }
 }
@@ -135,4 +135,14 @@
     }
     return _media;
 }
+
+
+-(UIImage *)getCroppedImage{
+    return _croppedImage;
+}
+-(void)setCroppedImage:(UIImage *) image{
+    _croppedImage = image;
+}
+
+
 @end

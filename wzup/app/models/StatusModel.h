@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UserModel.h"
+#import <UIKit/UIKit.h>
 
 @interface StatusModel : NSObject{
 NSString * imgPath;
@@ -23,6 +24,8 @@ NSString * imgPath;
 @property (nonatomic,strong) NSString * media_url;
 @property (nonatomic,strong) NSString * imgPath;
 @property (nonatomic,strong) NSData * media;
+
+@property (nonatomic,strong) UIImage * croppedImage;
 //Virtual
 @property (nonatomic,strong) UserModel * user;
 
@@ -40,6 +43,8 @@ NSString * imgPath;
 -(NSString*)getImgPath;
 -(NSString*)getMediaUrl;
 -(NSData*)getMedia;
+-(UIImage *)getCroppedImage;
+-(void)setCroppedImage:(UIImage *) image;
 
 -(void)getMedia:(NSObject*)object withSelector:(SEL)mediaDoneSelector withObject:(NSObject*) element;
 

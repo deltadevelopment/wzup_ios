@@ -17,14 +17,25 @@
    withError:(SEL) errorAction
 {
     NSLog(@"Device Id sending: %@", [authHelper getDeviceId]);
-    NSDictionary *credentials = @{
-                                  @"username" : username,
-                                  @"password" : password,
-                                  @"device_id" : [authHelper getDeviceId] == nil ? @"Device not supported" : [authHelper getDeviceId],
-                                  @"device_type":@"ios"
-                                  };
+    NSDictionary *credentials = [self loginBody:username pass:password];
     NSString *jsonData = [applicationHelper generateJsonFromDictionary:credentials];
     [self postHttpRequest:@"login" json:jsonData withObject:view withSuccess:success withError:errorAction withArgs:nil];
+}
+
+-(NSDictionary *) loginBody:(NSString *) username
+                       pass:(NSString *) password
+{
+    NSDictionary* body = @{
+                           @"username" : username,
+                           @"password" : password
+                           };
+    NSDictionary* bodyWithDevice = @{
+                                     @"username" : username,
+                                     @"password" : password,
+                                     @"device_id" : [authHelper getDeviceId],
+                                     @"device_type":@"ios"
+                                     };
+    return [authHelper getDeviceId] == nil ? body : bodyWithDevice;
 }
 
 -(void)storeCredentials:(NSData *) data{

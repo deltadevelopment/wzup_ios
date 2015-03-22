@@ -419,21 +419,33 @@ static int const EXPAND_SIZE = 549;
 
     return [feed count];
 }
--(void)initMedia:(NSIndexPath *) indexPath{
-    SEL mediaDone = @selector(mediaIsDownloaded:);
-    StatusModel *status = [feed objectAtIndex:indexPath.row];
-    [status getMedia:self withSelector:mediaDone withObject:indexPath];
+-(void)initMedia:(NSIndexPath *) indexPath withStatus:(StatusModel *) status withCell:(FeedTableViewCell *) cell{
+    if([status getMedia] == nil){
+        [status getMedia:self withSelector:@selector(mediaIsDownloaded:) withObject:indexPath];
+    }
+    else{
+        [cell stopImageLoading];
+        if([[status getMediaType] intValue] == 1){
+            NSLog(@"setter bilde for %@", [[status getUser]getDisplayName]);
+            [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[status getCroppedImage]]];
+            
+        }else{
+            [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[cell getThumbnail]]];
+        }
+    }
 }
 
 -(void)mediaIsDownloaded:(NSIndexPath *) indexPath{
+    NSLog(@"-----------________indexPATH = %ld", (long)indexPath.row);
     StatusModel *status = [feed objectAtIndex:indexPath.row];
     FeedTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     [cell stopImageLoading];
     if([[status getMediaType] intValue] == 1){
         UIImage *image = [UIImage imageWithData:[status getMedia]];
         image = [self getCroppedImage:image];
-        
+        [status setCroppedImage:image];
         //self.playButton.hidden = YES;
+        NSLog(@"setter bilde for %@", [[status getUser]getDisplayName]);
         [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
         
     }else{
@@ -472,36 +484,26 @@ static int const EXPAND_SIZE = 549;
     //cell=nil;
     if(cell == nil){
         cell = [[FeedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"customCell"];
-       
+        NSLog(@"cell iS NULL----");
     }
-    
+
     if([feed count] != 0){
+        
+   
+  
+        
   
         UITapGestureRecognizer *tapGr;
         tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         tapGr.numberOfTapsRequired = 1;
         [[cell getTopBar] addGestureRecognizer:tapGr];
         StatusModel *status = [feed objectAtIndex:indexPath.row];
-        if([status getMedia] == nil){
-         [self initMedia:indexPath];
-        }
-        else{
-            if([[status getMediaType] intValue] == 1){
-                UIImage *image = [UIImage imageWithData:[status getMedia]];
-                image = [self getCroppedImage:image];
-                
-                //self.playButton.hidden = YES;
-                [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
-                
-            }
-            else{
-                UIImage *image = [cell getThumbnail];
-                image = [self getCroppedImage:image];
-             [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
-            }
+        [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", @"status-icon2.png"]]]];
         
-        }
-       
+        [self initMedia:indexPath withStatus:status withCell:cell];
+        
+        
+        
                 
         cell.statusLabel.text = [status getBody];
         
@@ -565,7 +567,7 @@ static int const EXPAND_SIZE = 549;
                 
                 //image =  [UIImage imageNamed:@"testBilde.jpg"];
             }
-            image = [self imageByScalingAndCroppingForSize:size img:image];
+            //image = [self imageByScalingAndCroppingForSize:size img:image];
             dispatch_sync(dispatch_get_main_queue(), ^{
                 if(hasStoppedRecording){
                     if([[status getUser] getId ] == [[authHelper getUserId] intValue]){
@@ -634,7 +636,7 @@ static int const EXPAND_SIZE = 549;
    
     return cell;
 }
-
+/*
 -(void)setMediaToCell:(FeedTableViewCell *)cell{
     NSLog(@"-------MEDIA TO CELL______");
     CGSize size = CGSizeMake(screenWidth, EXPAND_SIZE);
@@ -655,7 +657,7 @@ static int const EXPAND_SIZE = 549;
     }
    
 }
-
+*/
 -(void)textFieldDidChange:(UITextField *) textField{
     //[self showLoginButton];
     if(textField.text.length > 39){
