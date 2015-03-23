@@ -45,7 +45,10 @@ NSString * imgPath;
 -(NSData*)getMedia;
 -(UIImage *)getCroppedImage;
 -(void)setCroppedImage:(UIImage *) image;
-
+-(UIImage *) getStoredImage;
+-(bool)shouldUpdateMedia;
+-(NSData *) getStoredVideo;
+-(void)storeVideo:(NSData *) videoData;
 -(void)getMedia:(NSObject*)object withSelector:(SEL)mediaDoneSelector withObject:(NSObject*) element;
 
 

@@ -425,8 +425,29 @@ static int const EXPAND_SIZE = 549;
     return [feed count];
 }
 -(void)initMedia:(NSIndexPath *) indexPath withStatus:(StatusModel *) status withCell:(FeedTableViewCell *) cell{
+    
+        [cell stopImageLoading];
+    
+    
     if([status getMedia] == nil){
-        [status getMedia:self withSelector:@selector(mediaIsDownloaded:) withObject:indexPath];
+        if([[status getMediaType] intValue] == 1){
+            if([status getStoredImage] != nil){
+                NSLog(@"setter bilde for %@", [[status getUser]getDisplayName]);
+                [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[status getStoredImage]]];
+            }
+        }else{
+            if([status getStoredVideo] != nil){
+                
+                
+                [cell getVideo:[status getStoredVideo]];
+                [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[cell getThumbnail]]];
+                [cell setVideoDoneCallback:self withSuccess:@selector(videoDonePlayingInCell)];
+            }
+        }
+        if([status shouldUpdateMedia]){
+            [status getMedia:self withSelector:@selector(mediaIsDownloaded:) withObject:indexPath];
+            NSLog(@"UPDATING MEDIA------------");
+        }
     }
     else{
         [cell stopImageLoading];
@@ -456,12 +477,15 @@ static int const EXPAND_SIZE = 549;
         
     }else{
         [self getVideo:indexPath];
+        //sett video her
+        
         //[self playVideo:cell];
     }
 }
 
 -(void)getVideo:(NSIndexPath *) indexPath{
     StatusModel *status = [feed objectAtIndex:indexPath.row];
+    [status storeVideo:[status getMedia]];
     FeedTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     NSData *data = [status getMedia];
     [cell getVideo:data];

@@ -431,7 +431,7 @@ MPMoviePlayerController *player;
         [self despand];
     }
     if([[status getMediaType] intValue] == 2){
-     [self playVideo:nil];
+        [self playVideo:nil];
     }
    
     isExpanded = isExpanded == YES ? NO : YES;
