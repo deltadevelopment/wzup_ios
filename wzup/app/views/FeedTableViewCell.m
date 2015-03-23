@@ -71,11 +71,12 @@
     self.captionTick.alpha = 0.0;
 }
 
--(void)getVideo:(NSData *)data{
+-(void)getVideo:(NSData *)data withId:(NSInteger *) intId{
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *appFile = [documentsDirectory stringByAppendingPathComponent:@"MyFile.mov"];
+    NSString *path = [NSString stringWithFormat:@"feedMovie%ld.mov", (long)intId];
+    NSString *appFile = [documentsDirectory stringByAppendingPathComponent:path];
     [data writeToFile:appFile atomically:YES];
     NSURL *movieUrl = [NSURL fileURLWithPath:appFile];
     

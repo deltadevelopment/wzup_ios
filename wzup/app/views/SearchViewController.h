@@ -13,5 +13,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *searchIcon;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
+@property (weak, nonatomic) IBOutlet UIImageView *searchSuccessImage;
+@property (weak, nonatomic) IBOutlet UIButton *searchButton;
+- (IBAction)searchAction:(id)sender;
 
 @end

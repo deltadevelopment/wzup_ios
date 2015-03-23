@@ -16,11 +16,16 @@
          withError:(SEL) errorAction;
 
 -(StatusModel*)getUser:(NSData *) data;
+-(UserModel*)getUserWithUser:(NSData *) data;
 
 -(void)initRequestingFollowers:(NSObject *)view
                    withSuccess:(SEL) success
                      withError:(SEL) errorAction;
 
+-(void)searchForUserByUsername:(NSString *) searchString
+                    withObject:(NSObject *)view
+                   withSuccess:(SEL) success
+                     withError:(SEL) errorAction;
 
 -(void)initFollowers:(NSObject *)view
          withSuccess:(SEL) success

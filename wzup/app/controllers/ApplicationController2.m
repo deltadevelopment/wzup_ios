@@ -7,7 +7,7 @@
 //
 
 #import "ApplicationController2.h"
-
+#import <UIKit/UIKit.h>
 @implementation ApplicationController2
 
 - (id)init
@@ -107,6 +107,7 @@
                                    if(statuscode < 300){
                                        [view performSelector:success withObject:data];
                                    }else{
+                                       [self alertUser:[NSString stringWithFormat:@"%ld",(long)statuscode]];
                                        NSMutableDictionary *errors = [parserHelper parse:data];
                                        NSError *httpError = [NSError errorWithDomain:@"world" code:200 userInfo:errors];
                                        [view performSelector:errorAction withObject:httpError];
@@ -119,6 +120,17 @@
                                }
                                
                            }];
+}
+
+-(void)alertUser:(NSString *) text{
+    NSString *errorMessage = [NSHTTPURLResponse localizedStringForStatusCode:[text intValue]];
+    NSString *errorMessageWithStatusCode = [NSString stringWithFormat:@"%@ - %@", text, errorMessage];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error"
+                                                   message:errorMessageWithStatusCode
+                                                  delegate:self
+                                         cancelButtonTitle:@"Ok"
+                                         otherButtonTitles:nil,nil];
+    [alert show];
 }
 
 - (void)connection:(NSURLConnection *)connection

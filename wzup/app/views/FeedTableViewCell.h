@@ -26,7 +26,7 @@
 -(void)setAvailability:(NSInteger) available;
 -(UIView*)getTopBar;
 -(void)stopImageLoading;
--(void)getVideo:(NSData *)data;
+-(void)getVideo:(NSData *)data withId:(NSInteger *) intId;
 - (IBAction)playVideo;
 -(void)stopVideo;
 -(void)setVideoDoneCallback:(NSObject *) callbackView withSuccess:(SEL) success;

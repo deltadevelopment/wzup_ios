@@ -180,6 +180,9 @@ static int const EXPAND_SIZE = 549;
 }
 
 -(void)feedNotRecieved:(NSError *)error{
+    NSLog(@"feed not recieved");
+    NSMutableDictionary *dic = [error userInfo];
+    NSLog(@"");
     NSLog([error localizedDescription]);
 }
 
@@ -439,7 +442,7 @@ static int const EXPAND_SIZE = 549;
             if([status getStoredVideo] != nil){
                 
                 
-                [cell getVideo:[status getStoredVideo]];
+                [cell getVideo:[status getStoredVideo] withId:indexPath.row];
                 [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[cell getThumbnail]]];
                 [cell setVideoDoneCallback:self withSuccess:@selector(videoDonePlayingInCell)];
             }
@@ -488,7 +491,7 @@ static int const EXPAND_SIZE = 549;
     [status storeVideo:[status getMedia]];
     FeedTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     NSData *data = [status getMedia];
-    [cell getVideo:data];
+    [cell getVideo:data withId:indexPath.row];
     [cell setVideoDoneCallback:self withSuccess:@selector(videoDonePlayingInCell)];
 
 }

@@ -39,6 +39,11 @@
 		C590D0481A9C7D70003432D7 /* Navigation2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590D0471A9C7D70003432D7 /* Navigation2ViewController.m */; };
 		C595D29D1AAF63F6006CC479 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C595D29C1AAF63F6006CC479 /* SearchViewController.m */; };
 		C5D1EBC41AAEF9EE00A77C09 /* FollowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D1EBC31AAEF9EE00A77C09 /* FollowModel.m */; };
+		C5D9D3861AC08B8C00822B7C /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D9D3851AC08B8C00822B7C /* NewRelicAgent.framework */; };
+		C5D9D3881AC08BB900822B7C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D9D3871AC08BB900822B7C /* CoreTelephony.framework */; };
+		C5D9D38A1AC08BC200822B7C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D9D3891AC08BC200822B7C /* SystemConfiguration.framework */; };
+		C5D9D38C1AC08BCB00822B7C /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D9D38B1AC08BCB00822B7C /* libc++.dylib */; };
+		C5D9D38E1AC08BD400822B7C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D9D38D1AC08BD400822B7C /* libz.dylib */; };
 		C5DFD5811A920A1800F37803 /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD5801A920A1800F37803 /* LoginModel.m */; };
 		C5FEC2D11AA9FAA700EB3C30 /* ProfileNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FEC2D01AA9FAA700EB3C30 /* ProfileNavigationViewController.m */; };
 		C5FEC2D41AADAB0B00EB3C30 /* ProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FEC2D31AADAB0B00EB3C30 /* ProfileController.m */; };
@@ -145,6 +150,11 @@
 		C595D29C1AAF63F6006CC479 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		C5D1EBC21AAEF9EE00A77C09 /* FollowModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowModel.h; sourceTree = "<group>"; };
 		C5D1EBC31AAEF9EE00A77C09 /* FollowModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowModel.m; sourceTree = "<group>"; };
+		C5D9D3851AC08B8C00822B7C /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
+		C5D9D3871AC08BB900822B7C /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		C5D9D3891AC08BC200822B7C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C5D9D38B1AC08BCB00822B7C /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		C5D9D38D1AC08BD400822B7C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		C5DFD57F1A920A1800F37803 /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModel.h; sourceTree = "<group>"; };
 		C5DFD5801A920A1800F37803 /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModel.m; sourceTree = "<group>"; };
 		C5FEC2CF1AA9FAA700EB3C30 /* ProfileNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileNavigationViewController.h; sourceTree = "<group>"; };
@@ -194,6 +204,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5D9D38E1AC08BD400822B7C /* libz.dylib in Frameworks */,
+				C5D9D38C1AC08BCB00822B7C /* libc++.dylib in Frameworks */,
+				C5D9D38A1AC08BC200822B7C /* SystemConfiguration.framework in Frameworks */,
+				C5D9D3881AC08BB900822B7C /* CoreTelephony.framework in Frameworks */,
+				C5D9D3861AC08B8C00822B7C /* NewRelicAgent.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +225,7 @@
 		C506387F1A91E18C00F39D63 = {
 			isa = PBXGroup;
 			children = (
+				C5D9D3841AC08B8C00822B7C /* Frameworks */,
 				C590D0461A9C7D70003432D7 /* Navigation2ViewController.h */,
 				C590D0471A9C7D70003432D7 /* Navigation2ViewController.m */,
 				C590D0351A9B4075003432D7 /* NavigationViewController.h */,
@@ -395,6 +411,19 @@
 			name = res;
 			sourceTree = "<group>";
 		};
+		C5D9D3841AC08B8C00822B7C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C5D9D38D1AC08BD400822B7C /* libz.dylib */,
+				C5D9D38B1AC08BCB00822B7C /* libc++.dylib */,
+				C5D9D3891AC08BC200822B7C /* SystemConfiguration.framework */,
+				C5D9D3871AC08BB900822B7C /* CoreTelephony.framework */,
+				C5D9D3851AC08B8C00822B7C /* NewRelicAgent.framework */,
+			);
+			name = Frameworks;
+			path = wzup/Frameworks;
+			sourceTree = "<group>";
+		};
 		F1C6A04A1ABEF6E4004FBB39 /* feed */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +477,7 @@
 				C50638841A91E18C00F39D63 /* Sources */,
 				C50638851A91E18C00F39D63 /* Frameworks */,
 				C50638861A91E18C00F39D63 /* Resources */,
+				C5D9D38F1AC08C2900822B7C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -552,6 +582,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C5D9D38F1AC08C2900822B7C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SCRIPT=`/usr/bin/find \"${SRCROOT}\" -name newrelic_postbuild.sh | head -n 1`\n\n/bin/sh \"${SCRIPT}\" \"AA23e6b54731679b8b327c5fa411e39966732af8c2\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C50638841A91E18C00F39D63 /* Sources */ = {
@@ -721,6 +767,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/wzup/Frameworks",
+				);
 				INFOPLIST_FILE = wzup/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -735,6 +785,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/wzup/Frameworks",
+				);
 				INFOPLIST_FILE = wzup/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

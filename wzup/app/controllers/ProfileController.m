@@ -7,6 +7,7 @@
 //
 
 #import "ProfileController.h"
+#import "UserModel.h"
 
 @implementation ProfileController
 NSMutableArray *followers;
@@ -26,6 +27,14 @@ withError:(SEL) errorAction{
     StatusModel *status = [[StatusModel alloc] init];
     [status build:dic[@"status"]];
     return status;
+}
+
+-(UserModel*)getUserWithUser:(NSData *) data{
+    ParserHelper* parserHelper = [[ParserHelper alloc] init];
+    NSMutableDictionary *dic = [parserHelper parse:data];
+    UserModel *user = [[UserModel alloc] init];
+    [user build:dic[@"user"]];
+    return user;
 }
 
 -(void)initFollowers:(NSObject *)view
@@ -60,6 +69,16 @@ withError:(SEL) errorAction{
         [follower build:followerRaw];
         [followers addObject:follower];
     }
+}
+
+-(void)searchForUserByUsername:(NSString *) searchString
+       withObject:(NSObject *)view
+      withSuccess:(SEL) success
+        withError:(SEL) errorAction
+{
+    NSString *url = [NSString stringWithFormat:@"user/by_username/%@", searchString];
+    [self getHttpRequest:url withObject:view withSuccess:success withError:errorAction withArgs:nil];
+
 }
 
 -(void)initFollowing:(NSObject *)view

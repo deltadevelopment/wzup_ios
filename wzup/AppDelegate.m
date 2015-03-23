@@ -12,6 +12,7 @@
 #import "AuthHelper.h"
 #import "SearchViewController.h"
 #import "PlaygroundViewController.h"
+#import <NewRelicAgent/NewRelic.h>
 @interface AppDelegate ()
 
 @end
@@ -20,6 +21,8 @@
 AuthHelper *authHelper;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [NewRelicAgent startWithApplicationToken:@"AA23e6b54731679b8b327c5fa411e39966732af8c2"];
     
     authHelper = [[AuthHelper alloc] init];
   //[authHelper resetCredentials];
