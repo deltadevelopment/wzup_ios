@@ -70,11 +70,21 @@ MPMoviePlayerController *player;
 
 -(void)initMedia{
     SEL mediaDone = @selector(mediaIsDownloaded:);
-    [status getMedia:self withSelector:mediaDone withObject:self];
+    if([status getMedia] == nil){
+        [status getMedia:self withSelector:mediaDone withObject:self];
+        
+    }else{
+        if([[status getMediaType] intValue] == 1){
+            NSLog(@"setter bilde for %@", [[status getUser]getDisplayName]);
+            [self.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[status getCroppedImage]]];
+        }else{
+            [self getVideo];
+        }
+    }
+    
 }
 -(void)stopRecording{
     [mediaHelper StartStopRecording];
-
 }
 
 - (IBAction)playVideo:(id)sender {
@@ -232,6 +242,7 @@ MPMoviePlayerController *player;
     [profileController initFollowing:self withSuccess:@selector(followingWasReturned:) withError:@selector(followingWasNotReturned:)];
 }
 -(void)refreshGUI{
+    NSLog(@"refresing");
     [self updateGUI];
     [self attachGestures];
     [self initMedia];
@@ -246,6 +257,7 @@ MPMoviePlayerController *player;
 }
 
 -(void)followersWasReturned:(NSData*) data{
+    NSLog(@"followers was returned ----");
     [profileController getFollowers:data];
     NumberOfFollowers = [profileController getNumberOfFollowers];
     [self refreshGUI];
@@ -298,6 +310,7 @@ MPMoviePlayerController *player;
 }
 
 -(void)mediaIsDownloaded:(NSObject *) object{
+    NSLog(@"media downloaded");
     if([[status getMediaType] intValue] == 1){
         UIImage *image = [UIImage imageWithData:[status getMedia]];
         image = [self getCroppedImage:image];
@@ -396,6 +409,7 @@ MPMoviePlayerController *player;
 
 -(void)setProfile:(StatusModel* ) statusProfile{
     isOwnProfile = NO;
+    NSLog(@"setting profile");
     status = statusProfile;
     NSString* userId = [NSString stringWithFormat:@"%d", [[status getUser] getId]];
     profileController  = [[ProfileController alloc] init];
@@ -416,7 +430,10 @@ MPMoviePlayerController *player;
     }else{
         [self despand];
     }
-    [self playVideo:nil];
+    if([[status getMediaType] intValue] == 2){
+     [self playVideo:nil];
+    }
+   
     isExpanded = isExpanded == YES ? NO : YES;
 }
 
