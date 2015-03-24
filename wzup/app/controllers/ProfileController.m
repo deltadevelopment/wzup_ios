@@ -154,7 +154,7 @@ withError:(SEL) errorAction{
                                withError:(SEL) errorAction
 {
     
-    NSString *url = [NSString stringWithFormat:@"user/%@/following_requests", Id];
+    NSString *url = [NSString stringWithFormat:@"user/%@/follower_requests", Id];
    // NSData *response = [self getHttpRequest:url];
     [self getHttpRequest:url withObject:view withSuccess:success withError:errorAction withArgs:nil];
     //NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];

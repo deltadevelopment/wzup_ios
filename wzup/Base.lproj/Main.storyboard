@@ -285,9 +285,6 @@
                                                     <state key="normal" title="Log out">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="18" y="7" width="54" height="33"/>
-                                                    </variation>
                                                     <connections>
                                                         <action selector="logoutAction:" destination="tMn-bc-h2G" eventType="touchUpInside" id="gr0-eJ-wgm"/>
                                                     </connections>
@@ -2869,6 +2866,121 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xF3-KK-TCt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5464.5" y="1364.25"/>
+        </scene>
+        <!--Following Table View Controller-->
+        <scene sceneID="hqB-p0-Nh3">
+            <objects>
+                <tableViewController storyboardIdentifier="following" id="1aj-Zf-zCe" customClass="FollowingTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" id="ikX-0o-kZt">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="followingCell" rowHeight="70" id="k8J-cd-xVV" customClass="followerTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k8J-cd-xVV" id="t0Z-sx-NOp">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status-icon2.png" translatesAutoresizingMaskIntoConstraints="NO" id="Nob-8I-itF">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="47" id="Ayf-Kr-IQX">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="50"/>
+                                                </constraint>
+                                                <constraint firstAttribute="width" constant="49" id="MY0-6n-Kir">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="50"/>
+                                                </constraint>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Ayf-Kr-IQX"/>
+                                                    <exclude reference="MY0-6n-Kir"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="8" y="7" width="50" height="50"/>
+                                                <mask key="constraints">
+                                                    <include reference="Ayf-Kr-IQX"/>
+                                                    <include reference="MY0-6n-Kir"/>
+                                                </mask>
+                                            </variation>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xbO-ka-Vhb">
+                                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="66" y="22" width="42" height="21"/>
+                                            </variation>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z88-XN-2OK">
+                                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
+                                            <inset key="contentEdgeInsets" minX="10" minY="6" maxX="10" maxY="6"/>
+                                            <state key="normal" title="Unfollow">
+                                                <color key="titleColor" red="0.5568627451" green="0.2666666667" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="298" y="22" width="80" height="30"/>
+                                            </variation>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Nob-8I-itF" firstAttribute="leading" secondItem="t0Z-sx-NOp" secondAttribute="leadingMargin" id="2MB-yh-0Lh"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Z88-XN-2OK" secondAttribute="trailing" constant="14" id="BKz-t4-3YZ"/>
+                                        <constraint firstItem="xbO-ka-Vhb" firstAttribute="leading" secondItem="Nob-8I-itF" secondAttribute="trailing" constant="8" id="Ohr-eu-5XC"/>
+                                        <constraint firstItem="xbO-ka-Vhb" firstAttribute="centerY" secondItem="Z88-XN-2OK" secondAttribute="centerY" constant="-3.5" id="enX-Jq-V7k"/>
+                                        <constraint firstAttribute="centerY" secondItem="xbO-ka-Vhb" secondAttribute="centerY" constant="3" id="iuR-s6-dlf"/>
+                                        <constraint firstAttribute="centerY" secondItem="Nob-8I-itF" secondAttribute="centerY" constant="3.5" id="wqH-6J-wzE"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="Nob-8I-itF"/>
+                                            <exclude reference="xbO-ka-Vhb"/>
+                                            <exclude reference="Z88-XN-2OK"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="2MB-yh-0Lh"/>
+                                            <exclude reference="wqH-6J-wzE"/>
+                                            <exclude reference="Ohr-eu-5XC"/>
+                                            <exclude reference="enX-Jq-V7k"/>
+                                            <exclude reference="iuR-s6-dlf"/>
+                                            <exclude reference="BKz-t4-3YZ"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="subviews">
+                                            <include reference="Nob-8I-itF"/>
+                                            <include reference="xbO-ka-Vhb"/>
+                                            <include reference="Z88-XN-2OK"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="2MB-yh-0Lh"/>
+                                            <include reference="wqH-6J-wzE"/>
+                                            <include reference="Ohr-eu-5XC"/>
+                                            <include reference="enX-Jq-V7k"/>
+                                            <include reference="iuR-s6-dlf"/>
+                                            <include reference="BKz-t4-3YZ"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="followButton" destination="Z88-XN-2OK" id="rra-SC-Hlb"/>
+                                    <outlet property="profileName" destination="xbO-ka-Vhb" id="92d-U5-TfK"/>
+                                    <outlet property="profilePicture" destination="Nob-8I-itF" id="hRc-ja-5Sr"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="1aj-Zf-zCe" id="k7e-yg-vRn"/>
+                            <outlet property="delegate" destination="1aj-Zf-zCe" id="bBj-Jf-goG"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TXY-hP-XbW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4863" y="2028.75"/>
         </scene>
         <!--Followers Table View Controller-->
         <scene sceneID="Re7-LD-sDv">

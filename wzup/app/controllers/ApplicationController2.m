@@ -112,7 +112,7 @@
                                    if(statuscode < 300){
                                        [view performSelector:success withObject:data];
                                    }else{
-                                       [self alertUser:[NSString stringWithFormat:@"%ld",(long)statuscode]];
+                                       [self alertUser:[NSString stringWithFormat:@"%ld on %@",(long)statuscode, [request URL]]];
                                        if(statuscode == 403){
                                            [self logoutUser:view];
                                        }
@@ -126,7 +126,6 @@
                                    // There was an error, alert the user
                                    [view performSelector:errorAction withObject:error];
                                }
-                               
                            }];
 }
 

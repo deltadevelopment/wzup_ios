@@ -12,6 +12,7 @@
 #import "MediaHelper.h"
 #import "UIHelper.h"
 #import "SettingsTableViewController.h"
+#import "FollowingTableViewController.h"
 
 
 
@@ -458,10 +459,9 @@ MPMoviePlayerController *player;
 }
 
 -(void)showFollowing:(UITapGestureRecognizer *) sender{
-    NSLog(@"showFolloers");
-    followersTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"followers"];
+    FollowingTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"following"];
     //NSLog(@"length %lu", (unsigned long)[[profileController getFollowers] count]);
-    [vc setFollowers:[profileController getFollowing] withBool:NO];
+    [vc setFollowings:[profileController getFollowing]];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

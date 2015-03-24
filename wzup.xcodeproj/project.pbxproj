@@ -22,6 +22,8 @@
 		C55BD4E21A9C91050061327D /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C55BD4E11A9C91050061327D /* UserModel.m */; };
 		C55BD4E51A9C967E0061327D /* FeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55BD4E41A9C967E0061327D /* FeedController.m */; };
 		C55BD4F71A9F763A0061327D /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55BD4F61A9F763A0061327D /* ProfileViewController.m */; };
+		C57992551AC1F1650017F40E /* FollowingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C57992541AC1F1650017F40E /* FollowingTableViewController.m */; };
+		C57992581AC1F56A0017F40E /* FollowingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C57992571AC1F56A0017F40E /* FollowingTableViewCell.m */; };
 		C58E31CE1AB9EAA400654B30 /* MediaHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C58E31CD1AB9EAA400654B30 /* MediaHelper.m */; };
 		C58E31D11ABA094F00654B30 /* VideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = C58E31D01ABA094F00654B30 /* VideoController.m */; };
 		C590CFE41A937FFC003432D7 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590CFD21A937FFC003432D7 /* LoginController.m */; };
@@ -123,6 +125,10 @@
 		C55BD4E41A9C967E0061327D /* FeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedController.m; sourceTree = "<group>"; };
 		C55BD4F51A9F763A0061327D /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		C55BD4F61A9F763A0061327D /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		C57992531AC1F1650017F40E /* FollowingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingTableViewController.h; sourceTree = "<group>"; };
+		C57992541AC1F1650017F40E /* FollowingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingTableViewController.m; sourceTree = "<group>"; };
+		C57992561AC1F56A0017F40E /* FollowingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingTableViewCell.h; sourceTree = "<group>"; };
+		C57992571AC1F56A0017F40E /* FollowingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingTableViewCell.m; sourceTree = "<group>"; };
 		C58E31CC1AB9EAA400654B30 /* MediaHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaHelper.h; sourceTree = "<group>"; };
 		C58E31CD1AB9EAA400654B30 /* MediaHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaHelper.m; sourceTree = "<group>"; };
 		C58E31CF1ABA094F00654B30 /* VideoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoController.h; sourceTree = "<group>"; };
@@ -491,6 +497,10 @@
 				C55718CD1AB09A3700C4CE3D /* followersTableViewController.m */,
 				C55718CF1AB09F5700C4CE3D /* followerTableViewCell.h */,
 				C55718D01AB09F5700C4CE3D /* followerTableViewCell.m */,
+				C57992531AC1F1650017F40E /* FollowingTableViewController.h */,
+				C57992541AC1F1650017F40E /* FollowingTableViewController.m */,
+				C57992561AC1F56A0017F40E /* FollowingTableViewCell.h */,
+				C57992571AC1F56A0017F40E /* FollowingTableViewCell.m */,
 			);
 			name = profile;
 			sourceTree = "<group>";
@@ -665,9 +675,11 @@
 				C590CFF61A977886003432D7 /* RegisterViewController.m in Sources */,
 				C5FEC2D11AA9FAA700EB3C30 /* ProfileNavigationViewController.m in Sources */,
 				C590D0371A9B4075003432D7 /* NavigationViewController.m in Sources */,
+				C57992551AC1F1650017F40E /* FollowingTableViewController.m in Sources */,
 				C590CFE91A937FFC003432D7 /* SSKeychain.m in Sources */,
 				F155761B1A9FD1D800202CF6 /* FeedTableViewCell.m in Sources */,
 				C55718D11AB09F5700C4CE3D /* followerTableViewCell.m in Sources */,
+				C57992581AC1F56A0017F40E /* FollowingTableViewCell.m in Sources */,
 				C5D759BA1AC1A39B00E3167C /* EditProfileTableViewController.m in Sources */,
 				C595D29D1AAF63F6006CC479 /* SearchViewController.m in Sources */,
 				C527757E1ABC54D900ED3E15 /* CircleIndicator.m in Sources */,
