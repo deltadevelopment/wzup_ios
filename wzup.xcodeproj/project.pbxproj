@@ -39,6 +39,7 @@
 		C590D0481A9C7D70003432D7 /* Navigation2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C590D0471A9C7D70003432D7 /* Navigation2ViewController.m */; };
 		C595D29D1AAF63F6006CC479 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C595D29C1AAF63F6006CC479 /* SearchViewController.m */; };
 		C5D1EBC41AAEF9EE00A77C09 /* FollowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D1EBC31AAEF9EE00A77C09 /* FollowModel.m */; };
+		C5D759AA1AC17C3900E3167C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C5D759A91AC17C3900E3167C /* Settings.bundle */; };
 		C5D9D3861AC08B8C00822B7C /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D9D3851AC08B8C00822B7C /* NewRelicAgent.framework */; };
 		C5D9D3881AC08BB900822B7C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D9D3871AC08BB900822B7C /* CoreTelephony.framework */; };
 		C5D9D38A1AC08BC200822B7C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D9D3891AC08BC200822B7C /* SystemConfiguration.framework */; };
@@ -150,6 +151,7 @@
 		C595D29C1AAF63F6006CC479 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		C5D1EBC21AAEF9EE00A77C09 /* FollowModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowModel.h; sourceTree = "<group>"; };
 		C5D1EBC31AAEF9EE00A77C09 /* FollowModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowModel.m; sourceTree = "<group>"; };
+		C5D759A91AC17C3900E3167C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		C5D9D3851AC08B8C00822B7C /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		C5D9D3871AC08BB900822B7C /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		C5D9D3891AC08BC200822B7C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -225,6 +227,7 @@
 		C506387F1A91E18C00F39D63 = {
 			isa = PBXGroup;
 			children = (
+				C5D759A91AC17C3900E3167C /* Settings.bundle */,
 				C5D9D3841AC08B8C00822B7C /* Frameworks */,
 				C590D0461A9C7D70003432D7 /* Navigation2ViewController.h */,
 				C590D0471A9C7D70003432D7 /* Navigation2ViewController.m */,
@@ -570,6 +573,7 @@
 				F1C6A02D1ABDA4C9004FBB39 /* search-icon.png in Resources */,
 				C506389C1A91E18C00F39D63 /* Images.xcassets in Resources */,
 				F1E0EB3B1AA6704200EBBBD4 /* camera-icon.png in Resources */,
+				C5D759AA1AC17C3900E3167C /* Settings.bundle in Resources */,
 				F1A386B71A9E7E290084A8EF /* feed-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

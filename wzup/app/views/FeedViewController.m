@@ -66,8 +66,10 @@ static int const EXPAND_SIZE = 549;
 
 
 - (void)viewDidLoad {
-        [super viewDidLoad];
+    [super viewDidLoad];
     NSLog(@"------tre--------");
+
+    BOOL bgColor = (BOOL)[[NSUserDefaults standardUserDefaults] valueForKey:@"test"];
     
     authHelper = [[AuthHelper alloc] init];
     mediaHelper = [[MediaHelper alloc] init];
