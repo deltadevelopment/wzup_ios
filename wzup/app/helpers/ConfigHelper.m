@@ -13,7 +13,15 @@
 {
     self = [super init];
     if (self) {
-        _baseUrl = @"http://wzap.herokuapp.com";
+        if([[NSUserDefaults standardUserDefaults] objectForKey:@"currentServer"] != nil) {
+            NSString *storedBaseUrl = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentServer"];
+            // NSLog(@"imgPath: %@", theImagePath);
+            _baseUrl = storedBaseUrl;
+        
+        }else{
+         _baseUrl = @"http://wzap.herokuapp.com";
+        }
+           NSLog(@"baseURL: %@", _baseUrl);
     }
     
     return self;

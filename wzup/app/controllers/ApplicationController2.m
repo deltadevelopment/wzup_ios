@@ -8,12 +8,17 @@
 
 #import "ApplicationController2.h"
 #import <UIKit/UIKit.h>
-@implementation ApplicationController2
+#import "AppDelegate.h"
+#import "StartViewController.h"
+@implementation ApplicationController2{
+    UIViewController *viewController;
+}
 
 - (id)init
 {
     self = [super init];
     if (self) {
+        viewController = [[UIViewController alloc] init];
         authHelper = [[AuthHelper alloc] init];
         parserHelper = [[ParserHelper alloc] init];
         applicationHelper = [[ApplicationHelper alloc] init];
@@ -108,6 +113,9 @@
                                        [view performSelector:success withObject:data];
                                    }else{
                                        [self alertUser:[NSString stringWithFormat:@"%ld",(long)statuscode]];
+                                       if(statuscode == 403){
+                                           [self logoutUser:view];
+                                       }
                                        NSMutableDictionary *errors = [parserHelper parse:data];
                                        NSError *httpError = [NSError errorWithDomain:@"world" code:200 userInfo:errors];
                                        [view performSelector:errorAction withObject:httpError];
@@ -123,16 +131,31 @@
 }
 
 -(void)alertUser:(NSString *) text{
-    NSString *errorMessage = [NSHTTPURLResponse localizedStringForStatusCode:[text intValue]];
-    NSString *errorMessageWithStatusCode = [NSString stringWithFormat:@"%@ - %@", text, errorMessage];
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error"
-                                                   message:errorMessageWithStatusCode
-                                                  delegate:self
-                                         cancelButtonTitle:@"Ok"
-                                         otherButtonTitles:nil,nil];
-    [alert show];
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"debugMode"] != nil) {
+        bool debugMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"debugMode"];
+        if(debugMode){
+            NSString *errorMessage = [NSHTTPURLResponse localizedStringForStatusCode:[text intValue]];
+            NSString *errorMessageWithStatusCode = [NSString stringWithFormat:@"%@ - %@", text, errorMessage];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error"
+                                                           message:errorMessageWithStatusCode
+                                                          delegate:self
+                                                 cancelButtonTitle:@"Ok"
+                                                 otherButtonTitles:nil,nil];
+            [alert show];
+        }
+    }
 }
-
+-(void)logoutUser:(NSObject *) view{
+    if([view isKindOfClass:[UIViewController class]]){
+        UIViewController *viewController = (UIViewController*)view;
+        [authHelper resetCredentials];
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+        UINavigationController *navigation =[mainStoryboard instantiateViewControllerWithIdentifier:@"startNav"];
+        [viewController presentViewController:navigation animated:NO completion:nil];
+    }
+   
+    
+}
 - (void)connection:(NSURLConnection *)connection
    didSendBodyData:(NSInteger)bytesWritten
  totalBytesWritten:(NSInteger)totalBytesWritten
@@ -147,6 +170,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
     }
     //NSLog(@"Skrevet %ld av totalt %ld percentage %d", (long)totalBytesWritten, (long)totalBytesExpectedToWrite, percentageDownloaded);
 }
+
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {

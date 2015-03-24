@@ -11,6 +11,7 @@
 #import "followersTableViewController.h"
 #import "MediaHelper.h"
 #import "UIHelper.h"
+#import "SettingsTableViewController.h"
 
 
 
@@ -112,6 +113,7 @@ MPMoviePlayerController *player;
     }
 }
 
+
 -(void)setOwnProfile:(bool) isProfile{
     isOwnProfile = isProfile;
 }
@@ -131,7 +133,12 @@ MPMoviePlayerController *player;
     followingtapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFollowing:)];
     followingtapGr.numberOfTapsRequired = 1;
     [self.showFollowingView addGestureRecognizer:followingtapGr];
-
+    /*
+    UITapGestureRecognizer *settingsGr;
+    settingsGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings:)];
+    settingsGr.numberOfTapsRequired = 1;
+    [self.settingsButton addGestureRecognizer:settingsGr];
+*/
     
 }
 
@@ -442,6 +449,11 @@ MPMoviePlayerController *player;
     followersTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"followers"];
     NSLog(@"length %lu", (unsigned long)[[profileController getFollowers] count]);
     [vc setFollowers:[profileController getFollowers] withBool:YES];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)showSettings:(UITapGestureRecognizer *) sender{
+    SettingsTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"settings"];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

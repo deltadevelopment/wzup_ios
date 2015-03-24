@@ -13,14 +13,17 @@
 -(void)build:(NSMutableDictionary *)dic{
     _username  = dic[@"username"];
     _email  = dic[@"email"];
-    _phone_number  = dic[@"phone_number"];
+    if((NSNull*)dic[@"phone_number"] != [NSNull null]){
+           _phone_number  = [[dic objectForKey:@"phone_number"] intValue];
+    }
+
     _display_name  = dic[@"display_name"];
     _availability  = [[dic objectForKey:@"availability"] intValue];    
     _created_at  = dic[@"created_at"];
     _updated_at  = dic[@"updated_at"];
     _password_hash  = dic[@"password_hash"];
     _password_salt  = dic[@"password_salt"];
-    _private_profile  = dic[@"private_profile"];
+    _private_profile  = [[dic objectForKey:@"private_profile"] boolValue];
     _Id  = [[dic objectForKey:@"id"] intValue];
    // NSLog(@"the followee is %@", dic[@"is_followee"]);
     if((NSNull*)dic[@"is_followee"] != [NSNull null]){
@@ -32,7 +35,7 @@
 
 -(NSString*) getUsername{return _username;};
 -(NSString*) getEmail{return _email;};
--(id) getPhoneNumber{return _phone_number;};
+-(int) getPhoneNumber{return _phone_number;};
 -(NSString*) getDisplayName{
     if((NSNull*)_display_name == [NSNull null]){
         return [NSString stringWithFormat:@"@%@",_username];

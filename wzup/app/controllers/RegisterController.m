@@ -48,6 +48,7 @@ NSString *passwordError;
 };
 
 -(void)parseData:(NSDictionary *) dic{
+    dic = [dic objectForKey:@"error"];
     NSArray *usernameErrorArray = dic[@"username"];
     NSArray *passwordErrorArray = dic[@"password"];
     NSArray *emailErrorArray = dic[@"email"];

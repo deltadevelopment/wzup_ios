@@ -11,7 +11,7 @@
 @interface UserModel : NSObject
 @property (nonatomic,strong) NSString * username;
 @property (nonatomic,strong) NSString * email;
-@property (nonatomic) id phone_number;
+@property (nonatomic) int phone_number;
 @property (nonatomic,strong) NSString * display_name;
 @property (nonatomic) int availability;
 @property (nonatomic,strong) NSDate * created_at;
@@ -26,7 +26,7 @@
 
 -(NSString*) getUsername;
 -(NSString*) getEmail;
--(id) getPhoneNumber;
+-(int) getPhoneNumber;
 -(NSString*) getDisplayName;
 -(int) getAvailability;
 -(NSDate*) getCreatedAt;

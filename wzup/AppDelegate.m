@@ -13,7 +13,10 @@
 #import "SearchViewController.h"
 #import "PlaygroundViewController.h"
 #import <NewRelicAgent/NewRelic.h>
-@interface AppDelegate ()
+#import "SettingsTableViewController.h"
+@interface AppDelegate (){
+
+}
 
 @end
 
@@ -23,9 +26,9 @@ AuthHelper *authHelper;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [NewRelicAgent startWithApplicationToken:@"AA23e6b54731679b8b327c5fa411e39966732af8c2"];
-    
+    self.navigationViewController = [[NavigationViewController alloc]init];
     authHelper = [[AuthHelper alloc] init];
-  //[authHelper resetCredentials];
+    //[authHelper resetCredentials];
     if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
     {
         // iOS 8 Notifications
@@ -49,6 +52,7 @@ AuthHelper *authHelper;
     }else{
         //[self setView:[[SearchViewController alloc] init] second:@"search"];
         [self setView:[[FeedViewController alloc] init] second:@"feed2"];
+        //[self setView:[[SettingsTableViewController alloc] init] second:@"settings"];
        // [self setView:[[FeedTableViewController alloc] init] second:@"FeedNavigation"];
     }
     return YES;

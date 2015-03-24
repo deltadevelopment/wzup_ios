@@ -40,6 +40,12 @@
 		C595D29D1AAF63F6006CC479 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C595D29C1AAF63F6006CC479 /* SearchViewController.m */; };
 		C5D1EBC41AAEF9EE00A77C09 /* FollowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D1EBC31AAEF9EE00A77C09 /* FollowModel.m */; };
 		C5D759AA1AC17C3900E3167C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C5D759A91AC17C3900E3167C /* Settings.bundle */; };
+		C5D759B11AC1830800E3167C /* SettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D759B01AC1830800E3167C /* SettingsTableViewCell.m */; };
+		C5D759B41AC186EE00E3167C /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D759B31AC186EE00E3167C /* SettingsTableViewController.m */; };
+		C5D759B71AC193A300E3167C /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D759B61AC193A300E3167C /* SettingsController.m */; };
+		C5D759BA1AC1A39B00E3167C /* EditProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D759B91AC1A39B00E3167C /* EditProfileTableViewController.m */; };
+		C5D759BD1AC1BA1D00E3167C /* ChangePasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D759BC1AC1BA1D00E3167C /* ChangePasswordTableViewController.m */; };
+		C5D759C01AC1DD6400E3167C /* ServerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5D759BF1AC1DD6400E3167C /* ServerTableViewController.m */; };
 		C5D9D3861AC08B8C00822B7C /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D9D3851AC08B8C00822B7C /* NewRelicAgent.framework */; };
 		C5D9D3881AC08BB900822B7C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D9D3871AC08BB900822B7C /* CoreTelephony.framework */; };
 		C5D9D38A1AC08BC200822B7C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D9D3891AC08BC200822B7C /* SystemConfiguration.framework */; };
@@ -152,6 +158,18 @@
 		C5D1EBC21AAEF9EE00A77C09 /* FollowModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowModel.h; sourceTree = "<group>"; };
 		C5D1EBC31AAEF9EE00A77C09 /* FollowModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowModel.m; sourceTree = "<group>"; };
 		C5D759A91AC17C3900E3167C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		C5D759AF1AC1830800E3167C /* SettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewCell.h; sourceTree = "<group>"; };
+		C5D759B01AC1830800E3167C /* SettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewCell.m; sourceTree = "<group>"; };
+		C5D759B21AC186EE00E3167C /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		C5D759B31AC186EE00E3167C /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
+		C5D759B51AC193A300E3167C /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
+		C5D759B61AC193A300E3167C /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
+		C5D759B81AC1A39B00E3167C /* EditProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileTableViewController.h; sourceTree = "<group>"; };
+		C5D759B91AC1A39B00E3167C /* EditProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileTableViewController.m; sourceTree = "<group>"; };
+		C5D759BB1AC1BA1D00E3167C /* ChangePasswordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordTableViewController.h; sourceTree = "<group>"; };
+		C5D759BC1AC1BA1D00E3167C /* ChangePasswordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordTableViewController.m; sourceTree = "<group>"; };
+		C5D759BE1AC1DD6400E3167C /* ServerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerTableViewController.h; sourceTree = "<group>"; };
+		C5D759BF1AC1DD6400E3167C /* ServerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerTableViewController.m; sourceTree = "<group>"; };
 		C5D9D3851AC08B8C00822B7C /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		C5D9D3871AC08BB900822B7C /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		C5D9D3891AC08BC200822B7C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -320,6 +338,8 @@
 				C58E31D01ABA094F00654B30 /* VideoController.m */,
 				F1C6A03E1ABDB07D004FBB39 /* ApplicationController2.h */,
 				F1C6A03F1ABDB07D004FBB39 /* ApplicationController2.m */,
+				C5D759B51AC193A300E3167C /* SettingsController.h */,
+				C5D759B61AC193A300E3167C /* SettingsController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -372,6 +392,7 @@
 		C590CFE21A937FFC003432D7 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				C5D759AB1AC17E6700E3167C /* settings */,
 				F1C6A04C1ABEF753004FBB39 /* login */,
 				F1C6A04B1ABEF714004FBB39 /* profile */,
 				F1C6A04A1ABEF6E4004FBB39 /* feed */,
@@ -412,6 +433,23 @@
 				F1E0EB3E1AA67D3900EBBBD4 /* status-icon.png */,
 			);
 			name = res;
+			sourceTree = "<group>";
+		};
+		C5D759AB1AC17E6700E3167C /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				C5D759AF1AC1830800E3167C /* SettingsTableViewCell.h */,
+				C5D759B01AC1830800E3167C /* SettingsTableViewCell.m */,
+				C5D759B21AC186EE00E3167C /* SettingsTableViewController.h */,
+				C5D759B31AC186EE00E3167C /* SettingsTableViewController.m */,
+				C5D759B81AC1A39B00E3167C /* EditProfileTableViewController.h */,
+				C5D759B91AC1A39B00E3167C /* EditProfileTableViewController.m */,
+				C5D759BB1AC1BA1D00E3167C /* ChangePasswordTableViewController.h */,
+				C5D759BC1AC1BA1D00E3167C /* ChangePasswordTableViewController.m */,
+				C5D759BE1AC1DD6400E3167C /* ServerTableViewController.h */,
+				C5D759BF1AC1DD6400E3167C /* ServerTableViewController.m */,
+			);
+			name = settings;
 			sourceTree = "<group>";
 		};
 		C5D9D3841AC08B8C00822B7C /* Frameworks */ = {
@@ -599,7 +637,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SCRIPT=`/usr/bin/find \"${SRCROOT}\" -name newrelic_postbuild.sh | head -n 1`\n\n/bin/sh \"${SCRIPT}\" \"AA23e6b54731679b8b327c5fa411e39966732af8c2\"";
+			shellScript = "";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -608,13 +646,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5D759B41AC186EE00E3167C /* SettingsTableViewController.m in Sources */,
 				F15576241A9FEFDD00202CF6 /* FeedNavigationViewController.m in Sources */,
 				C590CFEA1A937FFC003432D7 /* SSKeychainQuery.m in Sources */,
+				C5D759B11AC1830800E3167C /* SettingsTableViewCell.m in Sources */,
 				C590CFE41A937FFC003432D7 /* LoginController.m in Sources */,
 				F15576181A9FD05300202CF6 /* FeedViewController.m in Sources */,
 				C55718CE1AB09A3700C4CE3D /* followersTableViewController.m in Sources */,
 				C55BD4F71A9F763A0061327D /* ProfileViewController.m in Sources */,
 				C590CFF01A93A9E6003432D7 /* StartViewController.m in Sources */,
+				C5D759B71AC193A300E3167C /* SettingsController.m in Sources */,
 				C55BD4E51A9C967E0061327D /* FeedController.m in Sources */,
 				C590CFE51A937FFC003432D7 /* ApplicationHelper.m in Sources */,
 				C590CFE71A937FFC003432D7 /* ConfigHelper.m in Sources */,
@@ -627,6 +668,7 @@
 				C590CFE91A937FFC003432D7 /* SSKeychain.m in Sources */,
 				F155761B1A9FD1D800202CF6 /* FeedTableViewCell.m in Sources */,
 				C55718D11AB09F5700C4CE3D /* followerTableViewCell.m in Sources */,
+				C5D759BA1AC1A39B00E3167C /* EditProfileTableViewController.m in Sources */,
 				C595D29D1AAF63F6006CC479 /* SearchViewController.m in Sources */,
 				C527757E1ABC54D900ED3E15 /* CircleIndicator.m in Sources */,
 				C590CFE61A937FFC003432D7 /* AuthHelper.m in Sources */,
@@ -647,6 +689,8 @@
 				C5DFD5811A920A1800F37803 /* LoginModel.m in Sources */,
 				F1C6A0341ABDA7E3004FBB39 /* ImageHelper.m in Sources */,
 				C5FEC2D41AADAB0B00EB3C30 /* ProfileController.m in Sources */,
+				C5D759BD1AC1BA1D00E3167C /* ChangePasswordTableViewController.m in Sources */,
+				C5D759C01AC1DD6400E3167C /* ServerTableViewController.m in Sources */,
 				C590CFF31A94FC0D003432D7 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

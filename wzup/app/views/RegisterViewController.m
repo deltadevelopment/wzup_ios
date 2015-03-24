@@ -136,13 +136,13 @@ LoginController *loginController;
 -(void)registerWasSuccessful:(NSData *) data{
  NSString *strdata=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(strdata);
-    /*
+    [self.regIndicator stopAnimating];
     [loginController login:self.usernameTextField.text
                       pass:self.passwordTextField.text
                 withObject:self
                withSuccess:@selector(loginWasSuccessful:)
                  withError:@selector(loginWasNotSuccessful:)];
-     */
+     
 }
 
 -(void)registerWasNotSuccessful:(NSError *) error{
@@ -160,7 +160,7 @@ LoginController *loginController;
     [self.regIndicator stopAnimating];
     [loginController storeCredentials:data];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    FeedViewController *viewController = (FeedViewController *)[storyboard instantiateViewControllerWithIdentifier:@"feed"];
+    FeedViewController *viewController = (FeedViewController *)[storyboard instantiateViewControllerWithIdentifier:@"feed2"];
     [self presentViewController:viewController animated:YES completion:nil];
 }
 

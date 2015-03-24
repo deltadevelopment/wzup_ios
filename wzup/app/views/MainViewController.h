@@ -13,4 +13,5 @@
 -(CGSize)getSize;
 - (UIImage*)imageByScalingAndCroppingForSize:(CGSize)targetSize img:(UIImage *) sourceImage;
 -(UIImage*)getCroppedImage:(UIImage*)sourceImage;
+-(void)setView:(UIViewController *)controller second:(NSString *) controllerString;
 @end
