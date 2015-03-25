@@ -47,11 +47,18 @@
     if(timer != nil){
         [timer invalidate];
     }
- 
-    self.userLabel.text = textField.text;
-    self.indicator.hidden = NO;
-    self.searchButton.hidden = YES;
-    timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(searchForUser) userInfo:nil repeats:NO];
+     self.userLabel.text = textField.text;
+    if([textField.text length] != 0){
+       
+        self.indicator.hidden = NO;
+        self.searchButton.hidden = YES;
+        self.searchSuccessImage.hidden = YES;
+        timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(searchForUser) userInfo:nil repeats:NO];
+    }else
+    {
+        self.indicator.hidden = YES;
+    }
+
    
     
 }
@@ -73,9 +80,10 @@
 
 -(void)searchWasNotSuccessful:(NSError *) error
 {
-    
-    self.searchSuccessImage.hidden = YES;
-    
+    self.searchSuccessImage.image =[UIImage imageNamed:@"cross-simple.png"];
+    self.searchSuccessImage.hidden = NO;
+    self.indicator.hidden = YES;
+
     NSLog(@"not success");
 }
 
@@ -130,6 +138,7 @@
 
     self.searchButton.hidden = YES;
     self.indicator.hidden = YES;
+     self.searchSuccessImage.image =[UIImage imageNamed:@"tick-black-icon.png"];
     self.searchSuccessImage.hidden = NO;
     NSLog(@"follow success");
 }

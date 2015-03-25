@@ -53,6 +53,8 @@
 		C5D9D38A1AC08BC200822B7C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D9D3891AC08BC200822B7C /* SystemConfiguration.framework */; };
 		C5D9D38C1AC08BCB00822B7C /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D9D38B1AC08BCB00822B7C /* libc++.dylib */; };
 		C5D9D38E1AC08BD400822B7C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D9D38D1AC08BD400822B7C /* libz.dylib */; };
+		C5DEB7B01AC2D9CA007F2537 /* cross-simple.png in Resources */ = {isa = PBXBuildFile; fileRef = C5DEB7AF1AC2D9CA007F2537 /* cross-simple.png */; };
+		C5DEB7B21AC2DA10007F2537 /* plus-simple.png in Resources */ = {isa = PBXBuildFile; fileRef = C5DEB7B11AC2DA10007F2537 /* plus-simple.png */; };
 		C5DFD5811A920A1800F37803 /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DFD5801A920A1800F37803 /* LoginModel.m */; };
 		C5FEC2D11AA9FAA700EB3C30 /* ProfileNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FEC2D01AA9FAA700EB3C30 /* ProfileNavigationViewController.m */; };
 		C5FEC2D41AADAB0B00EB3C30 /* ProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FEC2D31AADAB0B00EB3C30 /* ProfileController.m */; };
@@ -181,6 +183,8 @@
 		C5D9D3891AC08BC200822B7C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C5D9D38B1AC08BCB00822B7C /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		C5D9D38D1AC08BD400822B7C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		C5DEB7AF1AC2D9CA007F2537 /* cross-simple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cross-simple.png"; path = "../../../../Downloads/cross-simple.png"; sourceTree = "<group>"; };
+		C5DEB7B11AC2DA10007F2537 /* plus-simple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "plus-simple.png"; path = "../../../../Downloads/plus-simple.png"; sourceTree = "<group>"; };
 		C5DFD57F1A920A1800F37803 /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModel.h; sourceTree = "<group>"; };
 		C5DFD5801A920A1800F37803 /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModel.m; sourceTree = "<group>"; };
 		C5FEC2CF1AA9FAA700EB3C30 /* ProfileNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileNavigationViewController.h; sourceTree = "<group>"; };
@@ -425,8 +429,10 @@
 				F15576141A9FCFA200202CF6 /* testBilde.jpg */,
 				F1C6A04D1ABF60E9004FBB39 /* play.png */,
 				F1C6A0271ABDA4B8004FBB39 /* plus-icon.png */,
+				C5DEB7AF1AC2D9CA007F2537 /* cross-simple.png */,
 				F1C6A0231ABDA3F8004FBB39 /* tick.png */,
 				F1C6A0291ABDA4C9004FBB39 /* cross-icon.png */,
+				C5DEB7B11AC2DA10007F2537 /* plus-simple.png */,
 				F1C6A02A1ABDA4C9004FBB39 /* search-icon.png */,
 				F1C6A04F1ABF7010004FBB39 /* play-black.png */,
 				F1C6A02B1ABDA4C9004FBB39 /* tick-black-icon.png */,
@@ -602,9 +608,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1C6A0501ABF7010004FBB39 /* play-black.png in Resources */,
+				C5DEB7B01AC2D9CA007F2537 /* cross-simple.png in Resources */,
 				F1E0EB3F1AA67D3900EBBBD4 /* status-icon.png in Resources */,
 				F1C6A04E1ABF60E9004FBB39 /* play.png in Resources */,
 				F1A386AF1A9E7DB20084A8EF /* miranda-kerr.jpg in Resources */,
+				C5DEB7B21AC2DA10007F2537 /* plus-simple.png in Resources */,
 				F1A386B11A9E7DC10084A8EF /* christer-dahl.jpeg in Resources */,
 				F1C6A0281ABDA4B8004FBB39 /* plus-icon.png in Resources */,
 				C506389A1A91E18C00F39D63 /* Main.storyboard in Resources */,
