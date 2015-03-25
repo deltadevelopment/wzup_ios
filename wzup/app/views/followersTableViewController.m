@@ -25,6 +25,8 @@ bool isFollowers;
 - (void)viewDidLoad {
     [super viewDidLoad];
     profileController = [[ProfileController alloc] init];
+    //self.navigationController.tabBarItem.title = @"Followers";
+    self.navigationItem.title = @"Followers";
     
     if(isFollowers){
         //[profileController initRequestingFollowers];

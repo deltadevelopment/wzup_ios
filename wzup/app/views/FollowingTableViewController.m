@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     sections = 1;
+    self.navigationItem.title = @"Following";
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

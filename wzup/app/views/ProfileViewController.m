@@ -34,6 +34,8 @@ MediaHelper *mediaHelper;
 MPMoviePlayerController *player;
 - (void)viewDidLoad {
     mediaHelper = [[MediaHelper alloc]init];
+    
+  
     /*
     [mediaHelper initaliseVideo];
     //YES == front camera
