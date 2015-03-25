@@ -74,11 +74,28 @@
                        withError:(SEL) errorAction;
 
 
+-(void)initRequestingFollowees:(NSObject *)view
+                   withSuccess:(SEL) success
+                     withError:(SEL) errorAction;
+
+
+-(void)initRequestingFolloweesWithUserId:(NSString*) Id
+                              withObject:(NSObject *)view
+                             withSuccess:(SEL) success
+                               withError:(SEL) errorAction;
+
 
 -(NSMutableArray*)getFollowers;
 -(NSMutableArray*)getFollowing;
 -(NSUInteger)getNumberOfFollowers;
 -(NSUInteger)getNumberOfFollowing;
 -(NSMutableArray*)getRequestingFollowers;
--(void)AcceptFollowingWithUserId:(NSString *) Id;
+-(void)AcceptFollowingWithUserId:(NSString *) Id
+                      withObject:(NSObject *)view
+                     withSuccess:(SEL) success
+                       withError:(SEL) errorAction;
+
+-(void)requestUser:(NSString *) userId withObject:(NSObject *) view
+       withSuccess:(SEL) success
+         withError:(SEL) errorAction;
 @end

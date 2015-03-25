@@ -10,6 +10,7 @@
 #import "MainViewController.h"
 #import "StatusModel.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "FollowModel.h"
 @interface ProfileViewController : MainViewController<UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *testLabel;
 @property (weak, nonatomic) IBOutlet UIView *topBar;
@@ -47,4 +48,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *availability;
 - (IBAction)playVideo:(id)sender;
 -(void)setOwnProfile:(bool) isProfile;
+-(void)setProfileWithFollower:(FollowModel *)follower;
 @end

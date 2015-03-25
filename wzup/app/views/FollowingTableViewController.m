@@ -9,6 +9,8 @@
 #import "FollowingTableViewController.h"
 #import "followerTableViewCell.h"
 #import "FollowModel.h"
+#import "ProfileController.h"
+#import "ProfileViewController.h"
 @interface FollowingTableViewController ()
 
 @end
@@ -16,19 +18,53 @@
 @implementation FollowingTableViewController
 {
     NSMutableArray* followings;
-    NSMutableArray* requestingFollowings;
+    NSMutableArray* requestingFollowees;
+    ProfileController *profileController;
     int sections;
+    followerTableViewCell *currentCell;
 }
+bool isOwnProfiles = YES;
 - (void)viewDidLoad {
     [super viewDidLoad];
     sections = 1;
     self.navigationItem.title = @"Following";
+    profileController = [[ProfileController alloc]init];
+    requestingFollowees = [[NSMutableArray alloc] init];
+    if(isOwnProfiles){
+        [profileController initRequestingFollowees:self withSuccess:@selector(requestingFolloweesWasReturned:) withError:@selector(requestingFolloweesWasNotReturned:)];
+    }
+
+}
+     
+-(void)requestingFolloweesWasReturned:(NSData *) data{
+
+    NSString *strdata=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(strdata);
+    NSLog(@"was returned -----");
+    requestingFollowees = [profileController getRequestingFollowers:data];
+    if([requestingFollowees count] != 0){
+        sections = 2;
+    }
+    [self.tableView reloadData];
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"didselect");
+    ProfileViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"profile"];
+    FollowModel *follower  = [followings objectAtIndex:indexPath.row];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    //[follower getUser]
+    [vc setProfileWithFollower:follower];
+    // OR myViewController *vc = [[myViewController alloc] init];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    // any setup code for *vc
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain
+                                                                            target:nil action:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)requestingFolloweesWasNotReturned:(NSError *) error{
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,8 +72,9 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)setFollowings:(NSMutableArray*) theFollowings{
+-(void)setFollowings:(NSMutableArray*) theFollowings withBool:(BOOL)isOwnProfile{
     followings = theFollowings;
+    isOwnProfiles = isOwnProfile;
 }
 
 
@@ -53,7 +90,8 @@
         return [followings count];
     }
     else{
-        return [requestingFollowings count];
+        NSLog(@"Re %lu",(unsigned long)[requestingFollowees count]);
+        return [requestingFollowees count];
     }
 }
 
@@ -77,7 +115,42 @@
     FollowModel *follower = [followings objectAtIndex:tapIndexPath.row];
     followerTableViewCell *cell = [self.tableView cellForRowAtIndexPath:tapIndexPath];
     NSString *userId = [NSString stringWithFormat:@"%d", [[follower getUser] getId]];
-    //[[follower getUser] isFollowee] ? [self unFollowWithFollower:follower cell:cell] : [self followWithFollower:follower cell:cell];
+    [[follower getUser] isFollowee] ? [self unFollowWithFollower:follower cell:cell] : [self followWithFollower:follower cell:cell];
+}
+
+
+-(void) followWithFollower:(FollowModel *) follower
+                      cell:(followerTableViewCell*) cell{
+    NSString *userId = [NSString stringWithFormat:@"%d", [[follower getUser] getId]];
+    [[follower getUser] setIs_followee:true];
+    //[profileController followUserWithUserId:userId];
+    [profileController followUserWithUserId:userId withObject:self withSuccess:@selector(followedSuccesfully:) withError:@selector(followedWithError:)];
+    currentCell = cell;
+}
+-(void)unFollowWithFollower:(FollowModel *) follower cell:(followerTableViewCell*) cell
+{
+    NSString *userId = [NSString stringWithFormat:@"%d", [[follower getUser] getId]];
+    [[follower getUser] setIs_followee:false];
+    [profileController unfollowUserWithUserId:userId withObject:self withSuccess:@selector(unfollowedSuccesfully:) withError:@selector(unfollowedWithError:)];
+    //  [profileController unfollowUserWithUserId:userId];
+    currentCell = cell;
+    
+}
+
+-(void)followedSuccesfully:(NSData *) data{
+    [currentCell.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+}
+
+-(void)followedWithError:(NSError *) error{
+    
+}
+
+-(void)unfollowedSuccesfully:(NSData *) data{
+    [currentCell.followButton setTitle:@"Follow" forState:UIControlStateNormal];
+}
+
+-(void)unfollowedWithError:(NSError *) error{
+    
 }
 
 
@@ -107,26 +180,26 @@
         else{
             [cell.followButton setTitle:@"Follow" forState:UIControlStateNormal];
         }
-        
+        cell.followButton.hidden = NO;
         cell.profileName.text = [[follower getUser] getDisplayName];
         [cell attachToGUI];
         
     }else{
-        if([requestingFollowings count] != 0){
+        if([requestingFollowees count] != 0){
             UITapGestureRecognizer *tapGr;
             tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(acceptTap:)];
             tapGr.numberOfTapsRequired = 1;
             [[cell followButton] addGestureRecognizer:tapGr];
             
             //following_requests
-            FollowModel *follower = [requestingFollowings objectAtIndex:indexPath.row];
+            FollowModel *follower = [requestingFollowees objectAtIndex:indexPath.row];
             /*if([[follower getUser] isFollowee]){
              [cell.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
              }
              else{
              [cell.followButton setTitle:@"Follow" forState:UIControlStateNormal];
              }*/
-            [cell.followButton setTitle:@"Accept" forState:UIControlStateNormal];
+            cell.followButton.hidden = YES;
             cell.profileName.text = [[follower getUser] getDisplayName];
             [cell attachToGUI];
         }

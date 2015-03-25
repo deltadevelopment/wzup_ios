@@ -25,7 +25,7 @@ AuthHelper *authHelper;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [NewRelicAgent startWithApplicationToken:@"AA23e6b54731679b8b327c5fa411e39966732af8c2"];
+    //[NewRelicAgent startWithApplicationToken:@"AA23e6b54731679b8b327c5fa411e39966732af8c2"];
     self.navigationViewController = [[NavigationViewController alloc]init];
     authHelper = [[AuthHelper alloc] init];
     //[authHelper resetCredentials];
@@ -36,13 +36,13 @@ AuthHelper *authHelper;
         
         [application registerForRemoteNotifications];
     }
+    
     else
     {
         // iOS < 8 Notifications
         [application registerForRemoteNotificationTypes:
          (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
     }
-    
     
     // Override point for customization after application launch.
 

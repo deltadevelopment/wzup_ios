@@ -33,13 +33,19 @@ bool isPlaying;
 MediaHelper *mediaHelper;
 MPMoviePlayerController *player;
 - (void)viewDidLoad {
+    [self loadData];
+   
+   
+}
+
+-(void)loadData{
     mediaHelper = [[MediaHelper alloc]init];
     
-  
+    
     /*
-    [mediaHelper initaliseVideo];
-    //YES == front camera
-    [mediaHelper CameraToggleButtonPressed:YES];
+     [mediaHelper initaliseVideo];
+     //YES == front camera
+     [mediaHelper CameraToggleButtonPressed:YES];
      [mediaHelper StartStopRecording];
      [NSTimer scheduledTimerWithTimeInterval:4.0
      target:self
@@ -57,8 +63,10 @@ MPMoviePlayerController *player;
     if(isOwnProfile){
         [self getData];
     }
-   
-   
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [self loadData];
 }
 
 #pragma mark - gesture delegate
@@ -418,6 +426,10 @@ MPMoviePlayerController *player;
 
 
 -(void)setProfile:(StatusModel* ) statusProfile{
+    [self getUserWithStatus:statusProfile];
+}
+
+-(void)getUserWithStatus:(StatusModel *) statusProfile{
     isOwnProfile = NO;
     NSLog(@"setting profile");
     status = statusProfile;
@@ -425,6 +437,24 @@ MPMoviePlayerController *player;
     profileController  = [[ProfileController alloc] init];
     [profileController initFollowersWithUserId:userId withObject:self withSuccess:@selector(followersWasReturned:) withError:@selector(followersWasNotReturned:)];
     [profileController initFollowingWithUserId:userId withObject:self withSuccess:@selector(followingWasReturned:) withError:@selector(followingWasNotReturned:)];
+}
+
+-(void)setProfileWithFollower:(FollowModel *)follower{
+    isOwnProfile = NO;
+    NSString* userId = [NSString stringWithFormat:@"%d", [[follower getUser]getId]];
+    [profileController requestUser:userId withObject:self withSuccess:@selector(UserWasFetched:) withError:@selector(UserWasNotFetched:)];
+    
+}
+
+
+-(void)UserWasFetched:(NSData *) data{
+    [self getUserWithStatus:[profileController getUser:data]];
+    
+
+}
+
+-(void)UserWasNotFetched:(NSError *) error{
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -451,7 +481,14 @@ MPMoviePlayerController *player;
     NSLog(@"showFolloers");
     followersTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"followers"];
     NSLog(@"length %lu", (unsigned long)[[profileController getFollowers] count]);
-    [vc setFollowers:[profileController getFollowers] withBool:YES];
+ 
+    if(isOwnProfile){
+        [vc setFollowers:[profileController getFollowers] isOwnProfile:YES];
+    }else{
+        [vc setFollowers:[profileController getFollowers] isOwnProfile:NO];
+    }
+    
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -463,7 +500,11 @@ MPMoviePlayerController *player;
 -(void)showFollowing:(UITapGestureRecognizer *) sender{
     FollowingTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"following"];
     //NSLog(@"length %lu", (unsigned long)[[profileController getFollowers] count]);
-    [vc setFollowings:[profileController getFollowing]];
+    if(isOwnProfile){
+     [vc setFollowings:[profileController getFollowing] withBool:YES];
+    }else{
+     [vc setFollowings:[profileController getFollowing] withBool:NO];
+    }
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface FollowingTableViewController : UITableViewController
--(void)setFollowings:(NSMutableArray*) theFollowings;
+-(void)setFollowings:(NSMutableArray*) theFollowings withBool:(BOOL)wasOwnProfile;
 @end

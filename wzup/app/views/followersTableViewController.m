@@ -10,37 +10,54 @@
 #import "followerTableViewCell.h"
 #import "FollowModel.h"
 #import "ProfileController.h"
+#import "ProfileViewController.h"
 
 @interface followersTableViewController ()
 
 @end
 
-@implementation followersTableViewController
-NSMutableArray* followers;
-NSMutableArray* requestingFollowers;
-ProfileController *profileController;
-followerTableViewCell *currentCell;
-int sections = 1;
-bool isFollowers;
+@implementation followersTableViewController{
+    NSMutableArray* followers;
+    NSMutableArray* requestingFollowers;
+    ProfileController *profileController;
+    followerTableViewCell *currentCell;
+    NSIndexPath *indexPathForRemoval;
+}
+    bool isOwnProfil = YES;
+    int sections = 1;
 - (void)viewDidLoad {
     [super viewDidLoad];
     profileController = [[ProfileController alloc] init];
     //self.navigationController.tabBarItem.title = @"Followers";
     self.navigationItem.title = @"Followers";
     
-    if(isFollowers){
-        //[profileController initRequestingFollowers];
+    //[profileController initRequestingFollowers];
+    if(isOwnProfil){
         [profileController initRequestingFollowers:self
                                        withSuccess:@selector(requestingFollowersWasReturned:)
-                                        withError:@selector(requestingFollowersWasNotReturned:)];
-    }else{
-        //INITIALISER FOLLOWEES REQUESTS HER
-        //[profileController initPendingFollowees];
-        //requestingFollowers = [profileController getRequestingFollowers];
-        //if([requestingFollowers count] != 0){
-        //  sections = 2;
-        //}
+                                         withError:@selector(requestingFollowersWasNotReturned:)];
     }
+
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    NSLog(@"hey");
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"didselect");
+    ProfileViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"profile"];
+    FollowModel *follower  = [followers objectAtIndex:indexPath.row];
+    
+    //[follower getUser]
+    [vc setProfileWithFollower:follower];
+    // OR myViewController *vc = [[myViewController alloc] init];
+    
+    // any setup code for *vc
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain
+                                                                            target:nil action:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)requestingFollowersWasReturned:(NSData *) data{
@@ -55,10 +72,9 @@ bool isFollowers;
     
 }
 
--(void)setFollowers:(NSMutableArray*) theFollowers withBool:(bool) isFollower{
+-(void)setFollowers:(NSMutableArray*) theFollowers isOwnProfile:(bool) isProfile{
     NSLog(@"followr");
-    isFollowers = isFollower;
-    
+    isOwnProfil = isProfile;
     followers = theFollowers;
    
 }
@@ -93,7 +109,7 @@ bool isFollowers;
     }
     
     if(section == 1){
-        return isFollowers ? @"Waiting for accept" : @"Pending requests";
+        return @"Waiting for accept";
         
     }
     return nil;
@@ -124,7 +140,7 @@ bool isFollowers;
         else{
             [cell.followButton setTitle:@"Follow" forState:UIControlStateNormal];
         }
-        
+        cell.followButton.hidden = NO;
         cell.profileName.text = [[follower getUser] getDisplayName];
         [cell attachToGUI];
     
@@ -159,13 +175,25 @@ bool isFollowers;
     FollowModel *follower = [requestingFollowers objectAtIndex:tapIndexPath.row];
     NSString *userId = [NSString stringWithFormat:@"%d", [[follower getUser] getId]];
     
-    [profileController AcceptFollowingWithUserId:userId];
+    [profileController AcceptFollowingWithUserId:userId withObject:self withSuccess:@selector(acceptWasSuccessful:) withError:@selector(acceptWasNotSuccessful:) ];
+    indexPathForRemoval = tapIndexPath;
+  
+}
+
+-(void)acceptWasSuccessful:(NSData *) data{
     //Remove user from the cell
-    [requestingFollowers removeObjectAtIndex:tapIndexPath.row];
+    [requestingFollowers removeObjectAtIndex:indexPathForRemoval.row];
+    
     if([requestingFollowers count] == 0){
         sections = 1;
     }
     [self.tableView reloadData];
+
+}
+
+-(void)acceptWasNotSuccessful:(NSError *)error{
+
+
 }
 
 -(void)followTap:(UITapGestureRecognizer *) sender{

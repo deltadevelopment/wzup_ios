@@ -99,6 +99,7 @@ LoginController* loginController;
                 withObject:self
                withSuccess:@selector(loginWasSuccessful:)
                  withError:@selector(loginWasNotSuccessful:)];
+    NSLog(@"logging in");
 }
 
 -(void)loginWasSuccessful:(NSData *) data{

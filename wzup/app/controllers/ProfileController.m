@@ -21,6 +21,13 @@ withError:(SEL) errorAction{
     [self getHttpRequest:url withObject:view withSuccess:success withError:errorAction withArgs:nil];
 }
 
+-(void)requestUser:(NSString *) userId withObject:(NSObject *) view
+       withSuccess:(SEL) success
+         withError:(SEL) errorAction{
+    NSString *url = [NSString stringWithFormat:@"user/%@/status", userId];
+    [self getHttpRequest:url withObject:view withSuccess:success withError:errorAction withArgs:nil];
+}
+
 -(StatusModel*)getUser:(NSData *) data{
     ParserHelper* parserHelper = [[ParserHelper alloc] init];
     NSMutableDictionary *dic = [parserHelper parse:data];
@@ -160,6 +167,29 @@ withError:(SEL) errorAction{
     //NSString *strdata=[[NSString alloc]initWithData:response encoding:NSUTF8StringEncoding];
     //NSLog(@"waiting for accept: %@",strdata);
    
+};
+
+
+-(void)initRequestingFollowees:(NSObject *)view
+                   withSuccess:(SEL) success
+                     withError:(SEL) errorAction
+{
+    
+    [self initRequestingFolloweesWithUserId:[authHelper getUserId] withObject:view withSuccess:success withError:errorAction];
+    
+};
+
+
+-(void)initRequestingFolloweesWithUserId:(NSString*) Id
+                              withObject:(NSObject *)view
+                             withSuccess:(SEL) success
+                               withError:(SEL) errorAction
+{
+    
+    NSString *url = [NSString stringWithFormat:@"user/%@/followee_requests", Id];
+    NSLog(@"followeee requests");
+    [self getHttpRequest:url withObject:view withSuccess:success withError:errorAction withArgs:nil];
+    
 };
 
 -(NSMutableArray *)getRequestingFollowers:(NSData *) data{
