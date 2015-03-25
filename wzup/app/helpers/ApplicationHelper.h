@@ -17,4 +17,5 @@
 -(NSString*)getUnAvailableText;
 -(void)addAvailableTexts;
 -(void)addUnAvailableTexts;
+-(NSString*) formatPhoneNumber:(NSString*) simpleNumber deleteLastChar:(BOOL)deleteLastChar;
 @end

@@ -11,6 +11,7 @@
 #import "ProfileController.h"
 #import "UserModel.h"
 #import "AuthHelper.h"
+#import "ApplicationHelper.h"
 @interface EditProfileTableViewController ()
 
 @end
@@ -20,12 +21,14 @@
     ProfileController *profileController;
     UserModel *user;
     AuthHelper *authHelper;
+    ApplicationHelper *applicationHelper;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     settingsController = [[SettingsController alloc]init];
     profileController = [[ProfileController alloc]init];
+    applicationHelper = [[ApplicationHelper alloc]init];
     authHelper = [[AuthHelper alloc]init];
     //Requesting user
     [profileController requestUser:self withSuccess:@selector(userWasReturned:) withError:@selector(userWasNotReturned:)];
@@ -33,6 +36,49 @@
     self.emailTextField.delegate = self;
     self.displayNameTextField.delegate = self;
     self.phoneNumberTextField.delegate = self;
+
+
+}
+
+
+
+-(BOOL)textField:(UITextField *)textField
+shouldChangeCharactersInRange:(NSRange)range
+replacementString:(NSString *)string
+{
+    NSLog(@"the string; %@ andfield: %@", string, textField.text);
+    if(textField == self.phoneNumberTextField){
+        if ([string isEqualToString:@""]) {
+            NSLog(@"Backspace");
+            int length = textField.text.length;
+            if([[textField.text substringFromIndex:length - 1] isEqualToString:@" "]){
+                textField.text = [textField.text substringToIndex:textField.text.length-1];
+            }
+        }else{
+            self.phoneNumberTextField.text = [self formatNumber:textField.text];
+        }
+    }
+  
+    return YES;
+}
+
+-(NSString *)formatNumber:(NSString *)text
+{
+    if(text.length == 3){
+        text=[NSString stringWithFormat:@"%@ ", text];
+    }
+    else  if(text.length == 6){
+        text=[NSString stringWithFormat:@"%@ ", text];
+    }
+  
+    return text;
+}
+-(NSString *)formatPhoneNumber:(NSString *) text
+{
+  
+NSString *finalString = [NSString stringWithFormat:@"%@ %@ %@", [text substringWithRange:NSMakeRange(0, 3)],[text substringWithRange:NSMakeRange(3, 2)],[text substringWithRange:NSMakeRange(5, 3)]];
+    
+    return  finalString;
 }
 
 
@@ -42,7 +88,8 @@
 
     self.emailTextField.text = [user getEmail];
     self.displayNameTextField.text = [user getDisplayName];
-    self.phoneNumberTextField.text = phoneNumber;
+    self.phoneNumberTextField.text = [self formatPhoneNumber:phoneNumber];
+    
 }
 
 -(void)userWasNotReturned:(NSError *) error{
@@ -106,7 +153,8 @@
 */
 
 - (IBAction)doneAction:(id)sender {
-    [settingsController saveProfile:self.displayNameTextField.text withPhoneNumber:self.phoneNumberTextField.text withEmail:self.emailTextField.text withObject:self withSuccess:@selector(userWasSaved:) withError:@selector(userWasNotSaved:)];
+    NSString *phoneNumber = [self.phoneNumberTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [settingsController saveProfile:self.displayNameTextField.text withPhoneNumber:phoneNumber withEmail:self.emailTextField.text withObject:self withSuccess:@selector(userWasSaved:) withError:@selector(userWasNotSaved:)];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
