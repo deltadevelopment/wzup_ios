@@ -15,6 +15,8 @@
 		C506389F1A91E18C00F39D63 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C506389D1A91E18C00F39D63 /* LaunchScreen.xib */; };
 		C50638AB1A91E18C00F39D63 /* wzupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C50638AA1A91E18C00F39D63 /* wzupTests.m */; };
 		C515A3331AC58E0C001A625B /* SuperSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C515A3321AC58E0C001A625B /* SuperSettingsTableViewController.m */; };
+		C515A3391AC5A75F001A625B /* ProfilePictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C515A3381AC5A75F001A625B /* ProfilePictureViewController.m */; };
+		C515A33B1AC5D4DC001A625B /* cross-white.png in Resources */ = {isa = PBXBuildFile; fileRef = C515A33A1AC5D4DC001A625B /* cross-white.png */; };
 		C527757B1ABC52E900ED3E15 /* PlaygroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C527757A1ABC52E900ED3E15 /* PlaygroundViewController.m */; };
 		C527757E1ABC54D900ED3E15 /* CircleIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = C527757D1ABC54D900ED3E15 /* CircleIndicator.m */; };
 		C55718CE1AB09A3700C4CE3D /* followersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55718CD1AB09A3700C4CE3D /* followersTableViewController.m */; };
@@ -114,6 +116,9 @@
 		C50638AA1A91E18C00F39D63 /* wzupTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wzupTests.m; sourceTree = "<group>"; };
 		C515A3311AC58E0C001A625B /* SuperSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperSettingsTableViewController.h; sourceTree = "<group>"; };
 		C515A3321AC58E0C001A625B /* SuperSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuperSettingsTableViewController.m; sourceTree = "<group>"; };
+		C515A3371AC5A75F001A625B /* ProfilePictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilePictureViewController.h; sourceTree = "<group>"; };
+		C515A3381AC5A75F001A625B /* ProfilePictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilePictureViewController.m; sourceTree = "<group>"; };
+		C515A33A1AC5D4DC001A625B /* cross-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cross-white.png"; path = "../../../../Downloads/cross-white.png"; sourceTree = "<group>"; };
 		C52775791ABC52E900ED3E15 /* PlaygroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaygroundViewController.h; sourceTree = "<group>"; };
 		C527757A1ABC52E900ED3E15 /* PlaygroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaygroundViewController.m; sourceTree = "<group>"; };
 		C527757C1ABC54D900ED3E15 /* CircleIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleIndicator.h; sourceTree = "<group>"; };
@@ -431,6 +436,7 @@
 				F1A386B21A9E7E110084A8EF /* events-icon.png */,
 				F15576141A9FCFA200202CF6 /* testBilde.jpg */,
 				F1C6A04D1ABF60E9004FBB39 /* play.png */,
+				C515A33A1AC5D4DC001A625B /* cross-white.png */,
 				F1C6A0271ABDA4B8004FBB39 /* plus-icon.png */,
 				C5DEB7AF1AC2D9CA007F2537 /* cross-simple.png */,
 				F1C6A0231ABDA3F8004FBB39 /* tick.png */,
@@ -465,6 +471,8 @@
 				C5D759BF1AC1DD6400E3167C /* ServerTableViewController.m */,
 				C515A3311AC58E0C001A625B /* SuperSettingsTableViewController.h */,
 				C515A3321AC58E0C001A625B /* SuperSettingsTableViewController.m */,
+				C515A3371AC5A75F001A625B /* ProfilePictureViewController.h */,
+				C515A3381AC5A75F001A625B /* ProfilePictureViewController.m */,
 			);
 			name = settings;
 			sourceTree = "<group>";
@@ -629,6 +637,7 @@
 				F15576151A9FCFA200202CF6 /* testBilde.jpg in Resources */,
 				F1C6A02C1ABDA4C9004FBB39 /* cross-icon.png in Resources */,
 				F1A386B31A9E7E110084A8EF /* events-icon.png in Resources */,
+				C515A33B1AC5D4DC001A625B /* cross-white.png in Resources */,
 				F1C6A02E1ABDA4C9004FBB39 /* tick-black-icon.png in Resources */,
 				F1A386AA1A9BD3260084A8EF /* wz-monkey-bg.jpg in Resources */,
 				F1C6A02D1ABDA4C9004FBB39 /* search-icon.png in Resources */,
@@ -688,6 +697,7 @@
 				C590CFF61A977886003432D7 /* RegisterViewController.m in Sources */,
 				C5FEC2D11AA9FAA700EB3C30 /* ProfileNavigationViewController.m in Sources */,
 				C590D0371A9B4075003432D7 /* NavigationViewController.m in Sources */,
+				C515A3391AC5A75F001A625B /* ProfilePictureViewController.m in Sources */,
 				C57992551AC1F1650017F40E /* FollowingTableViewController.m in Sources */,
 				C590CFE91A937FFC003432D7 /* SSKeychain.m in Sources */,
 				F155761B1A9FD1D800202CF6 /* FeedTableViewCell.m in Sources */,

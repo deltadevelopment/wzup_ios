@@ -44,6 +44,7 @@
     self.changePasswordCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     self.serverCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     self.logoutCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    self.profilePictureCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     
 

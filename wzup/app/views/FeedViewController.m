@@ -591,7 +591,7 @@ static int const EXPAND_SIZE = 549;
                 cameraCell = cell;
                // [self initializeCamera:cell.statusImage];
                 //NYTT KAMERA
-                [mediaHelper setView:cameraCell.statusImage];
+                [mediaHelper setView:cameraCell.statusImage withRect:CGRectZero];
                 [mediaHelper initaliseVideo];
               
             }
@@ -1071,8 +1071,6 @@ static int const EXPAND_SIZE = 549;
             }
         }
     }
-
-
 }
 
 - (IBAction)addStatus:(id)sender {

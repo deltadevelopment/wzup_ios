@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *showErrorsSwitch;
 @property (weak, nonatomic) IBOutlet UITableViewCell *serverCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *logoutCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *profilePictureCell;
 
 
 - (IBAction)toggleServerAction:(id)sender;

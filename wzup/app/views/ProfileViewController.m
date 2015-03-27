@@ -90,6 +90,7 @@ MPMoviePlayerController *player;
             NSLog(@"setter bilde for %@", [[status getUser]getDisplayName]);
             [self.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[status getCroppedImage]]];
         }else{
+            NSLog(@"VIDEO HER JA");
             [self getVideo];
         }
     }
@@ -303,7 +304,7 @@ MPMoviePlayerController *player;
 
 -(void)updateGUI{
     self.nameLabel.text =[[status getUser] getDisplayName];
-    [self getMedia];
+   // [self getMedia];
     self.statusTextLabel.text = [status getBody];
     [self updateAvailability:[[status getUser] getAvailability]];
     self.followersLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)NumberOfFollowers];
@@ -336,6 +337,7 @@ MPMoviePlayerController *player;
         [self.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
         
     }else{
+        NSLog(@"VIDE HER JA");
         [self getVideo];
     }
 }

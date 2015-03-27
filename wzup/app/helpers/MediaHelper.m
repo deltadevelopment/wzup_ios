@@ -20,6 +20,7 @@ AVCaptureDevicePosition position;
 UIView *CameraView;
 VideoController *videoController;
 NSData *lastRecordedVideo;
+bool square;
 
 -(id)init{
     movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
@@ -27,12 +28,15 @@ NSData *lastRecordedVideo;
     return self;
 }
 
--(void)setView:(UIView *) videoView{
-    CGRect rect = videoView.bounds;
-    rect.size.height = 500;
+-(void)setView:(UIView *)videoView withRect:(CGRect) rect{
+    if(CGRectIsEmpty(rect)){
+        rect = videoView.bounds;
+        rect.size.height = 500;
+    }
     videoView.bounds = rect;
     view = videoView;
 }
+
 - (void) capImage:(NSObject *) object withSuccess:(SEL) success {
     //method to capture image from AVCaptureSession video feed
     AVCaptureConnection *videoConnection = nil;
@@ -135,6 +139,10 @@ NSData *lastRecordedVideo;
     
     
 }
+-(void)setSquare:(bool) theSquare
+{
+    square = theSquare;
+}
 -(void)initaliseVideo{
     NSLog(@"Setting up capture session");
     CaptureSession = [[AVCaptureSession alloc] init];
@@ -185,8 +193,10 @@ NSData *lastRecordedVideo;
     [self setPreviewLayer:[[AVCaptureVideoPreviewLayer alloc] initWithSession:CaptureSession]];
     
     //_PreviewLayer.orientation = AVCaptureVideoOrientationPortrait;		//<<SET ORIENTATION.  You can deliberatly set this wrong to flip the image and may actually need to set it wrong to get the right image
+  
+        [[self PreviewLayer] setVideoGravity:AVLayerVideoGravityResizeAspectFill];
     
-    [[self PreviewLayer] setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+    
     
     
     //ADD MOVIE FILE OUTPUT
@@ -218,8 +228,15 @@ NSData *lastRecordedVideo;
     //	AVCaptureSessionPresetPhoto - Full photo resolution (not supported for video output)
     NSLog(@"Setting image quality");
     [CaptureSession setSessionPreset:AVCaptureSessionPresetMedium];
-    if ([CaptureSession canSetSessionPreset:AVCaptureSessionPreset640x480])		//Check size based configs are supported before setting them
-        [CaptureSession setSessionPreset:AVCaptureSessionPreset640x480];
+    
+    if(!square){
+        if ([CaptureSession canSetSessionPreset:AVCaptureSessionPreset640x480])		//Check size based configs are supported before setting them
+            [CaptureSession setSessionPreset:AVCaptureSessionPreset640x480];
+    
+    }else{
+        [CaptureSession setSessionPreset:AVCaptureSessionPresetPhoto];
+    }
+ 
     
     
     

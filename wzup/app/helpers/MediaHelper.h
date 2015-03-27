@@ -30,6 +30,7 @@
     
     
 }
+-(void)setSquare:(bool) theSquare;
 -(void)cancelSession;
 - (void) capImage:(NSObject *) object withSuccess:(SEL) success;
 -(NSData*)getLastRecordedVideo;
@@ -39,5 +40,5 @@
 - (void)StartStopRecording;
 -(void)initaliseVideo;
 - (void)CameraToggleButtonPressed:(bool)isFrontCamera;
--(void)setView:(UIView *) videoView;
+-(void)setView:(UIView *)videoView withRect:(CGRect) rect;
 @end
