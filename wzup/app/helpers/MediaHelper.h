@@ -30,6 +30,8 @@
     
     
 }
+-(void)cancelSession;
+- (void) capImage:(NSObject *) object withSuccess:(SEL) success;
 -(NSData*)getLastRecordedVideo;
 -(void)setMediaDoneSelector:(SEL) successSelector
                  withObject:(NSObject*) object;

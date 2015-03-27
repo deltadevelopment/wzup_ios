@@ -61,6 +61,7 @@ static int const EXPAND_SIZE = 549;
     MPMoviePlayerController *player;
     bool isPlaying;
     UIRefreshControl *refreshControl;
+    bool lockUI;
     
 }
 
@@ -129,7 +130,7 @@ static int const EXPAND_SIZE = 549;
     [_statusButton addGestureRecognizer:gesture];
     UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc]
                                                  initWithTarget:self action:@selector(recordVideo:)];
-    [longGesture setMinimumPressDuration:1];
+    [longGesture setMinimumPressDuration:0.6];
     [_statusButton addGestureRecognizer:longGesture];
     
     
@@ -219,6 +220,7 @@ static int const EXPAND_SIZE = 549;
                                               shouldExpand = NO;
                                               [_tableView beginUpdates];
                                               [_tableView endUpdates];
+                                              lockUI = NO;
                                           }];
                      }];
 }
@@ -385,13 +387,18 @@ static int const EXPAND_SIZE = 549;
 }
 
 -(void)flipCamera:(UITapGestureRecognizer *) sender{
-    if(cameraIsShown){
-        [session stopRunning];
-        [captureVideoPreviewLayer removeFromSuperlayer];
-        [_tableView reloadData];
-        frontFacing = frontFacing ? NO : YES;
-        [self initializeCamera:cameraCell.statusImage];
+    if(!lockUI){
+        if(cameraIsShown){
+            //[session stopRunning];
+            //[captureVideoPreviewLayer removeFromSuperlayer];
+            //[_tableView reloadData];
+            frontFacing = frontFacing ? NO : YES;
+            //[self initializeCamera:cameraCell.statusImage];
+            NSLog(@"flipping");
+            [mediaHelper CameraToggleButtonPressed:frontFacing];
+        }
     }
+   
 }
 
 -(void)addCaption:(UITapGestureRecognizer *) sender{
@@ -532,11 +539,6 @@ static int const EXPAND_SIZE = 549;
     }
 
     if([feed count] != 0){
-        
-   
-  
-        
-  
         UITapGestureRecognizer *tapGr;
         tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         tapGr.numberOfTapsRequired = 1;
@@ -587,7 +589,10 @@ static int const EXPAND_SIZE = 549;
                 flipCameratapGr.cancelsTouchesInView = NO;
                 [[cell statusImage] addGestureRecognizer:flipCameratapGr];
                 cameraCell = cell;
-                [self initializeCamera:cell.statusImage];
+               // [self initializeCamera:cell.statusImage];
+                //NYTT KAMERA
+                [mediaHelper setView:cameraCell.statusImage];
+                [mediaHelper initaliseVideo];
               
             }
            
@@ -719,6 +724,24 @@ static int const EXPAND_SIZE = 549;
     
 }
 
+-(void)imageWasTaken:(UIImage *) imageFromCamera{
+    imgTaken = imageFromCamera;
+    CGRect cropRect = CGRectMake(0 ,0 ,480 ,640);
+    UIGraphicsBeginImageContextWithOptions(cropRect.size, self.view, 1.0f);
+    [imgTaken drawInRect:cropRect];
+    UIImage * customScreenShot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    NSData* data = UIImagePNGRepresentation(customScreenShot);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [feedController setSelector:@selector(mediaIsUploaded:) withObject:self];
+        [feedController sendImageToServer:data];
+    });
+    _tableView.scrollEnabled = YES;
+    self.cancelButton.hidden = YES;
+    [_tableView reloadData];
+}
+
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
         NSUInteger newLength = [textField.text length] + [string length] - range.length;
         return (newLength > 65) ? NO : YES;
@@ -847,15 +870,18 @@ static int const EXPAND_SIZE = 549;
     }
     
     StatusModel *status = [feed objectAtIndex:path.row];
-    if([[status getMediaType] intValue] != 1){
-        FeedTableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
-        if(shouldExpand){
-            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:path.row inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-            [cell playVideo];
-        }else{
-            [cell stopVideo];
+    if(!cameraIsShown){
+        if([[status getMediaType] intValue] != 1){
+            FeedTableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
+            if(shouldExpand){
+                [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:path.row inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+                [cell playVideo];
+            }else{
+                [cell stopVideo];
+            }
         }
     }
+  
 }
 
 -(void)viewDidLayoutSubviews
@@ -1009,20 +1035,21 @@ static int const EXPAND_SIZE = 549;
     {
         // Long press detected, start the timer
         if(cameraIsShown){
+            lockUI = YES;
             NSLog(@"starter filme her");
             
-             hasStoppedRecording = NO;
+            hasStoppedRecording = NO;
             circleIndicator = [[CircleIndicator alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
             [self.indicatorView addSubview:circleIndicator];
             
             [circleIndicator setIndicatorWithMaxTime:10];
             recordTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(decrementSpin) userInfo:nil repeats:YES];
             //YES == front camera
-            [session stopRunning];
-            [captureVideoPreviewLayer removeFromSuperlayer];
-            [mediaHelper setView:cameraCell.statusImage];
-            [mediaHelper initaliseVideo];
-            [mediaHelper CameraToggleButtonPressed:NO];
+            // [session stopRunning];
+            //[captureVideoPreviewLayer removeFromSuperlayer];
+            //[mediaHelper setView:cameraCell.statusImage];
+            //[mediaHelper initaliseVideo];
+            //[mediaHelper CameraToggleButtonPressed:NO];
             [mediaHelper StartStopRecording];
             
             
@@ -1049,11 +1076,17 @@ static int const EXPAND_SIZE = 549;
 }
 
 - (IBAction)addStatus:(id)sender {
+    if(!lockUI){
+        [self prepareStatus];
+    }
+}
+
+-(void)prepareStatus{
     if(!cameraIsShown){
         
         cameraIsShown = YES;
-       [feedController requestUpload];
-       // [_tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+        [feedController requestUpload];
+        // [_tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
         [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         //Prepare for taking picture with camera
         _tableView.scrollEnabled = NO;
@@ -1089,16 +1122,16 @@ static int const EXPAND_SIZE = 549;
         if([[tempStatus getUser] getId ] == [[authHelper getUserId] intValue]){
             
         }else{
-           [feedController requestUser:self withSuccess:@selector(userWasReturned:) withError:@selector(userWasNotReturned:)];
+            [feedController requestUser:self withSuccess:@selector(userWasReturned:) withError:@selector(userWasNotReturned:)];
             UserModel* user = [[UserModel alloc] init];
             user.Id = [[authHelper getUserId] intValue];
             
             StatusModel *status = [[StatusModel alloc] init];
             [status setUser:user];
-           
+            
             currentCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             [feed insertObject:status atIndex:0];
-           // userCell = [self.tableView cellForRowAtIndexPath:0];
+            // userCell = [self.tableView cellForRowAtIndexPath:0];
         }
         
         [self.tableView reloadData];
@@ -1106,8 +1139,10 @@ static int const EXPAND_SIZE = 549;
     }
     else if(cameraIsShown){
         //Take picture
-        
-        [self capImage];
+        //NYTT KAMERA
+        //[self capImage];
+        lockUI = YES;
+        [mediaHelper capImage:self withSuccess:@selector(imageWasTaken:)];
         cameraIsShown = NO;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -1130,6 +1165,7 @@ static int const EXPAND_SIZE = 549;
         });
     }
 }
+
 -(void)userWasReturned:(NSData *) data{
     UserModel* user = [feedController getUser:data];
     
@@ -1164,79 +1200,6 @@ static int const EXPAND_SIZE = 549;
     });
 }
 
-- (void) initializeCamera:(UIView *) cameraView {
-    
-    session = [[AVCaptureSession alloc] init];
-    
-    
-    session.sessionPreset = AVCaptureSessionPresetPhoto;
-    
-        captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
-    
-    
-    [captureVideoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-    CGRect rect = cameraView.bounds;
-    rect.size.height = 480;
-    cameraView.bounds = rect;
-    NSLog(@"height: %f",cameraView.bounds.size.height);
-    captureVideoPreviewLayer.frame = cameraView.bounds;
-
-    //[cameraView.layer addSublayer:captureVideoPreviewLayer];
-    [cameraView.layer insertSublayer:captureVideoPreviewLayer atIndex:0];
-    
-
-    
-    UIView *view = cameraView;
-    CALayer *viewLayer = [view layer];
-    [viewLayer setMasksToBounds:YES];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        CGRect bounds = [view bounds];
-        [captureVideoPreviewLayer setFrame:bounds];
-        
-        NSArray *devices = [AVCaptureDevice devices];
-        
-        for (AVCaptureDevice *device in devices) {
-            
-            NSLog(@"Device name: %@", [device localizedName]);
-            
-            if ([device hasMediaType:AVMediaTypeVideo]) {
-                
-                if ([device position] == AVCaptureDevicePositionBack) {
-                    NSLog(@"Device position : back");
-                    backCamera = device;
-                }
-                else {
-                    NSLog(@"Device position : front");
-                    frontCamera = device;
-                }
-            }
-        }
-        //DEnne biten inn i annen kode
-        NSError *error = nil;
-        AVCaptureDeviceInput *input;
-        if(frontFacing){
-            input = [AVCaptureDeviceInput deviceInputWithDevice:frontCamera error:&error];
-        }else{
-            input = [AVCaptureDeviceInput deviceInputWithDevice:backCamera error:&error];
-        }
-        
-        if (!input) {
-            NSLog(@"ERROR: trying to open camera: %@", error);
-        }
-        [session addInput:input];
-        //SLUTT BIt I KODE HER
-        stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
-        NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
-        [stillImageOutput setOutputSettings:outputSettings];
-        
-        [session addOutput:stillImageOutput];
-        
-        [session startRunning];
-        
-    });
-}
 
 -(void)mediaIsUploaded:(NSNumber*) percentUploaded{
     NSLog(@"downloaded: %@", percentUploaded);
@@ -1264,53 +1227,7 @@ static int const EXPAND_SIZE = 549;
     
 }
 
-- (void) capImage { //method to capture image from AVCaptureSession video feed
-    AVCaptureConnection *videoConnection = nil;
-    for (AVCaptureConnection *connection in stillImageOutput.connections) {
-        
-        for (AVCaptureInputPort *port in [connection inputPorts]) {
-            
-            if ([[port mediaType] isEqual:AVMediaTypeVideo] ) {
-                videoConnection = connection;
-                break;
-            }
-        }
-        
-        if (videoConnection) {
-            break;
-        }
-    }
-    
-    NSLog(@"about to request a capture from: %@", stillImageOutput);
-    [stillImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler: ^(CMSampleBufferRef imageSampleBuffer, NSError *error) {
-        
-        if (imageSampleBuffer != NULL) {
-            NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
-            imgTaken = [UIImage imageWithData:imageData];
-            CGRect cropRect = CGRectMake(0 ,0 ,480 ,640);
-            UIGraphicsBeginImageContextWithOptions(cropRect.size, self.view, 1.0f);
-            [imgTaken drawInRect:cropRect];
-            UIImage * customScreenShot = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            NSData* data = UIImagePNGRepresentation(customScreenShot);
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [feedController setSelector:@selector(mediaIsUploaded:) withObject:self];
-                [feedController sendImageToServer:data];
-            });
-            //UIImage *imgTaken = [UIImage imageWithData:imageData];
-            
-           //[feed removeObjectAtIndex:0];
-            
-            [session stopRunning];
-            [captureVideoPreviewLayer removeFromSuperlayer];
-            _tableView.scrollEnabled = YES;
-            self.cancelButton.hidden = YES;
-            [_tableView reloadData];
-            //[self processImage:[UIImage imageWithData:imageData]];
-        }
 
-    }];
-}
 
 -(void)imageDownloading:(NSNumber *) percentUploaded{
  
@@ -1318,6 +1235,7 @@ static int const EXPAND_SIZE = 549;
 
 -(void)statusIsSuccess:(NSData *) data{
     NSLog(@"Status is set");
+    
       [self imageIsUploaded];
 }
 
@@ -1351,8 +1269,7 @@ static int const EXPAND_SIZE = 549;
     }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [session stopRunning];
-        [captureVideoPreviewLayer removeFromSuperlayer];
+        [mediaHelper cancelSession];
     });
     
 }

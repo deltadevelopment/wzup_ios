@@ -28,9 +28,12 @@ NSData *lastRecordedVideo;
 }
 
 -(void)setView:(UIView *) videoView{
+    CGRect rect = videoView.bounds;
+    rect.size.height = 500;
+    videoView.bounds = rect;
     view = videoView;
 }
-- (void) capImage {
+- (void) capImage:(NSObject *) object withSuccess:(SEL) success {
     //method to capture image from AVCaptureSession video feed
     AVCaptureConnection *videoConnection = nil;
     for (AVCaptureConnection *connection in stillImageOutput.connections) {
@@ -54,25 +57,22 @@ NSData *lastRecordedVideo;
         
         if (imageSampleBuffer != NULL) {
             NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
-            
             imgTaken = [UIImage imageWithData:imageData];
-            //CGRect cropRect = CGRectMake(0 ,0 ,480 ,640);
-            //UIGraphicsBeginImageContextWithOptions(cropRect.size, self.view, 1.0f);
-            
-            //[imgTaken drawInRect:cropRect];
-            //UIImage * customScreenShot = UIGraphicsGetImageFromCurrentImageContext();
-            //UIGraphicsEndImageContext();
-            //NSData* data = UIImagePNGRepresentation(customScreenShot);
-            
-            
-            
-            [session stopRunning];
+            [object performSelector:success withObject:imgTaken];
+            [CaptureSession stopRunning];
+            [CameraView removeFromSuperview];
             [captureVideoPreviewLayer removeFromSuperlayer];
-            
         }
         
     }];
 }
+
+-(void)cancelSession{
+    [CaptureSession stopRunning];
+    [CameraView removeFromSuperview];
+    [captureVideoPreviewLayer removeFromSuperlayer];
+}
+
 - (void) initializeCamera:(UIView *) cameraView {
     
     session = [[AVCaptureSession alloc] init];
@@ -203,8 +203,8 @@ NSData *lastRecordedVideo;
     if ([CaptureSession canAddOutput:MovieFileOutput])
         [CaptureSession addOutput:MovieFileOutput];
     
-    //SET THE CONNECTION PROPERTIES (output properties)
-    [self CameraSetOutputProperties];			//(We call a method as it also has to be done after changing camera)
+    [self addImageOutput];
+    		//(We call a method as it also has to be done after changing camera)
     
     
     
@@ -240,6 +240,15 @@ NSData *lastRecordedVideo;
     [[CameraView layer] addSublayer:_PreviewLayer];
     //----- START THE CAPTURE SESSION RUNNING -----
     [CaptureSession startRunning];
+}
+
+-(void)addImageOutput{
+    stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
+    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
+    [stillImageOutput setOutputSettings:outputSettings];
+    
+    [CaptureSession addOutput:stillImageOutput];
+    
 }
 
 
