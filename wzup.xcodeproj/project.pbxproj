@@ -14,6 +14,7 @@
 		C506389C1A91E18C00F39D63 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C506389B1A91E18C00F39D63 /* Images.xcassets */; };
 		C506389F1A91E18C00F39D63 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C506389D1A91E18C00F39D63 /* LaunchScreen.xib */; };
 		C50638AB1A91E18C00F39D63 /* wzupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C50638AA1A91E18C00F39D63 /* wzupTests.m */; };
+		C515A3331AC58E0C001A625B /* SuperSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C515A3321AC58E0C001A625B /* SuperSettingsTableViewController.m */; };
 		C527757B1ABC52E900ED3E15 /* PlaygroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C527757A1ABC52E900ED3E15 /* PlaygroundViewController.m */; };
 		C527757E1ABC54D900ED3E15 /* CircleIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = C527757D1ABC54D900ED3E15 /* CircleIndicator.m */; };
 		C55718CE1AB09A3700C4CE3D /* followersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C55718CD1AB09A3700C4CE3D /* followersTableViewController.m */; };
@@ -111,6 +112,8 @@
 		C50638A41A91E18C00F39D63 /* wzupTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wzupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C50638A91A91E18C00F39D63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C50638AA1A91E18C00F39D63 /* wzupTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wzupTests.m; sourceTree = "<group>"; };
+		C515A3311AC58E0C001A625B /* SuperSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperSettingsTableViewController.h; sourceTree = "<group>"; };
+		C515A3321AC58E0C001A625B /* SuperSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuperSettingsTableViewController.m; sourceTree = "<group>"; };
 		C52775791ABC52E900ED3E15 /* PlaygroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaygroundViewController.h; sourceTree = "<group>"; };
 		C527757A1ABC52E900ED3E15 /* PlaygroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaygroundViewController.m; sourceTree = "<group>"; };
 		C527757C1ABC54D900ED3E15 /* CircleIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleIndicator.h; sourceTree = "<group>"; };
@@ -460,6 +463,8 @@
 				C5D759BC1AC1BA1D00E3167C /* ChangePasswordTableViewController.m */,
 				C5D759BE1AC1DD6400E3167C /* ServerTableViewController.h */,
 				C5D759BF1AC1DD6400E3167C /* ServerTableViewController.m */,
+				C515A3311AC58E0C001A625B /* SuperSettingsTableViewController.h */,
+				C515A3321AC58E0C001A625B /* SuperSettingsTableViewController.m */,
 			);
 			name = settings;
 			sourceTree = "<group>";
@@ -695,6 +700,7 @@
 				C50638971A91E18C00F39D63 /* SecondViewController.m in Sources */,
 				C55BD4E21A9C91050061327D /* UserModel.m in Sources */,
 				C50638911A91E18C00F39D63 /* AppDelegate.m in Sources */,
+				C515A3331AC58E0C001A625B /* SuperSettingsTableViewController.m in Sources */,
 				C55BD4DF1A9C8EE90061327D /* StatusModel.m in Sources */,
 				F1A386AD1A9BE9100084A8EF /* ApplicationViewController.m in Sources */,
 				C527757B1ABC52E900ED3E15 /* PlaygroundViewController.m in Sources */,

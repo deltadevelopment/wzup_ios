@@ -175,11 +175,14 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="simenlie" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OSm-Zn-zG2">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OSm-Zn-zG2">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="323" y="12" width="54" height="20"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -279,39 +282,40 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0f5-KN-gzn" id="xPE-29-JBY">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfY-oq-Tmp">
-                                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log out" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qVY-5T-bi6">
+                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
-                                                    <state key="normal" title="Log out">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="logoutAction:" destination="tMn-bc-h2G" eventType="touchUpInside" id="gr0-eJ-wgm"/>
-                                                    </connections>
-                                                </button>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="18" y="12" width="71" height="21"/>
+                                                    </variation>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="VfY-oq-Tmp" secondAttribute="centerY" constant="-1" id="A8t-Ph-bhB"/>
-                                                <constraint firstItem="VfY-oq-Tmp" firstAttribute="leading" secondItem="xPE-29-JBY" secondAttribute="leadingMargin" constant="9" id="MAX-jm-Hys">
+                                                <constraint firstItem="qVY-5T-bi6" firstAttribute="leading" secondItem="xPE-29-JBY" secondAttribute="leadingMargin" constant="17" id="EHd-K8-t05">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                                                </constraint>
+                                                <constraint firstAttribute="centerY" secondItem="qVY-5T-bi6" secondAttribute="centerY" constant="-3" id="V7v-DA-XkG">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                                 </constraint>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
-                                                    <exclude reference="VfY-oq-Tmp"/>
+                                                    <exclude reference="qVY-5T-bi6"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="A8t-Ph-bhB"/>
-                                                    <exclude reference="MAX-jm-Hys"/>
+                                                    <exclude reference="EHd-K8-t05"/>
+                                                    <exclude reference="V7v-DA-XkG"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="subviews">
-                                                    <include reference="VfY-oq-Tmp"/>
+                                                    <include reference="qVY-5T-bi6"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="A8t-Ph-bhB"/>
-                                                    <include reference="MAX-jm-Hys"/>
+                                                    <include reference="EHd-K8-t05"/>
+                                                    <include reference="V7v-DA-XkG"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -448,6 +452,7 @@
                     <navigationItem key="navigationItem" title="Settings" id="Ll0-Ic-67M"/>
                     <connections>
                         <outlet property="changePasswordCell" destination="WGX-zc-vCu" id="E8g-fr-0qr"/>
+                        <outlet property="logoutCell" destination="0f5-KN-gzn" id="ZVG-xk-rcj"/>
                         <outlet property="privateToggleSwitch" destination="81u-Pd-htT" id="PsY-RY-o5l"/>
                         <outlet property="profileCell" destination="KsY-ck-Di2" id="mcg-ab-I9r"/>
                         <outlet property="serverCell" destination="Kf3-p8-HWp" id="RVP-lm-RQ2"/>
@@ -457,7 +462,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GMg-xB-vRn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6390" y="1238.25"/>
+            <point key="canvasLocation" x="6390" y="1237.5"/>
         </scene>
         <!--Edit profile-->
         <scene sceneID="P3l-12-TXy">
@@ -547,7 +552,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FrW-20-A6j">
                                                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="yes"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="yes" keyboardType="emailAddress"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>

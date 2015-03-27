@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface EditProfileTableViewController : UITableViewController<UITextFieldDelegate>
+#import "SuperSettingsTableViewController.h"
+@interface EditProfileTableViewController : SuperSettingsTableViewController<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableViewCell *displayNameCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *emailCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *phoneNumberCell;

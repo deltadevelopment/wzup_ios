@@ -43,6 +43,9 @@
     self.profileCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     self.changePasswordCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     self.serverCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    self.logoutCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    
 
 }
 -(void)userWasReturned:(NSData *) data{
@@ -51,6 +54,7 @@
     user = [[profileController getUser:data] getUser];
     //NSLog(@"user profile: %@", [[user private_profile]]);
     [self.privateToggleSwitch setOn:[user private_profile] animated:YES];
+    self.usernameLabel.text = [user getUsername];
 }
 
 -(void)userWasNotReturned:(NSError *) error{
@@ -61,6 +65,17 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.section == 1){
+        if(indexPath.row == 2){
+            
+            [self showLogoutAlert];
+            [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        }
+    }
+}
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -130,10 +145,10 @@
 
 - (IBAction)logoutAction:(id)sender {
 
-    [self showLoginAlert];
+
 }
 
--(void)showLoginAlert{
+-(void)showLogoutAlert{
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Log out"
                                                    message:@"Are you sure you want to log out?"
                                                   delegate:self

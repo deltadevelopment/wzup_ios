@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ChangePasswordTableViewController : UITableViewController<UITextFieldDelegate>
+#import "SuperSettingsTableViewController.h"
+@interface ChangePasswordTableViewController : SuperSettingsTableViewController<UITextFieldDelegate>
 - (IBAction)doneAction:(id)sender;
 - (IBAction)cancelAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;

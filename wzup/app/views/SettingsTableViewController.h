@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SettingsTableViewController : UITableViewController
+#import "SuperSettingsTableViewController.h"
+@interface SettingsTableViewController : SuperSettingsTableViewController
 - (IBAction)togglePrivateProfile:(id)sender;
 @property (weak, nonatomic) IBOutlet UISwitch *privateToggleSwitch;
 - (IBAction)editProfileAction:(id)sender;
@@ -21,6 +21,7 @@
 - (IBAction)showErrorsToggle:(id)sender;
 @property (weak, nonatomic) IBOutlet UISwitch *showErrorsSwitch;
 @property (weak, nonatomic) IBOutlet UITableViewCell *serverCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *logoutCell;
 
 
 - (IBAction)toggleServerAction:(id)sender;
