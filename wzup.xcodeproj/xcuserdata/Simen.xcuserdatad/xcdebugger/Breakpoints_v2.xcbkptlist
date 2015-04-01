@@ -42,13 +42,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wzup/app/views/FeedViewController.m"
-            timestampString = "448747898.666514"
+            timestampString = "449600802.669293"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "427"
-            endingLineNumber = "427"
-            landmarkName = "-initMedia:withStatus:withCell:"
-            landmarkType = "5">
+            startingLineNumber = "429"
+            endingLineNumber = "429"
+            landmarkName = "@implementation FeedViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

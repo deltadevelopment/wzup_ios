@@ -32,6 +32,7 @@ bool square;
     if(CGRectIsEmpty(rect)){
         rect = videoView.bounds;
         rect.size.height = 500;
+        
     }
     videoView.bounds = rect;
     view = videoView;
@@ -144,6 +145,7 @@ bool square;
     square = theSquare;
 }
 -(void)initaliseVideo{
+    NSLog(@"-------_________SETTER KAMERA");
     NSLog(@"Setting up capture session");
     CaptureSession = [[AVCaptureSession alloc] init];
     //----- ADD INPUTS -----

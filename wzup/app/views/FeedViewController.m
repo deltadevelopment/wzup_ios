@@ -62,6 +62,7 @@ static int const EXPAND_SIZE = 549;
     bool isPlaying;
     UIRefreshControl *refreshControl;
     bool lockUI;
+    bool cameraIsInitalised;
     
 }
 
@@ -221,6 +222,7 @@ static int const EXPAND_SIZE = 549;
                                               [_tableView beginUpdates];
                                               [_tableView endUpdates];
                                               lockUI = NO;
+                                               cameraIsInitalised = NO;
                                           }];
                      }];
 }
@@ -579,20 +581,25 @@ static int const EXPAND_SIZE = 549;
             
             NSLog(@"------------auth: %@ model: %d", [authHelper getUserId ], [[status getUser] getId ]);
             if(imgTaken == nil && cameraIsShown){
-                NSLog(@"visier kam");
-                shouldExpand = true;
-                indexCurrent = indexPath;
-                [cell.statusImage setBackgroundColor:nil];
-                
-                flipCameratapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(flipCamera:)];
-                flipCameratapGr.numberOfTapsRequired = 1;
-                flipCameratapGr.cancelsTouchesInView = NO;
-                [[cell statusImage] addGestureRecognizer:flipCameratapGr];
-                cameraCell = cell;
-               // [self initializeCamera:cell.statusImage];
-                //NYTT KAMERA
-                [mediaHelper setView:cameraCell.statusImage withRect:CGRectZero];
-                [mediaHelper initaliseVideo];
+                if(!cameraIsInitalised){
+                    NSLog(@"visier kam");
+                    shouldExpand = true;
+                    indexCurrent = indexPath;
+                    [cell.statusImage setBackgroundColor:nil];
+                    
+                    flipCameratapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(flipCamera:)];
+                    flipCameratapGr.numberOfTapsRequired = 1;
+                    flipCameratapGr.cancelsTouchesInView = NO;
+                    [[cell statusImage] addGestureRecognizer:flipCameratapGr];
+                    cameraCell = cell;
+                    // [self initializeCamera:cell.statusImage];
+                    //NYTT KAMERA
+                    [mediaHelper setView:cameraCell.statusImage withRect:CGRectZero];
+                    [mediaHelper initaliseVideo];
+                    NSLog(@"INIT VIDEO");
+                    cameraIsInitalised = YES;
+                }
+      
               
             }
            
@@ -1269,6 +1276,7 @@ static int const EXPAND_SIZE = 549;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [mediaHelper cancelSession];
     });
+     cameraIsInitalised = NO;
     
 }
 -(void)removeCameraView{

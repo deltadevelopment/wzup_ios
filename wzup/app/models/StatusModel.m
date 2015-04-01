@@ -23,7 +23,7 @@
     _media_type = dic[@"media_type"];
     _media_key = dic[@"media_key"];
     
-//NSLog(@"The status is %@ %@",_body, _user_id);
+    //NSLog(@"The status is %@ %@",_body, _user_id);
     //NSArray* pics = [[NSArray alloc] initWithObjects:@"testBilde.jpg", @"testBilde.jpg", @"testBilde.jpg",@"testBilde.jpg", nil];
     //imgPath =pics[rand()%4];
  
