@@ -7,7 +7,7 @@
 //
 
 #import "StatusModel.h"
-
+#import "ApplicationHelper.h"
 @implementation StatusModel
 
 -(void)build:(NSMutableDictionary *)dic{
@@ -68,16 +68,26 @@
                                    //NSLog(@"downloading");
                                    if (data != nil && error == nil)
                                    {
-                                         NSLog(@"notCAHCED");
-                                       
-                                       
+                                       NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+    
+                                       NSInteger statuscode = [httpResponse statusCode];
                                        NSURLCache *cache = [NSURLCache sharedURLCache];
                                        NSCachedURLResponse *cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
                                        [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
                                        
+                                       NSLog(@"status code for image : %ld", (long)statuscode);
+                                       if(statuscode < 300){
+                                           //SUKSESS
+                                           _media = data;
+                                           [object performSelector:mediaDoneSelector withObject:element];
+                                       }else{
+                                           ApplicationHelper *applicationHelper = [[ApplicationHelper alloc]init];
+                                           [applicationHelper alertUser:[NSString stringWithFormat:@"%ld on %@",(long)statuscode, [request URL]]];
+                                           //IKKE SUKSESS
+                                           self.croppedImage = [UIImage imageNamed:@"status-icon2.png"];
+                                           [self resetCache];
+                                       }
                                        
-                                       _media = data;
-                                       [object performSelector:mediaDoneSelector withObject:element];
                                    }
                                    else
                                    {
@@ -188,9 +198,11 @@
     _croppedImage = image;
     [self storeimage:image];
     
+    
 }
 
 -(bool)shouldUpdateMedia{
+    NSLog(@"MEDIA URL %@", self.media_url);
     NSString *userIdEtag = [NSString stringWithFormat:@"cachedEtag%@", self.user_id];
     if([[NSUserDefaults standardUserDefaults] objectForKey:userIdEtag] != nil) {
         NSString *etagStored = [[NSUserDefaults standardUserDefaults] stringForKey:userIdEtag];
@@ -204,12 +216,9 @@
 
 -(void)storeimage:(UIImage *) image{
     NSData *imageData = UIImagePNGRepresentation(image);
-    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    
     NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",@"cached"]];
-    
     NSLog((@"pre writing to file"));
     if (![imageData writeToFile:imagePath atomically:NO])
     {
@@ -217,32 +226,41 @@
     }
     else
     {
-        NSLog((@"the cachedImagedPath is %@",imagePath)); 
+        // Store the data
+        NSLog(@"user id storing for : %@", self.user_id);
+        NSString *userIdString = [NSString stringWithFormat:@"cachedImage%@", self.user_id];
+        NSString *userIdEtag = [NSString stringWithFormat:@"cachedEtag%@", self.user_id];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:imageData forKey:userIdString];
+        [defaults setObject:_media_key forKey:userIdEtag];
+        [defaults synchronize];
+        NSLog(@"Data saved");
     }
-    
-    // Store the data
-    NSLog(@"user id storing for : %@", self.user_id);
+}
+
+-(void)resetCache{
     NSString *userIdString = [NSString stringWithFormat:@"cachedImage%@", self.user_id];
     NSString *userIdEtag = [NSString stringWithFormat:@"cachedEtag%@", self.user_id];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:imageData forKey:userIdString];
-    [defaults setObject:_media_key forKey:userIdEtag];
-    [defaults synchronize];
-    NSLog(@"Data saved");
-    
+    [defaults removeObjectForKey:userIdString];
+    [defaults removeObjectForKey:userIdEtag];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(UIImage *) getStoredImage{
      NSString *userIdString = [NSString stringWithFormat:@"cachedImage%@", self.user_id];
     if([[NSUserDefaults standardUserDefaults] objectForKey:userIdString] != nil) {
-        NSString *theImagePath = [[NSUserDefaults standardUserDefaults] objectForKey:userIdString];
+        NSLog(@"henter bilde for %@", [self.user getUsername]);
+        NSData *theImagePath = [[NSUserDefaults standardUserDefaults] objectForKey:userIdString];
        // NSLog(@"imgPath: %@", theImagePath);
+        NSString *strdata=[[NSString alloc]initWithData:theImagePath encoding:NSUTF8StringEncoding];
+        NSLog(@"---- %@ ----", strdata);
         UIImage *customImage = [UIImage imageWithData:theImagePath];
+        UIImageWriteToSavedPhotosAlbum(customImage, nil, nil, nil);
+        
         return customImage;
     }
     return nil;
-   
-    
 }
 
 -(void)storeVideo:(NSData *) videoData{

@@ -113,7 +113,7 @@
                                    if(statuscode < 300){
                                        [view performSelector:success withObject:data];
                                    }else{
-                                       [self alertUser:[NSString stringWithFormat:@"%ld on %@",(long)statuscode, [request URL]]];
+                                       [applicationHelper alertUser:[NSString stringWithFormat:@"%ld on %@",(long)statuscode, [request URL]]];
                                        if(statuscode == 403){
                                            [self logoutUser:view];
                                        }
@@ -130,21 +130,7 @@
                            }];
 }
 
--(void)alertUser:(NSString *) text{
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"debugMode"] != nil) {
-        bool debugMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"debugMode"];
-        if(debugMode){
-            NSString *errorMessage = [NSHTTPURLResponse localizedStringForStatusCode:[text intValue]];
-            NSString *errorMessageWithStatusCode = [NSString stringWithFormat:@"%@ - %@", text, errorMessage];
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error"
-                                                           message:errorMessageWithStatusCode
-                                                          delegate:self
-                                                 cancelButtonTitle:@"Ok"
-                                                 otherButtonTitles:nil,nil];
-            [alert show];
-        }
-    }
-}
+
 -(void)logoutUser:(NSObject *) view{
     if([view isKindOfClass:[UIViewController class]]){
         UIViewController *viewController = (UIViewController*)view;

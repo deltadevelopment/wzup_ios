@@ -440,14 +440,16 @@ static int const EXPAND_SIZE = 549;
 }
 -(void)initMedia:(NSIndexPath *) indexPath withStatus:(StatusModel *) status withCell:(FeedTableViewCell *) cell{
     
-        [cell stopImageLoading];
+    [cell stopImageLoading];
     
     
     if([status getMedia] == nil){
         if([[status getMediaType] intValue] == 1){
             if([status getStoredImage] != nil){
+                
                 NSLog(@"setter bilde for %@", [[status getUser]getDisplayName]);
                 [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[status getStoredImage]]];
+                [cell setNeedsDisplay];
             }
         }else{
             if([status getStoredVideo] != nil){
@@ -459,15 +461,19 @@ static int const EXPAND_SIZE = 549;
             }
         }
         if([status shouldUpdateMedia]){
+            
             [status getMedia:self withSelector:@selector(mediaIsDownloaded:) withObject:indexPath];
             NSLog(@"UPDATING MEDIA------------");
         }
+ 
     }
     else{
         [cell stopImageLoading];
         if([[status getMediaType] intValue] == 1){
-            NSLog(@"setter bilde for %@", [[status getUser]getDisplayName]);
-            [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[status getCroppedImage]]];
+                NSLog(@"setter bilde for %@", [[status getUser]getDisplayName]);
+                [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[status getCroppedImage]]];
+            
+    
             
         }else{
          

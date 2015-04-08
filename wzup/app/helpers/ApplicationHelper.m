@@ -8,6 +8,7 @@
 
 #import "ApplicationHelper.h"
 #import "ConfigHelper.h"
+#import <UIKit/UIKit.h>
 static NSIndexPath *currrentIndex = 0;
 NSArray *availableTexts;
 NSArray *unAvailableTexts;
@@ -50,6 +51,22 @@ NSArray *unAvailableTexts;
 }
 -(NSString*)getUnAvailableText{
     return unAvailableTexts[rand()%4];
+}
+
+-(void)alertUser:(NSString *) text{
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"debugMode"] != nil) {
+        bool debugMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"debugMode"];
+        if(debugMode){
+            NSString *errorMessage = [NSHTTPURLResponse localizedStringForStatusCode:[text intValue]];
+            NSString *errorMessageWithStatusCode = [NSString stringWithFormat:@"%@ - %@", text, errorMessage];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error"
+                                                           message:errorMessageWithStatusCode
+                                                          delegate:self
+                                                 cancelButtonTitle:@"Ok"
+                                                 otherButtonTitles:nil,nil];
+            [alert show];
+        }
+    }
 }
 
 

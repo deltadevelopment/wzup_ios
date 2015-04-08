@@ -30,6 +30,7 @@ NSString * imgPath;
 @property (nonatomic,strong) UserModel * user;
 
 -(void)build:(NSMutableDictionary *)dic;
+-(void)resetCache;
 
 -(NSString*) getStatusId;
 -(NSString*)getMediaType;
