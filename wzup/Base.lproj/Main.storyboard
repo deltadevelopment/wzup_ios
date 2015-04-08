@@ -4055,6 +4055,142 @@
             </objects>
             <point key="canvasLocation" x="7132.5" y="390.75"/>
         </scene>
+        <!--Notification Helper-->
+        <scene sceneID="bxE-5h-BCm">
+            <objects>
+                <viewController id="gcy-AF-CEj" customClass="NotificationHelper" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7ki-NU-gQB"/>
+                        <viewControllerLayoutGuide type="bottom" id="sdG-VS-XhD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="C2t-xQ-cFD">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ow-2T-djK">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pii-IC-wvk">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="86c-1O-Stx">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                            </constraint>
+                                            <constraint firstAttribute="height" constant="30" id="ouM-gZ-I7U">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                            </constraint>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="cross-white.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="86c-1O-Stx"/>
+                                                <exclude reference="ouM-gZ-I7U"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="368" y="27" width="20" height="20"/>
+                                            <mask key="constraints">
+                                                <include reference="86c-1O-Stx"/>
+                                                <include reference="ouM-gZ-I7U"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="cancelNotification:" destination="gcy-AF-CEj" eventType="touchUpInside" id="Dht-1Q-r5P"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Mu-0P-azi">
+                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="14" y="24" width="346" height="23"/>
+                                        </variation>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.13734292840000001" blue="0.1233993256" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="6Mu-0P-azi" firstAttribute="leading" secondItem="3Ow-2T-djK" secondAttribute="leading" constant="14" id="9Gx-4X-VKi"/>
+                                    <constraint firstItem="pii-IC-wvk" firstAttribute="leading" secondItem="6Mu-0P-azi" secondAttribute="trailing" constant="8" id="DDX-f1-i9j"/>
+                                    <constraint firstAttribute="centerY" secondItem="pii-IC-wvk" secondAttribute="centerY" constant="-7" id="Dm4-5S-gxX">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                    </constraint>
+                                    <constraint firstAttribute="centerY" secondItem="6Mu-0P-azi" secondAttribute="centerY" constant="0.5" id="NMX-JZ-oM7">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="182" id="kCh-dw-MgK">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="70"/>
+                                    </constraint>
+                                    <constraint firstAttribute="trailing" secondItem="pii-IC-wvk" secondAttribute="trailing" constant="17" id="lNx-vC-JgQ"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="pii-IC-wvk"/>
+                                        <exclude reference="6Mu-0P-azi"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="kCh-dw-MgK"/>
+                                        <exclude reference="9Gx-4X-VKi"/>
+                                        <exclude reference="NMX-JZ-oM7"/>
+                                        <exclude reference="DDX-f1-i9j"/>
+                                        <exclude reference="Dm4-5S-gxX"/>
+                                        <exclude reference="lNx-vC-JgQ"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="pii-IC-wvk"/>
+                                        <include reference="6Mu-0P-azi"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <include reference="kCh-dw-MgK"/>
+                                        <include reference="9Gx-4X-VKi"/>
+                                        <include reference="NMX-JZ-oM7"/>
+                                        <include reference="DDX-f1-i9j"/>
+                                        <include reference="Dm4-5S-gxX"/>
+                                        <include reference="lNx-vC-JgQ"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="3Ow-2T-djK" firstAttribute="top" secondItem="7ki-NU-gQB" secondAttribute="bottom" constant="-20" id="BY4-cb-qHJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3Ow-2T-djK" secondAttribute="trailing" constant="-16" id="caA-T5-gjI"/>
+                            <constraint firstItem="3Ow-2T-djK" firstAttribute="leading" secondItem="C2t-xQ-cFD" secondAttribute="leadingMargin" constant="-16" id="gdU-m2-5nW"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="3Ow-2T-djK"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="BY4-cb-qHJ"/>
+                                <exclude reference="caA-T5-gjI"/>
+                                <exclude reference="gdU-m2-5nW"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="3Ow-2T-djK"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="BY4-cb-qHJ"/>
+                                <include reference="caA-T5-gjI"/>
+                                <include reference="gdU-m2-5nW"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="notificationCancelButton" destination="pii-IC-wvk" id="GxB-GA-GUz"/>
+                        <outlet property="notificationMessage" destination="6Mu-0P-azi" id="zzj-1s-SP5"/>
+                        <outlet property="notificationView" destination="3Ow-2T-djK" id="M76-tH-hTl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MAS-pn-6XI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7945.5" y="103.5"/>
+        </scene>
         <!--Navigation View Controller-->
         <scene sceneID="VMv-K8-VMc">
             <objects>
@@ -4150,6 +4286,7 @@
     <resources>
         <image name="camera-icon.png" width="500" height="500"/>
         <image name="cross-icon.png" width="456" height="456"/>
+        <image name="cross-white.png" width="1200" height="1200"/>
         <image name="plus-icon.png" width="500" height="500"/>
         <image name="plus-simple.png" width="500" height="500"/>
         <image name="search-icon.png" width="500" height="500"/>

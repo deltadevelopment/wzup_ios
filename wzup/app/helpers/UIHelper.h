@@ -15,5 +15,6 @@
 +(CGSize)getSize;
 
 +(CGRect)getFrame;
++(CGFloat)getScreenWidth;
 
 @end

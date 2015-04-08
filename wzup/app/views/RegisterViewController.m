@@ -148,7 +148,7 @@ LoginController *loginController;
 -(void)registerWasNotSuccessful:(NSError *) error{
     [registerController parseData:[error userInfo]];
     
-    [self errorAnimation];
+    //[self errorAnimation];
     [self.regIndicator stopAnimating];
     [self showError:self.usernameError errorMsg:[registerController getUsernameError]];
     [self showError:self.emailError errorMsg:[registerController getEmailError]];

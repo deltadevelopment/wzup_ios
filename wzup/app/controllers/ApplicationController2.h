@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AuthHelper.h"
 #import "ParserHelper.h"
+#import "NotificationHelper.h"
 #import "ApplicationHelper.h"
 @interface ApplicationController2 : NSObject<NSURLConnectionDataDelegate>{
     AuthHelper *authHelper;
@@ -19,6 +20,7 @@
     SEL mediaUploadSuccess;
     NSObject *mediaUploadSuccessObject;
     NSObject *mediaUploadSuccessArg;
+    NotificationHelper *notificationHelper;
 }
 -(void) getHttpRequest:(NSString *) url
             withObject:(NSObject *) view

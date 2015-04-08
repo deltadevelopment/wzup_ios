@@ -28,4 +28,8 @@ static CGFloat screenWidth;
     return CGRectMake(0, 0, screenWidth, 500);
 }
 
++(CGFloat)getScreenWidth{
+    return screenWidth;
+}
+
 @end

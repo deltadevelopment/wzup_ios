@@ -19,6 +19,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import "MediaHelper.h"
 #import "CircleIndicator.h"
+#import "NotificationHelper.h"
+
 @interface FeedViewController ()
 
 @end
@@ -26,6 +28,7 @@ static int const EXPAND_SIZE = 549;
 @implementation FeedViewController{
     NSIndexPath *indexCurrent;
     NSMutableArray *feed;
+    NotificationHelper *notificationHelper;
     AuthHelper *authHelper;
     FeedController* feedController;
     UIView *oldView;
@@ -70,7 +73,9 @@ static int const EXPAND_SIZE = 549;
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"------tre--------");
-
+    
+    
+    
     BOOL bgColor = (BOOL)[[NSUserDefaults standardUserDefaults] valueForKey:@"test"];
     
     authHelper = [[AuthHelper alloc] init];
@@ -134,6 +139,7 @@ static int const EXPAND_SIZE = 549;
     [longGesture setMinimumPressDuration:0.6];
     [_statusButton addGestureRecognizer:longGesture];
     
+ 
     
 }
 

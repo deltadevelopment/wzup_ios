@@ -22,6 +22,7 @@
         authHelper = [[AuthHelper alloc] init];
         parserHelper = [[ParserHelper alloc] init];
         applicationHelper = [[ApplicationHelper alloc] init];
+        
     }
     return self;
 }
@@ -113,7 +114,10 @@
                                    if(statuscode < 300){
                                        [view performSelector:success withObject:data];
                                    }else{
-                                       [applicationHelper alertUser:[NSString stringWithFormat:@"%ld on %@",(long)statuscode, [request URL]]];
+                                       NSString *strdata=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                       [applicationHelper alertUser:[NSString stringWithFormat:@"%ld on %@",(long)statuscode, strdata]];
+                                      
+                                       [self showNotification:view withData:data];
                                        if(statuscode == 403){
                                            [self logoutUser:view];
                                        }
@@ -125,9 +129,17 @@
                                else
                                {
                                    // There was an error, alert the user
+                                   //[self showNotification:view withData:data];
                                    [view performSelector:errorAction withObject:error];
                                }
                            }];
+}
+
+-(void)showNotification:(NSObject *) view withData: (NSData *) data{
+    notificationHelper =[[NotificationHelper alloc] initNotification];
+    UIViewController *viewController = (UIViewController *) view;
+    [notificationHelper setNotificationMessage:data];
+    [notificationHelper addNotificationToView:viewController.navigationController.view];
 }
 
 

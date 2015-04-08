@@ -11,7 +11,7 @@
 #import "StartViewController.h"
 #import "FeedViewController.h"
 #import "FeedNavigationViewController.h"
-
+#import "NotificationHelper.h"
 @interface LoginViewController ()
 
 @end
@@ -26,6 +26,8 @@ LoginController* loginController;
         self.usernameTextField.text = @"christiandalsvaag";
         self.passwordTextField.text = @"christiandalsvaag";
     }
+    
+
     
     verticalSpaceConstraintButton = self.verticalSpaceConstraint;
     [self addLine:self.usernameTextField];
@@ -126,8 +128,11 @@ LoginController* loginController;
 }
 
 -(void)loginWasNotSuccessful:(NSError *) error{
+    NotificationHelper *notificationHelper =[[NotificationHelper alloc]initNotification];
+    [notificationHelper addNotificationToView:self.navigationController.view];
     [self.loginIndicator stopAnimating];
-    [self errorAnimation];
+    //[self errorAnimation];
+    //parse data here
     NSLog([error localizedDescription]);
 }
 
