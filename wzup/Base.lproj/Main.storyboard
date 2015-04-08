@@ -2291,10 +2291,10 @@
                                                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="30" id="91Y-yS-OUW">
-                                                                        <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                                                        <variation key="heightClass=regular-widthClass=compact" constant="25"/>
                                                                     </constraint>
                                                                     <constraint firstAttribute="height" constant="30" id="e0F-6x-sN9">
-                                                                        <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                                                        <variation key="heightClass=regular-widthClass=compact" constant="25"/>
                                                                     </constraint>
                                                                 </constraints>
                                                                 <state key="normal" backgroundImage="search-icon.png">
@@ -2306,8 +2306,7 @@
                                                                         <exclude reference="e0F-6x-sN9"/>
                                                                     </mask>
                                                                 </variation>
-                                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                    <rect key="frame" x="51" y="14" width="20" height="20"/>
+                                                                <variation key="heightClass=regular-widthClass=compact">
                                                                     <mask key="constraints">
                                                                         <include reference="91Y-yS-OUW"/>
                                                                         <include reference="e0F-6x-sN9"/>
@@ -2321,9 +2320,7 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstItem="vyf-6O-Fgc" firstAttribute="top" secondItem="oOT-t3-gxe" secondAttribute="top" constant="25" id="A0R-9F-9q7">
-                                                                <variation key="heightClass=regular-widthClass=compact" constant="18"/>
-                                                            </constraint>
+                                                            <constraint firstItem="vyf-6O-Fgc" firstAttribute="top" secondItem="oOT-t3-gxe" secondAttribute="top" constant="25" id="A0R-9F-9q7"/>
                                                             <constraint firstItem="yXr-Fs-dHy" firstAttribute="centerX" secondItem="fHV-rp-XcT" secondAttribute="centerX" id="Dn7-GE-ygX"/>
                                                             <constraint firstItem="yXr-Fs-dHy" firstAttribute="top" secondItem="oOT-t3-gxe" secondAttribute="top" constant="8" id="HBp-y1-2pk">
                                                                 <variation key="heightClass=regular-widthClass=compact" constant="14"/>
@@ -4020,6 +4017,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ohz-6a-nR9">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="49" y="49" width="480" height="240"/>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
