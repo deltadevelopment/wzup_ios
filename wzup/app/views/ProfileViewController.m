@@ -32,6 +32,7 @@ bool isFollowee;
 bool isPlaying;
 MediaHelper *mediaHelper;
 MPMoviePlayerController *player;
+bool isSubscriber;
 - (void)viewDidLoad {
     [self loadData];
    
@@ -81,14 +82,15 @@ MPMoviePlayerController *player;
 
 
 -(void)initMedia{
-    SEL mediaDone = @selector(mediaIsDownloaded:);
-    if([status getMedia] == nil){
-        [status getMedia:self withSelector:mediaDone withObject:self];
+    if([status shouldUpdateMedia]){
         
+        [status getMedia:self withSelector:@selector(mediaIsDownloaded:) withObject:self];
+        NSLog(@"UPDATING MEDIA------------");
     }else{
         if([[status getMediaType] intValue] == 1){
             NSLog(@"setter bilde for %@", [[status getUser]getDisplayName]);
-            [self.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[status getCroppedImage]]];
+  
+            [self.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[status getStoredImage]]];
         }else{
             NSLog(@"VIDEO HER JA");
             [self getVideo];
@@ -192,6 +194,7 @@ MPMoviePlayerController *player;
     self.followView.hidden = YES;
 }
 -(void)updateGUIForOthersProfile{
+    [self initSubscription];
     self.searchButton.hidden = YES;
     self.notificationsLabel.hidden = NO;
     self.subscribeText.hidden = NO;
@@ -213,6 +216,38 @@ MPMoviePlayerController *player;
 - (void)subscribeAction:(UITapGestureRecognizer *)recognizer {
     NSLog(@"subscribing");
     //Subscribe implementation here
+     NSString* userId = [NSString stringWithFormat:@"%d", [[status getUser] getId]];
+    //ERSTATTES av en sjekk mot backend
+    isSubscriber = NO;
+    if(isSubscriber){
+        [profileController unSubscribeToUserWithUserId:userId withObject:self withSuccess:@selector(subscribedSuccesfully:) withError:@selector(subscribedWithError:)];
+    }else{
+        [profileController subscribeToUserWithUserId:userId withObject:self withSuccess:@selector(subscribedSuccesfully:) withError:@selector(subscribedWithError:)];
+    }
+}
+
+-(void)subscribedSuccesfully:(NSData *) data{
+    [self initSubscription];
+}
+
+-(void)initSubscription{
+    if(isSubscriber){
+        //UNSUBSCRIBE: SETT til at du ikke er subscriber lenger
+        isSubscriber = NO;
+        self.subscribeText.text = @"Subscribe";
+        self.notificationsLabel.text = @"+";
+    }else{
+        isSubscriber = YES;
+        //SUBSCRIBE: SETT til at du nå er subsrciber
+        self.subscribeText.text = @"Unsubscribe";
+        self.notificationsLabel.text = @"x";
+        
+        
+    }
+}
+
+-(void)subscribedWithError:(NSError *) error{
+    
 }
 
 - (void)followAction:(UITapGestureRecognizer *)recognizer {
@@ -333,7 +368,7 @@ MPMoviePlayerController *player;
     if([[status getMediaType] intValue] == 1){
         UIImage *image = [UIImage imageWithData:[status getMedia]];
         image = [self getCroppedImage:image];
-        
+        [status setCroppedImage:image];
         [self.statusImage setBackgroundColor:[UIColor colorWithPatternImage:image]];
         
     }else{

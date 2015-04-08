@@ -84,6 +84,17 @@
                              withSuccess:(SEL) success
                                withError:(SEL) errorAction;
 
+-(void)subscribeToUserWithUserId:(NSString *) userId
+                      withObject:(NSObject *)view
+                     withSuccess:(SEL) success
+                       withError:(SEL) errorAction;
+
+
+-(void)unSubscribeToUserWithUserId:(NSString *) userId
+                        withObject:(NSObject *) view
+                       withSuccess:(SEL) success
+                         withError:(SEL) errorAction;
+
 
 -(NSMutableArray*)getFollowers;
 -(NSMutableArray*)getFollowing;
