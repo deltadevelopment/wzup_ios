@@ -447,7 +447,7 @@ static int const EXPAND_SIZE = 549;
 -(void)initMedia:(NSIndexPath *) indexPath withStatus:(StatusModel *) status withCell:(FeedTableViewCell *) cell{
     
     [cell stopImageLoading];
-    
+   //[status resetCache];
     
     if([status getMedia] == nil){
         if([[status getMediaType] intValue] == 1){
@@ -459,8 +459,6 @@ static int const EXPAND_SIZE = 549;
             }
         }else{
             if([status getStoredVideo] != nil){
-                
-                
                 [cell getVideo:[status getStoredVideo] withId:indexPath.row];
                 [cell.statusImage setBackgroundColor:[UIColor colorWithPatternImage:[cell getThumbnail]]];
                 [cell setVideoDoneCallback:self withSuccess:@selector(videoDonePlayingInCell)];

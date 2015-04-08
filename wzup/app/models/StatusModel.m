@@ -57,7 +57,7 @@
         NSLog(@"ISCAHCED");
         responseData = [cachedURLResponse data];
         _media = responseData;
-        [object performSelector:mediaDoneSelector withObject:element];
+        //[object performSelector:mediaDoneSelector withObject:element];
     }
     else //if no cache get it from the server.
     {
@@ -81,10 +81,11 @@
                                            _media = data;
                                            [object performSelector:mediaDoneSelector withObject:element];
                                        }else{
+                                           self.mediaBroken = YES;
                                            ApplicationHelper *applicationHelper = [[ApplicationHelper alloc]init];
                                            [applicationHelper alertUser:[NSString stringWithFormat:@"%ld on %@",(long)statuscode, [request URL]]];
                                            //IKKE SUKSESS
-                                           self.croppedImage = [UIImage imageNamed:@"status-icon2.png"];
+                                           //self.croppedImage = [UIImage imageNamed:@"status-icon2.png"];
                                            [self resetCache];
                                        }
                                        
@@ -93,6 +94,7 @@
                                    {
                                        // There was an error, alert the user
                                        NSLog(@"error with the request");
+                                       [self resetCache];
                                    }
                                    
                                }];
@@ -195,10 +197,11 @@
     return _croppedImage;
 }
 -(void)setCroppedImage:(UIImage *) image{
+    NSLog(@"setcroppedCALLED");
     _croppedImage = image;
-    [self storeimage:image];
+     [self storeimage:image];
     
-    
+   
 }
 
 -(bool)shouldUpdateMedia{
@@ -215,6 +218,10 @@
 }
 
 -(void)storeimage:(UIImage *) image{
+    if([[self.user getUsername] isEqualToString:@"sindredl"]){
+        ApplicationHelper *applicationHelper = [[ApplicationHelper alloc]init];
+        [applicationHelper alertUser:@"SINDREDEL was added to cache"];
+    }
     NSData *imageData = UIImagePNGRepresentation(image);
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];

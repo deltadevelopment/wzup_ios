@@ -108,6 +108,16 @@ bool isOwnProfiles = YES;
     return nil;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if(section == 1)
+    {
+        return 35;
+        
+    }
+    return UITableViewAutomaticDimension;
+}
+
 -(void)followTap:(UITapGestureRecognizer *) sender{
     CGPoint tapLocation = [sender locationInView:self.tableView];
     NSIndexPath *tapIndexPath = [self.tableView indexPathForRowAtPoint:tapLocation];

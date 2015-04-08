@@ -60,6 +60,16 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if(section == 1)
+    {
+        return 35;
+        
+    }
+    return UITableViewAutomaticDimension;
+}
+
 -(void)requestingFollowersWasReturned:(NSData *) data{
     requestingFollowers = [profileController getRequestingFollowers:data];
     if([requestingFollowers count] != 0){

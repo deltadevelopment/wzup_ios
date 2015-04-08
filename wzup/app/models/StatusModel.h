@@ -12,6 +12,7 @@
 
 @interface StatusModel : NSObject{
 NSString * imgPath;
+    bool mediaBroken;
 }
 @property (nonatomic,strong) NSString * statusId;
 @property (nonatomic,strong) NSString * body;
@@ -24,6 +25,7 @@ NSString * imgPath;
 @property (nonatomic,strong) NSString * media_url;
 @property (nonatomic,strong) NSString * imgPath;
 @property (nonatomic,strong) NSData * media;
+@property (nonatomic) bool mediaBroken;
 
 @property (nonatomic,strong) UIImage * croppedImage;
 //Virtual

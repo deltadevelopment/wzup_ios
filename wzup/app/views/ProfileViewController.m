@@ -175,10 +175,11 @@ MPMoviePlayerController *player;
     //self.following.layer.borderWidth = 1;
     //self.notifications.layer.borderWidth = 1;
    // [self setBorder:self.hotness];
-    [self setBorder:self.followers];
-    [self setBorder:self.following];
-    [self setBorder:self.notifications];
-    [self setBorderTopBottom:self.hotness];
+    //[self setBorder:self.followers];
+    //[self setBorder:self.following];
+   // [self setBorder:self.notifications];
+  //  [self setBorderTopBottom:self.hotness];
+    
     self.degreeLabel.textColor = [UIColor colorWithRed:0.204 green:0.596 blue:0.859 alpha:1];
     self.pointsIndicator.backgroundColor = [UIColor colorWithRed:0.204 green:0.596 blue:0.859 alpha:1];
 }
@@ -187,15 +188,14 @@ MPMoviePlayerController *player;
     self.settingsButton.alpha = 0.5f;
     self.searchButton.hidden = NO;
     self.notificationsLabel.hidden = YES;
-    self.subscribeText.hidden = YES;
+    self.subscribeText.text = @"Add friend";
     self.followView.hidden = YES;
-    
-
 }
 -(void)updateGUIForOthersProfile{
     self.searchButton.hidden = YES;
     self.notificationsLabel.hidden = NO;
     self.subscribeText.hidden = NO;
+    self.subscribeText.text = @"Subscribe";
     [self.settingsButton setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", @"testBilde.jpg"]] forState:UIControlStateNormal];
     self.followView.hidden = NO;
     UITapGestureRecognizer *singleFingerTap =
