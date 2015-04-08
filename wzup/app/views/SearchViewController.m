@@ -18,11 +18,14 @@
     NSTimer *timer;
     ProfileController *profileController;
     UserModel *user;
+    AuthHelper *authHelper;
+    BOOL isAddedAlready;
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    authHelper = [[AuthHelper alloc]init];
        self.searchSuccessImage.hidden = YES;
     self.searchButton.hidden = YES;
     profileController = [[ProfileController alloc] init];
@@ -65,17 +68,29 @@
 
 -(void)searchForUser{
     NSLog(@"search");
-    
     [profileController searchForUserByUsername:self.searchTextField.text withObject:self withSuccess:@selector(searchWasSuccessful:) withError:@selector(searchWasNotSuccessful:)];
 }
+
+
 
 -(void)searchWasSuccessful:(NSData *) data
 {
     user = [profileController getUserWithUser:data];
-    self.searchButton.hidden = NO;
-    self.indicator.hidden = YES;
+    if([user Id] == [[authHelper getUserId] intValue] || [user is_followee])
+    {
+        self.searchButton.hidden = YES;
+        self.indicator.hidden = YES;
+        self.searchSuccessImage.image =[UIImage imageNamed:@"tick-black-icon.png"];
+        self.searchSuccessImage.hidden = NO;
+        isAddedAlready = YES;
     
-    NSLog(@"search success");
+    }
+    else{
+        self.searchButton.hidden = NO;
+        self.indicator.hidden = YES;
+        NSLog(@"search success");
+    }
+    
 }
 
 -(void)searchWasNotSuccessful:(NSError *) error
@@ -130,7 +145,9 @@
 
 - (IBAction)searchAction:(id)sender {
     [self.searchTextField resignFirstResponder];
-    [profileController followUserWithUserId:[NSString stringWithFormat:@"%d",[user getId]] withObject:self withSuccess:@selector(followWasSuccessful:) withError:@selector(followWasNotSuccessful:)];
+    if(!isAddedAlready){
+        [profileController followUserWithUserId:[NSString stringWithFormat:@"%d",[user getId]] withObject:self withSuccess:@selector(followWasSuccessful:) withError:@selector(followWasNotSuccessful:)];
+    }
 }
 
 -(void)followWasSuccessful:(NSData *) data
